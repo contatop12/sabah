@@ -24,68 +24,196 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet" />
 
   <link rel="stylesheet" href="/src/style.css" />
   <script type="module" src="/src/main.ts"></script>
 </head>
 <body>
-  <main class="bio">
-    <div class="container">
+  <!-- Ícones (traço) + WhatsApp/Instagram de Font Awesome Free 5 (CC BY 4.0) -->
+  <svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+    <symbol id="i-share" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="M8 7l4-4 4 4"/><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7"/></symbol>
+    <symbol id="i-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></symbol>
+    <symbol id="i-calendar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M8 3v4M16 3v4M3 10h18"/></symbol>
+    <symbol id="i-cloche" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M5 16a7 7 0 0 1 14 0"/><path d="M12 9V7"/><path d="M3 16h18"/><path d="M4 19h16"/></symbol>
+    <symbol id="i-bag" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8h12l1 12H5L6 8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></symbol>
+    <symbol id="i-box" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8l9-4 9 4-9 4-9-4z"/><path d="M3 8v8l9 4 9-4V8"/><path d="M12 12v8"/></symbol>
+    <symbol id="i-book" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h6a3 3 0 0 1 3 3v13a2 2 0 0 0-2-2H4V4z"/><path d="M20 4h-6a3 3 0 0 0-3 3v13a2 2 0 0 1 2-2h7V4z"/></symbol>
+    <symbol id="i-utensils" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3v7a2 2 0 0 0 4 0V3"/><path d="M9 12v9"/><path d="M17 3c-2 1-3 3-3 6v3h3v9"/></symbol>
+    <symbol id="i-camera" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></symbol>
+    <symbol id="i-star" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9L12 3z"/></symbol>
+    <symbol id="i-globe" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3a14 14 0 0 1 0 18a14 14 0 0 1 0-18z"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-6-5.3-6-11a6 6 0 0 1 12 0c0 5.7-6 11-6 11z"/><circle cx="12" cy="10" r="2.5"/></symbol>
+    <symbol id="i-quote" viewBox="0 0 24 24" fill="currentColor"><path d="M6 17c-1.7 0-3-1.3-3-3 0-3.3 2.2-6.6 5.5-8l.9 1.4C7.7 8.4 6.6 9.8 6.3 11.3 7.9 11.5 9 12.6 9 14.2 9 15.8 7.7 17 6 17zm9 0c-1.7 0-3-1.3-3-3 0-3.3 2.2-6.6 5.5-8l.9 1.4c-1.7 1-2.8 2.4-3.1 3.9 1.6.2 2.7 1.3 2.7 2.9 0 1.6-1.3 2.8-3 2.8z"/></symbol>
+    <symbol id="i-whatsapp" viewBox="0 0 448 512" fill="currentColor"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/></symbol>
+    <symbol id="i-instagram" viewBox="0 0 448 512" fill="currentColor"><path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"/></symbol>
+  </svg>
 
-      <header class="row">
-        <div class="col col--header">
-          <div class="bio__header">
-            <img
-              class="bio__avatar blur-up"
-              src="/avatar-150.png"
-              srcset="/avatar-150.png 1x, /avatar-260.png 2x"
-              width="130"
-              height="130"
-              alt="Cozinha Árabe"
-              decoding="async"
-              fetchpriority="high"
-            />
-            <h1 class="bio__title">Cozinha Árabe</h1>
-          </div>
-        </div>
-      </header>
+  <div class="bg" aria-hidden="true">
+    <span class="bg__dots"></span>
+  </div>
 
-      <section class="row" aria-label="Links">
-        <div class="col col--links">
-          <ul class="bio__links">
-            <li class="bio__link">
-              <a class="btn" href="https://wa.me/5511918730446?text=Ol%C3%A1%2C%20gostaria%20de%20reservar%20mesa%20para%20o%20Jantar%21" target="_blank" rel="noopener noreferrer">Reservar mesa para o Jantar</a>
-            </li>
-            <li class="bio__link">
-              <a class="btn" href="https://wa.me/5511918730446?text=Ol%C3%A1%2C%20gostaria%20de%20um%20or%C3%A7amento%20para%20o%20servi%C3%A7o%20de%20Buffet%21" target="_blank" rel="noopener noreferrer">Buffet a domicílio - Solicitar orçamento</a>
-            </li>
-            <li class="bio__link">
-              <a class="btn" href="https://www.ifood.com.br/delivery/sao-paulo-sp/sabah-cozinha-arabe-esfihas-e-kebabs-bela-vista/dbf10475-e887-40b5-bb54-7ee90bfd12f6" target="_blank" rel="noopener noreferrer">IFOOD</a>
-            </li>
-            <li class="bio__link">
-              <a class="btn" href="https://wa.me/5511918730446?text=Ol%C3%A1%2C%20gostaria%20de%20fazer%20uma%20encomenda%20para%20retirada%20no%20restaurante." target="_blank" rel="noopener noreferrer">Encomenda: Para retirada no restaurante</a>
-            </li>
-            <li class="bio__link">
-              <a class="btn" href="https://drive.google.com/file/d/1GcBjehcGxpgiexmxQQUGSJdCzWeDnpGz/view" target="_blank" rel="noopener noreferrer">Cardápio - Delivery e Encomendas</a>
-            </li>
-            <li class="bio__link">
-              <a class="btn" href="https://drive.google.com/file/d/13W7Nrt4xetYpO-LgTtKqiaFdbRTgSUnl/view?usp=drive_link" target="_blank" rel="noopener noreferrer">Cardápio - Salão</a>
-            </li>
-            <li class="bio__link">
-              <a class="btn" href="https://wa.me/5511995635211?text=Ol%C3%A1%2C%20segue%20nossa%20proposta%20de%20parceria%20para%20o%20Sabah%3A" target="_blank" rel="noopener noreferrer">Influenciadores / mídia: Envio de Mídia Kit, Propostas e Parcerias</a>
-            </li>
-            <li class="bio__link">
-              <a class="btn" href="https://www.google.com/maps/place//data=!4m3!3m2!1s0x94ce59b8bf25fb8b:0xf07c915feae851c6!12e1?source=g.page.m.ia._&amp;laa=nmx-review-solicitation-ia2" target="_blank" rel="noopener noreferrer">NOS AVALIE NO GOOGLE</a>
-            </li>
-            <li class="bio__link">
-              <a class="btn" href="https://www.sabah.com.br/" target="_blank" rel="noopener noreferrer">SITE</a>
-            </li>
-          </ul>
-        </div>
-      </section>
+  <main class="page">
+    <button id="share" class="share" type="button" aria-label="Compartilhar esta página">
+      <svg><use href="#i-share"/></svg>
+    </button>
 
-    </div>
+    <header class="hero">
+      <span class="hero__ring">
+        <img
+          class="hero__avatar blur-up"
+          src="/avatar-150.png"
+          srcset="/avatar-150.png 1x, /avatar-260.png 2x"
+          width="130"
+          height="130"
+          alt="Sabah – A Legítima Cozinha Árabe"
+          decoding="async"
+          fetchpriority="high"
+        />
+      </span>
+
+      <p class="hero__eyebrow">Cozinha árabe</p>
+      <h1 class="hero__name">Sabah</h1>
+      <div class="hero__divider" aria-hidden="true"></div>
+
+      <ul class="hero__tagline">
+        <li>Salão</li>
+        <li>Delivery</li>
+        <li>Buffet</li>
+        <li>Encomendas</li>
+      </ul>
+
+      <p class="hero__desc">
+        Esfihas, kebabs e pratos árabes na Bela Vista, em São Paulo.
+        Reserve sua mesa, peça delivery ou encomende para retirar.
+      </p>
+
+      <ul class="social">
+        <li>
+          <a class="social__link" href="https://www.instagram.com/sabahcozinhaarabe/" target="_blank" rel="noopener noreferrer" aria-label="Instagram da Sabah">
+            <svg><use href="#i-instagram"/></svg>
+          </a>
+        </li>
+        <li>
+          <a class="social__link" href="https://wa.me/5511918730446" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp da Sabah">
+            <svg><use href="#i-whatsapp"/></svg>
+          </a>
+        </li>
+        <li>
+          <a class="social__link" href="https://www.google.com/maps/place//data=!4m3!3m2!1s0x94ce59b8bf25fb8b:0xf07c915feae851c6!12e1?source=g.page.m.ia._&amp;laa=nmx-review-solicitation-ia2" target="_blank" rel="noopener noreferrer" aria-label="Sabah no Google Maps">
+            <svg><use href="#i-pin"/></svg>
+          </a>
+        </li>
+        <li>
+          <a class="social__link" href="https://www.sabah.com.br/" target="_blank" rel="noopener noreferrer" aria-label="Site da Sabah">
+            <svg><use href="#i-globe"/></svg>
+          </a>
+        </li>
+      </ul>
+    </header>
+
+    <nav aria-label="Links da Sabah">
+      <ul class="cards">
+        <li>
+          <a class="card card--wine" href="https://wa.me/5511918730446?text=Ol%C3%A1%2C%20gostaria%20de%20reservar%20mesa%20para%20o%20Jantar%21" target="_blank" rel="noopener noreferrer">
+            <span class="card__icon" aria-hidden="true"><svg><use href="#i-calendar"/></svg></span>
+            <span class="card__body">
+              <span class="card__title">Reservar mesa</span>
+              <span class="card__sub">Jantar no salão, pelo WhatsApp</span>
+            </span>
+            <svg class="card__chevron" aria-hidden="true"><use href="#i-chevron"/></svg>
+          </a>
+        </li>
+        <li>
+          <a class="card card--paper" href="https://wa.me/5511918730446?text=Ol%C3%A1%2C%20gostaria%20de%20um%20or%C3%A7amento%20para%20o%20servi%C3%A7o%20de%20Buffet%21" target="_blank" rel="noopener noreferrer">
+            <span class="card__icon" aria-hidden="true"><svg><use href="#i-cloche"/></svg></span>
+            <span class="card__body">
+              <span class="card__title">Buffet a domicílio</span>
+              <span class="card__sub">Solicite um orçamento</span>
+            </span>
+            <svg class="card__chevron" aria-hidden="true"><use href="#i-chevron"/></svg>
+          </a>
+        </li>
+        <li>
+          <a class="card card--wine" href="https://www.ifood.com.br/delivery/sao-paulo-sp/sabah-cozinha-arabe-esfihas-e-kebabs-bela-vista/dbf10475-e887-40b5-bb54-7ee90bfd12f6" target="_blank" rel="noopener noreferrer">
+            <span class="card__icon" aria-hidden="true"><svg><use href="#i-bag"/></svg></span>
+            <span class="card__body">
+              <span class="card__title">Pedir no iFood</span>
+              <span class="card__sub">Delivery em São Paulo</span>
+            </span>
+            <svg class="card__chevron" aria-hidden="true"><use href="#i-chevron"/></svg>
+          </a>
+        </li>
+        <li>
+          <a class="card card--paper" href="https://wa.me/5511918730446?text=Ol%C3%A1%2C%20gostaria%20de%20fazer%20uma%20encomenda%20para%20retirada%20no%20restaurante." target="_blank" rel="noopener noreferrer">
+            <span class="card__icon" aria-hidden="true"><svg><use href="#i-box"/></svg></span>
+            <span class="card__body">
+              <span class="card__title">Encomendas</span>
+              <span class="card__sub">Para retirada no restaurante</span>
+            </span>
+            <svg class="card__chevron" aria-hidden="true"><use href="#i-chevron"/></svg>
+          </a>
+        </li>
+        <li>
+          <a class="card card--wine" href="https://drive.google.com/file/d/1GcBjehcGxpgiexmxQQUGSJdCzWeDnpGz/view" target="_blank" rel="noopener noreferrer">
+            <span class="card__icon" aria-hidden="true"><svg><use href="#i-book"/></svg></span>
+            <span class="card__body">
+              <span class="card__title">Cardápio delivery e encomendas</span>
+              <span class="card__sub">Abrir em PDF</span>
+            </span>
+            <svg class="card__chevron" aria-hidden="true"><use href="#i-chevron"/></svg>
+          </a>
+        </li>
+        <li>
+          <a class="card card--paper" href="https://drive.google.com/file/d/13W7Nrt4xetYpO-LgTtKqiaFdbRTgSUnl/view?usp=drive_link" target="_blank" rel="noopener noreferrer">
+            <span class="card__icon" aria-hidden="true"><svg><use href="#i-utensils"/></svg></span>
+            <span class="card__body">
+              <span class="card__title">Cardápio do salão</span>
+              <span class="card__sub">Abrir em PDF</span>
+            </span>
+            <svg class="card__chevron" aria-hidden="true"><use href="#i-chevron"/></svg>
+          </a>
+        </li>
+        <li>
+          <a class="card card--wine" href="https://wa.me/5511995635211?text=Ol%C3%A1%2C%20segue%20nossa%20proposta%20de%20parceria%20para%20o%20Sabah%3A" target="_blank" rel="noopener noreferrer">
+            <span class="card__icon" aria-hidden="true"><svg><use href="#i-camera"/></svg></span>
+            <span class="card__body">
+              <span class="card__title">Influenciadores e mídia</span>
+              <span class="card__sub">Mídia kit, propostas e parcerias</span>
+            </span>
+            <svg class="card__chevron" aria-hidden="true"><use href="#i-chevron"/></svg>
+          </a>
+        </li>
+        <li>
+          <a class="card card--paper" href="https://www.google.com/maps/place//data=!4m3!3m2!1s0x94ce59b8bf25fb8b:0xf07c915feae851c6!12e1?source=g.page.m.ia._&amp;laa=nmx-review-solicitation-ia2" target="_blank" rel="noopener noreferrer">
+            <span class="card__icon" aria-hidden="true"><svg><use href="#i-star"/></svg></span>
+            <span class="card__body">
+              <span class="card__title">Avalie no Google</span>
+              <span class="card__sub">Conte como foi sua experiência</span>
+            </span>
+            <svg class="card__chevron" aria-hidden="true"><use href="#i-chevron"/></svg>
+          </a>
+        </li>
+        <li>
+          <a class="card card--wine" href="https://www.sabah.com.br/" target="_blank" rel="noopener noreferrer">
+            <span class="card__icon" aria-hidden="true"><svg><use href="#i-globe"/></svg></span>
+            <span class="card__body">
+              <span class="card__title">Site oficial</span>
+              <span class="card__sub">sabah.com.br</span>
+            </span>
+            <svg class="card__chevron" aria-hidden="true"><use href="#i-chevron"/></svg>
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <footer class="quote">
+      <svg class="quote__mark" aria-hidden="true"><use href="#i-quote"/></svg>
+      <p class="quote__text">A legítima cozinha árabe.</p>
+      <p class="quote__meta">Sabah Cozinha Árabe, Bela Vista, São Paulo</p>
+    </footer>
   </main>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
 </body>
 </html>

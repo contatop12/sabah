@@ -9,28 +9,34 @@
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="/src/style.css" />
 </head>
 <body>
-  <main class="bio">
-    <div class="container">
-      <header class="row">
-        <div class="col col--header">
-          <div class="bio__header">
-            <img class="bio__avatar" src="/avatar-150.png" srcset="/avatar-150.png 1x, /avatar-260.png 2x" width="130" height="130" alt="Cozinha Árabe" />
-            <h1 class="bio__title">Página não encontrada</h1>
-          </div>
-        </div>
-      </header>
-      <section class="row">
-        <div class="col col--links">
-          <ul class="bio__links">
-            <li class="bio__link"><a class="btn" href="/">Voltar ao início</a></li>
-          </ul>
-        </div>
-      </section>
-    </div>
+  <div class="bg" aria-hidden="true"><span class="bg__dots"></span></div>
+  <main class="page">
+    <header class="hero">
+      <span class="hero__ring">
+        <img class="hero__avatar" src="/avatar-150.png" srcset="/avatar-150.png 1x, /avatar-260.png 2x" width="130" height="130" alt="Sabah" />
+      </span>
+      <p class="hero__eyebrow">Erro 404</p>
+      <h1 class="hero__name">Página não encontrada</h1>
+      <p class="hero__desc">O endereço que você abriu não existe. Volte para os links da Sabah.</p>
+    </header>
+    <ul class="cards">
+      <li>
+        <a class="card card--paper" href="/">
+          <span class="card__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/></svg>
+          </span>
+          <span class="card__body">
+            <span class="card__title">Voltar ao início</span>
+            <span class="card__sub">Todos os links da Sabah</span>
+          </span>
+          <svg class="card__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
+        </a>
+      </li>
+    </ul>
   </main>
 </body>
 </html>

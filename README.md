@@ -6,7 +6,7 @@ Clone estático de [bio.sabah.com.br](https://bio.sabah.com.br/) (página "link 
 
 - **HTML** – `index.html` (conteúdo e links) e `404.html`
 - **CSS** – `src/style.css` (estilos extraídos do tema original, sem Bootstrap)
-- **TypeScript** – `src/main.ts` e `src/blur-up.ts` (efeito blur-up do avatar); o build gera JS puro em `dist/assets/`
+- **TypeScript** – `src/main.ts`, `src/blur-up.ts` (blur-up do avatar) e `src/share.ts` (botão compartilhar: Web Share API com fallback de copiar link); o build gera JS puro em `dist/assets/`
 - **Vite** – dev server e build
 - **Wrangler** – deploy no Cloudflare
 
@@ -49,7 +49,7 @@ O mesmo `dist/` funciona no Pages (build command `npm run build`, output `dist`)
 
 ## Editar os links
 
-Os botões estão em `index.html`, dentro de `<ul class="bio__links">`. Cada `<li>` é um botão. Cores e fonte estão nas variáveis CSS no topo de `src/style.css`.
+Os cards estão em `index.html`, dentro de `<ul class="cards">`. Cada `<li>` tem ícone (`<use href="#i-...">`), título e subtítulo; alterne `card--wine` e `card--paper`. Ícones sociais ficam em `<ul class="social">`. Cores e fonte estão nas variáveis CSS no topo de `src/style.css`.
 
 ## Imagens
 

@@ -1,32 +1,34 @@
 /*
  * Sabah – Bio (link in bio)
- * Estilos extraídos de bio.sabah.com.br (tema Wolf WP, template "link grouper").
- * Apenas o subconjunto realmente usado pela página; Bootstrap foi reduzido ao grid mínimo.
+ * Paleta e fonte herdadas do site original; layout em cards com ícone,
+ * título e subtítulo. Mobile-first.
  */
 
 :root {
-  --font-default: "Poppins", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font: "Poppins", Roboto, "Helvetica Neue", Arial, sans-serif;
 
-  --bg-start: #0a0a0a;
-  --bg-end: #4f0200;
+  --ink: #0a0a0a;
+  --wine: #4f0200;
+  --brand: #a30101;
+  --brand-deep: #6a0100;
+  --paper: #ffffff;
 
-  --title-color: #ffffff;
-  --btn-bg: #ffffff;
-  --btn-color: #a30101;
-  --btn-radius: 50px;
+  --on-dark: rgba(255, 255, 255, 0.85);
+  --on-dark-muted: rgba(255, 255, 255, 0.6);
+  --line: rgba(255, 255, 255, 0.3);
 
-  --gutter: 12px;
+  --radius-card: 18px;
+  --shadow-card: 0 12px 32px rgba(0, 0, 0, 0.35);
+  --page-max: 560px;
 }
 
 *,
 *::before,
-*::after {
-  box-sizing: border-box;
-}
+*::after { box-sizing: border-box; }
 
 html {
   font-size: 16px;
-  background-color: var(--bg-end);
+  background-color: var(--wine);
   -webkit-text-size-adjust: 100%;
 }
 
@@ -34,139 +36,381 @@ body {
   margin: 0;
   min-height: 100vh;
   min-height: 100dvh;
-  font-family: var(--font-default);
+  font-family: var(--font);
   font-size: 16px;
   font-weight: 400;
-  line-height: 1.7;
-  color: #333333;
-  background-color: var(--bg-end);
-  background-image: linear-gradient(90deg, var(--bg-start) 0%, var(--bg-end) 100%);
+  line-height: 1.6;
+  color: var(--paper);
+  background-color: var(--wine);
+  background-image: linear-gradient(90deg, var(--ink) 0%, var(--wine) 100%);
   background-repeat: no-repeat;
   background-attachment: fixed;
   -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
 }
 
-img {
-  max-width: 100%;
-  height: auto;
+img { max-width: 100%; height: auto; }
+svg { display: block; }
+a { color: inherit; }
+
+/* ---------- Fundo decorativo ---------- */
+
+.bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
 }
 
-/* ---------- Grid (subconjunto do Bootstrap 5 usado no original) ---------- */
+.bg::before,
+.bg::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(48px);
+}
 
-.container {
-  width: 100%;
+.bg::before {
+  width: 72vmax;
+  height: 72vmax;
+  top: -28vmax;
+  right: -30vmax;
+  background: radial-gradient(circle, rgba(163, 1, 1, 0.55) 0%, rgba(163, 1, 1, 0) 62%);
+}
+
+.bg::after {
+  width: 60vmax;
+  height: 60vmax;
+  bottom: -30vmax;
+  left: -28vmax;
+  background: radial-gradient(circle, rgba(163, 1, 1, 0.38) 0%, rgba(163, 1, 1, 0) 62%);
+}
+
+.bg__dots {
+  position: absolute;
+  right: -10px;
+  top: 30%;
+  width: 150px;
+  height: 260px;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.28) 1px, transparent 1.6px);
+  background-size: 14px 14px;
+  -webkit-mask-image: radial-gradient(ellipse at center, #000 30%, transparent 72%);
+          mask-image: radial-gradient(ellipse at center, #000 30%, transparent 72%);
+}
+
+
+/* ---------- Página ---------- */
+
+.page {
+  position: relative;
+  z-index: 1;
+  max-width: var(--page-max);
   margin: 0 auto;
-  padding: 0 var(--gutter);
+  padding: 24px 20px 44px;
 }
 
-@media (min-width: 576px)  { .container { max-width: 540px; } }
-@media (min-width: 768px)  { .container { max-width: 720px; } }
-@media (min-width: 992px)  { .container { max-width: 960px; } }
-@media (min-width: 1200px) { .container { max-width: 1140px; } }
-@media (min-width: 1400px) { .container { max-width: 1320px; } }
-
-.row {
-  display: flex;
-  flex-wrap: wrap;
-  margin: 0 calc(-1 * var(--gutter));
+.share {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--paper);
+  cursor: pointer;
+  -webkit-backdrop-filter: blur(6px);
+          backdrop-filter: blur(6px);
 }
 
-.col {
-  flex: 0 0 auto;
-  width: 100%;
-  max-width: 100%;
-  margin: auto;
-  padding: 0 var(--gutter);
+.share svg { width: 20px; height: 20px; }
+
+.share:hover,
+.share:focus-visible {
+  background: var(--paper);
+  color: var(--brand);
 }
 
-@media (min-width: 992px) {
-  .col--header { width: 58.3333%; } /* col-lg-7 */
-  .col--links  { width: 41.6667%; } /* col-lg-5 */
-}
+/* ---------- Hero ---------- */
 
-/* ---------- Header ---------- */
-
-.bio__header {
-  padding: 30px 0;
+.hero {
+  padding-top: 36px;
   text-align: center;
 }
 
-.bio__avatar {
-  display: block;
-  width: 130px;
-  max-width: 130px;
-  height: 130px;
-  margin: 0 auto;
+.hero__ring {
+  display: inline-block;
+  padding: 6px;
+  border: 2px solid rgba(255, 255, 255, 0.45);
   border-radius: 50%;
 }
 
-.bio__title {
-  margin: 20px 0;
-  font-size: 1.5rem;
+.hero__avatar {
+  display: block;
+  width: 130px;
+  height: 130px;
+  border: 4px solid var(--paper);
+  border-radius: 50%;
+  background: var(--paper);
+}
+
+.hero__eyebrow {
+  margin: 22px 0 2px;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--on-dark-muted);
+}
+
+.hero__name {
+  margin: 0;
+  font-size: clamp(2.5rem, 10vw, 3.1rem);
   font-weight: 600;
-  line-height: 1.2;
-  color: var(--title-color);
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  color: var(--paper);
 }
 
-@media (max-width: 768px) {
-  .bio__title { line-height: 1.5; }
+.hero__divider {
+  position: relative;
+  width: 140px;
+  height: 1px;
+  margin: 18px auto;
+  background: var(--line);
 }
 
-/* ---------- Blur-up (equivalente ao lazysizes do original) ---------- */
-
-.blur-up {
-  filter: blur(5px);
-  transition: filter 0.4s;
+.hero__divider::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 7px;
+  height: 7px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: var(--paper);
 }
 
-.blur-up.is-loaded {
-  filter: blur(0);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .blur-up { transition: none; }
-}
-
-/* ---------- Lista de links ---------- */
-
-.bio__links {
+.hero__tagline {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   margin: 0;
   padding: 0;
   list-style: none;
+  font-size: 0.74rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--paper);
+}
+
+.hero__tagline li + li::before {
+  content: "\2022";
+  margin: 0 0.7em;
+  opacity: 0.55;
+}
+
+.hero__desc {
+  max-width: 36ch;
+  margin: 16px auto 0;
+  font-size: 0.95rem;
+  font-weight: 300;
+  line-height: 1.6;
+  color: var(--on-dark);
+}
+
+/* ---------- Redes / contato rápido ---------- */
+
+.social {
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+  margin: 24px 0 28px;
+  padding: 0;
+  list-style: none;
+}
+
+.social__link {
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  border: 1.5px solid rgba(255, 255, 255, 0.55);
+  border-radius: 50%;
+  color: var(--paper);
+  text-decoration: none;
+}
+
+.social__link svg { width: 22px; height: 22px; }
+
+.social__link:hover,
+.social__link:focus-visible {
+  background: var(--paper);
+  border-color: var(--paper);
+  color: var(--brand);
+}
+
+/* ---------- Cards ---------- */
+
+.cards {
+  display: grid;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.card {
+  display: grid;
+  grid-template-columns: 54px 1fr 20px;
+  align-items: center;
+  gap: 14px;
+  padding: 13px 16px 13px 13px;
+  border-radius: var(--radius-card);
+  text-decoration: none;
+  box-shadow: var(--shadow-card);
+  transition: transform 0.12s ease-out;
+}
+
+.card:active { transform: scale(0.985); }
+
+.card--paper {
+  background: var(--paper);
+  color: var(--brand);
+}
+
+.card--paper .card__icon { background: rgba(163, 1, 1, 0.1); }
+.card--paper .card__sub { color: rgba(79, 2, 0, 0.78); }
+
+.card--wine {
+  background: linear-gradient(135deg, var(--brand) 0%, var(--brand-deep) 100%);
+  color: var(--paper);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.14), var(--shadow-card);
+}
+
+.card--wine .card__icon { background: rgba(255, 255, 255, 0.14); }
+.card--wine .card__sub { color: rgba(255, 255, 255, 0.82); }
+
+.card__icon {
+  display: grid;
+  place-items: center;
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+}
+
+.card__icon svg { width: 26px; height: 26px; }
+
+.card__body { min-width: 0; }
+
+.card__title {
+  display: block;
+  margin: 0;
+  font-size: 1.02rem;
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+.card__sub {
+  display: block;
+  margin: 3px 0 0;
+  font-size: 0.78rem;
+  font-weight: 400;
+  line-height: 1.35;
+}
+
+.card__chevron {
+  width: 20px;
+  height: 20px;
+  opacity: 0.7;
+}
+
+/* ---------- Rodapé ---------- */
+
+.quote {
+  margin: 38px 0 0;
   text-align: center;
 }
 
-.bio__link {
-  margin-bottom: 15px;
+.quote__mark {
+  width: 28px;
+  height: 28px;
+  margin: 0 auto 8px;
+  color: rgba(255, 255, 255, 0.45);
 }
 
-.bio__link:last-child {
-  margin-bottom: 30px;
+.quote__text {
+  max-width: 30ch;
+  margin: 0 auto;
+  font-size: 1rem;
+  font-weight: 300;
+  line-height: 1.6;
+  color: var(--on-dark);
 }
 
-.btn {
-  display: block;
-  width: 100%;
-  padding: 10px;
-  border: none;
-  border-radius: var(--btn-radius);
-  background-color: var(--btn-bg);
-  color: var(--btn-color);
+.quote__meta {
+  margin: 12px 0 0;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  color: var(--on-dark-muted);
+}
+
+/* ---------- Toast (fallback do compartilhar) ---------- */
+
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 24px;
+  z-index: 2;
+  padding: 10px 18px;
+  border-radius: 999px;
+  background: var(--paper);
+  color: var(--brand);
+  font-size: 0.85rem;
   font-weight: 500;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  text-decoration: none;
-  box-shadow: inset 0 0 0 3px rgba(0, 0, 0, 0.2);
-  transition: all 0.1s ease-in-out;
+  box-shadow: var(--shadow-card);
+  opacity: 0;
+  transform: translate(-50%, 8px);
+  transition: opacity 0.2s, transform 0.2s;
+  pointer-events: none;
 }
 
-.btn:hover,
-.btn:focus {
-  text-decoration: none;
-  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1);
+.toast.is-visible {
+  opacity: 1;
+  transform: translate(-50%, 0);
 }
 
-.btn:focus-visible {
-  outline: 3px solid #ffffff;
-  outline-offset: 2px;
+/* ---------- Blur-up do avatar ---------- */
+
+.blur-up { filter: blur(5px); transition: filter 0.4s; }
+.blur-up.is-loaded { filter: blur(0); }
+
+/* ---------- Foco e movimento ---------- */
+
+:focus-visible {
+  outline: 3px solid var(--paper);
+  outline-offset: 3px;
+}
+
+.card--paper:focus-visible { outline-color: var(--brand); }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition: none !important; }
+}
+
+/* ---------- Telas maiores ---------- */
+
+@media (min-width: 768px) {
+  .page { padding: 32px 24px 56px; }
+  .share { top: 28px; right: 24px; }
+  .hero { padding-top: 40px; }
+  .cards { gap: 14px; }
+  .card { padding: 15px 18px 15px 15px; }
 }
