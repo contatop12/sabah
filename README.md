@@ -41,7 +41,7 @@ Ou, pelo painel: Workers & Pages → `sabah-bio` → Settings → Domains & Rout
 ### Deploy automático via Git (Workers Builds)
 
 No painel: Workers & Pages → Create → conectar o repositório `contatop12/sabah`.
-Build command: `npm run build` · Deploy command: `npx wrangler deploy`.
+Deploy command: `npx wrangler deploy`. Build command pode ficar vazio: o `build.command` do `wrangler.jsonc` roda `npm run build` automaticamente.
 
 ### Alternativa: Cloudflare Pages
 

@@ -3,6 +3,12 @@
   "name": "sabah-bio",
   "compatibility_date": "2026-09-22",
 
+  // Roda antes de `wrangler deploy` / `wrangler dev`, inclusive no Workers Builds.
+  // Garante que dist/ exista mesmo sem build command configurado no painel.
+  "build": {
+    "command": "npm run build"
+  },
+
   // Site estático (assets-only): não há script de Worker.
   "assets": {
     "directory": "./dist",
