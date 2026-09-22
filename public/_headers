@@ -1,0 +1,16 @@
+# Headers aplicados pelo Cloudflare Workers (static assets).
+# Este arquivo não é servido publicamente.
+
+/*
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: SAMEORIGIN
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=()
+
+# Assets com hash no nome (gerados pelo Vite): cache longo.
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Não indexar a URL *.workers.dev (só o domínio final).
+https://:worker.:subdomain.workers.dev/*
+  X-Robots-Tag: noindex

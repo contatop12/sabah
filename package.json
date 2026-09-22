@@ -1,0 +1,33 @@
+{
+  "name": "sabah-bio",
+  "version": "1.0.0",
+  "description": "Página bio.sabah.com.br (link in bio) em HTML/CSS/TS, deploy no Cloudflare Workers.",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc --noEmit",
+    "cf:dev": "wrangler dev",
+    "deploy": "npm run build && wrangler deploy",
+    "deploy:dry": "npm run build && wrangler deploy --dry-run"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/contatop12/sabah.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/contatop12/sabah/issues"
+  },
+  "homepage": "https://github.com/contatop12/sabah#readme",
+  "devDependencies": {
+    "@types/node": "^26.6.2",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.0",
+    "wrangler": "^4.136.3"
+  },
+  "private": true
+}

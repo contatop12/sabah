@@ -1,0 +1,172 @@
+/*
+ * Sabah – Bio (link in bio)
+ * Estilos extraídos de bio.sabah.com.br (tema Wolf WP, template "link grouper").
+ * Apenas o subconjunto realmente usado pela página; Bootstrap foi reduzido ao grid mínimo.
+ */
+
+:root {
+  --font-default: "Poppins", Roboto, "Helvetica Neue", Arial, sans-serif;
+
+  --bg-start: #0a0a0a;
+  --bg-end: #4f0200;
+
+  --title-color: #ffffff;
+  --btn-bg: #ffffff;
+  --btn-color: #a30101;
+  --btn-radius: 50px;
+
+  --gutter: 12px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  background-color: var(--bg-end);
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  min-height: 100dvh;
+  font-family: var(--font-default);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.7;
+  color: #333333;
+  background-color: var(--bg-end);
+  background-image: linear-gradient(90deg, var(--bg-start) 0%, var(--bg-end) 100%);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* ---------- Grid (subconjunto do Bootstrap 5 usado no original) ---------- */
+
+.container {
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+
+@media (min-width: 576px)  { .container { max-width: 540px; } }
+@media (min-width: 768px)  { .container { max-width: 720px; } }
+@media (min-width: 992px)  { .container { max-width: 960px; } }
+@media (min-width: 1200px) { .container { max-width: 1140px; } }
+@media (min-width: 1400px) { .container { max-width: 1320px; } }
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 calc(-1 * var(--gutter));
+}
+
+.col {
+  flex: 0 0 auto;
+  width: 100%;
+  max-width: 100%;
+  margin: auto;
+  padding: 0 var(--gutter);
+}
+
+@media (min-width: 992px) {
+  .col--header { width: 58.3333%; } /* col-lg-7 */
+  .col--links  { width: 41.6667%; } /* col-lg-5 */
+}
+
+/* ---------- Header ---------- */
+
+.bio__header {
+  padding: 30px 0;
+  text-align: center;
+}
+
+.bio__avatar {
+  display: block;
+  width: 130px;
+  max-width: 130px;
+  height: 130px;
+  margin: 0 auto;
+  border-radius: 50%;
+}
+
+.bio__title {
+  margin: 20px 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+  line-height: 1.2;
+  color: var(--title-color);
+}
+
+@media (max-width: 768px) {
+  .bio__title { line-height: 1.5; }
+}
+
+/* ---------- Blur-up (equivalente ao lazysizes do original) ---------- */
+
+.blur-up {
+  filter: blur(5px);
+  transition: filter 0.4s;
+}
+
+.blur-up.is-loaded {
+  filter: blur(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .blur-up { transition: none; }
+}
+
+/* ---------- Lista de links ---------- */
+
+.bio__links {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  text-align: center;
+}
+
+.bio__link {
+  margin-bottom: 15px;
+}
+
+.bio__link:last-child {
+  margin-bottom: 30px;
+}
+
+.btn {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: var(--btn-radius);
+  background-color: var(--btn-bg);
+  color: var(--btn-color);
+  font-weight: 500;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  text-decoration: none;
+  box-shadow: inset 0 0 0 3px rgba(0, 0, 0, 0.2);
+  transition: all 0.1s ease-in-out;
+}
+
+.btn:hover,
+.btn:focus {
+  text-decoration: none;
+  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1);
+}
+
+.btn:focus-visible {
+  outline: 3px solid #ffffff;
+  outline-offset: 2px;
+}

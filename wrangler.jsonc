@@ -1,0 +1,20 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "sabah-bio",
+  "compatibility_date": "2026-09-22",
+
+  // Site estático (assets-only): não há script de Worker.
+  "assets": {
+    "directory": "./dist",
+    "html_handling": "auto-trailing-slash",
+    "not_found_handling": "404-page"
+  }
+
+  // Domínio customizado. Descomente SOMENTE na hora do cutover:
+  // isso aponta bio.sabah.com.br para este Worker e substitui o site atual (WordPress).
+  // A zona sabah.com.br precisa estar na mesma conta Cloudflare.
+  //
+  // "routes": [
+  //   { "pattern": "bio.sabah.com.br", "custom_domain": true }
+  // ]
+}
