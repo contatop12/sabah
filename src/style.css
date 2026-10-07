@@ -553,6 +553,8 @@ h1, h2, p, dl, dd { margin: 0; }
   text-align: center;
 }
 
+.modal__box:focus { outline: none; }
+
 .modal__close {
   position: absolute;
   top: 8px;

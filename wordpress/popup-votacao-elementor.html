@@ -1,0 +1,160 @@
+<!--
+  Sabah – Conteúdo do POPUP DO ELEMENTOR PRO "Votação" (Campeões da Gastronomia • GoWhere 2026)
+
+  Use este arquivo DENTRO de um template de Popup do Elementor (Modelos > Popups > "Votação").
+  Ele é só o conteúdo: quem abre, fecha e controla a frequência é o próprio Elementor.
+  (Para usar sem Popup do Elementor, use popup-votacao-standalone.html.)
+
+  PASSO A PASSO
+  1. Abra o popup "Votação" no Elementor. APAGUE o widget HTML antigo, coloque um novo widget "HTML"
+     e cole TODO este arquivo nele.
+  2. O CSS abaixo ajusta a moldura do Elementor sozinho (largura 420 px, sem fundo branco, sem
+     padding, fundo da página em degradê, esconde o X padrão). Se algo não ficar certo, ajuste
+     manualmente na engrenagem (Configurações do popup):
+       - Layout: Largura 420 px · Altura "Ajustar ao conteúdo" · Posição centro
+       - Estilo > Popup: fundo transparente · Preenchimento 0
+       - Botão Fechar: Ocultar (o card tem o X e o "Agora não")
+  3. Publicar > Condições: "Site inteiro" (ou "Página inicial").
+  4. Gatilhos: "Ao carregar a página" · 1 segundo.
+  5. Regras avançadas: "Mostrar até X vezes" = 1, por "Sessão".
+  6. Configurações avançadas: deixe DESLIGADO "Impedir fechar ao clicar fora" e "Impedir fechar com ESC".
+  7. Teste em janela anônima (a regra de 1 vez por sessão esconde o popup depois da primeira vez).
+
+  Trocar a foto: altere a URL em --sbh-foto (logo abaixo, no <style>).
+  Intensidade do degradê sobre a foto: --sbh-degrade.
+
+  Obs.: o popup 528 (WhatsApp) também abre ao carregar a página. Durante a campanha, desative-o
+  ou mude o gatilho dele, para não abrir dois popups.
+-->
+
+<div class="sbh-card">
+  <a class="sbh-card__close" href="#elementor-action%3Aaction%3Dpopup%3Aclose%26settings%3DeyJkb19ub3Rfc2hvd19hZ2FpbiI6IiJ9" role="button" aria-label="Fechar">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6L6 18"/><path d="M6 6l12 12"/></svg>
+  </a>
+
+  <span class="sbh-card__icon" aria-hidden="true">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M8 21h8"/><path d="M12 17v4"/><path d="M7 4h10v5a5 5 0 0 1-10 0V4z"/><path d="M7 6H4v2a3 3 0 0 0 3 3"/><path d="M17 6h3v2a3 3 0 0 1-3 3"/></svg>
+  </span>
+
+  <p class="sbh-card__eyebrow">Campeões da Gastronomia • GoWhere 2026</p>
+  <h2 class="sbh-card__title">Vote no Sabah</h2>
+  <p class="sbh-card__text">O Sabah está concorrendo ao prêmio Campeões da Gastronomia de São Paulo 2026, da GoWhere, na categoria restaurante árabe.</p>
+  <p class="sbh-card__text">Ajude o Sabah a conquistar o título de Melhor Árabe de São Paulo. Leva menos de um minuto.</p>
+
+  <div class="sbh-card__actions">
+    <a class="sbh-btn sbh-btn--primary" href="https://gowhere.com.br/campeoes-da-gastronomia-de-sao-paulo-2026/" target="_blank" rel="noopener noreferrer"
+       onclick="window.dataLayer=window.dataLayer||[];window.dataLayer.push({event:'bio_link_click',link_name:'gowhere'});">Votar agora</a>
+    <a class="sbh-btn sbh-btn--ghost" href="#elementor-action%3Aaction%3Dpopup%3Aclose%26settings%3DeyJkb19ub3Rfc2hvd19hZ2FpbiI6IiJ9" role="button">Agora não</a>
+  </div>
+</div>
+
+<style>
+  .sbh-card {
+    /* Foto de fundo (biblioteca de mídia do WordPress, ID 785) */
+    --sbh-foto: url("https://sabah.com.br/wp-content/uploads/2026/10/sabah-restaurante-arabe-av-paulista-1920.webp");
+    /* Degradê sobre a foto: preto no topo, vinho Sabah embaixo */
+    --sbh-degrade: linear-gradient(180deg, rgba(17, 17, 17, 0.62) 0%, rgba(17, 17, 17, 0.78) 42%, rgba(110, 0, 0, 0.94) 100%);
+  }
+
+  /* ---------- Moldura do Popup do Elementor (só quando contém este card) ---------- */
+  .elementor-popup-modal:has(.sbh-card) {
+    background: linear-gradient(160deg, rgba(10, 10, 10, 0.84) 0%, rgba(79, 2, 0, 0.82) 100%) !important;
+  }
+  .elementor-popup-modal:has(.sbh-card) .dialog-widget-content {
+    width: auto !important;
+    max-width: calc(100vw - 32px) !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    border-radius: 18px !important;
+  }
+  .elementor-popup-modal:has(.sbh-card) .dialog-message {
+    width: min(420px, calc(100vw - 32px)) !important;
+    max-height: calc(100dvh - 32px);
+    padding: 0 !important;
+    overflow: auto;
+  }
+  .elementor-popup-modal:has(.sbh-card) .dialog-close-button { display: none !important; }
+  .elementor-popup-modal:has(.sbh-card) .e-con,
+  .elementor-popup-modal:has(.sbh-card) .e-con-inner,
+  .elementor-popup-modal:has(.sbh-card) .elementor-section .elementor-container,
+  .elementor-popup-modal:has(.sbh-card) .elementor-column > .elementor-widget-wrap {
+    padding: 0 !important;
+    min-height: 0 !important;
+    background: transparent !important;
+  }
+  .elementor-popup-modal:has(.sbh-card) .elementor-widget-html { margin: 0 !important; width: 100%; }
+  .elementor-popup-modal:has(.sbh-card) .elementor-location-popup { width: 100%; }
+
+  /* ---------- Card ---------- */
+  .sbh-card, .sbh-card * { box-sizing: border-box; }
+  .sbh-card {
+    position: relative;
+    width: 100%;
+    max-width: 420px;
+    margin: 0 auto;
+    padding: 40px 24px 24px;
+    border-radius: 18px;
+    overflow: hidden;
+    background-color: #2a0a08;
+    background-image: var(--sbh-degrade), var(--sbh-foto);
+    background-size: cover, cover;
+    background-position: center, center;
+    color: #ffffff;
+    font-family: "Manrope", "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    line-height: 1.5;
+    text-align: center;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
+  }
+
+  .sbh-card .sbh-card__close {
+    position: absolute; top: 8px; right: 8px;
+    display: grid; place-items: center;
+    width: 44px; height: 44px; margin: 0; padding: 0;
+    border-radius: 50%; color: rgba(255, 255, 255, 0.85); background: transparent;
+    text-decoration: none; box-shadow: none;
+  }
+  .sbh-card .sbh-card__close:hover { background: rgba(255, 255, 255, 0.14); color: #ffffff; }
+  .sbh-card .sbh-card__close svg { width: 20px; height: 20px; display: block; }
+
+  .sbh-card .sbh-card__icon {
+    display: grid; place-items: center;
+    width: 60px; height: 60px; margin: 0 auto 14px;
+    border-radius: 50%; background: #ffffff; color: #a30000;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
+  }
+  .sbh-card .sbh-card__icon svg { width: 30px; height: 30px; display: block; }
+
+  .sbh-card .sbh-card__eyebrow { margin: 0; font-size: 0.75rem; font-weight: 600; line-height: 1.4; color: rgba(255, 255, 255, 0.82); }
+  .sbh-card .sbh-card__title {
+    margin: 6px 0 0; padding: 0;
+    font-family: inherit; font-size: 1.75rem; font-weight: 800; line-height: 1.15;
+    color: #ffffff; text-transform: none; letter-spacing: -0.01em;
+    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.35);
+  }
+  .sbh-card .sbh-card__text { margin: 12px 0 0; font-size: 0.925rem; line-height: 1.55; color: rgba(255, 255, 255, 0.9); }
+
+  .sbh-card .sbh-card__actions { display: grid; gap: 10px; margin-top: 22px; }
+  .sbh-card .sbh-btn {
+    display: flex; align-items: center; justify-content: center;
+    width: 100%; min-height: 48px; margin: 0; padding: 12px 18px;
+    border: 1px solid transparent; border-radius: 999px;
+    font-family: inherit; font-size: 0.925rem; font-weight: 700; line-height: 1.3;
+    text-align: center; text-decoration: none; text-transform: none; letter-spacing: normal;
+    box-shadow: none; cursor: pointer;
+    transition: background-color 180ms ease-out, border-color 180ms ease-out, color 180ms ease-out;
+  }
+  .sbh-card .sbh-btn--primary,
+  .sbh-card .sbh-btn--primary:visited { background: #ffffff; border-color: #ffffff; color: #a30000; }
+  .sbh-card .sbh-btn--primary:hover,
+  .sbh-card .sbh-btn--primary:focus { background: #faf8f4; border-color: #faf8f4; color: #8b0000; text-decoration: none; }
+  .sbh-card .sbh-btn--ghost,
+  .sbh-card .sbh-btn--ghost:visited { background: transparent; border-color: rgba(255, 255, 255, 0.55); color: #ffffff; }
+  .sbh-card .sbh-btn--ghost:hover,
+  .sbh-card .sbh-btn--ghost:focus { background: rgba(255, 255, 255, 0.1); border-color: #ffffff; color: #ffffff; text-decoration: none; }
+  .sbh-card a:focus-visible { outline: 2px solid #ffffff; outline-offset: 3px; }
+
+  @media (max-width: 360px) {
+    .sbh-card { padding: 36px 18px 20px; }
+    .sbh-card .sbh-card__title { font-size: 1.5rem; }
+  }
+</style>

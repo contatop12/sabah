@@ -1,0 +1,198 @@
+<!--
+  Sabah – Popup "Vote no Sabah" STANDALONE (Campeões da Gastronomia • GoWhere 2026)
+
+  ATENÇÃO: se você usa um template de POPUP do Elementor Pro, use popup-votacao-elementor.html.
+  Este arquivo aqui JÁ É um popup completo e não pode ficar dentro de outro popup.
+
+  COMO USAR
+  1. Elementor: widget "HTML" numa página normal (não num template de Popup) e cole TODO este arquivo.
+     Site inteiro: Elementor Pro > Custom Code (body end), ou plugin WPCode > Site Wide Footer.
+  2. No EDITOR o popup aparece "deitado" na página como pré-visualização. Ele não abre sozinho no editor.
+  3. Para testar: "Visualizar" (olho) ou a página publicada, em janela anônima.
+     Para forçar a abertura em qualquer aba, adicione ?sbh-popup=1 no fim da URL.
+  4. Desativar: apague o widget ou troque data-ativo="true" por "false" no <dialog> abaixo.
+     Trocar o link de votação: atributo data-link. Trocar a foto: --sbh-foto no <style>.
+
+  WP Rocket: o <script> tem o atributo "nowprocket" para não ser atrasado pelo
+  "Atrasar a execução de JavaScript". Não remova esse atributo.
+
+  Comportamento: abre 0,9 s após carregar, uma vez por sessão; fecha por botão, Esc ou clique fora.
+  Envia {event:"bio_link_click", link_name:"gowhere"} ao dataLayer (GTM/GA4), se existir.
+-->
+
+<p class="sbh-editor-note">Pré-visualização do popup de votação. Só aparece assim no editor; no site ele abre sozinho.</p>
+
+<dialog id="sbh-vote-modal" class="sbh-modal" data-ativo="true" data-link="https://gowhere.com.br/campeoes-da-gastronomia-de-sao-paulo-2026/" aria-labelledby="sbh-vote-title">
+  <div class="sbh-modal__box" tabindex="-1" autofocus>
+    <button class="sbh-modal__close" type="button" data-sbh-close aria-label="Fechar">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6L6 18"/><path d="M6 6l12 12"/></svg>
+    </button>
+
+    <span class="sbh-modal__icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M8 21h8"/><path d="M12 17v4"/><path d="M7 4h10v5a5 5 0 0 1-10 0V4z"/><path d="M7 6H4v2a3 3 0 0 0 3 3"/><path d="M17 6h3v2a3 3 0 0 1-3 3"/></svg>
+    </span>
+
+    <p class="sbh-modal__eyebrow">Campeões da Gastronomia • GoWhere 2026</p>
+    <h2 id="sbh-vote-title" class="sbh-modal__title">Vote no Sabah</h2>
+    <p class="sbh-modal__text">O Sabah está concorrendo ao prêmio Campeões da Gastronomia de São Paulo 2026, da GoWhere, na categoria restaurante árabe.</p>
+    <p class="sbh-modal__text">Ajude o Sabah a conquistar o título de Melhor Árabe de São Paulo. Leva menos de um minuto.</p>
+
+    <div class="sbh-modal__actions">
+      <a class="sbh-btn sbh-btn--primary" href="https://gowhere.com.br/campeoes-da-gastronomia-de-sao-paulo-2026/" target="_blank" rel="noopener noreferrer" data-sbh-vote>Votar agora</a>
+      <button class="sbh-btn sbh-btn--ghost" type="button" data-sbh-close>Agora não</button>
+    </div>
+  </div>
+</dialog>
+
+<style>
+  #sbh-vote-modal.sbh-modal {
+    /* Foto de fundo (biblioteca de mídia do WordPress, ID 785) */
+    --sbh-foto: url("https://sabah.com.br/wp-content/uploads/2026/10/sabah-restaurante-arabe-av-paulista-1920.webp");
+    /* Degradê sobre a foto: preto no topo, vinho Sabah embaixo */
+    --sbh-degrade: linear-gradient(180deg, rgba(17, 17, 17, 0.62) 0%, rgba(17, 17, 17, 0.78) 42%, rgba(110, 0, 0, 0.94) 100%);
+
+    box-sizing: border-box;
+    width: min(100% - 32px, 420px);
+    max-width: 420px;
+    max-height: calc(100vh - 32px);
+    max-height: calc(100dvh - 32px);
+    margin: auto;
+    padding: 0;
+    border: 0;
+    border-radius: 18px;
+    background-color: #2a0a08;
+    background-image: var(--sbh-degrade), var(--sbh-foto);
+    background-size: cover, cover;
+    background-position: center, center;
+    color: #ffffff;
+    font-family: "Manrope", "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    line-height: 1.5;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
+    overflow: auto;
+    z-index: 999999;
+  }
+  #sbh-vote-modal.sbh-modal::backdrop {
+    background: linear-gradient(160deg, rgba(10, 10, 10, 0.84) 0%, rgba(79, 2, 0, 0.82) 100%);
+  }
+  #sbh-vote-modal.sbh-modal[open] { animation: sbh-modal-in 180ms ease-out; }
+  @keyframes sbh-modal-in { from { opacity: 0; transform: translateY(8px); } }
+  @media (prefers-reduced-motion: reduce) { #sbh-vote-modal.sbh-modal[open] { animation: none; } }
+
+  #sbh-vote-modal * { box-sizing: border-box; }
+  #sbh-vote-modal .sbh-modal__box { position: relative; padding: 40px 24px 24px; text-align: center; }
+  #sbh-vote-modal .sbh-modal__box:focus { outline: none; }
+
+  #sbh-vote-modal .sbh-modal__close {
+    position: absolute; top: 8px; right: 8px;
+    display: grid; place-items: center;
+    width: 44px; height: 44px; min-height: 0; margin: 0; padding: 0;
+    border: 0; border-radius: 50%; background: transparent; color: rgba(255, 255, 255, 0.85);
+    cursor: pointer; box-shadow: none;
+  }
+  #sbh-vote-modal .sbh-modal__close:hover { background: rgba(255, 255, 255, 0.14); color: #ffffff; }
+  #sbh-vote-modal .sbh-modal__close svg { width: 20px; height: 20px; display: block; }
+
+  #sbh-vote-modal .sbh-modal__icon {
+    display: grid; place-items: center;
+    width: 60px; height: 60px; margin: 0 auto 14px;
+    border-radius: 50%; background: #ffffff; color: #a30000;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
+  }
+  #sbh-vote-modal .sbh-modal__icon svg { width: 30px; height: 30px; display: block; }
+
+  #sbh-vote-modal .sbh-modal__eyebrow { margin: 0; font-size: 0.75rem; font-weight: 600; line-height: 1.4; color: rgba(255, 255, 255, 0.82); }
+  #sbh-vote-modal .sbh-modal__title {
+    margin: 6px 0 0; padding: 0;
+    font-family: inherit; font-size: 1.75rem; font-weight: 800; line-height: 1.15;
+    color: #ffffff; text-transform: none; letter-spacing: -0.01em;
+    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.35);
+  }
+  #sbh-vote-modal .sbh-modal__text { margin: 12px 0 0; font-size: 0.925rem; line-height: 1.55; color: rgba(255, 255, 255, 0.9); }
+
+  #sbh-vote-modal .sbh-modal__actions { display: grid; gap: 10px; margin-top: 22px; }
+  #sbh-vote-modal .sbh-btn {
+    display: flex; align-items: center; justify-content: center;
+    width: 100%; min-height: 48px; margin: 0; padding: 12px 18px;
+    border: 1px solid transparent; border-radius: 999px;
+    font: inherit; font-size: 0.925rem; font-weight: 700; line-height: 1.3;
+    text-align: center; text-decoration: none; text-transform: none; letter-spacing: normal;
+    cursor: pointer; box-shadow: none;
+    transition: background-color 180ms ease-out, border-color 180ms ease-out, color 180ms ease-out;
+  }
+  #sbh-vote-modal .sbh-btn--primary,
+  #sbh-vote-modal .sbh-btn--primary:visited { background: #ffffff; border-color: #ffffff; color: #a30000; }
+  #sbh-vote-modal .sbh-btn--primary:hover { background: #faf8f4; border-color: #faf8f4; color: #8b0000; text-decoration: none; }
+  #sbh-vote-modal .sbh-btn--ghost { background: transparent; border-color: rgba(255, 255, 255, 0.55); color: #ffffff; }
+  #sbh-vote-modal .sbh-btn--ghost:hover { background: rgba(255, 255, 255, 0.1); border-color: #ffffff; color: #ffffff; }
+  #sbh-vote-modal :focus-visible { outline: 2px solid #ffffff; outline-offset: 3px; }
+
+  @media (max-width: 360px) {
+    #sbh-vote-modal .sbh-modal__box { padding: 36px 18px 20px; }
+    #sbh-vote-modal .sbh-modal__title { font-size: 1.5rem; }
+  }
+
+  /* Fora do editor a nota fica escondida. */
+  .sbh-editor-note { display: none; }
+
+  /* Dentro do editor do Elementor: mostra o popup "deitado" na página, como pré-visualização. */
+  .elementor-editor-active .sbh-editor-note,
+  .elementor-edit-mode .sbh-editor-note {
+    display: block; margin: 16px auto 8px; max-width: 420px;
+    font: 600 12px/1.4 system-ui, sans-serif; color: #666666; text-align: center;
+  }
+  .elementor-editor-active #sbh-vote-modal.sbh-modal,
+  .elementor-edit-mode #sbh-vote-modal.sbh-modal {
+    display: block; position: relative; inset: auto; margin: 0 auto 24px; animation: none;
+  }
+</style>
+
+<script nowprocket data-cfasync="false" data-no-optimize="1">
+(function () {
+  var modal = document.getElementById("sbh-vote-modal");
+  if (!modal || typeof modal.showModal !== "function") return;
+  if (modal.getAttribute("data-ativo") !== "true") { modal.remove(); return; }
+
+  // Não abre dentro do editor do Elementor.
+  var inEditor =
+    document.body.classList.contains("elementor-editor-active") ||
+    !!modal.closest(".elementor-edit-mode") ||
+    (window.elementorFrontend && typeof window.elementorFrontend.isEditMode === "function" && window.elementorFrontend.isEditMode());
+  if (inEditor) return;
+
+  // Dentro de um template de Popup do Elementor este arquivo não funciona: avisa no console.
+  if (modal.closest(".elementor-location-popup")) {
+    if (window.console) console.warn("[Sabah] popup-votacao-standalone.html está dentro de um Popup do Elementor. Use popup-votacao-elementor.html.");
+    return;
+  }
+
+  var SEEN_KEY = "sabah-vote-popup";
+  var DELAY_MS = 900;
+  var forced = /[?&]sbh-popup=1\b/.test(window.location.search);
+
+  function seen() { try { return sessionStorage.getItem(SEEN_KEY) === "1"; } catch (e) { return false; } }
+  function markSeen() { try { sessionStorage.setItem(SEEN_KEY, "1"); } catch (e) {} }
+  function open() { if (!modal.open) modal.showModal(); }
+  function close() { if (modal.open) modal.close(); }
+
+  var closers = modal.querySelectorAll("[data-sbh-close]");
+  for (var i = 0; i < closers.length; i++) closers[i].addEventListener("click", close);
+
+  modal.addEventListener("click", function (e) { if (e.target === modal) close(); });
+
+  var vote = modal.querySelector("[data-sbh-vote]");
+  if (vote) {
+    var link = modal.getAttribute("data-link");
+    if (link) vote.setAttribute("href", link);
+    vote.addEventListener("click", function () {
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({ event: "bio_link_click", link_name: "gowhere" });
+      close();
+    });
+  }
+
+  if (forced || !seen()) {
+    markSeen();
+    window.setTimeout(open, DELAY_MS);
+  }
+})();
+</script>
