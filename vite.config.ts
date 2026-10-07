@@ -68,12 +68,9 @@ function gtmSnippets(id: string): { head: string; body: string } {
  *  - copia cf/* para a raiz de dist/ após o build.
  */
 function sabahTemplate(): Plugin {
-  const showCampaign = CONFIG.showGoWhereCampaign && CONFIG.links.gowhere.length > 0;
-  if (CONFIG.showGoWhereCampaign && !CONFIG.links.gowhere) {
-    console.warn(
-      "\n[sabah] showGoWhereCampaign=true, mas links.gowhere está vazio em src/config.ts. " +
-        "O bloco da campanha foi OCULTADO até a URL ser preenchida.\n",
-    );
+  const showCampaign = CONFIG.showGoWhereCampaign;
+  if (showCampaign && !CONFIG.links.gowhere) {
+    console.warn("\n[sabah] showGoWhereCampaign=true, mas links.gowhere está vazio em src/config.ts.\n");
   }
 
   return {
@@ -128,6 +125,8 @@ export default defineConfig({
   plugins: [sabahTemplate()],
   build: {
     outDir: OUT_DIR,
+    // A limpeza de dist/ é feita em buildStart (tolerante a locks do Windows).
+    emptyOutDir: false,
     target: "es2022",
     rollupOptions: {
       input: {

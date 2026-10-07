@@ -37,8 +37,9 @@ Depois de alterar, rode `npm run build` (ou faça push: o deploy automático bui
 
 Em `src/config.ts`:
 
-- `showGoWhereCampaign: true` mostra o bloco; `false` esconde o bloco inteiro e os outros links sobem, sem espaço vazio.
-- `links.gowhere` precisa ter a URL de votação. **Enquanto estiver vazio, o bloco fica oculto automaticamente** (o build avisa), para não publicar um botão sem destino.
+- `showGoWhereCampaign: true` mostra o CTA vermelho no topo dos links **e o popup** que abre uma vez por sessão explicando a votação; `false` esconde os dois e os outros links sobem, sem espaço vazio.
+- `links.gowhere` é a URL de votação (hoje a página da campanha na GoWhere). O build avisa se estiver vazia.
+- Textos do popup: `index.html`, bloco `<dialog id="vote-modal">`. Comportamento (atraso, uma vez por sessão): `src/modal.ts`.
 
 ## Imagens
 
@@ -101,6 +102,7 @@ src/config.ts       CONFIGURAÇÃO CENTRAL
 src/style.css       estilos
 src/main.ts         bootstrap
 src/accordion.ts    blocos expansíveis (almoço, jantar, eventos)
+src/modal.ts        popup da votação GoWhere
 src/tracking.ts     dataLayer / eventos
 vite.config.ts      base, plugin de template, cópia de cf/ para dist/
 cf/                 _headers, robots.txt (raiz do Worker; {{base}} resolvido no build)

@@ -22,7 +22,6 @@ export const CONFIG = {
    * Campanha GoWhere.
    * true  = mostra o CTA "Vote no Sabah" no topo dos links.
    * false = esconde o bloco inteiro e os demais links sobem.
-   * Se links.gowhere estiver vazio, o bloco também é ocultado (com aviso no build).
    */
   showGoWhereCampaign: true,
 
@@ -38,8 +37,8 @@ export const CONFIG = {
   },
 
   links: {
-    /** URL de votação no prêmio Campeões da Gastronomia (GoWhere 2026). PREENCHER. */
-    gowhere: "",
+    /** Votação do prêmio Campeões da Gastronomia de São Paulo 2026 (GoWhere). */
+    gowhere: "https://gowhere.com.br/campeoes-da-gastronomia-de-sao-paulo-2026/",
 
     reservation: whatsapp("Olá! Vim pelo Instagram do Sabah e gostaria de reservar uma mesa."),
     dinnerReservation: whatsapp(
