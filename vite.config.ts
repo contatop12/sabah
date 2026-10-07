@@ -1,12 +1,12 @@
 import { defineConfig, type Plugin } from "vite";
 import { fileURLToPath } from "node:url";
-import { copyFileSync, existsSync, mkdirSync, readdirSync, rmSync } from "node:fs";
+import { existsSync, mkdirSync, readdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { CONFIG } from "./src/config.ts";
 
 const ROOT = fileURLToPath(new URL(".", import.meta.url));
 const OUT_ROOT = resolve(ROOT, "dist");
-// base "/bio/" -> dist/bio  (a raiz de dist/ recebe _headers, _redirects e robots.txt)
+// base "/" -> dist/ ; base "/bio/" -> dist/bio (a raiz de dist/ sempre recebe _headers e robots.txt)
 const OUT_DIR = resolve(OUT_ROOT, CONFIG.basePath.replace(/^\/|\/$/g, ""));
 
 function escapeHtml(s: string): string {
@@ -108,9 +108,17 @@ function sabahTemplate(): Plugin {
       },
     },
     closeBundle() {
+      // cf/* vai para a raiz de dist/ com {{base}} resolvido.
       const cf = resolve(ROOT, "cf");
       mkdirSync(OUT_ROOT, { recursive: true });
-      for (const file of readdirSync(cf)) copyFileSync(resolve(cf, file), resolve(OUT_ROOT, file));
+      for (const file of readdirSync(cf)) {
+        const text = readFileSync(resolve(cf, file), "utf8").replaceAll("{{base}}", CONFIG.basePath);
+        writeFileSync(resolve(OUT_ROOT, file), text);
+      }
+      // Quando a página não está na raiz, a raiz redireciona para ela.
+      if (CONFIG.basePath !== "/") {
+        writeFileSync(resolve(OUT_ROOT, "_redirects"), `/  ${CONFIG.basePath}  302\n`);
+      }
     },
   };
 }

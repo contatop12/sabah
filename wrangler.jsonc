@@ -8,7 +8,7 @@
     "command": "npm run build"
   },
 
-  // Site estático (assets-only). A página fica em dist/bio/ e a raiz redireciona para /bio/.
+  // Site estático (assets-only). dist/ é gerado pelo Vite (base em src/config.ts).
   "assets": {
     "directory": "./dist",
     "html_handling": "auto-trailing-slash",
@@ -16,20 +16,18 @@
   }
 
   // ---------------------------------------------------------------------------
-  // PUBLICAR EM sabah.com.br/bio  (descomente SOMENTE na hora do cutover)
+  // DOMÍNIO FINAL: links.sabah.com.br
   //
-  // A zona sabah.com.br já está no Cloudflare. Esta rota envia apenas /bio e /bio/*
-  // para este Worker; o restante do site (WordPress) continua intocado.
+  // Opção A (recomendada): painel Cloudflare → Workers & Pages → sabah-bio →
+  // Settings → Domains & Routes → Add → Custom domain → links.sabah.com.br.
+  // O painel cria o DNS e o certificado e valida que a zona está nesta conta.
   //
-  // "routes": [
-  //   { "pattern": "sabah.com.br/bio*", "zone_name": "sabah.com.br" }
-  // ]
-  //
-  // Alternativa: manter o subdomínio bio.sabah.com.br apontando para o Worker
-  // (a raiz redireciona para /bio/). Substitui o WordPress atual do subdomínio.
+  // Opção B: descomentar abaixo e fazer push. Só funciona se a zona
+  // sabah.com.br estiver NESTA conta Cloudflare; caso contrário o deploy
+  // automático falha.
   //
   // "routes": [
-  //   { "pattern": "bio.sabah.com.br", "custom_domain": true }
+  //   { "pattern": "links.sabah.com.br", "custom_domain": true }
   // ]
   // ---------------------------------------------------------------------------
 }

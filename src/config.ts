@@ -15,8 +15,8 @@ function whatsapp(message?: string): string {
 }
 
 export const CONFIG = {
-  /** Caminho público da página (sabah.com.br/bio/). */
-  basePath: "/bio/",
+  /** Caminho público da página ("/" = raiz de links.sabah.com.br). */
+  basePath: "/",
 
   /**
    * Campanha GoWhere.
@@ -33,8 +33,8 @@ export const CONFIG = {
     title: "Sabah | Restaurante Árabe na Avenida Paulista",
     description:
       "Conheça o Sabah, restaurante árabe dentro do Club Homs, na Avenida Paulista. Almoço, jantar, reservas, iFood e buffet para eventos.",
-    canonical: "https://sabah.com.br/bio/",
-    ogImage: "https://sabah.com.br/bio/img/og-image.jpg",
+    canonical: "https://links.sabah.com.br/",
+    ogImage: "https://links.sabah.com.br/img/og-image.jpg",
   },
 
   links: {

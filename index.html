@@ -6,7 +6,7 @@
   <title>{{site.title}}</title>
   <meta name="description" content="{{site.description}}" />
   <meta name="robots" content="index, follow, max-image-preview:large" />
-  <meta name="theme-color" content="#FAF8F4" />
+  <meta name="theme-color" content="#111111" />
   <link rel="canonical" href="{{site.canonical}}" />
 
   <meta property="og:type" content="website" />
@@ -27,10 +27,10 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet" />
 
-  <!-- Foto principal (LCP): pré-carrega a variante AVIF no tamanho certo -->
+  <!-- Foto de fundo (LCP): pré-carrega a variante AVIF -->
   <link rel="preload" as="image" type="image/avif"
-    imagesrcset="{{base}}img/sabah-paulista-480.avif 480w, {{base}}img/sabah-paulista-768.avif 768w, {{base}}img/sabah-paulista-1080.avif 1080w, {{base}}img/sabah-paulista-1280.avif 1280w"
-    imagesizes="(min-width: 600px) 520px, calc(100vw - 40px)" />
+    imagesrcset="{{base}}img/bg-1280.avif 1280w, {{base}}img/bg-1920.avif 1920w"
+    imagesizes="100vw" />
 
   <link rel="stylesheet" href="/src/style.css" />
   <script type="module" src="/src/main.ts"></script>
@@ -53,6 +53,14 @@
     <symbol id="i-instagram" viewBox="0 0 448 512" fill="currentColor"><path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"/></symbol>
   </svg>
 
+  <div class="bg" aria-hidden="true">
+    <picture>
+      <source type="image/avif" srcset="/img/bg-1280.avif 1280w, /img/bg-1920.avif 1920w" sizes="100vw" />
+      <source type="image/webp" srcset="/img/bg-1280.webp 1280w, /img/bg-1920.webp 1920w" sizes="100vw" />
+      <img src="/img/bg-1280.jpg" srcset="/img/bg-1280.jpg 1280w, /img/bg-1920.jpg 1920w" sizes="100vw" width="1920" height="1280" alt="" fetchpriority="high" decoding="async" />
+    </picture>
+  </div>
+
   <div class="page">
 
     <header class="top">
@@ -62,14 +70,6 @@
         <svg class="top__pin" aria-hidden="true"><use href="#i-pin"/></svg>
         Dentro do {{address.complement}} • {{address.street}}
       </p>
-
-      <figure class="photo">
-        <picture>
-          <source type="image/avif" srcset="/img/sabah-paulista-480.avif 480w, /img/sabah-paulista-768.avif 768w, /img/sabah-paulista-1080.avif 1080w, /img/sabah-paulista-1280.avif 1280w" sizes="(min-width: 600px) 520px, calc(100vw - 40px)" />
-          <source type="image/webp" srcset="/img/sabah-paulista-480.webp 480w, /img/sabah-paulista-768.webp 768w, /img/sabah-paulista-1080.webp 1080w, /img/sabah-paulista-1280.webp 1280w" sizes="(min-width: 600px) 520px, calc(100vw - 40px)" />
-          <img class="photo__img" src="/img/sabah-paulista-768.jpg" srcset="/img/sabah-paulista-480.jpg 480w, /img/sabah-paulista-768.jpg 768w, /img/sabah-paulista-1080.jpg 1080w, /img/sabah-paulista-1280.jpg 1280w" sizes="(min-width: 600px) 520px, calc(100vw - 40px)" width="1280" height="800" alt="Salão do Sabah: painel de madeira com geometria árabe, lanternas na parede e clientes à mesa" fetchpriority="high" decoding="async" />
-        </picture>
-      </figure>
     </header>
 
     <main>

@@ -1,17 +1,17 @@
-# Sabah – página /bio
+# Sabah – links (link in bio)
 
-Página "link in bio" do restaurante Sabah, publicada em **sabah.com.br/bio**. HTML, CSS e TypeScript puros (Vite), deploy no Cloudflare Workers como site estático. Sem frameworks, sem bibliotecas em runtime.
+Página "link in bio" do restaurante Sabah, publicada em **links.sabah.com.br**. HTML, CSS e TypeScript puros (Vite), deploy no Cloudflare Workers como site estático. Sem frameworks, sem bibliotecas em runtime.
 
 ## Comandos
 
 ```bash
 npm install          # dependências
-npm run dev          # dev server (http://localhost:5173/bio/)
-npm run build        # typecheck + build em dist/ (dist/bio/ = página; raiz = _headers, _redirects, robots.txt)
+npm run dev          # dev server (http://localhost:5173/)
+npm run build        # typecheck + build em dist/ (+ _headers e robots.txt de cf/)
 npm run preview      # serve o dist/ localmente
 npm run cf:dev       # roda o dist/ no runtime do Cloudflare (testa _headers, redirect e 404)
 npm run deploy       # build + deploy no Cloudflare Workers
-npm run images -- <foto.jpg>   # regenera as variantes da foto principal (ver "Imagens")
+npm run images -- <foto.jpg>   # regenera a foto de fundo e a imagem OG (ver "Imagens")
 ```
 
 ## Onde alterar cada coisa
@@ -42,18 +42,19 @@ Em `src/config.ts`:
 
 ## Imagens
 
-Ficam em `public/` e são copiadas para `dist/bio/`:
+Ficam em `public/` e são copiadas para `dist/`:
 
-- `public/img/sabah-paulista-{480,768,1080,1280}.{avif,webp,jpg}` – foto principal, recorte 16:10
-- `public/img/og-image.jpg` – imagem de compartilhamento (1200×630)
+- `public/img/bg-{1280,1920}.{avif,webp,jpg}` – **foto de fundo** da página (proporção original, `object-fit: cover`, overlay escuro por cima)
+- `public/img/og-image.jpg` – imagem de compartilhamento (1200×630), recorte central da mesma foto
+- `public/img/cardapio/` – páginas do cardápio (ver abaixo)
 - `public/avatar-150.png`, `avatar-260.png` – logo (1x / 2x)
 - `public/favicon-32.png`, `apple-touch-icon.png` – ícones
 
-**Trocar a foto principal**: rode `npm run images -- caminho/da/foto.jpg` (precisa de Python + Pillow). O script recorta ao centro em 16:10, gera AVIF/WebP/JPEG nos quatro tamanhos e a imagem OG. Se quiser outro recorte, ajuste `RATIO` ou faça o recorte antes.
+**Trocar a foto de fundo**: `npm run images -- caminho/da/foto.jpg` (Python + Pillow). Gera as variantes e a imagem OG. A intensidade do escurecimento está em `.bg::after` no `src/style.css`.
 
 **Foto da esfiha premiada (DSC01396) e do delivery (DSC01200)**: ainda não foram fornecidas. Há um comentário em `index.html` no bloco `.award` indicando onde entra; a classe `.award__photo` já está pronta no CSS.
 
-## Cardápio (/bio/cardapio)
+## Cardápio (/cardapio)
 
 As páginas dos dois PDFs são servidas como imagens otimizadas (AVIF + JPEG, lazy) em `public/img/cardapio/`; abre instantaneamente no navegador do Instagram, sem o visualizador do Drive. Os PDFs do Drive continuam como "Baixar PDF".
 
@@ -80,24 +81,15 @@ npm run menu -- salao.pdf delivery.pdf
 
 ## Deploy
 
-Workers Builds já está conectado ao repositório `contatop12/sabah`: cada push na `main` builda e publica em `sabah-bio.<conta>.workers.dev/bio/`. O `build.command` do `wrangler.jsonc` roda `npm run build` antes do deploy.
+Workers Builds já está conectado ao repositório `contatop12/sabah`: cada push na `main` builda e publica em `sabah-bio.<conta>.workers.dev`. O `build.command` do `wrangler.jsonc` roda `npm run build` antes do deploy.
 
 Manual: `npx wrangler login` e depois `npm run deploy`.
 
-### Publicar em sabah.com.br/bio (cutover)
+### Domínio links.sabah.com.br
 
-O site principal é WordPress + Elementor e **não precisa ser alterado**: a zona `sabah.com.br` está no Cloudflare, então uma rota de Worker captura só `/bio*`.
+Pelo painel (recomendado): Workers & Pages → `sabah-bio` → Settings → Domains & Routes → Add → Custom domain → `links.sabah.com.br`. O Cloudflare cria o DNS e o certificado. Alternativa por config: bloco `routes` comentado no `wrangler.jsonc` (exige a zona `sabah.com.br` na mesma conta).
 
-1. Em `wrangler.jsonc`, descomente:
-
-   ```jsonc
-   "routes": [{ "pattern": "sabah.com.br/bio*", "zone_name": "sabah.com.br" }]
-   ```
-
-2. Faça push (ou `npm run deploy`).
-3. Teste `https://sabah.com.br/bio` (redireciona para `/bio/`).
-
-`sabah.com.br/bio` dava 404 no WordPress antes, então nada existente é sobrescrito. O subdomínio `bio.sabah.com.br` pode continuar como está ou apontar para o Worker (segunda opção comentada no `wrangler.jsonc`; a raiz redireciona para `/bio/`).
+Para publicar em um subcaminho (ex.: `sabah.com.br/bio`), mude `basePath` em `src/config.ts` para `"/bio/"`: o build passa a gerar `dist/bio/`, a raiz redireciona e os caminhos de `_headers` se ajustam sozinhos.
 
 ## Estrutura
 
@@ -110,10 +102,10 @@ src/style.css       estilos
 src/main.ts         bootstrap
 src/accordion.ts    blocos expansíveis (almoço, jantar, eventos)
 src/tracking.ts     dataLayer / eventos
-vite.config.ts      base /bio/, plugin de template, cópia de cf/ para dist/
-cf/                 _headers, _redirects, robots.txt (raiz do Worker)
+vite.config.ts      base, plugin de template, cópia de cf/ para dist/
+cf/                 _headers, robots.txt (raiz do Worker; {{base}} resolvido no build)
 public/             imagens e ícones
-scripts/optimize-images.py  foto principal
+scripts/optimize-images.py  foto de fundo + OG
 scripts/render-menu.py      páginas do cardápio
 wrangler.jsonc      config do Cloudflare Workers
 ```
