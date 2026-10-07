@@ -13,7 +13,7 @@
      manualmente na engrenagem (Configurações do popup):
        - Layout: Largura 420 px · Altura "Ajustar ao conteúdo" · Posição centro
        - Estilo > Popup: fundo transparente · Preenchimento 0
-       - Botão Fechar: Ocultar (o card tem o X e o "Agora não")
+       - Botão Fechar: Ocultar (o card tem o próprio X)
   3. Publicar > Condições: "Site inteiro" (ou "Página inicial").
   4. Gatilhos: "Ao carregar a página" · 1 segundo.
   5. Regras avançadas: "Mostrar até X vezes" = 1, por "Sessão".
@@ -44,7 +44,6 @@
   <div class="sbh-card__actions">
     <a class="sbh-btn sbh-btn--primary" href="https://gowhere.com.br/campeoes-da-gastronomia-de-sao-paulo-2026/" target="_blank" rel="noopener noreferrer"
        onclick="window.dataLayer=window.dataLayer||[];window.dataLayer.push({event:'bio_link_click',link_name:'gowhere'});">Votar agora</a>
-    <a class="sbh-btn sbh-btn--ghost" href="#elementor-action%3Aaction%3Dpopup%3Aclose%26settings%3DeyJkb19ub3Rfc2hvd19hZ2FpbiI6IiJ9" role="button">Agora não</a>
   </div>
 </div>
 
@@ -147,10 +146,6 @@
   .sbh-card .sbh-btn--primary:visited { background: #ffffff; border-color: #ffffff; color: #a30000; }
   .sbh-card .sbh-btn--primary:hover,
   .sbh-card .sbh-btn--primary:focus { background: #faf8f4; border-color: #faf8f4; color: #8b0000; text-decoration: none; }
-  .sbh-card .sbh-btn--ghost,
-  .sbh-card .sbh-btn--ghost:visited { background: transparent; border-color: rgba(255, 255, 255, 0.55); color: #ffffff; }
-  .sbh-card .sbh-btn--ghost:hover,
-  .sbh-card .sbh-btn--ghost:focus { background: rgba(255, 255, 255, 0.1); border-color: #ffffff; color: #ffffff; text-decoration: none; }
   .sbh-card a:focus-visible { outline: 2px solid #ffffff; outline-offset: 3px; }
 
   @media (max-width: 360px) {
