@@ -1,5 +1,5 @@
-import { initBlurUp } from "./blur-up";
-import { initShare } from "./share";
+import { initAccordions } from "./accordion";
+import { initTracking } from "./tracking";
 
-initBlurUp(document.querySelectorAll<HTMLImageElement>("img.blur-up"));
-initShare(document.getElementById("share"), document.getElementById("toast"));
+initAccordions(document.querySelectorAll<HTMLButtonElement>("button[aria-controls]"));
+initTracking(document);

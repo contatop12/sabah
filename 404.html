@@ -3,40 +3,38 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Página não encontrada – Sabah</title>
+  <title>Página não encontrada | Sabah</title>
   <meta name="robots" content="noindex" />
-  <meta name="theme-color" content="#4f0200" />
+  <meta name="theme-color" content="#FAF8F4" />
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="/src/style.css" />
 </head>
 <body>
-  <div class="bg" aria-hidden="true"><span class="bg__dots"></span></div>
-  <main class="page">
-    <header class="hero">
-      <span class="hero__ring">
-        <img class="hero__avatar" src="/avatar-150.png" srcset="/avatar-150.png 1x, /avatar-260.png 2x" width="130" height="130" alt="Sabah" />
-      </span>
-      <p class="hero__eyebrow">Erro 404</p>
-      <h1 class="hero__name">Página não encontrada</h1>
-      <p class="hero__desc">O endereço que você abriu não existe. Volte para os links da Sabah.</p>
+  <svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+    <symbol id="i-home" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/></symbol>
+    <symbol id="i-chevron-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></symbol>
+  </svg>
+
+  <div class="page">
+    <header class="top">
+      <img class="top__logo" src="/avatar-150.png" srcset="/avatar-150.png 1x, /avatar-260.png 2x" width="112" height="112" alt="Sabah – A Legítima Cozinha Árabe" />
+      <h1 class="top__headline">Página não encontrada.</h1>
+      <p class="top__where">O endereço que você abriu não existe.</p>
     </header>
-    <ul class="cards">
-      <li>
-        <a class="card card--paper" href="/">
-          <span class="card__icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/></svg>
-          </span>
-          <span class="card__body">
-            <span class="card__title">Voltar ao início</span>
-            <span class="card__sub">Todos os links da Sabah</span>
-          </span>
-          <svg class="card__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
-        </a>
-      </li>
-    </ul>
-  </main>
+    <main>
+      <ul class="list">
+        <li>
+          <a class="btn" href="{{base}}">
+            <svg class="btn__icon" aria-hidden="true"><use href="#i-home"/></svg>
+            <span class="btn__text"><span class="btn__title">Voltar aos links do Sabah</span></span>
+            <svg class="btn__chevron" aria-hidden="true"><use href="#i-chevron-right"/></svg>
+          </a>
+        </li>
+      </ul>
+    </main>
+  </div>
 </body>
 </html>

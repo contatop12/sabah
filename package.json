@@ -1,7 +1,7 @@
 {
   "name": "sabah-bio",
   "version": "1.0.0",
-  "description": "Página bio.sabah.com.br (link in bio) em HTML/CSS/TS, deploy no Cloudflare Workers.",
+  "description": "Página sabah.com.br/bio (link in bio) em HTML/CSS/TypeScript, deploy no Cloudflare Workers.",
   "scripts": {
     "dev": "vite",
     "build": "tsc --noEmit && vite build",
@@ -9,7 +9,8 @@
     "typecheck": "tsc --noEmit",
     "cf:dev": "wrangler dev",
     "deploy": "wrangler deploy",
-    "deploy:dry": "wrangler deploy --dry-run"
+    "deploy:dry": "wrangler deploy --dry-run",
+    "images": "python -P scripts/optimize-images.py"
   },
   "repository": {
     "type": "git",

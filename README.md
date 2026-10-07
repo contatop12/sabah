@@ -1,58 +1,104 @@
-# Sabah – Bio
+# Sabah – página /bio
 
-Clone estático de [bio.sabah.com.br](https://bio.sabah.com.br/) (página "link in bio"), feito em HTML, CSS e TypeScript, pronto para deploy no Cloudflare Workers (static assets).
-
-## Stack
-
-- **HTML** – `index.html` (conteúdo e links) e `404.html`
-- **CSS** – `src/style.css` (estilos extraídos do tema original, sem Bootstrap)
-- **TypeScript** – `src/main.ts`, `src/blur-up.ts` (blur-up do avatar) e `src/share.ts` (botão compartilhar: Web Share API com fallback de copiar link); o build gera JS puro em `dist/assets/`
-- **Vite** – dev server e build
-- **Wrangler** – deploy no Cloudflare
+Página "link in bio" do restaurante Sabah, publicada em **sabah.com.br/bio**. HTML, CSS e TypeScript puros (Vite), deploy no Cloudflare Workers como site estático. Sem frameworks, sem bibliotecas em runtime.
 
 ## Comandos
 
 ```bash
-npm install          # instala dependências
-npm run dev          # dev server (http://localhost:5173)
-npm run build        # typecheck + build em dist/
+npm install          # dependências
+npm run dev          # dev server (http://localhost:5173/bio/)
+npm run build        # typecheck + build em dist/ (dist/bio/ = página; raiz = _headers, _redirects, robots.txt)
 npm run preview      # serve o dist/ localmente
-npm run cf:dev       # roda o dist/ com o runtime do Cloudflare (testa _headers, 404)
-npm run deploy:dry   # valida config do wrangler sem publicar
+npm run cf:dev       # roda o dist/ no runtime do Cloudflare (testa _headers, redirect e 404)
 npm run deploy       # build + deploy no Cloudflare Workers
+npm run images -- <foto.jpg>   # regenera as variantes da foto principal (ver "Imagens")
 ```
 
-## Deploy no Cloudflare
+## Onde alterar cada coisa
 
-1. Autenticar uma vez: `npx wrangler login`
-2. Publicar: `npm run deploy`
-3. O Worker `sabah-bio` fica disponível em `https://sabah-bio.<sua-conta>.workers.dev`
+Tudo que é dado (URLs, WhatsApp, horários, endereço, campanha, GTM) fica em **um único arquivo**: [`src/config.ts`](src/config.ts). Os valores entram no HTML no build, via tokens `{{chave}}`; não há URL espalhada pelo projeto.
 
-### Domínio bio.sabah.com.br (cutover)
+| O que | Onde |
+| --- | --- |
+| URLs (reserva, iFood, cardápios, Maps, site, Instagram, GoWhere) | `src/config.ts` → `links` |
+| Número do WhatsApp | `src/config.ts` → `WHATSAPP_NUMBER` (topo do arquivo) |
+| Mensagens automáticas do WhatsApp | `src/config.ts` → `links.reservation`, `dinnerReservation`, `eventsWhatsapp` |
+| Horários (almoço, jantar, delivery) | `src/config.ts` → `hours` |
+| Endereço | `src/config.ts` → `address` |
+| Título, description, canonical, imagem OG | `src/config.ts` → `site` |
+| UTMs dos links para sabah.com.br | `src/config.ts` → `utm` |
+| Textos dos botões e dos blocos expansíveis | `index.html` |
+| Cores, fonte, espaçamentos | `src/style.css` (variáveis em `:root`) |
 
-O domínio atual ainda aponta para o WordPress. Para trocar:
+Depois de alterar, rode `npm run build` (ou faça push: o deploy automático builda).
 
-1. A zona `sabah.com.br` precisa estar na mesma conta Cloudflare.
-2. Em `wrangler.jsonc`, descomente o bloco `routes` com `"custom_domain": true`.
-3. Rode `npm run deploy`. O Cloudflare cria o DNS e o certificado automaticamente.
+### Campanha GoWhere (CTA "Vote no Sabah")
 
-Ou, pelo painel: Workers & Pages → `sabah-bio` → Settings → Domains & Routes → Add custom domain.
+Em `src/config.ts`:
 
-### Deploy automático via Git (Workers Builds)
-
-No painel: Workers & Pages → Create → conectar o repositório `contatop12/sabah`.
-Deploy command: `npx wrangler deploy`. Build command pode ficar vazio: o `build.command` do `wrangler.jsonc` roda `npm run build` automaticamente.
-
-### Alternativa: Cloudflare Pages
-
-O mesmo `dist/` funciona no Pages (build command `npm run build`, output `dist`). Os arquivos `_headers` e `404.html` são respeitados nos dois.
-
-## Editar os links
-
-Os cards estão em `index.html`, dentro de `<ul class="cards">`. Cada `<li>` tem ícone (`<use href="#i-...">`), título e subtítulo; alterne `card--wine` e `card--paper`. Ícones sociais ficam em `<ul class="social">`. Cores e fonte estão nas variáveis CSS no topo de `src/style.css`.
+- `showGoWhereCampaign: true` mostra o bloco; `false` esconde o bloco inteiro e os outros links sobem, sem espaço vazio.
+- `links.gowhere` precisa ter a URL de votação. **Enquanto estiver vazio, o bloco fica oculto automaticamente** (o build avisa), para não publicar um botão sem destino.
 
 ## Imagens
 
-- `public/avatar-150.png` / `avatar-260.png` – avatar (1x / 2x)
-- `public/avatar-1080.png` – imagem para compartilhamento (og:image)
-- `public/apple-touch-icon.png`, `public/favicon-32.png` – ícones (o original não tinha favicon)
+Ficam em `public/` e são copiadas para `dist/bio/`:
+
+- `public/img/sabah-paulista-{480,768,1080,1280}.{avif,webp,jpg}` – foto principal, recorte 16:10
+- `public/img/og-image.jpg` – imagem de compartilhamento (1200×630)
+- `public/avatar-150.png`, `avatar-260.png` – logo (1x / 2x)
+- `public/favicon-32.png`, `apple-touch-icon.png` – ícones
+
+**Trocar a foto principal**: rode `npm run images -- caminho/da/foto.jpg` (precisa de Python + Pillow). O script recorta ao centro em 16:10, gera AVIF/WebP/JPEG nos quatro tamanhos e a imagem OG. Se quiser outro recorte, ajuste `RATIO` ou faça o recorte antes.
+
+**Foto da esfiha premiada (DSC01396) e do delivery (DSC01200)**: ainda não foram fornecidas. Há um comentário em `index.html` no bloco `.award` indicando onde entra; a classe `.award__photo` já está pronta no CSS.
+
+## Tracking (GTM / GA4 / Meta Pixel)
+
+1. Preencha `gtmId: "GTM-XXXXXXX"` em `src/config.ts`. O build injeta o snippet oficial do GTM no `<head>` e o `<noscript>` no `<body>`.
+2. Todo clique importante dispara no `dataLayer`:
+
+   ```js
+   { event: "bio_link_click", link_name: "ifood" }
+   ```
+
+   Valores de `link_name`: `gowhere`, `reservation`, `lunch`, `dinner`, `ifood`, `events`, `menu`, `maps`, `website`, `instagram`. Blocos expansíveis disparam ao abrir.
+3. No GTM, crie um gatilho "Evento personalizado" = `bio_link_click` e uma tag GA4 Event com o parâmetro `link_name` = `{{dlv - link_name}}`. Meta Pixel e outras tags entram pelo mesmo GTM.
+4. Links para sabah.com.br recebem `utm_source=instagram&utm_medium=bio&utm_campaign=sabah_bio` automaticamente.
+
+## Deploy
+
+Workers Builds já está conectado ao repositório `contatop12/sabah`: cada push na `main` builda e publica em `sabah-bio.<conta>.workers.dev/bio/`. O `build.command` do `wrangler.jsonc` roda `npm run build` antes do deploy.
+
+Manual: `npx wrangler login` e depois `npm run deploy`.
+
+### Publicar em sabah.com.br/bio (cutover)
+
+O site principal é WordPress + Elementor e **não precisa ser alterado**: a zona `sabah.com.br` está no Cloudflare, então uma rota de Worker captura só `/bio*`.
+
+1. Em `wrangler.jsonc`, descomente:
+
+   ```jsonc
+   "routes": [{ "pattern": "sabah.com.br/bio*", "zone_name": "sabah.com.br" }]
+   ```
+
+2. Faça push (ou `npm run deploy`).
+3. Teste `https://sabah.com.br/bio` (redireciona para `/bio/`).
+
+`sabah.com.br/bio` dava 404 no WordPress antes, então nada existente é sobrescrito. O subdomínio `bio.sabah.com.br` pode continuar como está ou apontar para o Worker (segunda opção comentada no `wrangler.jsonc`; a raiz redireciona para `/bio/`).
+
+## Estrutura
+
+```text
+index.html          página (tokens {{...}} preenchidos no build)
+404.html            página de erro
+src/config.ts       CONFIGURAÇÃO CENTRAL
+src/style.css       estilos
+src/main.ts         bootstrap
+src/accordion.ts    blocos expansíveis (almoço, jantar, eventos, cardápio)
+src/tracking.ts     dataLayer / eventos
+vite.config.ts      base /bio/, plugin de template, cópia de cf/ para dist/
+cf/                 _headers, _redirects, robots.txt (raiz do Worker)
+public/             imagens e ícones
+scripts/optimize-images.py
+wrangler.jsonc      config do Cloudflare Workers
+```

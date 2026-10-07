@@ -4,23 +4,32 @@
   "compatibility_date": "2026-09-22",
 
   // Roda antes de `wrangler deploy` / `wrangler dev`, inclusive no Workers Builds.
-  // Garante que dist/ exista mesmo sem build command configurado no painel.
   "build": {
     "command": "npm run build"
   },
 
-  // Site estático (assets-only): não há script de Worker.
+  // Site estático (assets-only). A página fica em dist/bio/ e a raiz redireciona para /bio/.
   "assets": {
     "directory": "./dist",
     "html_handling": "auto-trailing-slash",
     "not_found_handling": "404-page"
   }
 
-  // Domínio customizado. Descomente SOMENTE na hora do cutover:
-  // isso aponta bio.sabah.com.br para este Worker e substitui o site atual (WordPress).
-  // A zona sabah.com.br precisa estar na mesma conta Cloudflare.
+  // ---------------------------------------------------------------------------
+  // PUBLICAR EM sabah.com.br/bio  (descomente SOMENTE na hora do cutover)
+  //
+  // A zona sabah.com.br já está no Cloudflare. Esta rota envia apenas /bio e /bio/*
+  // para este Worker; o restante do site (WordPress) continua intocado.
+  //
+  // "routes": [
+  //   { "pattern": "sabah.com.br/bio*", "zone_name": "sabah.com.br" }
+  // ]
+  //
+  // Alternativa: manter o subdomínio bio.sabah.com.br apontando para o Worker
+  // (a raiz redireciona para /bio/). Substitui o WordPress atual do subdomínio.
   //
   // "routes": [
   //   { "pattern": "bio.sabah.com.br", "custom_domain": true }
   // ]
+  // ---------------------------------------------------------------------------
 }
