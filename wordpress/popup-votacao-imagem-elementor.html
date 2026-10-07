@@ -1,0 +1,108 @@
+<!--
+  Sabah – POPUP DO ELEMENTOR PRO "Votação", versão SÓ IMAGEM (arte "Vote no Sabah")
+
+  A arte inteira é clicável e leva à votação. O "×" desenhado na arte fecha o popup
+  (há uma área invisível de 44 px exatamente sobre ele).
+
+  PASSO A PASSO
+  1. Mídia > Adicionar nova: suba o arquivo sabah-popup-vote-no-sabah.webp (sem renomear).
+     A URL esperada é a que está no src da <img> abaixo. Se o WordPress gerar outra
+     (ex.: "-1" no fim ou outro mês), copie a URL da mídia e troque no src.
+  2. Abra o popup "Votação" no Elementor. Apague o widget HTML atual, coloque um novo
+     widget "HTML" e cole TODO este arquivo.
+  3. O CSS abaixo ajusta a moldura do Elementor sozinho (sem fundo branco, sem padding,
+     esconde o X padrão, fundo da página em degradê). Se a moldura branca aparecer,
+     na engrenagem do popup: Largura 420 px · Altura "Ajustar ao conteúdo" · Fundo
+     transparente · Preenchimento 0 · Botão Fechar: Ocultar.
+  4. Condições: "Site inteiro". Gatilhos: "Ao carregar a página", 1 segundo.
+     Regras avançadas: "Mostrar até 1 vez por sessão".
+     Deixe DESLIGADO "Impedir fechar ao clicar fora" e "Impedir fechar com ESC".
+  5. Teste em janela anônima.
+-->
+
+<div class="sbh-art">
+  <a class="sbh-art__link" href="https://gowhere.com.br/campeoes-da-gastronomia-de-sao-paulo-2026/" target="_blank" rel="noopener noreferrer"
+     onclick="window.dataLayer=window.dataLayer||[];window.dataLayer.push({event:'bio_link_click',link_name:'gowhere'});">
+    <img class="sbh-art__img no-lazy"
+         src="https://sabah.com.br/wp-content/uploads/2026/10/sabah-popup-vote-no-sabah.webp"
+         width="840" height="1067"
+         alt="Vote no Sabah. Ajude o Sabah a conquistar o título de Melhor Árabe de São Paulo. Estamos concorrendo no prêmio Campeões da Gastronomia 2026 da GoWhere, categoria Árabe. Leva menos de 1 minuto. Votar agora."
+         decoding="async" fetchpriority="low" data-no-lazy="1" />
+  </a>
+  <a class="sbh-art__close" href="#elementor-action%3Aaction%3Dpopup%3Aclose%26settings%3DeyJkb19ub3Rfc2hvd19hZ2FpbiI6IiJ9" role="button" aria-label="Fechar"></a>
+</div>
+
+<style>
+  /* ---------- Moldura do Popup do Elementor (só quando contém esta arte) ---------- */
+  .elementor-popup-modal:has(.sbh-art) {
+    background: linear-gradient(160deg, rgba(10, 10, 10, 0.84) 0%, rgba(79, 2, 0, 0.82) 100%) !important;
+  }
+  .elementor-popup-modal:has(.sbh-art) .dialog-widget-content {
+    width: auto !important;
+    max-width: calc(100vw - 32px) !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+  }
+  .elementor-popup-modal:has(.sbh-art) .dialog-message {
+    /* 420 px no máximo; encolhe para caber na largura e na altura da tela (proporção da arte 840:1067) */
+    width: min(420px, calc(100vw - 32px), calc((100dvh - 32px) * 0.7873)) !important;
+    max-height: none;
+    padding: 0 !important;
+    overflow: visible;
+  }
+  .elementor-popup-modal:has(.sbh-art) .dialog-close-button { display: none !important; }
+  .elementor-popup-modal:has(.sbh-art) .e-con,
+  .elementor-popup-modal:has(.sbh-art) .e-con-inner,
+  .elementor-popup-modal:has(.sbh-art) .elementor-section .elementor-container,
+  .elementor-popup-modal:has(.sbh-art) .elementor-column > .elementor-widget-wrap {
+    padding: 0 !important;
+    min-height: 0 !important;
+    background: transparent !important;
+  }
+  .elementor-popup-modal:has(.sbh-art) .elementor-widget-html { margin: 0 !important; width: 100%; }
+  .elementor-popup-modal:has(.sbh-art) .elementor-location-popup { width: 100%; }
+
+  /* ---------- Arte ---------- */
+  .sbh-art {
+    position: relative;
+    width: 100%;
+    max-width: 420px;
+    margin: 0 auto;
+    aspect-ratio: 840 / 1067;
+    border-radius: 3.2% / 2.5%;
+    background: #f3ece2; /* enquanto a imagem carrega */
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
+  }
+  .sbh-art .sbh-art__link {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: inherit;
+    text-decoration: none;
+  }
+  .sbh-art .sbh-art__img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    margin: 0;
+    object-fit: cover;
+    border-radius: 3.2% / 2.5%; /* esconde as quinas de fundo da arte */
+    box-shadow: none;
+  }
+  .sbh-art .sbh-art__close {
+    position: absolute;
+    left: 95.54%;
+    top: 3.95%;
+    width: 44px;
+    height: 44px;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    background: transparent;
+    text-decoration: none;
+  }
+  .sbh-art .sbh-art__close:hover { background: rgba(17, 17, 17, 0.08); }
+  .sbh-art .sbh-art__close:focus-visible { outline: 2px solid #a30000; outline-offset: 0; }
+  .sbh-art .sbh-art__link:focus-visible { outline: 3px solid #ffffff; outline-offset: 4px; }
+</style>
