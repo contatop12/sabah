@@ -1,0 +1,137 @@
+<!--
+  Sabah – Popup "Vote no Sabah" (Campeões da Gastronomia • GoWhere 2026)
+
+  COMO USAR NO WORDPRESS / ELEMENTOR
+  1. Elementor → arraste um widget "HTML" para qualquer lugar da página (o popup é fixo, a posição não importa).
+     Ou: Elementor → Site Settings → Custom Code → adicione no <body> - end (vale para o site todo).
+  2. Cole TODO este arquivo no widget. Publique.
+  3. Para desativar a campanha: apague o widget ou mude data-ativo="true" para "false" na primeira linha abaixo.
+
+  Comportamento: abre 0,9 s após carregar, uma vez por sessão (sessionStorage); fecha por botão, Esc ou clique fora.
+  Não abre dentro do editor do Elementor. Envia {event:"bio_link_click", link_name:"gowhere"} ao dataLayer (GTM/GA4).
+-->
+
+<dialog id="sbh-vote-modal" class="sbh-modal" data-ativo="true" data-link="https://gowhere.com.br/campeoes-da-gastronomia-de-sao-paulo-2026/" aria-labelledby="sbh-vote-title">
+  <div class="sbh-modal__box">
+    <button class="sbh-modal__close" type="button" data-sbh-close aria-label="Fechar">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6L6 18"/><path d="M6 6l12 12"/></svg>
+    </button>
+
+    <span class="sbh-modal__icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M8 21h8"/><path d="M12 17v4"/><path d="M7 4h10v5a5 5 0 0 1-10 0V4z"/><path d="M7 6H4v2a3 3 0 0 0 3 3"/><path d="M17 6h3v2a3 3 0 0 1-3 3"/></svg>
+    </span>
+
+    <p class="sbh-modal__eyebrow">Campeões da Gastronomia • GoWhere 2026</p>
+    <h2 id="sbh-vote-title" class="sbh-modal__title">Vote no Sabah</h2>
+    <p class="sbh-modal__text">O Sabah está concorrendo ao prêmio Campeões da Gastronomia de São Paulo 2026, da GoWhere, na categoria restaurante árabe.</p>
+    <p class="sbh-modal__text">Ajude o Sabah a conquistar o título de Melhor Árabe de São Paulo. Leva menos de um minuto.</p>
+
+    <div class="sbh-modal__actions">
+      <a class="sbh-btn sbh-btn--primary" href="https://gowhere.com.br/campeoes-da-gastronomia-de-sao-paulo-2026/" target="_blank" rel="noopener noreferrer" data-sbh-vote>Votar agora</a>
+      <button class="sbh-btn" type="button" data-sbh-close>Agora não</button>
+    </div>
+  </div>
+</dialog>
+
+<style>
+  #sbh-vote-modal.sbh-modal {
+    box-sizing: border-box;
+    width: min(100% - 32px, 420px);
+    max-width: 420px;
+    max-height: calc(100vh - 32px);
+    max-height: calc(100dvh - 32px);
+    margin: auto;
+    padding: 0;
+    border: 0;
+    border-radius: 16px;
+    background: #ffffff;
+    color: #111111;
+    font-family: "Manrope", "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    line-height: 1.5;
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.35);
+    overflow: auto;
+    z-index: 999999;
+  }
+  #sbh-vote-modal.sbh-modal::backdrop { background: rgba(17, 17, 17, 0.7); }
+  #sbh-vote-modal.sbh-modal[open] { animation: sbh-modal-in 180ms ease-out; }
+  @keyframes sbh-modal-in { from { opacity: 0; transform: translateY(8px); } }
+  @media (prefers-reduced-motion: reduce) { #sbh-vote-modal.sbh-modal[open] { animation: none; } }
+
+  #sbh-vote-modal .sbh-modal__box { position: relative; padding: 28px 22px 22px; text-align: center; }
+  #sbh-vote-modal * { box-sizing: border-box; }
+
+  #sbh-vote-modal .sbh-modal__close {
+    position: absolute; top: 8px; right: 8px;
+    display: grid; place-items: center;
+    width: 44px; height: 44px; margin: 0; padding: 0;
+    border: 0; border-radius: 50%; background: transparent; color: #666666;
+    cursor: pointer; box-shadow: none;
+  }
+  #sbh-vote-modal .sbh-modal__close:hover { background: #faf8f4; color: #111111; }
+  #sbh-vote-modal .sbh-modal__close svg { width: 20px; height: 20px; display: block; }
+
+  #sbh-vote-modal .sbh-modal__icon {
+    display: grid; place-items: center;
+    width: 56px; height: 56px; margin: 0 auto 12px;
+    border-radius: 50%; background: rgba(163, 0, 0, 0.08); color: #a30000;
+  }
+  #sbh-vote-modal .sbh-modal__icon svg { width: 28px; height: 28px; display: block; }
+
+  #sbh-vote-modal .sbh-modal__eyebrow { margin: 0; font-size: 0.75rem; font-weight: 600; color: #666666; }
+  #sbh-vote-modal .sbh-modal__title { margin: 4px 0 0; padding: 0; font-size: 1.5rem; font-weight: 800; line-height: 1.2; color: #111111; }
+  #sbh-vote-modal .sbh-modal__text { margin: 10px 0 0; font-size: 0.925rem; line-height: 1.5; color: #666666; }
+
+  #sbh-vote-modal .sbh-modal__actions { display: grid; gap: 8px; margin-top: 18px; }
+  #sbh-vote-modal .sbh-btn {
+    display: inline-flex; align-items: center; justify-content: center;
+    min-height: 44px; margin: 0; padding: 10px 18px;
+    border: 1px solid #e7e3dd; border-radius: 999px;
+    background: #ffffff; color: #111111;
+    font: inherit; font-size: 0.875rem; font-weight: 700; text-align: center; text-decoration: none;
+    cursor: pointer; box-shadow: none;
+    transition: background-color 180ms ease-out, border-color 180ms ease-out;
+  }
+  #sbh-vote-modal .sbh-btn:hover { border-color: #a30000; color: #111111; text-decoration: none; }
+  #sbh-vote-modal .sbh-btn--primary { border-color: #a30000; background: #a30000; color: #ffffff; }
+  #sbh-vote-modal .sbh-btn--primary:hover { background: #8b0000; border-color: #8b0000; color: #ffffff; }
+  #sbh-vote-modal :focus-visible { outline: 2px solid #a30000; outline-offset: 2px; }
+  #sbh-vote-modal .sbh-btn--primary:focus-visible { outline-color: #111111; }
+</style>
+
+<script>
+(function () {
+  var modal = document.getElementById("sbh-vote-modal");
+  if (!modal || typeof modal.showModal !== "function") return;
+  if (modal.getAttribute("data-ativo") !== "true") { modal.remove(); return; }
+  if (document.body.classList.contains("elementor-editor-active")) return;
+
+  var SEEN_KEY = "sabah-vote-popup";
+  var DELAY_MS = 900;
+
+  function seen() { try { return sessionStorage.getItem(SEEN_KEY) === "1"; } catch (e) { return false; } }
+  function markSeen() { try { sessionStorage.setItem(SEEN_KEY, "1"); } catch (e) {} }
+  function open() { if (!modal.open) modal.showModal(); }
+  function close() { if (modal.open) modal.close(); }
+
+  var closers = modal.querySelectorAll("[data-sbh-close]");
+  for (var i = 0; i < closers.length; i++) closers[i].addEventListener("click", close);
+
+  modal.addEventListener("click", function (e) { if (e.target === modal) close(); });
+
+  var vote = modal.querySelector("[data-sbh-vote]");
+  if (vote) {
+    var link = modal.getAttribute("data-link");
+    if (link) vote.setAttribute("href", link);
+    vote.addEventListener("click", function () {
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({ event: "bio_link_click", link_name: "gowhere" });
+      close();
+    });
+  }
+
+  if (!seen()) {
+    markSeen();
+    window.setTimeout(open, DELAY_MS);
+  }
+})();
+</script>
