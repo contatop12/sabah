@@ -120,7 +120,7 @@
               </ul>
               <div class="acc__ctas">
                 <a class="pill pill--primary" href="{{links.reservation}}" target="_blank" rel="noopener noreferrer" data-track="reservation">Reservar mesa</a>
-                <a class="pill" href="{{links.menu}}" target="_blank" rel="noopener noreferrer" data-track="menu">Ver cardápio</a>
+                <a class="pill" href="{{base}}cardapio#salao" data-track="menu">Ver cardápio</a>
               </div>
             </div>
           </div>
@@ -184,20 +184,12 @@
           </div>
         </li>
 
-        <li class="acc">
-          <button class="btn" type="button" aria-expanded="false" aria-controls="panel-menu" data-track="menu">
+        <li>
+          <a class="btn" href="{{base}}cardapio" data-track="menu">
             <svg class="btn__icon" aria-hidden="true"><use href="#i-book"/></svg>
             <span class="btn__text"><span class="btn__title">Ver cardápio</span><span class="btn__sub">Salão, delivery e encomendas</span></span>
-            <svg class="btn__chevron btn__chevron--down" aria-hidden="true"><use href="#i-chevron-down"/></svg>
-          </button>
-          <div class="acc__panel" id="panel-menu">
-            <div class="acc__inner">
-              <div class="acc__ctas">
-                <a class="pill pill--primary" href="{{links.menu}}" target="_blank" rel="noopener noreferrer" data-track="menu">Cardápio do salão</a>
-                <a class="pill" href="{{links.menuDelivery}}" target="_blank" rel="noopener noreferrer" data-track="menu">Delivery e encomendas</a>
-              </div>
-            </div>
-          </div>
+            <svg class="btn__chevron" aria-hidden="true"><use href="#i-chevron-right"/></svg>
+          </a>
         </li>
 
         <li>
@@ -240,7 +232,7 @@
       <p class="foot__addr">{{address.street}}<br />{{address.complement}} • {{address.city}}</p>
       <nav class="foot__nav" aria-label="Links do rodapé">
         <a href="{{links.website}}" target="_blank" rel="noopener noreferrer" data-track="website">Site oficial</a>
-        <a href="{{links.instagram}}" target="_blank" rel="noopener noreferrer" data-track="instagram"><svg class="foot__ig" aria-hidden="true"><use href="#i-instagram"/></svg>Instagram</a>
+        <a href="{{links.instagram}}" target="_blank" rel="me noopener noreferrer" data-track="instagram"><svg class="foot__ig" aria-hidden="true"><use href="#i-instagram"/></svg>Instagram</a>
       </nav>
     </footer>
 

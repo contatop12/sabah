@@ -28,6 +28,7 @@ Tudo que é dado (URLs, WhatsApp, horários, endereço, campanha, GTM) fica em *
 | Título, description, canonical, imagem OG | `src/config.ts` → `site` |
 | UTMs dos links para sabah.com.br | `src/config.ts` → `utm` |
 | Textos dos botões e dos blocos expansíveis | `index.html` |
+| Página do cardápio | `cardapio.html` |
 | Cores, fonte, espaçamentos | `src/style.css` (variáveis em `:root`) |
 
 Depois de alterar, rode `npm run build` (ou faça push: o deploy automático builda).
@@ -51,6 +52,18 @@ Ficam em `public/` e são copiadas para `dist/bio/`:
 **Trocar a foto principal**: rode `npm run images -- caminho/da/foto.jpg` (precisa de Python + Pillow). O script recorta ao centro em 16:10, gera AVIF/WebP/JPEG nos quatro tamanhos e a imagem OG. Se quiser outro recorte, ajuste `RATIO` ou faça o recorte antes.
 
 **Foto da esfiha premiada (DSC01396) e do delivery (DSC01200)**: ainda não foram fornecidas. Há um comentário em `index.html` no bloco `.award` indicando onde entra; a classe `.award__photo` já está pronta no CSS.
+
+## Cardápio (/bio/cardapio)
+
+As páginas dos dois PDFs são servidas como imagens otimizadas (AVIF + JPEG, lazy) em `public/img/cardapio/`; abre instantaneamente no navegador do Instagram, sem o visualizador do Drive. Os PDFs do Drive continuam como "Baixar PDF".
+
+**Atualizar o cardápio**: baixe os PDFs novos e rode
+
+```bash
+npm run menu -- salao.pdf delivery.pdf
+```
+
+(precisa de Python + `pip install pymupdf pillow`). Se o número de páginas mudar (hoje 10 e 8), ajuste a lista de `<picture>` em `cardapio.html`. Limitação: o conteúdo é imagem; leitores de tela só recebem o resumo de cada página no `alt`.
 
 ## Tracking (GTM / GA4 / Meta Pixel)
 
@@ -90,15 +103,17 @@ O site principal é WordPress + Elementor e **não precisa ser alterado**: a zon
 
 ```text
 index.html          página (tokens {{...}} preenchidos no build)
+cardapio.html       cardápio como imagens otimizadas
 404.html            página de erro
 src/config.ts       CONFIGURAÇÃO CENTRAL
 src/style.css       estilos
 src/main.ts         bootstrap
-src/accordion.ts    blocos expansíveis (almoço, jantar, eventos, cardápio)
+src/accordion.ts    blocos expansíveis (almoço, jantar, eventos)
 src/tracking.ts     dataLayer / eventos
 vite.config.ts      base /bio/, plugin de template, cópia de cf/ para dist/
 cf/                 _headers, _redirects, robots.txt (raiz do Worker)
 public/             imagens e ícones
-scripts/optimize-images.py
+scripts/optimize-images.py  foto principal
+scripts/render-menu.py      páginas do cardápio
 wrangler.jsonc      config do Cloudflare Workers
 ```

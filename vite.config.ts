@@ -124,6 +124,7 @@ export default defineConfig({
     rollupOptions: {
       input: {
         main: resolve(ROOT, "index.html"),
+        cardapio: resolve(ROOT, "cardapio.html"),
         notFound: resolve(ROOT, "404.html"),
       },
     },

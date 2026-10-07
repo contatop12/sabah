@@ -405,6 +405,96 @@ h1, h2, p, dl, dd { margin: 0; }
 .foot__nav a:hover { text-decoration: underline; }
 .foot__ig { width: 15px; height: 15px; }
 
+/* ---------- Página de cardápio ---------- */
+
+.top--menu { position: relative; }
+
+.back {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 44px;
+  margin-bottom: 6px;
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--red);
+  text-decoration: none;
+}
+
+.back:hover { text-decoration: underline; }
+.back__icon { width: 18px; height: 18px; }
+
+.top__logo--small { width: 88px; height: 88px; }
+
+.menu-nav {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  display: flex;
+  gap: 8px;
+  margin: 18px calc(-1 * var(--gutter)) 0;
+  padding: 10px var(--gutter);
+  background: var(--cream);
+}
+
+.menu-nav a {
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 8px 12px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--white);
+  font-size: 0.875rem;
+  font-weight: 700;
+  text-align: center;
+  text-decoration: none;
+  transition: border-color var(--ease);
+}
+
+.menu-nav a:hover { border-color: var(--red); }
+
+.menu-section {
+  margin-top: 18px;
+  scroll-margin-top: 72px;
+}
+
+.menu-section + .menu-section { margin-top: 32px; }
+
+.menu-section__title {
+  font-size: 1.25rem;
+  font-weight: 800;
+  line-height: 1.25;
+}
+
+.menu-section__sub {
+  margin: 4px 0 12px;
+  font-size: 0.875rem;
+  color: var(--gray);
+}
+
+.menu-pages {
+  display: grid;
+  gap: 10px;
+}
+
+.menu-page {
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--white);
+}
+
+.menu-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 14px;
+}
+
 /* ---------- Foco e movimento ---------- */
 
 :focus-visible {
