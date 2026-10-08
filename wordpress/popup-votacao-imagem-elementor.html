@@ -6,7 +6,9 @@
   A borda desfocada de fora do card é recortada pelo CSS; não precisa editar a imagem.
 
   A arte inteira é clicável e leva à votação. O "×" desenhado na arte fecha o popup
-  (há uma área invisível de 44 px exatamente sobre ele).
+  (há uma área invisível de 44 px exatamente sobre ele). Clique fora e Esc também fecham.
+  O fechamento é feito pelo script no fim deste arquivo (tem "nowprocket" para o
+  WP Rocket não atrasar): a rotina de fechar do próprio Elementor não funciona neste site.
 
   PASSO A PASSO
   1. Abra o popup "Votação" no Elementor. Apague o widget HTML atual, coloque um novo
@@ -40,6 +42,9 @@
   /* ---------- Moldura do Popup do Elementor (só quando contém esta arte) ---------- */
   .elementor-popup-modal:has(.sbh-art) {
     background: linear-gradient(160deg, rgba(10, 10, 10, 0.84) 0%, rgba(79, 2, 0, 0.82) 100%) !important;
+    /* Acima de outros popups (ex.: 528 WhatsApp, que no celular cobre a borda direita e o X) */
+    z-index: 100000 !important;
+    pointer-events: all !important;
   }
   .elementor-popup-modal:has(.sbh-art) .dialog-widget-content {
     width: auto !important;
@@ -118,3 +123,49 @@
   .sbh-art .sbh-art__close:focus-visible { outline: 2px solid #a30000; outline-offset: 0; }
   .sbh-art .sbh-art__link:focus-visible { outline: 3px solid #ffffff; outline-offset: 4px; }
 </style>
+
+<script nowprocket data-cfasync="false" data-no-optimize="1">
+/* Fecha o popup da arte pelo X, clique fora e Esc.
+   Não depende da rotina de fechar do Elementor, que neste site não esconde o popup. */
+(function () {
+  if (window.__sbhArtClose) return;
+  window.__sbhArtClose = true;
+
+  function popupOf(el) { return el && el.closest ? el.closest(".elementor-popup-modal") : null; }
+  function isOpen(modal) { return !!modal && getComputedStyle(modal).display !== "none"; }
+  function openArtPopup() {
+    var art = document.querySelector(".elementor-popup-modal .sbh-art");
+    var modal = popupOf(art);
+    return isOpen(modal) ? modal : null;
+  }
+  function closeModal(modal) {
+    if (!modal) return;
+    try {
+      var id = parseInt(modal.id.replace("elementor-popup-modal-", ""), 10);
+      var doc = window.elementorFrontend && elementorFrontend.documentsManager && elementorFrontend.documentsManager.documents[id];
+      if (doc && doc.getModal) doc.getModal().hide();
+    } catch (e) {}
+    modal.style.display = "none";
+    document.documentElement.classList.remove("dialog-prevent-scroll");
+    document.body.classList.remove("dialog-prevent-scroll");
+  }
+
+  document.addEventListener("click", function (e) {
+    var t = e.target;
+    var btn = t && t.closest ? t.closest(".sbh-art__close") : null;
+    if (btn) {
+      e.preventDefault();
+      e.stopPropagation();
+      closeModal(popupOf(btn));
+      return;
+    }
+    // Clique fora da arte (no fundo escuro) fecha.
+    var modal = openArtPopup();
+    if (modal && popupOf(t) === modal && !(t.closest && t.closest(".sbh-art"))) closeModal(modal);
+  }, true);
+
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape" || e.key === "Esc") closeModal(openArtPopup());
+  });
+})();
+</script>
