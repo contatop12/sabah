@@ -2,6 +2,8 @@
 
 Página "link in bio" do restaurante Sabah, publicada em **links.sabah.com.br**. HTML, CSS e TypeScript puros (Vite), deploy no Cloudflare Workers como site estático. Sem frameworks, sem bibliotecas em runtime.
 
+> **Site institucional (sabah.com.br):** fica em [`site/`](site/), com projeto, build e Worker próprios (`sabah-site`). Veja [`site/README.md`](site/README.md). Esta raiz continua sendo só o link-in-bio.
+
 ## Comandos
 
 ```bash

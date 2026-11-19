@@ -1,0 +1,77 @@
+  <footer class="foot" id="contato">
+    <div class="wrap foot__grid">
+      <div class="foot__brand">
+        <picture>
+          <source type="image/webp" srcset="/img/logo-branco.webp" />
+          <img src="/img/logo-branco.png" width="247" height="108" alt="Sabah, A Legítima Cozinha Árabe" loading="lazy" decoding="async" />
+        </picture>
+        <p>Receitas da família Sabbag desde {{site.foundingYear}}, dentro do {{address.place}}, na Avenida Paulista.</p>
+      </div>
+
+      <div class="foot__col">
+        <h2 class="foot__h">Onde estamos</h2>
+        <address>
+          {{address.street}}, {{address.neighborhood}}<br />
+          {{address.place}}, {{address.city}}/{{address.state}}<br />
+          CEP {{address.postalCode}}
+        </address>
+        <p><a href="{{links.maps}}" target="_blank" rel="noopener" data-track="route_click" data-loc="rodape">Traçar rota no Maps</a></p>
+        <p>
+          <a href="tel:{{phone.tel}}">{{phone.display}}</a><br />
+          <a href="{{links.whatsapp}}" target="_blank" rel="noopener" data-track="whatsapp_click" data-loc="rodape">WhatsApp {{phone.whatsappDisplay}}</a><br />
+          <a href="mailto:{{email}}">{{email}}</a>
+        </p>
+      </div>
+
+      <div class="foot__col">
+        <h2 class="foot__h">Horários</h2>
+        <dl class="foot__hours">
+          <div><dt>Almoço, segunda a sexta</dt><dd>{{hours.lunchWeekdays}}</dd></div>
+          <div><dt>Almoço, sábados, domingos e feriados</dt><dd>{{hours.lunchWeekend}}</dd></div>
+          <div><dt>Jantar, todos os dias (com reserva)</dt><dd>{{hours.dinner}}</dd></div>
+          <div><dt>Delivery, todos os dias</dt><dd>{{hours.delivery}}</dd></div>
+        </dl>
+      </div>
+
+      <nav class="foot__col" aria-label="Rodapé">
+        <h2 class="foot__h">Sabah</h2>
+        <ul class="foot__links">
+          <li><a href="{{links.menu}}" target="_blank" rel="noopener" data-track="menu_view" data-loc="rodape">Cardápio</a></li>
+          <li><a href="{{links.reservation}}" target="_blank" rel="noopener" data-track="reservation_click" data-loc="rodape">Reservar mesa</a></li>
+          <li><a href="{{links.ifood}}" target="_blank" rel="noopener" data-track="ifood_click" data-loc="rodape">Pedir no iFood</a></li>
+          <li><a href="/#eventos">Eventos</a></li>
+          <li><a href="{{links.instagram}}" target="_blank" rel="me noopener" data-track="instagram_click" data-loc="rodape">Instagram</a></li>
+          <li><a href="{{links.facebook}}" target="_blank" rel="me noopener">Facebook</a></li>
+          <li><a href="{{links.tiktok}}" target="_blank" rel="me noopener">TikTok</a></li>
+          <li><a href="/politicasdeprivacidade/">Política de privacidade</a></li>
+          <li><a href="/termosdeuso/">Termos de uso</a></li>
+          <li><button type="button" class="linklike" data-consent-open>Preferências de cookies</button></li>
+        </ul>
+      </nav>
+    </div>
+
+    <div class="wrap foot__base">
+      <p>© {{year}} {{site.legalName}}. Todos os direitos reservados.</p>
+      <p>Desenvolvido por <a href="{{links.agency}}" target="_blank" rel="noopener">P12 Digital</a></p>
+    </div>
+  </footer>
+
+  <!-- Barra fixa no celular: aparece depois da primeira dobra -->
+  <div class="dock" data-dock hidden>
+    <a class="dock__btn" href="{{links.maps}}" target="_blank" rel="noopener" data-track="route_click" data-loc="barra-fixa">
+      <svg aria-hidden="true"><use href="#i-pin"/></svg>Como chegar
+    </a>
+    <a class="dock__btn dock__btn--primary" href="{{links.reservation}}" target="_blank" rel="noopener" data-track="reservation_click" data-loc="barra-fixa">
+      <svg aria-hidden="true"><use href="#i-whatsapp"/></svg>Reservar mesa
+    </a>
+  </div>
+
+  <!-- Consentimento de cookies (LGPD). Sem escolha, medição e anúncios ficam negados. -->
+  <section class="consent" data-consent hidden aria-labelledby="consent-title">
+    <h2 id="consent-title" class="consent__title">Cookies no site do Sabah</h2>
+    <p>Usamos cookies para medir visitas e melhorar o site. Você pode aceitar ou recusar. Saiba mais na <a href="/politicasdeprivacidade/">política de privacidade</a>.</p>
+    <div class="consent__actions">
+      <button type="button" class="btn btn--ghost" data-consent-deny>Recusar</button>
+      <button type="button" class="btn btn--primary" data-consent-accept>Aceitar cookies</button>
+    </div>
+  </section>

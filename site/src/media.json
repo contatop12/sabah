@@ -1,0 +1,279 @@
+{
+  "hero-desktop": {
+    "width": 2755,
+    "height": 1424,
+    "widths": [
+      900,
+      1400,
+      2000
+    ],
+    "fallbackWidth": 1400
+  },
+  "hero-mobile": {
+    "width": 1722,
+    "height": 1424,
+    "widths": [
+      480,
+      750,
+      1080
+    ],
+    "fallbackWidth": 750
+  },
+  "buffet-bancada": {
+    "width": 3200,
+    "height": 1800,
+    "widths": [
+      640,
+      1024,
+      1600,
+      2400
+    ],
+    "fallbackWidth": 1024
+  },
+  "buffet-salao": {
+    "width": 2000,
+    "height": 2500,
+    "widths": [
+      480,
+      800,
+      1200
+    ],
+    "fallbackWidth": 800
+  },
+  "buffet-cubas": {
+    "width": 453,
+    "height": 491,
+    "widths": [
+      453
+    ],
+    "fallbackWidth": 453
+  },
+  "prato-montado": {
+    "width": 455,
+    "height": 722,
+    "widths": [
+      455
+    ],
+    "fallbackWidth": 455
+  },
+  "salao": {
+    "width": 3200,
+    "height": 2133,
+    "widths": [
+      640,
+      1024,
+      1600,
+      2400
+    ],
+    "fallbackWidth": 1024
+  },
+  "prato-homus": {
+    "width": 480,
+    "height": 600,
+    "widths": [
+      320,
+      480
+    ],
+    "fallbackWidth": 480
+  },
+  "prato-tabule": {
+    "width": 320,
+    "height": 400,
+    "widths": [
+      320
+    ],
+    "fallbackWidth": 320
+  },
+  "prato-mjadara": {
+    "width": 320,
+    "height": 400,
+    "widths": [
+      320
+    ],
+    "fallbackWidth": 320
+  },
+  "prato-charutos": {
+    "width": 391,
+    "height": 489,
+    "widths": [
+      320,
+      391
+    ],
+    "fallbackWidth": 391
+  },
+  "prato-kafta": {
+    "width": 960,
+    "height": 1200,
+    "widths": [
+      320,
+      640,
+      960
+    ],
+    "fallbackWidth": 640
+  },
+  "prato-michui": {
+    "width": 560,
+    "height": 700,
+    "widths": [
+      320,
+      560
+    ],
+    "fallbackWidth": 560
+  },
+  "prato-kibe-cru": {
+    "width": 960,
+    "height": 1200,
+    "widths": [
+      320,
+      640,
+      960
+    ],
+    "fallbackWidth": 640
+  },
+  "prato-falafel": {
+    "width": 238,
+    "height": 298,
+    "widths": [
+      238
+    ],
+    "fallbackWidth": 238
+  },
+  "prato-doces": {
+    "width": 480,
+    "height": 720,
+    "widths": [
+      320,
+      480
+    ],
+    "fallbackWidth": 480
+  },
+  "esfihas-abertas": {
+    "width": 1200,
+    "height": 800,
+    "widths": [
+      480,
+      800,
+      1200
+    ],
+    "fallbackWidth": 800
+  },
+  "esfihas-mesa": {
+    "width": 720,
+    "height": 480,
+    "widths": [
+      480,
+      720
+    ],
+    "fallbackWidth": 720
+  },
+  "esfihas-salgadas": {
+    "width": 480,
+    "height": 720,
+    "widths": [
+      320,
+      480
+    ],
+    "fallbackWidth": 480
+  },
+  "kibe-frito": {
+    "width": 600,
+    "height": 400,
+    "widths": [
+      320,
+      600
+    ],
+    "fallbackWidth": 600
+  },
+  "kebab": {
+    "width": 720,
+    "height": 480,
+    "widths": [
+      480,
+      720
+    ],
+    "fallbackWidth": 720
+  },
+  "familia-sabbag": {
+    "width": 957,
+    "height": 846,
+    "widths": [
+      480,
+      957
+    ],
+    "fallbackWidth": 957
+  },
+  "placa-sabah": {
+    "width": 1260,
+    "height": 840,
+    "widths": [
+      480,
+      800,
+      1260
+    ],
+    "fallbackWidth": 800
+  },
+  "club-homs": {
+    "width": 616,
+    "height": 343,
+    "widths": [
+      400,
+      616
+    ],
+    "fallbackWidth": 616
+  },
+  "como-chegar-poster": {
+    "width": 1080,
+    "height": 1920,
+    "widths": [
+      360,
+      720
+    ],
+    "fallbackWidth": 720
+  },
+  "evento-mesa": {
+    "width": 1068,
+    "height": 600,
+    "widths": [
+      480,
+      800,
+      1068
+    ],
+    "fallbackWidth": 800
+  },
+  "evento-dabke": {
+    "width": 1068,
+    "height": 600,
+    "widths": [
+      480,
+      800,
+      1068
+    ],
+    "fallbackWidth": 800
+  },
+  "evento-buffet": {
+    "width": 1068,
+    "height": 600,
+    "widths": [
+      480,
+      800,
+      1068
+    ],
+    "fallbackWidth": 800
+  },
+  "logo-vermelho": {
+    "width": 247,
+    "height": 108,
+    "widths": [
+      247
+    ],
+    "fallbackWidth": 247
+  },
+  "logo-branco": {
+    "width": 247,
+    "height": 108,
+    "widths": [
+      247
+    ],
+    "fallbackWidth": 247
+  }
+}

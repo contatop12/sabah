@@ -1,0 +1,28 @@
+  <a class="skip" href="#conteudo">Ir para o conteúdo</a>
+
+  <header class="top" data-header>
+    <div class="top__in">
+      <a class="top__logo" href="/" aria-label="Sabah, A Legítima Cozinha Árabe: página inicial">
+        <picture>
+          <source type="image/webp" srcset="/img/logo-vermelho.webp" />
+          <img src="/img/logo-vermelho.png" width="247" height="108" alt="Sabah, A Legítima Cozinha Árabe" />
+        </picture>
+      </a>
+
+      <nav class="nav" id="menu" aria-label="Principal" data-nav>
+        <ul class="nav__list">
+          <li><a href="/#buffet" data-spy="buffet">Buffet</a></li>
+          <li><a href="{{links.menu}}" target="_blank" rel="noopener" data-track="menu_view" data-loc="menu">Cardápio</a></li>
+          <li><a href="/#historia" data-spy="historia">Nossa história</a></li>
+          <li><a href="/#como-chegar" data-spy="como-chegar">Como chegar</a></li>
+          <li><a href="/#eventos" data-spy="eventos">Eventos</a></li>
+        </ul>
+        <a class="btn btn--primary nav__cta" href="{{links.reservation}}" target="_blank" rel="noopener" data-track="reservation_click" data-loc="menu">Reservar mesa</a>
+      </nav>
+
+      <button class="top__toggle" type="button" aria-controls="menu" aria-expanded="false" data-nav-toggle>
+        <span class="top__toggle-label">Menu</span>
+        <span class="top__bars" aria-hidden="true"><i></i><i></i></span>
+      </button>
+    </div>
+  </header>
