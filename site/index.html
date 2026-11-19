@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{{site.title}}</title>
+  <meta name="description" content="{{site.description}}" />
+  <link rel="canonical" href="{{page.url}}" />
+  <meta property="og:title" content="{{site.title}}" />
+  <meta property="og:description" content="{{site.description}}" />
+  <meta property="og:url" content="{{page.url}}" />
+<!--@include head-->
+
+  <!-- Hero (LCP): pré-carrega só a variante usada na tela -->
+  <link rel="preload" as="image" type="image/avif" media="(max-width: 899px)"
+    imagesrcset="/img/hero-mobile-480.avif 480w, /img/hero-mobile-750.avif 750w, /img/hero-mobile-1080.avif 1080w"
+    imagesizes="100vw" fetchpriority="high" />
+  <link rel="preload" as="image" type="image/avif" media="(min-width: 900px)"
+    imagesrcset="/img/hero-desktop-900.avif 900w, /img/hero-desktop-1400.avif 1400w, /img/hero-desktop-2000.avif 2000w"
+    imagesizes="60vw" fetchpriority="high" />
+
+  <!-- Navegação provável: busca as páginas internas e o cardápio com antecedência -->
+  <script type="speculationrules">
+    {"prefetch":[{"where":{"href_matches":["/politicasdeprivacidade/","/termosdeuso/"]},"eagerness":"moderate"}]}
+  </script>
+
+  <link rel="stylesheet" href="/src/styles/main.css" />
+  <script type="module" src="/src/main.ts"></script>
+<!--@jsonld home "Sabah | Buffet Árabe na Avenida Paulista, São Paulo"-->
+</head>
+<body>
+<!--@include icons-->
+<!--@include header-->
+
+  <main id="conteudo">
+
+    <!-- ================= HERO ================= -->
+    <section class="hero" id="inicio" aria-labelledby="hero-title">
+      <div class="hero__photo">
+        <picture>
+          <source media="(max-width: 899px)" type="image/avif" sizes="100vw"
+            srcset="/img/hero-mobile-480.avif 480w, /img/hero-mobile-750.avif 750w, /img/hero-mobile-1080.avif 1080w" />
+          <source media="(max-width: 899px)" type="image/webp" sizes="100vw"
+            srcset="/img/hero-mobile-480.webp 480w, /img/hero-mobile-750.webp 750w, /img/hero-mobile-1080.webp 1080w" />
+          <source type="image/avif" sizes="60vw"
+            srcset="/img/hero-desktop-900.avif 900w, /img/hero-desktop-1400.avif 1400w, /img/hero-desktop-2000.avif 2000w" />
+          <source type="image/webp" sizes="60vw"
+            srcset="/img/hero-desktop-900.webp 900w, /img/hero-desktop-1400.webp 1400w, /img/hero-desktop-2000.webp 2000w" />
+          <img src="/img/hero-desktop.jpg" width="1400" height="724" fetchpriority="high" decoding="async"
+            alt="Mesa do Sabah vista de cima: homus, coalhada seca e babaganuche, kibe cru, charutinhos, cesto de pão sírio e m'jadara" />
+        </picture>
+      </div>
+
+      <div class="hero__text">
+        <a class="hero__award" href="#reconhecimentos">
+          <svg aria-hidden="true"><use href="#i-trophy"/></svg>
+          <span>1º lugar na categoria Árabe · Campeões da Gastronomia 2026</span>
+        </a>
+        <h1 id="hero-title" class="hero__title">Buffet árabe à vontade na Avenida Paulista</h1>
+        <p class="hero__lead">Homus com pão árabe, tabule fresco, kafta e charutinhos. Venha almoçar no Sabah, dentro do Club Homs.</p>
+        <div class="hero__ctas">
+          <a class="btn btn--light" href="#buffet">Ver o buffet</a>
+          <a class="btn btn--outline-light" href="{{links.maps}}" target="_blank" rel="noopener" data-track="route_click" data-loc="hero">Como chegar</a>
+        </div>
+        <p class="hero__status" data-open-status aria-live="polite"></p>
+      </div>
+    </section>
+
+    <!-- ================= BUFFET ================= -->
+    <section class="sec buffet" id="buffet" aria-labelledby="buffet-title">
+      <div class="wrap">
+        <header class="sec__head" data-reveal>
+          <h2 id="buffet-title" class="h2">Um pouco de cada, à vontade</h2>
+          <p class="lead">No almoço, a bancada do Sabah fica montada com pastas, saladas, pratos quentes e sobremesa. Você se serve do que quiser, quantas vezes quiser, e monta o prato do seu jeito.</p>
+        </header>
+      </div>
+
+      <figure class="buffet__wide" data-parallax>
+        <x-img name="buffet-bancada" class="buffet__wide-img" sizes="100vw"
+          alt="Bancada do buffet do Sabah abastecida, com clientes se servindo no salão"></x-img>
+        <figcaption class="wrap">A bancada do almoço, montada todos os dias no salão do Sabah.</figcaption>
+      </figure>
+
+      <div class="wrap buffet__facts" data-reveal>
+        <dl class="facts">
+          <div><dt>Segunda a sexta</dt><dd>{{hours.lunchWeekdays}}</dd></div>
+          <div><dt>Sábados, domingos e feriados</dt><dd>{{hours.lunchWeekend}}</dd></div>
+          <div><dt>Incluído no buffet</dt><dd>Sobremesa</dd></div>
+        </dl>
+        <p class="buffet__note">Prefere pedir à mesa? O salão também serve à la carte, pratos executivos, combinados, kebabs e esfihas.</p>
+      </div>
+
+      <div class="wrap">
+        <h3 class="h3 buffet__sub" data-reveal>O que tem na bancada</h3>
+        <p class="buffet__hint" data-reveal>Se a cozinha árabe é novidade para você, comece por aqui.</p>
+      </div>
+
+      <ul class="dishes" aria-label="Pratos do buffet" data-dishes>
+        <li class="dish" data-reveal>
+          <x-img name="prato-homus" class="dish__img" sizes="(min-width: 1100px) 22vw, (min-width: 700px) 30vw, 64vw" alt="Trio de pastas árabes do Sabah: homus, coalhada seca e babaganuche"></x-img>
+          <h4 class="dish__name">Homus</h4>
+          <p class="dish__desc">Pasta de grão-de-bico que vai bem com pão árabe. Na foto, com coalhada seca e babaganuche.</p>
+        </li>
+        <li class="dish" data-reveal>
+          <x-img name="prato-tabule" class="dish__img" sizes="(min-width: 1100px) 22vw, (min-width: 700px) 30vw, 64vw" alt="Tigela de tabule do Sabah"></x-img>
+          <h4 class="dish__name">Tabule</h4>
+          <p class="dish__desc">Salada fresca de salsinha, tomate e trigo.</p>
+        </li>
+        <li class="dish" data-reveal>
+          <x-img name="prato-mjadara" class="dish__img" sizes="(min-width: 1100px) 22vw, (min-width: 700px) 30vw, 64vw" alt="Prato de m'jadara com cebola dourada por cima"></x-img>
+          <h4 class="dish__name">M’jadara</h4>
+          <p class="dish__desc">Arroz com lentilhas e cebola dourada.</p>
+        </li>
+        <li class="dish" data-reveal>
+          <x-img name="prato-charutos" class="dish__img" sizes="(min-width: 1100px) 22vw, (min-width: 700px) 30vw, 64vw" alt="Charutinhos de repolho recheados do Sabah"></x-img>
+          <h4 class="dish__name">Charutinhos</h4>
+          <p class="dish__desc">Folhas de uva ou de repolho enroladas e recheadas. Na foto, os de repolho.</p>
+        </li>
+        <li class="dish" data-reveal>
+          <x-img name="prato-kafta" class="dish__img" sizes="(min-width: 1100px) 22vw, (min-width: 700px) 30vw, 64vw" alt="Espetos de kafta do Sabah com hortelã"></x-img>
+          <h4 class="dish__name">Kafta</h4>
+          <p class="dish__desc">Carne moída temperada, moldada no espeto e grelhada.</p>
+        </li>
+        <li class="dish" data-reveal>
+          <x-img name="prato-michui" class="dish__img" sizes="(min-width: 1100px) 22vw, (min-width: 700px) 30vw, 64vw" alt="Espeto de michui de frango grelhado"></x-img>
+          <h4 class="dish__name">Michui de frango</h4>
+          <p class="dish__desc">Espeto de frango temperado e grelhado.</p>
+        </li>
+        <li class="dish" data-reveal>
+          <x-img name="prato-kibe-cru" class="dish__img" sizes="(min-width: 1100px) 22vw, (min-width: 700px) 30vw, 64vw" alt="Kibe cru do Sabah decorado com hortelã"></x-img>
+          <h4 class="dish__name">Kibe cru</h4>
+          <p class="dish__desc">Carne crua com trigo, servida com cebola, hortelã e azeite.</p>
+        </li>
+        <li class="dish" data-reveal>
+          <x-img name="prato-falafel" class="dish__img" sizes="(min-width: 1100px) 22vw, (min-width: 700px) 30vw, 64vw" alt="Faláfel do Sabah partido ao meio"></x-img>
+          <h4 class="dish__name">Faláfel</h4>
+          <p class="dish__desc">Bolinho frito de grão-de-bico, crocante por fora.</p>
+        </li>
+      </ul>
+
+      <div class="wrap buffet__end" data-reveal>
+        <p class="fine">Os pratos da bancada podem variar conforme o dia.</p>
+        <div class="row">
+          <a class="btn btn--primary" href="{{links.menuSalao}}" target="_blank" rel="noopener" data-track="menu_view" data-loc="buffet">Ver cardápio do salão</a>
+          <a class="btn btn--ghost" href="#como-chegar">Horários e localização</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= RECONHECIMENTOS ================= -->
+    <section class="sec awards" id="reconhecimentos" aria-labelledby="awards-title">
+      <div class="wrap">
+        <h2 id="awards-title" class="h2" data-reveal>Reconhecimentos do Sabah</h2>
+
+        <article class="award award--first" data-reveal>
+          <p class="award__rank" aria-hidden="true">1º</p>
+          <div class="award__body">
+            <h3 class="h3">1º lugar na categoria Árabe · GoWhere 2026</h3>
+            <p><strong>O Sabah ficou em 1º lugar na categoria Árabe do prêmio Campeões da Gastronomia 2026.</strong> A escolha foi por voto popular, em uma premiação realizada pela GoWhere em parceria com a Jovem Pan.</p>
+            <ul class="sources">
+              <li><a class="btn btn--primary" href="{{links.gowhereResult}}" target="_blank" rel="noopener" data-track="award_click" data-loc="gowhere">Ver resultado oficial</a></li>
+              <li><a class="link" href="{{links.jovemPan}}" target="_blank" rel="noopener" data-track="award_click" data-loc="jovempan">Cobertura da Jovem Pan<svg aria-hidden="true"><use href="#i-out"/></svg></a></li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="award award--sbt">
+          <a class="cover" href="{{links.sbtReel}}" target="_blank" rel="noopener" data-track="video_click" data-loc="sbt-reel" data-reveal="photo"
+            aria-label="Assista ao momento da vitória no Instagram do Sabah">
+            <x-img name="esfihas-abertas" class="cover__img" sizes="(min-width: 900px) 46vw, 100vw" alt="Esfihas abertas de carne do Sabah servidas em prato branco"></x-img>
+            <span class="cover__play"><svg aria-hidden="true"><use href="#i-play"/></svg>Assista ao momento da vitória</span>
+          </a>
+          <div class="award__body" data-reveal>
+            <h3 class="h3">A esfiha do Sabah que conquistou os jurados do SBT</h3>
+            <p>Em 2024, o Sabah venceu a disputa pela melhor esfiha de São Paulo no programa <em>Chega Mais</em>, do SBT. Para a final, a casa criou uma receita que entrou no cardápio com o nome <strong>Esfiha SBT</strong>.</p>
+            <p>No vídeo, Nilton Sabbag, fundador da casa, e Bruno, seu filho e sócio, recebem o resultado.</p>
+            <ul class="sources sources--stack">
+              <li><a class="link" href="{{links.sbtFull}}" target="_blank" rel="noopener" data-track="video_click" data-loc="sbt-disputa">Veja como foi a disputa<svg aria-hidden="true"><use href="#i-out"/></svg></a></li>
+              <li><a class="link" href="{{links.menu}}" target="_blank" rel="noopener" data-track="menu_view" data-loc="sbt">Ver as esfihas no cardápio<svg aria-hidden="true"><use href="#i-out"/></svg></a></li>
+              <li><a class="link" href="{{links.desbravaSp}}" target="_blank" rel="noopener">Desbrava SP registra a vitória em 2024<svg aria-hidden="true"><use href="#i-out"/></svg></a></li>
+            </ul>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ================= JANTAR ================= -->
+    <section class="sec dinner" id="jantar" aria-labelledby="dinner-title">
+      <div class="wrap dinner__grid">
+        <div class="dinner__text" data-reveal>
+          <h2 id="dinner-title" class="h2">Buffet e rodízio de esfihas no jantar</h2>
+          <p class="lead">À noite, o buffet árabe continua à vontade e as esfihas passam a chegar à mesa em rodízio, abertas e fechadas, assadas na hora.</p>
+          <p>O jantar inclui sobremesa e bebidas, e quem preferir pode pedir à la carte. A esfiha de carne leva a pimenta síria caseira da família.</p>
+
+          <table class="compare">
+            <caption class="sr">Diferença entre o almoço e o jantar no Sabah</caption>
+            <thead><tr><th scope="col">Almoço</th><th scope="col">Jantar</th></tr></thead>
+            <tbody>
+              <tr><td>Buffet árabe à vontade</td><td>Buffet árabe à vontade</td></tr>
+              <tr><td>Sobremesa</td><td>Sobremesa e bebidas</td></tr>
+              <tr><td>Sem rodízio</td><td>Rodízio de esfihas na mesa</td></tr>
+              <tr><td>Seg. a sex. {{hours.lunchWeekdays}}<br />Sáb., dom. e feriados {{hours.lunchWeekend}}</td><td>Todos os dias, {{hours.dinner}}<br />Mediante reserva</td></tr>
+            </tbody>
+          </table>
+
+          <div class="row">
+            <a class="btn btn--light" href="{{links.dinnerReservation}}" target="_blank" rel="noopener" data-track="reservation_click" data-loc="jantar">Reservar para o jantar</a>
+            <a class="btn btn--outline-light" href="{{links.menu}}" target="_blank" rel="noopener" data-track="menu_view" data-loc="jantar">Ver cardápio</a>
+          </div>
+        </div>
+
+        <div class="dinner__photos">
+          <figure class="dinner__main" data-reveal="photo">
+            <x-img name="esfihas-mesa" sizes="(min-width: 900px) 40vw, 100vw" alt="Esfihas fechadas e abertas do Sabah servidas na mesa"></x-img>
+          </figure>
+          <figure class="dinner__side" data-reveal="photo">
+            <x-img name="esfihas-salgadas" sizes="(min-width: 900px) 18vw, 44vw" alt="Esfihas salgadas abertas e fechadas do Sabah"></x-img>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= HISTÓRIA ================= -->
+    <section class="sec story" id="historia" aria-labelledby="story-title">
+      <div class="wrap story__grid">
+        <figure class="story__photo" data-reveal="photo">
+          <x-img name="familia-sabbag" sizes="(min-width: 900px) 40vw, 100vw" alt="Bruno e Nilton Sabbag no salão do Sabah"></x-img>
+          <figcaption>Bruno e Nilton Sabbag, filho e pai, no salão do restaurante.</figcaption>
+        </figure>
+        <div class="story__text" data-reveal>
+          <h2 id="story-title" class="h2">As receitas da família Sabbag à mesa</h2>
+          <p class="lead">O Sabah abriu as portas em maio de 1993 e ficou conhecido primeiro pelas esfihas e pelos kibes. Depois vieram os pratos e os doces tradicionais que hoje enchem a bancada.</p>
+          <p>Quem cuida da casa é a família Sabbag: Nilton, o fundador, e Bruno, seu filho e sócio. As receitas e os modos de preparo vieram das matriarcas da família e continuam sendo seguidos à risca.</p>
+          <p>Um exemplo é a pimenta síria caseira, que tempera a esfiha de carne e o kibe com notas de canela, cravo e limão. Até hoje, os temperos da casa são preparados pelo fundador.</p>
+          <p><a class="link" href="{{links.gowhereStory}}" target="_blank" rel="noopener">Ler a história completa na GoWhere<svg aria-hidden="true"><use href="#i-out"/></svg></a></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= AVALIAÇÕES ================= -->
+    <section class="sec reviews" id="avaliacoes" aria-labelledby="reviews-title">
+      <div class="wrap">
+        <h2 id="reviews-title" class="h2" data-reveal>Avaliações de quem já foi</h2>
+        <div class="reviews__grid">
+<!--@reviews-->
+        </div>
+        <p class="reviews__more" data-reveal><a class="btn btn--ghost" href="{{links.googleReviews}}" target="_blank" rel="noopener" data-track="reviews_click" data-loc="avaliacoes">Ler avaliações no Google</a></p>
+      </div>
+    </section>
+
+    <!-- ================= COMO CHEGAR ================= -->
+    <section class="sec visit" id="como-chegar" aria-labelledby="visit-title">
+      <div class="wrap">
+        <header class="sec__head" data-reveal>
+          <h2 id="visit-title" class="h2">O Sabah fica dentro do Club Homs</h2>
+          <p class="visit__address"><svg aria-hidden="true"><use href="#i-pin"/></svg>{{address.full}}</p>
+        </header>
+
+        <div class="visit__grid">
+          <div class="visit__entry" data-reveal>
+            <figure class="visit__photo">
+              <x-img name="club-homs" sizes="(min-width: 900px) 44vw, 100vw" alt="Fachada do Club Homs na Avenida Paulista, onde fica o restaurante Sabah"></x-img>
+            </figure>
+            <blockquote class="visit__how">
+              <p>Entre no Club Homs e avise na portaria que vai ao Sabah. O restaurante fica no fim do corredor, à esquerda.</p>
+            </blockquote>
+            <a class="btn btn--primary btn--block" href="{{links.maps}}" target="_blank" rel="noopener" data-track="route_click" data-loc="como-chegar">
+              <svg aria-hidden="true"><use href="#i-pin"/></svg>Traçar rota no Maps
+            </a>
+          </div>
+
+          <div class="visit__info" data-reveal>
+            <h3 class="h3">Horários</h3>
+            <dl class="hours">
+              <div><dt>Almoço, segunda a sexta</dt><dd>{{hours.lunchWeekdays}}</dd></div>
+              <div><dt>Almoço, sábados, domingos e feriados</dt><dd>{{hours.lunchWeekend}}</dd></div>
+              <div><dt>Jantar, todos os dias, com reserva</dt><dd>{{hours.dinner}}</dd></div>
+            </dl>
+            <p class="visit__status" data-open-status aria-live="polite"></p>
+
+            <h3 class="h3">De metrô</h3>
+            <div class="metro" role="img" aria-label="Linha 2-Verde do metrô: o Club Homs fica entre as estações Brigadeiro e Trianon-Masp">
+              <span class="metro__st">Brigadeiro</span>
+              <span class="metro__line"><i class="metro__here">Sabah</i></span>
+              <span class="metro__st">Trianon-Masp</span>
+            </div>
+            <p>O Club Homs fica entre as estações Brigadeiro e Trianon-Masp, da Linha 2-Verde, a poucos minutos a pé de cada uma.</p>
+
+            <details class="more">
+              <summary>Vindo de carro</summary>
+              <p>O Club Homs tem estacionamento interno, com uma porta que dá acesso direto ao clube. Consulte as tarifas e o convênio com o Sabah.</p>
+              <p>Aos domingos e feriados, quando a Avenida Paulista fecha para carros, o trajeto autorizado pela CET é: subir pela Al. Campinas, entrar à direita na Al. Santos, à esquerda na Al. Joaquim Eugênio de Lima e à direita na Av. Paulista, seguindo um quarteirão pela pista da direita até o estacionamento do clube.</p>
+            </details>
+          </div>
+
+          <figure class="visit__video" data-reveal="photo">
+            <div class="video" data-video>
+              <video preload="none" playsinline controls hidden width="540" height="960"
+                aria-label="Vídeo do caminho da entrada do Club Homs até o restaurante Sabah">
+                <source src="/video/como-chegar.webm" type="video/webm" />
+                <source src="/video/como-chegar.mp4" type="video/mp4" />
+              </video>
+              <button class="video__cover" type="button" data-video-play data-track="video_play" data-loc="como-chegar">
+                <x-img name="como-chegar-poster" class="video__poster" sizes="(min-width: 900px) 24vw, 70vw" alt=""></x-img>
+                <span class="cover__play"><svg aria-hidden="true"><use href="#i-play"/></svg>Ver o caminho até o salão</span>
+              </button>
+            </div>
+            <figcaption>Da calçada da Paulista até a mesa, em menos de um minuto.</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= EVENTOS E DELIVERY ================= -->
+    <section class="sec more-ways" aria-labelledby="ways-title">
+      <div class="wrap">
+        <h2 id="ways-title" class="h2" data-reveal>Outras formas de pedir Sabah</h2>
+
+        <div class="ways">
+          <article class="way" id="eventos">
+            <figure class="way__photo" data-reveal="photo">
+              <x-img name="evento-mesa" sizes="(min-width: 900px) 46vw, 100vw" alt="Salão montado para evento com buffet do Sabah, mesa longa decorada"></x-img>
+            </figure>
+            <div class="way__body" data-reveal>
+              <h3 class="h3">Comida árabe para o seu evento</h3>
+              <p>O Sabah leva o buffet árabe a aniversários, casamentos, eventos corporativos e confraternizações em São Paulo e região, para grupos de aproximadamente 50 a 200 convidados.</p>
+              <p>Com parceiros, a casa também cuida de decoração, música e dança árabe, como o dabke.</p>
+              <button class="btn btn--primary" type="button" data-quote-open>Pedir orçamento</button>
+            </div>
+          </article>
+
+          <article class="way" id="delivery">
+            <figure class="way__photo" data-reveal="photo">
+              <x-img name="kebab" sizes="(min-width: 900px) 46vw, 100vw" alt="Kebab do Sabah no pão sírio, um dos pedidos do delivery"></x-img>
+            </figure>
+            <div class="way__body" data-reveal>
+              <h3 class="h3">Sabah em casa</h3>
+              <p>Esfihas, kebabs, kibe frito e os pratos da casa chegam prontos para a mesa. O delivery funciona todos os dias, das {{hours.delivery}}, pelo iFood.</p>
+              <a class="btn btn--primary" href="{{links.ifood}}" target="_blank" rel="noopener" data-track="ifood_click" data-loc="delivery">Pedir no iFood</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= FAQ ================= -->
+    <section class="sec faq" id="perguntas" aria-labelledby="faq-title">
+      <div class="wrap faq__grid">
+        <header data-reveal>
+          <h2 id="faq-title" class="h2">Perguntas frequentes sobre o Sabah</h2>
+          <p>Não achou o que procurava? <a class="link" href="{{links.whatsapp}}" target="_blank" rel="noopener" data-track="whatsapp_click" data-loc="faq">Fale com a gente no WhatsApp</a>.</p>
+        </header>
+        <div class="faq__list" data-reveal>
+<!--@faq-->
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= CHAMADA FINAL ================= -->
+    <section class="closing" aria-labelledby="closing-title">
+      <div class="closing__bg" aria-hidden="true">
+        <x-img name="salao" class="closing__img" sizes="100vw" alt=""></x-img>
+      </div>
+      <div class="wrap closing__in" data-reveal>
+        <h2 id="closing-title" class="h2">A mesa está posta na Paulista</h2>
+        <p>Almoço todos os dias e jantar com reserva, dentro do Club Homs.</p>
+        <div class="row">
+          <a class="btn btn--light" href="{{links.reservation}}" target="_blank" rel="noopener" data-track="reservation_click" data-loc="chamada-final">Reservar mesa</a>
+          <a class="btn btn--outline-light" href="{{links.maps}}" target="_blank" rel="noopener" data-track="route_click" data-loc="chamada-final">Como chegar</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Orçamento de eventos: monta a mensagem e abre o WhatsApp do Sabah -->
+  <dialog class="quote" data-quote aria-labelledby="quote-title">
+    <form class="quote__form" method="dialog" data-quote-form novalidate>
+      <header class="quote__head">
+        <h2 id="quote-title" class="h3">Pedir orçamento para evento</h2>
+        <button class="quote__close" type="button" data-quote-close aria-label="Fechar"><svg aria-hidden="true"><use href="#i-close"/></svg></button>
+      </header>
+      <p class="quote__intro">Preencha o básico e continue a conversa pelo WhatsApp do Sabah.</p>
+
+      <label class="field"><span>Seu nome</span>
+        <input name="nome" type="text" autocomplete="name" required /></label>
+      <label class="field"><span>Tipo de evento</span>
+        <select name="tipo" required>
+          <option value="">Selecione</option>
+          <option>Aniversário</option><option>Casamento</option><option>Evento corporativo</option>
+          <option>Confraternização</option><option>Festa particular</option><option>Outro</option>
+        </select></label>
+      <div class="field-row">
+        <label class="field"><span>Data prevista</span>
+          <input name="data" type="date" /></label>
+        <label class="field"><span>Convidados</span>
+          <input name="convidados" type="number" inputmode="numeric" min="1" max="2000" placeholder="Ex.: 80" required /></label>
+      </div>
+      <label class="field"><span>Pratos desejados e restrições <em>(opcional)</em></span>
+        <textarea name="detalhes" rows="3"></textarea></label>
+
+      <p class="quote__error" data-quote-error role="alert" hidden></p>
+      <p class="quote__lgpd">Os dados acima são usados só para montar a mensagem. Nada é guardado pelo site. Veja a <a href="/politicasdeprivacidade/">política de privacidade</a>.</p>
+      <button class="btn btn--primary btn--block" type="submit">
+        <svg aria-hidden="true"><use href="#i-whatsapp"/></svg>Enviar pelo WhatsApp
+      </button>
+    </form>
+  </dialog>
+
+<!--@include footer-->
+</body>
+</html>

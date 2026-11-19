@@ -1,0 +1,39 @@
+# Headers aplicados pelo Cloudflare Workers (static assets). Não é servido publicamente.
+
+/*
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: SAMEORIGIN
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), interest-cohort=()
+  Strict-Transport-Security: max-age=31536000; includeSubDomains
+  Cross-Origin-Opener-Policy: same-origin-allow-popups
+
+# CSS e JS com hash no nome (gerados pelo Vite): cache de 1 ano.
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Fontes locais: cache de 1 ano.
+/fonts/*
+  Cache-Control: public, max-age=31536000, immutable
+  Access-Control-Allow-Origin: *
+
+# Imagens e vídeo (nomes fixos): 30 dias no navegador, revalidação em segundo plano.
+/img/*
+  Cache-Control: public, max-age=2592000, stale-while-revalidate=604800
+/video/*
+  Cache-Control: public, max-age=2592000, stale-while-revalidate=604800
+/*.png
+  Cache-Control: public, max-age=2592000
+
+# Arquivos para buscadores e assistentes de IA.
+/llms.txt
+  Content-Type: text/plain; charset=utf-8
+  Cache-Control: public, max-age=3600
+/robots.txt
+  Cache-Control: public, max-age=3600
+/sitemap.xml
+  Cache-Control: public, max-age=3600
+
+# Não indexar a URL de prévia *.workers.dev (só o domínio final).
+https://:worker.:subdomain.workers.dev/*
+  X-Robots-Tag: noindex

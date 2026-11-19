@@ -1,0 +1,19 @@
+# Redirecionamentos do site anterior (WordPress) para manter links e sitemaps indexados.
+
+/sitemap_index.xml   /sitemap.xml   301
+/page-sitemap.xml    /sitemap.xml   301
+/wp-sitemap.xml      /sitemap.xml   301
+/home                /              301
+/home/               /              301
+/index.php           /              301
+/feed                /              301
+/feed/               /              301
+/comments/feed/      /              301
+
+# Atalhos úteis
+/cardapio            https://links.sabah.com.br/cardapio   302
+/cardapio/           https://links.sabah.com.br/cardapio   302
+/bio                 https://links.sabah.com.br/           302
+/links               https://links.sabah.com.br/           302
+/privacidade         /politicasdeprivacidade/              301
+/termos              /termosdeuso/                         301

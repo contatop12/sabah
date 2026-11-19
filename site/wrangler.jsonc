@@ -1,0 +1,32 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "sabah-site",
+  "compatibility_date": "2026-11-01",
+
+  // Roda antes de `wrangler deploy` / `wrangler dev`, inclusive no Workers Builds.
+  "build": {
+    "command": "npm run build"
+  },
+
+  // Site estático (assets-only): não há código de Worker, só os arquivos de dist/.
+  "assets": {
+    "directory": "./dist",
+    "html_handling": "auto-trailing-slash",
+    "not_found_handling": "404-page"
+  }
+
+  // ---------------------------------------------------------------------------
+  // DOMÍNIO FINAL: sabah.com.br  (só depois da aprovação da prévia)
+  //
+  // Opção A (recomendada): painel Cloudflare → Workers & Pages → sabah-site →
+  // Settings → Domains & Routes → Add → Custom domain → sabah.com.br e www.
+  //
+  // Opção B: descomentar abaixo e fazer push. Só funciona se a zona
+  // sabah.com.br estiver NESTA conta Cloudflare.
+  //
+  // "routes": [
+  //   { "pattern": "sabah.com.br", "custom_domain": true },
+  //   { "pattern": "www.sabah.com.br", "custom_domain": true }
+  // ]
+  // ---------------------------------------------------------------------------
+}

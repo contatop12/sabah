@@ -1,0 +1,24 @@
+{
+  "name": "sabah-site",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Site institucional sabah.com.br em HTML/CSS/TypeScript, publicado no Cloudflare Workers (static assets).",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc --noEmit",
+    "cf:dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "deploy:dry": "wrangler deploy --dry-run",
+    "media": "node scripts/build-media.mjs"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.2",
+    "sharp": "^0.35.4",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.0",
+    "wrangler": "^4.136.3"
+  }
+}
