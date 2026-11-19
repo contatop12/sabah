@@ -1,8 +1,8 @@
 /**
  * CONFIGURAÇÃO CENTRAL da página /bio.
  *
- * Único lugar para alterar links, WhatsApp, horários, endereço, campanha
- * GoWhere e Google Tag Manager. Os valores entram no HTML em tempo de build
+ * Único lugar para alterar links, WhatsApp, horários, endereço e
+ * Google Tag Manager. Os valores entram no HTML em tempo de build
  * (tokens {{chave.subchave}} em index.html e 404.html).
  */
 
@@ -18,13 +18,6 @@ export const CONFIG = {
   /** Caminho público da página ("/" = raiz de links.sabah.com.br). */
   basePath: "/",
 
-  /**
-   * Campanha GoWhere.
-   * true  = mostra o CTA "Vote no Sabah" no topo dos links.
-   * false = esconde o bloco inteiro e os demais links sobem.
-   */
-  showGoWhereCampaign: true,
-
   /** ID do Google Tag Manager (ex.: "GTM-XXXXXXX"). Vazio = não carrega GTM. */
   gtmId: "",
 
@@ -37,9 +30,6 @@ export const CONFIG = {
   },
 
   links: {
-    /** Votação do prêmio Campeões da Gastronomia de São Paulo 2026 (GoWhere). */
-    gowhere: "https://gowhere.com.br/campeoes-da-gastronomia-de-sao-paulo-2026/",
-
     reservation: whatsapp("Olá! Vim pelo Instagram do Sabah e gostaria de reservar uma mesa."),
     dinnerReservation: whatsapp(
       "Olá! Vim pelo Instagram do Sabah e gostaria de reservar uma mesa para o jantar.",

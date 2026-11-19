@@ -63,16 +63,10 @@ function gtmSnippets(id: string): { head: string; body: string } {
 /**
  * Plugin de template:
  *  - substitui {{tokens}} por valores de CONFIG (com UTM em links sabah.com.br);
- *  - remove o bloco <!-- if:gowhere --> ... <!-- endif:gowhere --> quando a campanha está desligada;
  *  - injeta o GTM quando CONFIG.gtmId está preenchido;
  *  - copia cf/* para a raiz de dist/ após o build.
  */
 function sabahTemplate(): Plugin {
-  const showCampaign = CONFIG.showGoWhereCampaign;
-  if (showCampaign && !CONFIG.links.gowhere) {
-    console.warn("\n[sabah] showGoWhereCampaign=true, mas links.gowhere está vazio em src/config.ts.\n");
-  }
-
   return {
     name: "sabah-template",
     buildStart() {
@@ -90,10 +84,6 @@ function sabahTemplate(): Plugin {
     transformIndexHtml: {
       order: "pre",
       handler(html) {
-        html = html.replace(
-          /<!--\s*if:gowhere\s*-->([\s\S]*?)<!--\s*endif:gowhere\s*-->/g,
-          (_m, inner: string) => (showCampaign ? inner : ""),
-        );
         html = html.replace(/\{\{\s*([\w.]+)\s*\}\}/g, (_m, key: string) => escapeHtml(lookup(key)));
         if (CONFIG.gtmId) {
           const gtm = gtmSnippets(CONFIG.gtmId);

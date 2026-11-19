@@ -16,11 +16,11 @@ npm run images -- <foto.jpg>   # regenera a foto de fundo e a imagem OG (ver "Im
 
 ## Onde alterar cada coisa
 
-Tudo que é dado (URLs, WhatsApp, horários, endereço, campanha, GTM) fica em **um único arquivo**: [`src/config.ts`](src/config.ts). Os valores entram no HTML no build, via tokens `{{chave}}`; não há URL espalhada pelo projeto.
+Tudo que é dado (URLs, WhatsApp, horários, endereço, GTM) fica em **um único arquivo**: [`src/config.ts`](src/config.ts). Os valores entram no HTML no build, via tokens `{{chave}}`; não há URL espalhada pelo projeto.
 
 | O que | Onde |
 | --- | --- |
-| URLs (reserva, iFood, cardápios, Maps, site, Instagram, GoWhere) | `src/config.ts` → `links` |
+| URLs (reserva, iFood, cardápios, Maps, site, Instagram) | `src/config.ts` → `links` |
 | Número do WhatsApp | `src/config.ts` → `WHATSAPP_NUMBER` (topo do arquivo) |
 | Mensagens automáticas do WhatsApp | `src/config.ts` → `links.reservation`, `dinnerReservation`, `eventsWhatsapp` |
 | Horários (almoço, jantar, delivery) | `src/config.ts` → `hours` |
@@ -32,14 +32,6 @@ Tudo que é dado (URLs, WhatsApp, horários, endereço, campanha, GTM) fica em *
 | Cores, fonte, espaçamentos | `src/style.css` (variáveis em `:root`) |
 
 Depois de alterar, rode `npm run build` (ou faça push: o deploy automático builda).
-
-### Campanha GoWhere (CTA "Vote no Sabah")
-
-Em `src/config.ts`:
-
-- `showGoWhereCampaign: true` mostra o CTA vermelho no topo dos links **e o popup** que abre uma vez por sessão explicando a votação; `false` esconde os dois e os outros links sobem, sem espaço vazio.
-- `links.gowhere` é a URL de votação (hoje a página da campanha na GoWhere). O build avisa se estiver vazia.
-- Textos do popup: `index.html`, bloco `<dialog id="vote-modal">`. Comportamento (atraso, uma vez por sessão): `src/modal.ts`.
 
 ## Imagens
 
@@ -76,7 +68,7 @@ npm run menu -- salao.pdf delivery.pdf
    { event: "bio_link_click", link_name: "ifood" }
    ```
 
-   Valores de `link_name`: `gowhere`, `reservation`, `lunch`, `dinner`, `ifood`, `events`, `menu`, `maps`, `website`, `instagram`. Blocos expansíveis disparam ao abrir.
+   Valores de `link_name`: `reservation`, `lunch`, `dinner`, `ifood`, `events`, `menu`, `maps`, `website`, `instagram`. Blocos expansíveis disparam ao abrir.
 3. No GTM, crie um gatilho "Evento personalizado" = `bio_link_click` e uma tag GA4 Event com o parâmetro `link_name` = `{{dlv - link_name}}`. Meta Pixel e outras tags entram pelo mesmo GTM.
 4. Links para sabah.com.br recebem `utm_source=instagram&utm_medium=bio&utm_campaign=sabah_bio` automaticamente.
 
@@ -102,7 +94,6 @@ src/config.ts       CONFIGURAÇÃO CENTRAL
 src/style.css       estilos
 src/main.ts         bootstrap
 src/accordion.ts    blocos expansíveis (almoço, jantar, eventos)
-src/modal.ts        popup da votação GoWhere
 src/tracking.ts     dataLayer / eventos
 vite.config.ts      base, plugin de template, cópia de cf/ para dist/
 cf/                 _headers, robots.txt (raiz do Worker; {{base}} resolvido no build)
