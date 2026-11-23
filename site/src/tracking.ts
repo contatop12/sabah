@@ -2,13 +2,16 @@
  * Mensuração: consentimento (LGPD + Consent Mode v2), Google Tag Manager e eventos.
  *
  * Eventos enviados ao dataLayer (parâmetro `location` = onde foi o clique):
- *   route_click        clique em rota / Como chegar
- *   reservation_click  clique em reserva (WhatsApp)
- *   menu_view          acesso ao cardápio
- *   quote_submit       envio do orçamento de eventos
- *   ifood_click        clique em iFood
- * e, de apoio: whatsapp_click, instagram_click, video_click, video_play,
- * award_click, reviews_click, quote_open.
+ *   route_click             clique em rota / Como chegar
+ *   menu_view               acesso ao cardápio (completo, salão ou delivery)
+ *   ifood_click             clique em iFood
+ *   quote_submit            envio do orçamento de eventos
+ *   whatsapp_selector_open  abertura do painel de WhatsApp (src/whatsapp.ts)
+ *   whatsapp_click          clique num assunto de WhatsApp; `topic` leva só o
+ *                           identificador (almoco, jantar, domicilio, grupo,
+ *                           retirada, midia, fornecedores), sem número nem mensagem
+ * e, de apoio: instagram_click, video_click, video_play, award_click,
+ * reviews_click, quote_open.
  */
 import { CONFIG } from "./config.ts";
 
@@ -76,6 +79,16 @@ export function initTracking(): void {
   if (saved) applyChoice(saved);
 
   const banner = document.querySelector<HTMLElement>("[data-consent]");
+  // Enquanto o aviso está na tela, o botão flutuante de WhatsApp sobe para não
+  // ficar atrás dele (o CSS usa a classe e a altura medida aqui).
+  const root = document.documentElement;
+  const setBanner = (visible: boolean): void => {
+    if (!banner) return;
+    banner.hidden = !visible;
+    root.classList.toggle("has-consent", visible);
+    if (visible) root.style.setProperty("--consent-h", `${banner.offsetHeight}px`);
+    else root.style.removeProperty("--consent-h");
+  };
   const choose = (choice: Choice): void => {
     try {
       localStorage.setItem(STORAGE_KEY, choice);
@@ -83,7 +96,7 @@ export function initTracking(): void {
       /* navegação privada: vale só para esta visita */
     }
     applyChoice(choice);
-    if (banner) banner.hidden = true;
+    setBanner(false);
   };
   if (banner) {
     // Sem escolha salva: o aviso aparece na primeira rolagem (ou após 6 s), para não
@@ -93,16 +106,23 @@ export function initTracking(): void {
       const show = (): void => {
         if (shown) return;
         shown = true;
-        banner.hidden = false;
+        setBanner(true);
       };
       window.addEventListener("scroll", show, { once: true, passive: true });
       window.setTimeout(show, 6000);
     }
+    window.addEventListener(
+      "resize",
+      () => {
+        if (!banner.hidden) root.style.setProperty("--consent-h", `${banner.offsetHeight}px`);
+      },
+      { passive: true },
+    );
     banner.querySelector("[data-consent-accept]")?.addEventListener("click", () => choose("granted"));
     banner.querySelector("[data-consent-deny]")?.addEventListener("click", () => choose("denied"));
     document.querySelectorAll("[data-consent-open]").forEach((b) =>
       b.addEventListener("click", () => {
-        banner.hidden = false;
+        setBanner(true);
         banner.querySelector<HTMLElement>("button")?.focus();
       }),
     );

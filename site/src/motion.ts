@@ -1,4 +1,4 @@
-/** Revelação ao rolar e barra fixa do celular. Sem bibliotecas: IntersectionObserver. */
+/** Revelação ao rolar. Sem bibliotecas: IntersectionObserver. */
 export function initMotion(): void {
   const items = document.querySelectorAll<HTMLElement>("[data-reveal]");
   const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -30,30 +30,4 @@ export function initMotion(): void {
   // Confirma para o script do <head> que a revelação está armada. Sem isso ele
   // remove a classe "js" e mostra tudo sem animação.
   document.documentElement.classList.add("ready");
-
-  // Barra fixa: aparece quando a primeira dobra sai da tela e some perto do rodapé.
-  const dock = document.querySelector<HTMLElement>("[data-dock]");
-  const hero = document.querySelector<HTMLElement>(".hero");
-  const foot = document.querySelector<HTMLElement>(".foot");
-  if (dock && hero && "IntersectionObserver" in window) {
-    dock.hidden = false;
-    let pastHero = false;
-    let atFoot = false;
-    const update = (): void => {
-      dock.classList.toggle("is-on", pastHero && !atFoot);
-    };
-    new IntersectionObserver((entries) => {
-      pastHero = !entries[0]!.isIntersecting;
-      update();
-    }).observe(hero);
-    if (foot) {
-      new IntersectionObserver(
-        (entries) => {
-          atFoot = entries[0]!.isIntersecting;
-          update();
-        },
-        { threshold: 0.35 },
-      ).observe(foot);
-    }
-  }
 }

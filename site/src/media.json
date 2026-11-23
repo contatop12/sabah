@@ -1,21 +1,21 @@
 {
   "hero-desktop": {
-    "width": 2755,
-    "height": 1424,
+    "width": 1672,
+    "height": 941,
     "widths": [
       900,
       1400,
-      2000
+      1672
     ],
     "fallbackWidth": 1400
   },
   "hero-mobile": {
-    "width": 1722,
-    "height": 1424,
+    "width": 1122,
+    "height": 1009,
     "widths": [
       480,
       750,
-      1080
+      1122
     ],
     "fallbackWidth": 750
   },
@@ -37,6 +37,17 @@
       480,
       800,
       1200
+    ],
+    "fallbackWidth": 800
+  },
+  "buffet-almoco": {
+    "width": 2400,
+    "height": 1600,
+    "widths": [
+      480,
+      800,
+      1200,
+      1600
     ],
     "fallbackWidth": 800
   },
@@ -147,13 +158,14 @@
     ],
     "fallbackWidth": 480
   },
-  "esfihas-abertas": {
-    "width": 1200,
-    "height": 800,
+  "esfiha-fechada-carne": {
+    "width": 2400,
+    "height": 1600,
     "widths": [
       480,
       800,
-      1200
+      1200,
+      1600
     ],
     "fallbackWidth": 800
   },
@@ -259,6 +271,30 @@
       1068
     ],
     "fallbackWidth": 800
+  },
+  "criador-turistando": {
+    "width": 260,
+    "height": 366,
+    "widths": [
+      260
+    ],
+    "fallbackWidth": 260
+  },
+  "criador-sampa-dicas": {
+    "width": 260,
+    "height": 366,
+    "widths": [
+      260
+    ],
+    "fallbackWidth": 260
+  },
+  "criador-mohamad": {
+    "width": 260,
+    "height": 366,
+    "widths": [
+      260
+    ],
+    "fallbackWidth": 260
   },
   "logo-vermelho": {
     "width": 247,

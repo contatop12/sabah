@@ -1,4 +1,4 @@
-  <footer class="foot" id="contato">
+  <footer class="foot">
     <div class="wrap foot__grid">
       <div class="foot__brand">
         <picture>
@@ -18,7 +18,7 @@
         <p><a href="{{links.maps}}" target="_blank" rel="noopener" data-track="route_click" data-loc="rodape">Traçar rota no Maps</a></p>
         <p>
           <a href="tel:{{phone.tel}}">{{phone.display}}</a><br />
-          <a href="{{links.whatsapp}}" target="_blank" rel="noopener" data-track="whatsapp_click" data-loc="rodape">WhatsApp {{phone.whatsappDisplay}}</a><br />
+          <button type="button" class="linklike" data-wa-open data-loc="rodape">Falar com o Sabah pelo WhatsApp</button><br />
           <a href="mailto:{{email}}">{{email}}</a>
         </p>
       </div>
@@ -28,8 +28,8 @@
         <dl class="foot__hours">
           <div><dt>Almoço, segunda a sexta</dt><dd>{{hours.lunchWeekdays}}</dd></div>
           <div><dt>Almoço, sábados, domingos e feriados</dt><dd>{{hours.lunchWeekend}}</dd></div>
-          <div><dt>Jantar, todos os dias (com reserva)</dt><dd>{{hours.dinner}}</dd></div>
-          <div><dt>Delivery, todos os dias</dt><dd>{{hours.delivery}}</dd></div>
+          <div><dt>Jantar, todos os dias</dt><dd>{{hours.dinner}}</dd></div>
+          <div><dt>Entrega pelo iFood, todos os dias</dt><dd>{{hours.delivery}}</dd></div>
         </dl>
       </div>
 
@@ -37,7 +37,7 @@
         <h2 class="foot__h">Sabah</h2>
         <ul class="foot__links">
           <li><a href="{{links.menu}}" target="_blank" rel="noopener" data-track="menu_view" data-loc="rodape">Cardápio</a></li>
-          <li><a href="{{links.reservation}}" target="_blank" rel="noopener" data-track="reservation_click" data-loc="rodape">Reservar mesa</a></li>
+          <li><a href="{{links.waGrupo}}" target="_blank" rel="noopener" data-wa-topic="grupo" data-loc="rodape">Reservar para grupos</a></li>
           <li><a href="{{links.ifood}}" target="_blank" rel="noopener" data-track="ifood_click" data-loc="rodape">Pedir no iFood</a></li>
           <li><a href="/#eventos">Eventos</a></li>
           <li><a href="{{links.instagram}}" target="_blank" rel="me noopener" data-track="instagram_click" data-loc="rodape">Instagram</a></li>
@@ -56,14 +56,23 @@
     </div>
   </footer>
 
-  <!-- Barra fixa no celular: aparece depois da primeira dobra -->
-  <div class="dock" data-dock hidden>
-    <a class="dock__btn" href="{{links.maps}}" target="_blank" rel="noopener" data-track="route_click" data-loc="barra-fixa">
-      <svg aria-hidden="true"><use href="#i-pin"/></svg>Como chegar
-    </a>
-    <a class="dock__btn dock__btn--primary" href="{{links.reservation}}" target="_blank" rel="noopener" data-track="reservation_click" data-loc="barra-fixa">
-      <svg aria-hidden="true"><use href="#i-whatsapp"/></svg>Reservar mesa
-    </a>
+  <!-- WhatsApp por assunto: botão flutuante e painel (fechado por padrão).
+       Números e mensagens vêm de WHATSAPP_TOPICS, em src/config.ts. -->
+  <div class="wa" data-wa>
+    <div class="wa__panel" id="wa-panel" role="dialog" aria-labelledby="wa-title" tabindex="-1" hidden data-wa-panel>
+      <div class="wa__head">
+        <h2 id="wa-title" class="wa__title">Como podemos ajudar?</h2>
+        <button class="wa__close" type="button" aria-label="Fechar" data-wa-close><svg aria-hidden="true"><use href="#i-close"/></svg></button>
+      </div>
+      <p class="wa__hint">Escolha o assunto. A conversa abre no WhatsApp com uma mensagem que você pode editar.</p>
+      <ul class="wa__list">
+<!--@whatsapp-->
+      </ul>
+      <p class="wa__ifood">Quer receber em casa? <a href="{{links.ifood}}" target="_blank" rel="noopener" data-track="ifood_click" data-loc="painel-whatsapp">Peça no iFood</a></p>
+    </div>
+    <button class="wa__fab" type="button" aria-label="Falar com o Sabah pelo WhatsApp" aria-haspopup="dialog" aria-expanded="false" aria-controls="wa-panel" data-wa-open data-loc="flutuante">
+      <svg aria-hidden="true"><use href="#i-whatsapp"/></svg>
+    </button>
   </div>
 
   <!-- Consentimento de cookies (LGPD). Sem escolha, medição e anúncios ficam negados. -->

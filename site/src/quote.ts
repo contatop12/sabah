@@ -48,7 +48,7 @@ export function initQuote(): void {
     const date = value("data");
     const details = value("detalhes");
     const lines = [
-      "Olá! Vim pelo site do Sabah e gostaria de um orçamento de buffet árabe para evento.",
+      "Olá! Vim pelo site do Sabah e gostaria de um orçamento de buffet a domicílio para evento.",
       "",
       `Nome: ${value("nome")}`,
       `Evento: ${value("tipo")}`,
