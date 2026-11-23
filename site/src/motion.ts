@@ -27,6 +27,9 @@ export function initMotion(): void {
     );
     items.forEach((el) => io.observe(el));
   }
+  // Confirma para o script do <head> que a revelação está armada. Sem isso ele
+  // remove a classe "js" e mostra tudo sem animação.
+  document.documentElement.classList.add("ready");
 
   // Barra fixa: aparece quando a primeira dobra sai da tela e some perto do rodapé.
   const dock = document.querySelector<HTMLElement>("[data-dock]");

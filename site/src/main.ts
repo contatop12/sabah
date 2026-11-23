@@ -6,9 +6,11 @@ import { initVideo } from "./video.ts";
 import { initQuote } from "./quote.ts";
 import { initTracking } from "./tracking.ts";
 
-initNav();
-initMotion();
-initOpenStatus();
-initVideo();
-initQuote();
-initTracking();
+// Cada parte inicia isolada: uma falha no menu não pode impedir as fotos de aparecer.
+for (const init of [initNav, initMotion, initOpenStatus, initVideo, initQuote, initTracking]) {
+  try {
+    init();
+  } catch (error) {
+    console.error(error);
+  }
+}
