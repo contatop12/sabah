@@ -25,12 +25,19 @@ const OUT = resolve(ROOT, "public/img");
  * ratio: proporção final opcional (largura/altura), corte centrado em `position`
  */
 const MANIFEST = [
-  // Hero: mesa com pastas (homus), kibe cru, charutinhos, pão e m'jadara.
-  { name: "hero-desktop", src: "hero-mesa.jpg", widths: [900, 1400, 2000], crop: { left: 0.2, top: 0, width: 0.8, height: 1 } },
-  { name: "hero-mobile", src: "hero-mesa.jpg", widths: [480, 750, 1080], crop: { left: 0.36, top: 0, width: 0.5, height: 1 } },
+  // Hero: fotos aprovadas (briefing de 23/11/2026). Mesa com homus e pão, tabule,
+  // m'jadara e o prato com kafta, charutinho, coalhada, kibe cru e espeto de frango.
+  //   desktop = rodizio-arabe-sabah.png (1672 x 941, horizontal)
+  //   mobile  = buffet-arabe-a-vontade-sabah.png (1122 x 1402, vertical)
+  // No celular a foto aparece em faixa: o recorte tira o topo (cadeiras e fundo)
+  // e mantém o homus, o pão e o prato principal.
+  { name: "hero-desktop", src: "rodizio-arabe-sabah.png", widths: [900, 1400, 1672] },
+  { name: "hero-mobile", src: "buffet-arabe-a-vontade-sabah.png", widths: [480, 750, 1122], crop: { left: 0, top: 0.28, width: 1, height: 0.72 } },
 
   { name: "buffet-bancada", src: "buffet-bancada.jpg", widths: [640, 1024, 1600, 2400], ratio: 16 / 9, position: "centre" },
   { name: "buffet-salao", src: "buffet-salao-vertical.jpg", widths: [480, 800, 1200], ratio: 4 / 5, position: "centre" },
+  // Cartão do almoço: close da bancada (kibe cru, salada e cubas). Acervo 2026, DSC00050.
+  { name: "buffet-almoco", src: "buffet-almoco.jpg", widths: [480, 800, 1200, 1600] },
   { name: "buffet-cubas", src: "buffet-cubas.jpg", widths: [453] },
   { name: "prato-montado", src: "prato-montado.jpg", widths: [455] },
   { name: "salao", src: "salao.jpg", widths: [640, 1024, 1600, 2400] },
@@ -45,7 +52,8 @@ const MANIFEST = [
   { name: "prato-falafel", src: "prato-falafel.jpg", widths: [320, 372], ratio: 4 / 5 },
   { name: "prato-doces", src: "prato-doces.jpg", widths: [320, 480] },
 
-  { name: "esfihas-abertas", src: "esfihas-abertas.jpg", widths: [480, 800, 1200] },
+  // Esfiha fechada de carne (campeã no SBT): uma inteira e outra cortada. Acervo 2026, DSC00801.
+  { name: "esfiha-fechada-carne", src: "esfiha-fechada-carne.jpg", widths: [480, 800, 1200, 1600] },
   { name: "esfihas-mesa", src: "esfihas-mesa.jpg", widths: [480, 720] },
   { name: "esfihas-salgadas", src: "esfihas-salgadas.jpg", widths: [320, 480] },
   { name: "kibe-frito", src: "kibe-frito.jpg", widths: [320, 600] },
@@ -58,6 +66,12 @@ const MANIFEST = [
   { name: "evento-mesa", src: "evento-mesa.jpg", widths: [480, 800, 1068] },
   { name: "evento-dabke", src: "evento-dabke.jpg", widths: [480, 800, 1068] },
   { name: "evento-buffet", src: "evento-buffet.jpg", widths: [480, 800, 1068] },
+
+  // Capas dos vídeos de quem visitou: área da foto dos cards "Eles Recomendam"
+  // do site anterior (260 x 366). Trocar por capas em alta quando o Sabah enviar.
+  { name: "criador-turistando", src: "criador-turistando.jpg", widths: [260] },
+  { name: "criador-sampa-dicas", src: "criador-sampa-dicas.jpg", widths: [260] },
+  { name: "criador-mohamad", src: "criador-mohamad.jpg", widths: [260] },
 ];
 
 const AVIF = { quality: 52, effort: 6, chromaSubsampling: "4:2:0" };
@@ -125,8 +139,7 @@ async function main() {
   }
 
   // Imagem de compartilhamento (Open Graph) 1200x630
-  const og = await sharp(resolve(SRC, "hero-mesa.jpg"))
-    .extract({ left: Math.round(0.26 * 3444), top: 0, width: Math.round(0.72 * 3444), height: 1424 })
+  const og = await sharp(resolve(SRC, "rodizio-arabe-sabah.png"))
     .resize(1200, 630, { fit: "cover", position: "centre" })
     .jpeg({ quality: 82, mozjpeg: true })
     .toFile(resolve(OUT, "og-sabah.jpg"));

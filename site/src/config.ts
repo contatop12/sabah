@@ -1,19 +1,86 @@
 /**
  * CONFIGURAÇÃO CENTRAL do site sabah.com.br.
  *
- * Única fonte de endereço, horários, telefones, links e tracking.
- * A home, o rodapé, os dados estruturados (JSON-LD), o sitemap, o robots.txt
- * e o llms.txt são gerados a partir daqui no build. Alterou aqui, mudou em tudo.
+ * Única fonte de endereço, horários, telefones, links, WhatsApp e tracking.
+ * A home, o rodapé, o painel de WhatsApp, os dados estruturados (JSON-LD),
+ * o sitemap, o robots.txt e o llms.txt são gerados a partir daqui no build.
+ * Alterou aqui, mudou em tudo.
  */
 
-/** WhatsApp de reservas (DDI + DDD + número, só dígitos). */
-const WHATSAPP_RESERVAS = "5511975114014";
-/** WhatsApp geral: eventos, encomendas e contato. */
+/** WhatsApp geral: dúvidas, buffet a domicílio, encomendas e fornecedores. */
 const WHATSAPP_GERAL = "5511918730446";
+/** WhatsApp de reservas: só para grupos grandes. */
+const WHATSAPP_GRUPOS = "5511975114014";
+/** WhatsApp de mídia: EXCLUSIVO para influenciadores, imprensa e parcerias. */
+const WHATSAPP_MIDIA = "5511976635211";
 
 function wa(number: string, message?: string): string {
   const base = `https://wa.me/${number}`;
   return message ? `${base}?text=${encodeURIComponent(message)}` : base;
+}
+
+/**
+ * ASSUNTOS DO WHATSAPP. Cada assunto tem um número e uma mensagem inicial,
+ * que a pessoa pode editar antes de enviar. O painel flutuante e os botões
+ * das seções usam esta mesma lista. `id` é o que vai para a mensuração.
+ */
+export const WHATSAPP_TOPICS = [
+  {
+    id: "almoco",
+    label: "Dúvidas sobre o almoço",
+    number: WHATSAPP_GERAL,
+    message: "Olá! Vim pelo site do Sabah e gostaria de tirar uma dúvida sobre o almoço.",
+  },
+  {
+    id: "jantar",
+    label: "Dúvidas sobre o jantar",
+    number: WHATSAPP_GERAL,
+    message: "Olá! Vim pelo site do Sabah e gostaria de tirar uma dúvida sobre o jantar.",
+  },
+  {
+    id: "domicilio",
+    label: "Dúvidas sobre buffet a domicílio",
+    number: WHATSAPP_GERAL,
+    message:
+      "Olá! Gostaria de saber mais sobre o buffet a domicílio do Sabah. Data do evento: ___ / Bairro ou cidade: ___ / Número de convidados: ___.",
+  },
+  {
+    id: "grupo",
+    label: "Reservar para um grupo grande",
+    number: WHATSAPP_GRUPOS,
+    message:
+      "Olá! Gostaria de reservar uma mesa para um grupo grande. Data: ___ / Horário: ___ / Número de pessoas: ___.",
+  },
+  {
+    id: "retirada",
+    label: "Encomendar para retirar no Sabah",
+    number: WHATSAPP_GERAL,
+    message:
+      "Olá! Gostaria de fazer uma encomenda para retirar no Sabah. Meu pedido: ___ / Data e horário de retirada: ___.",
+  },
+  {
+    id: "midia",
+    label: "Influenciadores, mídia e parcerias",
+    number: WHATSAPP_MIDIA,
+    message:
+      "Olá! Vim pelo site do Sabah e gostaria de apresentar uma proposta de mídia ou parceria. Meu nome: ___ / Perfil, veículo ou empresa: ___ / Proposta: ___ / Link do mídia kit, se houver: ___.",
+  },
+  {
+    id: "fornecedores",
+    label: "Fornecedores",
+    number: WHATSAPP_GERAL,
+    message:
+      "Olá! Meu nome é ___, falo pela empresa ___ e gostaria de apresentar nossos produtos ou serviços ao Sabah. Trabalhamos com ___.",
+  },
+] as const;
+
+export type WhatsappTopicId = (typeof WHATSAPP_TOPICS)[number]["id"];
+
+/** Link pronto de um assunto, com a mensagem codificada no parâmetro `text`. */
+function topicLink(id: WhatsappTopicId): string {
+  const topic = WHATSAPP_TOPICS.find((t) => t.id === id);
+  if (!topic) throw new Error(`[sabah] assunto de WhatsApp desconhecido: ${id}`);
+  return wa(topic.number, topic.message);
 }
 
 const ORIGIN = "https://sabah.com.br";
@@ -27,7 +94,7 @@ export const CONFIG = {
     slogan: "A Legítima Cozinha Árabe",
     title: "Sabah | Buffet Árabe na Avenida Paulista, São Paulo",
     description:
-      "Conheça o buffet árabe do Sabah na Avenida Paulista, dentro do Club Homs. Veja o cardápio, saiba como chegar e reserve sua mesa.",
+      "Buffet árabe à vontade no almoço e no jantar, na Avenida Paulista, dentro do Club Homs. À noite, tem também rodízio de esfihas. Veja o cardápio e como chegar.",
     ogImage: `${ORIGIN}/img/og-sabah.jpg`,
     foundingDate: "1993-05",
     foundingYear: "1993",
@@ -55,15 +122,17 @@ export const CONFIG = {
     tel: "+551132848899",
     whatsappDisplay: "(11) 91873-0446",
     whatsappE164: "+5511918730446",
-    reservasDisplay: "(11) 97511-4014",
-    reservasE164: "+5511975114014",
+    gruposDisplay: "(11) 97511-4014",
+    gruposE164: "+5511975114014",
+    midiaDisplay: "(11) 97663-5211",
   },
 
   email: "contato@sabah.com.br",
 
   /**
-   * HORÁRIOS. `text` é o que aparece na página; `spec` alimenta o JSON-LD
-   * e o indicador "aberto agora". Dias: 0 = domingo … 6 = sábado.
+   * HORÁRIOS. Os textos aparecem na página (buffet, contato, rodapé, FAQ);
+   * `spec` alimenta o JSON-LD e o indicador "aberto agora" (fuso de São Paulo).
+   * Dias: 0 = domingo … 6 = sábado.
    */
   hours: {
     lunchWeekdays: "11h30 às 15h30",
@@ -78,21 +147,24 @@ export const CONFIG = {
   },
 
   links: {
-    reservation: wa(WHATSAPP_RESERVAS, "Olá! Vim pelo site do Sabah e gostaria de reservar uma mesa."),
-    dinnerReservation: wa(
-      WHATSAPP_RESERVAS,
-      "Olá! Vim pelo site do Sabah e gostaria de reservar uma mesa para o jantar.",
-    ),
-    whatsapp: wa(WHATSAPP_GERAL, "Olá! Vim pelo site do Sabah."),
-    /** Base do orçamento de eventos; o formulário completa a mensagem. */
+    // WhatsApp por assunto (mesma lista do painel flutuante)
+    waAlmoco: topicLink("almoco"),
+    waJantar: topicLink("jantar"),
+    waDomicilio: topicLink("domicilio"),
+    waGrupo: topicLink("grupo"),
+    waRetirada: topicLink("retirada"),
+    waMidia: topicLink("midia"),
+    waFornecedores: topicLink("fornecedores"),
+    /** Número que recebe o orçamento de eventos; o formulário monta a mensagem. */
+    eventsNumber: WHATSAPP_GERAL,
     eventsWhatsapp: wa(
       WHATSAPP_GERAL,
-      "Olá! Vim pelo site do Sabah e gostaria de um orçamento de buffet árabe para evento.",
+      "Olá! Vim pelo site do Sabah e gostaria de um orçamento de buffet a domicílio para evento.",
     ),
-    eventsNumber: WHATSAPP_GERAL,
 
     menu: MENU,
     menuSalao: `${MENU}#salao`,
+    menuDelivery: `${MENU}#delivery`,
     ifood:
       "https://www.ifood.com.br/delivery/sao-paulo-sp/sabah-cozinha-arabe-esfihas-e-kebabs-bela-vista/dbf10475-e887-40b5-bb54-7ee90bfd12f6",
     maps: "https://maps.app.goo.gl/NYnaeeeBb6ij7XVF6",
@@ -111,13 +183,12 @@ export const CONFIG = {
       "https://gowhere.com.br/destaque/sabah-uma-viagem-pelos-sabores-da-autentica-gastronomia-libanesa-na-avenida-paulista/",
     sbtReel: "https://www.instagram.com/reel/C-TSqfhvNjM/",
     sbtFull: "https://www.instagram.com/p/C-JCFr0tpCI/",
-    desbravaSp: "https://www.desbravasp.com.br/blog/onde-comer/onde-comer-esfiha-sao-paulo",
 
     agency: "https://www.p12digital.com.br",
   },
 
   /** Datas usadas no sitemap e nos dados estruturados (AAAA-MM-DD). */
-  updated: "2026-11-19",
+  updated: "2026-11-23",
 } as const;
 
 export type Config = typeof CONFIG;

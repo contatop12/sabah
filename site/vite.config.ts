@@ -2,8 +2,8 @@ import { defineConfig, type Plugin } from "vite";
 import { fileURLToPath } from "node:url";
 import { existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from "node:fs";
 import { resolve } from "node:path";
-import { CONFIG } from "./src/config.ts";
-import { FAQS, REVIEWS } from "./src/content.ts";
+import { CONFIG, WHATSAPP_TOPICS } from "./src/config.ts";
+import { FAQS, REVIEWS, VISITOR_VIDEOS } from "./src/content.ts";
 
 const ROOT = fileURLToPath(new URL(".", import.meta.url));
 const OUT = resolve(ROOT, "dist");
@@ -82,9 +82,9 @@ function jsonLd(kind: string, pagePath: string, pageTitle: string): string {
     alternateName: [site.name, "Sabah Restaurante Árabe"],
     slogan: site.slogan,
     description:
-      "Restaurante árabe da família Sabbag, fundado em 1993, com buffet árabe à vontade no almoço e buffet com rodízio de esfihas no jantar. Fica dentro do Club Homs, na Avenida Paulista, em São Paulo.",
+      "Restaurante árabe da família Sabbag, fundado em 1993, com buffet árabe à vontade no almoço e no jantar e rodízio de esfihas à noite. Fica dentro do Club Homs, na Avenida Paulista, em São Paulo.",
     url: `${site.origin}/`,
-    image: [site.ogImage, `${site.origin}/img/buffet-bancada.jpg`, `${site.origin}/img/prato-kafta.jpg`],
+    image: [site.ogImage, `${site.origin}/img/buffet-bancada.jpg`, `${site.origin}/img/esfiha-fechada-carne.jpg`],
     logo: `${site.origin}/img/logo-vermelho.png`,
     telephone: phone.tel,
     email: CONFIG.email,
@@ -115,14 +115,15 @@ function jsonLd(kind: string, pagePath: string, pageTitle: string): string {
       {
         "@type": "ContactPoint",
         contactType: "reservations",
-        telephone: phone.reservasE164,
+        description: "Reservas para grupos grandes",
+        telephone: phone.gruposE164,
         availableLanguage: "pt-BR",
-        url: links.reservation,
+        url: links.waGrupo,
       },
       { "@type": "ContactPoint", contactType: "customer service", telephone: phone.whatsappE164, availableLanguage: "pt-BR" },
     ],
     potentialAction: [
-      { "@type": "ReserveAction", target: links.reservation, name: "Reservar mesa pelo WhatsApp" },
+      { "@type": "ReserveAction", target: links.waGrupo, name: "Reservar para um grupo grande pelo WhatsApp" },
       { "@type": "OrderAction", target: links.ifood, name: "Pedir no iFood" },
     ],
     award: [
@@ -198,6 +199,36 @@ function reviewsHtml(): string {
   ).join("\n");
 }
 
+/** Cards de "O Sabah pelos olhos de quem visitou" (lista em src/content.ts). */
+function visitorsHtml(): string {
+  return VISITOR_VIDEOS.map((v) => {
+    const house = v.postedBy !== v.handle;
+    return (
+      `<li class="visitor" data-reveal>` +
+      `<div class="visitor__cover">` +
+      `<x-img name="${v.cover}" class="visitor__img" sizes="(min-width: 900px) 260px, 62vw" alt="${esc(v.coverAlt)}"></x-img>` +
+      `<span class="visitor__play" aria-hidden="true"><svg><use href="#i-play"/></svg></span>` +
+      `</div>` +
+      `<p class="visitor__who"><strong>${esc(v.creator)}</strong> <span>${esc(v.handle)}</span></p>` +
+      `<h3 class="visitor__title">${esc(v.title)}</h3>` +
+      (house ? `<p class="visitor__note">Publicado no perfil ${esc(v.postedBy)}.</p>` : "") +
+      `<a class="link visitor__cta" href="${v.url}" target="_blank" rel="noopener" data-track="video_click" data-loc="visitou-${v.id}">` +
+      `Assistir no Instagram<span class="sr">: ${esc(v.title)}, de ${esc(v.creator)}</span>` +
+      `<svg aria-hidden="true"><use href="#i-out"/></svg></a>` +
+      `</li>`
+    );
+  }).join("\n");
+}
+
+/** Opções do painel de WhatsApp (lista em src/config.ts). */
+function whatsappHtml(): string {
+  return WHATSAPP_TOPICS.map(
+    (t) =>
+      `<li><a class="wa__opt" href="https://wa.me/${t.number}?text=${encodeURIComponent(t.message)}" target="_blank" rel="noopener" ` +
+      `data-wa-topic="${t.id}" data-loc="painel">${esc(t.label)}<svg aria-hidden="true"><use href="#i-out"/></svg></a></li>`,
+  ).join("\n");
+}
+
 function sitemap(): string {
   const urls = PAGES.map(
     (p) =>
@@ -234,7 +265,7 @@ function llms(): string {
   const { site, address, phone, hours, links } = CONFIG;
   return `# ${site.legalName}
 
-> Restaurante árabe da família Sabbag, fundado em ${site.foundingYear}, dentro do ${address.place}, na Avenida Paulista, em São Paulo. Serve buffet árabe à vontade no almoço e buffet com rodízio de esfihas no jantar. Também faz delivery pelo iFood e buffet para eventos.
+> Restaurante árabe da família Sabbag, fundado em ${site.foundingYear}, dentro do ${address.place}, na Avenida Paulista, em São Paulo. Serve buffet árabe à vontade no almoço e no jantar, com rodízio de esfihas à noite. Para jantar, é só chegar; o Sabah pede reserva só para grupos grandes. A entrega é feita pelo iFood, as encomendas para retirada são atendidas pelo WhatsApp e há buffet a domicílio para eventos.
 
 Este arquivo resume as informações oficiais do restaurante para assistentes e mecanismos de busca com IA. Em caso de divergência, vale o que está em ${site.origin}/.
 
@@ -245,28 +276,31 @@ Este arquivo resume as informações oficiais do restaurante para assistentes e 
 - Como entrar: entre no ${address.place}, avise na portaria que vai ao Sabah; o restaurante fica no fim do corredor, à esquerda. Não é preciso ser sócio do clube.
 - Metrô: ${address.metro}
 - Telefone: ${phone.display}
-- WhatsApp de reservas: ${phone.reservasDisplay}
-- WhatsApp geral (eventos e encomendas): ${phone.whatsappDisplay}
+- WhatsApp geral (dúvidas, encomendas para retirada, buffet a domicílio e fornecedores): ${phone.whatsappDisplay}
+- WhatsApp de reservas para grupos grandes: ${phone.gruposDisplay}
+- WhatsApp exclusivo para influenciadores, imprensa e parcerias: ${phone.midiaDisplay}
 - E-mail: ${CONFIG.email}
 
 ## Horários
 
 - Almoço, segunda a sexta: ${hours.lunchWeekdays}
 - Almoço, sábados, domingos e feriados: ${hours.lunchWeekend}
-- Jantar, todos os dias: ${hours.dinner} (mediante reserva)
-- Delivery (iFood), todos os dias: ${hours.delivery}
+- Jantar, todos os dias: ${hours.dinner}
+- Entrega pelo iFood, todos os dias: ${hours.delivery}
 
 ## O que o Sabah serve
 
-- Almoço: buffet árabe à vontade com sobremesa. No salão também há à la carte, pratos executivos, combinados, kebabs e esfihas.
-- Jantar: buffet árabe à vontade com rodízio de esfihas, sobremesa e bebidas, além de opções à la carte.
-- Pratos do buffet: homus, coalhada seca, babaganuche, tabule, kibe cru, kafta, michui de frango, faláfel, charutinhos de folha de uva e de repolho, m'jadara (arroz com lentilhas e cebola dourada), arroz chairie e doces árabes. Os pratos podem variar conforme o dia.
-- Eventos: buffet árabe para aproximadamente 50 a 200 convidados em São Paulo e região.
+- Almoço: buffet árabe à vontade.
+- Jantar: o mesmo buffet árabe à vontade e rodízio de esfihas à mesa. Para jantar, é só chegar. Para grupos grandes, o Sabah pede reserva pelo WhatsApp.
+- Pratos do buffet: homus, coalhada seca, babaganuche, tabule, kibe cru, kafta, michui de frango, faláfel, charutinhos e m'jadara (arroz com lentilhas e cebola dourada). Os pratos da bancada podem variar conforme o dia.
+- Entrega em casa: pelo iFood.
+- Encomendas para retirada no restaurante: pelo WhatsApp geral.
+- Buffet a domicílio: buffet árabe para eventos de aproximadamente 50 a 200 convidados em São Paulo e região, com orçamento pelo WhatsApp geral.
 
 ## Reconhecimentos
 
 - 1º lugar na categoria Árabe do prêmio Campeões da Gastronomia 2026, por voto popular, premiação da GoWhere em parceria com a Jovem Pan: ${links.gowhereResult}
-- Vencedor da disputa pela melhor esfiha de São Paulo no programa Chega Mais, do SBT, em 2024. A receita criada para a final entrou no cardápio como Esfiha SBT.
+- Em 2024, a esfiha fechada de carne do Sabah venceu a disputa pela melhor esfiha de São Paulo no programa Chega Mais, do SBT.
 
 ## Páginas
 
@@ -275,7 +309,9 @@ ${PAGES.map((p) => `- [${p.title}](${site.origin}${p.path})`).join("\n")}
 ## Links oficiais
 
 - [Cardápio](${links.menu})
-- [Reservar mesa pelo WhatsApp](${links.reservation})
+- [Cardápio do salão](${links.menuSalao})
+- [Cardápio de delivery e encomendas](${links.menuDelivery})
+- [Reservar para um grupo grande pelo WhatsApp](${links.waGrupo})
 - [Como chegar (Google Maps)](${links.maps})
 - [Pedir no iFood](${links.ifood})
 - [Instagram @sabahcozinhaarabe](${links.instagram})
@@ -300,6 +336,8 @@ function sabahSite(): Plugin {
         html = html
           .replace("<!--@faq-->", faqHtml)
           .replace("<!--@reviews-->", reviewsHtml)
+          .replace("<!--@visitors-->", visitorsHtml)
+          .replace("<!--@whatsapp-->", whatsappHtml)
           .replace(/<!--@jsonld (\w+) "([^"]+)"-->/g, (_m, kind: string, title: string) => jsonLd(kind, pagePath, title))
           .replaceAll("{{page.url}}", CONFIG.site.origin + pagePath)
           .replaceAll("{{year}}", String(new Date().getFullYear()));

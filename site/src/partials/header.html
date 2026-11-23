@@ -9,15 +9,29 @@
         </picture>
       </a>
 
+      <!-- Menu definitivo (ordem e rótulos do briefing). Os itens de seção usam "/#…"
+           para funcionar também nas páginas internas, voltando à âncora na home. -->
       <nav class="nav" id="menu" aria-label="Principal" data-nav>
         <ul class="nav__list">
-          <li><a href="/#buffet" data-spy="buffet">Buffet</a></li>
-          <li><a href="{{links.menu}}" target="_blank" rel="noopener" data-track="menu_view" data-loc="menu">Cardápio</a></li>
-          <li><a href="/#historia" data-spy="historia">Nossa história</a></li>
-          <li><a href="/#como-chegar" data-spy="como-chegar">Como chegar</a></li>
+          <li><a href="/#buffet" data-spy="buffet">Almoço e jantar</a></li>
+          <li class="nav__item--sub" data-submenu>
+            <a href="{{links.menu}}" target="_blank" rel="noopener" data-track="menu_view" data-loc="menu">Cardápio</a>
+            <button class="nav__sub-toggle" type="button" aria-expanded="false" aria-controls="submenu-cardapio" data-submenu-toggle>
+              <span class="sr" data-submenu-label>Abrir submenu do cardápio</span>
+              <svg aria-hidden="true"><use href="#i-chevron"/></svg>
+            </button>
+            <ul class="nav__sub" id="submenu-cardapio">
+              <li><a href="{{links.menuSalao}}" target="_blank" rel="noopener" data-track="menu_view" data-loc="menu-salao">Salão</a></li>
+              <li><a href="{{links.menuDelivery}}" target="_blank" rel="noopener" data-track="menu_view" data-loc="menu-delivery">Delivery/Encomendas</a></li>
+            </ul>
+          </li>
+          <li><a href="/#historia" data-spy="historia">Sobre o Sabah</a></li>
+          <li><a href="/#como-chegar" data-spy="como-chegar">Como Chegar</a></li>
           <li><a href="/#eventos" data-spy="eventos">Eventos</a></li>
+          <li><a href="{{links.ifood}}" target="_blank" rel="noopener" data-track="ifood_click" data-loc="menu">Ifood</a></li>
+          <li><a href="/#perguntas" data-spy="perguntas">FAQ</a></li>
+          <li><a href="/#contato" data-spy="contato">Contato</a></li>
         </ul>
-        <a class="btn btn--primary nav__cta" href="{{links.reservation}}" target="_blank" rel="noopener" data-track="reservation_click" data-loc="menu">Reservar mesa</a>
       </nav>
 
       <button class="top__toggle" type="button" aria-controls="menu" aria-expanded="false" data-nav-toggle>

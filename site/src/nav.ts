@@ -1,4 +1,4 @@
-/** Menu mobile, cabeçalho que some ao descer, destaque da seção atual e âncoras antigas. */
+/** Menu compacto, submenu do Cardápio, cabeçalho que some ao descer, destaque da seção atual e âncoras antigas. */
 
 /** Âncoras do site anterior (WordPress) -> seções novas. Mantém links antigos funcionando. */
 const LEGACY: Record<string, string> = {
@@ -9,8 +9,11 @@ const LEGACY: Record<string, string> = {
   parceiros: "reconhecimentos",
   guiasgastronomicos: "reconhecimentos",
   guiagastronomico: "reconhecimentos",
-  elesrecomendam: "avaliacoes",
+  elesrecomendam: "quem-visitou",
 };
+
+/** Largura a partir da qual o menu aparece inteiro no cabeçalho (igual ao CSS). */
+const WIDE = "(min-width: 1180px)";
 
 export function initNav(): void {
   const header = document.querySelector<HTMLElement>("[data-header]");
@@ -25,11 +28,52 @@ export function initNav(): void {
     if (label) label.textContent = open ? "Fechar" : "Menu";
   };
   toggle.addEventListener("click", () => setOpen(toggle.getAttribute("aria-expanded") !== "true"));
+  // Tocar num link (âncora ou externo) fecha o menu compacto.
   nav.addEventListener("click", (e) => {
     if ((e.target as HTMLElement).closest("a")) setOpen(false);
   });
+
+  // Submenu do Cardápio. O texto "Cardápio" é um link para a página completa;
+  // a seta é um botão separado que abre e fecha os subitens.
+  const sub = nav.querySelector<HTMLElement>("[data-submenu]");
+  const subToggle = sub?.querySelector<HTMLButtonElement>("[data-submenu-toggle]") ?? null;
+  const subLabel = sub?.querySelector<HTMLElement>("[data-submenu-label]") ?? null;
+  const subIsOpen = (): boolean => subToggle?.getAttribute("aria-expanded") === "true";
+  const setSub = (open: boolean): void => {
+    if (!sub || !subToggle) return;
+    sub.classList.toggle("is-open", open);
+    subToggle.setAttribute("aria-expanded", String(open));
+    if (subLabel) subLabel.textContent = open ? "Fechar submenu do cardápio" : "Abrir submenu do cardápio";
+  };
+  if (sub && subToggle) {
+    subToggle.addEventListener("click", () => setSub(!subIsOpen()));
+    // Com mouse, no menu inteiro: abre ao passar o ponteiro e fica aberto enquanto ele estiver sobre o item ou o submenu.
+    const hoverable = window.matchMedia(`${WIDE} and (hover: hover)`);
+    sub.addEventListener("pointerenter", (e) => {
+      if (hoverable.matches && e.pointerType === "mouse") setSub(true);
+    });
+    sub.addEventListener("pointerleave", (e) => {
+      if (hoverable.matches && e.pointerType === "mouse") setSub(false);
+    });
+    // No menu inteiro, sair do item com o teclado ou clicar fora fecha o submenu.
+    sub.addEventListener("focusout", (e) => {
+      const next = e.relatedTarget as Node | null;
+      if (window.matchMedia(WIDE).matches && (!next || !sub.contains(next))) setSub(false);
+    });
+    document.addEventListener("click", (e) => {
+      if (subIsOpen() && !sub.contains(e.target as Node)) setSub(false);
+    });
+  }
+
   document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape" && toggle.getAttribute("aria-expanded") === "true") {
+    if (e.key !== "Escape") return;
+    // Esc fecha primeiro o submenu e devolve o foco à seta; depois, o menu compacto.
+    if (subIsOpen() && subToggle) {
+      setSub(false);
+      subToggle.focus();
+      return;
+    }
+    if (toggle.getAttribute("aria-expanded") === "true") {
       setOpen(false);
       toggle.focus();
     }
