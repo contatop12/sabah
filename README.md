@@ -22,9 +22,9 @@ Tudo que é dado (URLs, WhatsApp, horários, endereço, GTM) fica em **um único
 
 | O que | Onde |
 | --- | --- |
-| URLs (reserva, iFood, cardápios, Maps, site, Instagram) | `src/config.ts` → `links` |
-| Número do WhatsApp | `src/config.ts` → `WHATSAPP_NUMBER` (topo do arquivo) |
-| Mensagens automáticas do WhatsApp | `src/config.ts` → `links.reservation`, `dinnerReservation`, `eventsWhatsapp` |
+| URLs (reserva, iFood, cardápios, Maps, avaliação no Google, site, Instagram) | `src/config.ts` → `links` |
+| Número do WhatsApp | `src/config.ts` → `WHATSAPP_NUMBER` (geral) e `WHATSAPP_MEDIA_NUMBER` (influenciadores e mídia), no topo do arquivo |
+| Mensagens automáticas do WhatsApp | `src/config.ts` → `links.reservation`, `dinnerReservation`, `eventsWhatsapp`, `mediaWhatsapp` |
 | Horários (almoço, jantar, delivery) | `src/config.ts` → `hours` |
 | Endereço | `src/config.ts` → `address` |
 | Título, description, canonical, imagem OG | `src/config.ts` → `site` |
@@ -70,7 +70,7 @@ npm run menu -- salao.pdf delivery.pdf
    { event: "bio_link_click", link_name: "ifood" }
    ```
 
-   Valores de `link_name`: `reservation`, `lunch`, `dinner`, `ifood`, `events`, `menu`, `maps`, `website`, `instagram`. Blocos expansíveis disparam ao abrir.
+   Valores de `link_name`: `reservation`, `lunch`, `dinner`, `ifood`, `events`, `menu`, `maps`, `review`, `website`, `media`, `instagram`. Blocos expansíveis disparam ao abrir.
 3. No GTM, crie um gatilho "Evento personalizado" = `bio_link_click` e uma tag GA4 Event com o parâmetro `link_name` = `{{dlv - link_name}}`. Meta Pixel e outras tags entram pelo mesmo GTM.
 4. Links para sabah.com.br recebem `utm_source=instagram&utm_medium=bio&utm_campaign=sabah_bio` automaticamente.
 

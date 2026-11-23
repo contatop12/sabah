@@ -8,9 +8,11 @@
 
 /** Número do WhatsApp (DDI + DDD + número, só dígitos). */
 const WHATSAPP_NUMBER = "5511918730446";
+/** WhatsApp de mídia: só para influenciadores, imprensa e parcerias. */
+const WHATSAPP_MEDIA_NUMBER = "5511995635211";
 
-function whatsapp(message?: string): string {
-  const base = `https://wa.me/${WHATSAPP_NUMBER}`;
+function whatsapp(message?: string, number: string = WHATSAPP_NUMBER): string {
+  const base = `https://wa.me/${number}`;
   return message ? `${base}?text=${encodeURIComponent(message)}` : base;
 }
 
@@ -38,6 +40,14 @@ export const CONFIG = {
     eventsWhatsapp: whatsapp(
       "Olá! Conheci o buffet para eventos pelo Instagram do Sabah e gostaria de solicitar um orçamento.",
     ),
+    /** Influenciadores, imprensa e parcerias (número próprio de mídia). */
+    mediaWhatsapp: whatsapp(
+      "Olá! Vim pelo Instagram do Sabah e gostaria de apresentar uma proposta de mídia ou parceria. Meu nome: ___ / Perfil, veículo ou empresa: ___ / Proposta: ___ / Link do mídia kit, se houver: ___.",
+      WHATSAPP_MEDIA_NUMBER,
+    ),
+
+    /** Avaliação do Sabah no Google (abre direto a tela de avaliar). */
+    googleReview: "https://g.page/r/CcZR6OpfkXzwEAE/review",
 
     ifood:
       "https://www.ifood.com.br/delivery/sao-paulo-sp/sabah-cozinha-arabe-esfihas-e-kebabs-bela-vista/dbf10475-e887-40b5-bb54-7ee90bfd12f6",
