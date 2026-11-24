@@ -982,3 +982,39 @@ html.js [data-reveal]:not(.is-in) .metro__here { opacity: 0; translate: -50% 8px
     margin-inline: 0; padding: 0.25rem 0 1rem; overflow-x: auto; scroll-padding-inline: 0;
   }
 }
+
+/* ---------- Sr. Nilton: composição da referência aprovada (24/11) ----------
+   Ilustração grande à esquerda, encostada na base do bloco; rótulo em maiúsculas
+   com filete dourado, título grande e botão com seta. Sobrepõe as regras anteriores. */
+.nilton {
+  gap: 0; padding: 0; overflow: hidden; border-left: 0; border-radius: var(--radius-lg);
+  background: #faeede;
+}
+.nilton__art { align-self: end; width: min(78vw, 330px); margin: 1.25rem auto 0; }
+.nilton__pose {
+  display: block;
+  -webkit-mask-image: linear-gradient(to right, #000 90%, transparent); -webkit-mask-composite: source-over;
+  mask-image: linear-gradient(to right, #000 90%, transparent); mask-composite: add;
+}
+.nilton__body { gap: 0.9rem; padding: 1.25rem clamp(1.25rem, 5vw, 2rem) clamp(1.75rem, 5vw, 2.5rem); }
+.nilton__who {
+  display: grid; gap: 0.85rem; max-width: none;
+  font-size: 0.82rem; font-weight: 800; letter-spacing: 0.09em; text-transform: uppercase; color: var(--roma-fundo);
+}
+.nilton__who::after { content: ""; width: 5.5rem; height: 2px; background: #d9b56a; }
+.nilton__title { font-size: clamp(2.1rem, 4.4vw, 3.5rem); color: var(--roma-fundo); }
+.nilton__body > p:not(.nilton__who) { max-width: 31em; font-size: clamp(1.02rem, 1.35vw, 1.2rem); line-height: 1.55; color: var(--berinjela-suave); }
+.tip__btn { gap: 0.7rem; padding-inline: 1.4rem; border-radius: 14px; font-size: 1rem; }
+.tip__btn::after {
+  content: ""; width: 0.55em; height: 0.55em; border-right: 2px solid currentColor; border-bottom: 2px solid currentColor;
+  rotate: 45deg; translate: 0 -0.15em; transition: rotate 0.25s var(--ease-out), translate 0.25s;
+}
+.tip[open] .tip__btn::after { rotate: -135deg; translate: 0 0.12em; }
+@media (min-width: 900px) {
+  .nilton { grid-template-columns: minmax(300px, 44%) 1fr; align-items: stretch; gap: 0; }
+  .nilton__art { width: 100%; margin: 0; padding: 1.25rem 0 0 0.5rem; }
+  .nilton__body {
+    align-content: center;
+    padding: clamp(2rem, 4vw, 3.5rem) clamp(1.5rem, 4vw, 3.5rem) clamp(2rem, 4vw, 3.5rem) clamp(1rem, 2vw, 2rem);
+  }
+}
