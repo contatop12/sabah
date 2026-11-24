@@ -24,8 +24,16 @@ export const FAQS: Faq[] = [
     a: `O buffet árabe à vontade é servido no almoço de segunda a sexta, das ${hours.lunchWeekdays}, e aos sábados, domingos e feriados, das ${hours.lunchWeekend}.`,
   },
   {
+    q: "Tem esfiha no almoço?",
+    a: "Sim. As esfihas salgadas ficam disponíveis na bancada do almoço. O rodízio de esfihas à mesa faz parte do jantar.",
+  },
+  {
     q: "O Sabah abre para o jantar?",
-    a: `Sim. O jantar é servido todos os dias, das ${hours.dinner}, com o mesmo buffet árabe à vontade do almoço e rodízio de esfihas à mesa.`,
+    a: `Sim. O jantar é servido todos os dias, das ${hours.dinner}, com a mesma bancada de buffet árabe do almoço, rodízio de esfihas à mesa e bebidas à vontade, incluindo Heineken.`,
+  },
+  {
+    q: "O que está incluído no jantar do Sabah?",
+    a: "O jantar inclui buffet árabe, rodízio de esfihas e bebidas à vontade, incluindo Heineken.",
   },
   {
     q: "Preciso reservar para jantar?",
@@ -101,39 +109,33 @@ export interface VisitorVideo {
   id: string;
 }
 
+/** Monta um item da lista; a capa é a miniatura do próprio post (media-src/criador-<id>.jpg). */
+function video(id: string, creator: string, handle: string, post: string, title: string, postedBy = handle): VisitorVideo {
+  return {
+    id,
+    creator,
+    handle,
+    title,
+    url: `https://www.instagram.com/p/${post}/`,
+    postedBy,
+    cover: `criador-${id}`,
+    coverAlt: `Capa do vídeo de ${creator} sobre o Sabah`,
+  };
+}
+
 /**
- * VÍDEOS DE QUEM VISITOU. Só entram vídeos com autoria conferida no post
- * e capa aprovada. As capas vêm dos cards "Eles Recomendam" do site anterior.
+ * VÍDEOS DE QUEM VISITOU, na ordem definida pela P12 em 24/11/2026.
+ * Autoria e legenda de cada post foram conferidas no Instagram em 23/11/2026.
+ * Não exibir número de seguidores.
  */
 export const VISITOR_VIDEOS: VisitorVideo[] = [
-  {
-    id: "turistando",
-    creator: "Turistando",
-    handle: "@turistandosp",
-    title: "Buffet árabe à vontade na Paulista",
-    url: "https://www.instagram.com/p/Cj30kWiJXQM/",
-    postedBy: "@turistandosp",
-    cover: "criador-turistando",
-    coverAlt: "Capa do vídeo do Turistando: criadora na Avenida Paulista com o texto “Árabe escondido na Paulista”",
-  },
-  {
-    id: "sampa-dicas",
-    creator: "Sampa Dicas",
-    handle: "@sampadicas",
-    title: "O Gabriel, do Sampa Dicas, deu seu aval ao Sabah",
-    url: "https://www.instagram.com/p/C4gLlb7vTn-/",
-    postedBy: "@sabahcozinhaarabe",
-    cover: "criador-sampa-dicas",
-    coverAlt: "Capa do vídeo do Sampa Dicas: o criador abraçado a um senhor no salão do restaurante",
-  },
-  {
-    id: "mohamad-hindi",
-    creator: "Mohamad Hindi",
-    handle: "@mohindi",
-    title: "Mohamad Hindi indica o Sabah entre os melhores da Paulista",
-    url: "https://www.instagram.com/p/CgZb33nOp1m/",
-    postedBy: "@sabahcozinhaarabe",
-    cover: "criador-mohamad",
-    coverAlt: "Capa do vídeo de Mohamad Hindi segurando um prato com um salgado árabe",
-  },
+  video("mohamad", "Mohamad Hindi", "@mohindi", "CgZb33nOp1m", "Mohamad Hindi indica o Sabah entre os melhores da Paulista", "@sabahcozinhaarabe"),
+  video("sampa-dicas", "Sampa Dicas", "@sampadicas", "C4gLlb7vTn-", "O Gabriel, do Sampa Dicas, deu seu aval ao Sabah", "@sabahcozinhaarabe"),
+  video("desbrava", "Desbrava São Paulo", "@desbravasaopaulo", "DDf0zFAuNwk", "Experiência árabe à vontade, com bebidas e sobremesa"),
+  video("paulistano", "Paulistano por aí", "@paulistanoporai", "DNEhauZuOIk", "Restaurante árabe escondido na Avenida Paulista"),
+  video("turistando", "Turistando SP", "@turistandosp", "Cj30kWiJXQM", "Buffet árabe à vontade na Paulista"),
+  video("dicas-em-sp", "Anna Campos e Rogerio", "@dicas.em.sp", "C8vHG1nxdL5", "Restaurante escondidinho na Paulista, com mais de 30 anos de tradição"),
+  video("juliana-mendes", "Juliana Mendes", "@j.u.mendes", "DOHQ3RYkmkn", "Restaurante escondido dentro do Club Homs"),
+  video("jornaliz", "Jornaliz", "@jornaliz_", "C1pvUAjv44E", "Sabah, comida árabe com receitas de família"),
+  video("aline-souza", "Aline Souza", "@alinesouzatb", "DY25eqDp9Wr", "Um rodízio árabe secreto na Paulista"),
 ];

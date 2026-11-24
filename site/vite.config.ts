@@ -82,7 +82,7 @@ function jsonLd(kind: string, pagePath: string, pageTitle: string): string {
     alternateName: [site.name, "Sabah Restaurante Árabe"],
     slogan: site.slogan,
     description:
-      "Restaurante árabe da família Sabbag, fundado em 1993, com buffet árabe à vontade no almoço e no jantar e rodízio de esfihas à noite. Fica dentro do Club Homs, na Avenida Paulista, em São Paulo.",
+      "Restaurante árabe da família Sabbag, fundado em 1993, com buffet árabe à vontade no almoço e no jantar. No jantar, tem também rodízio de esfihas à mesa e bebidas à vontade. Fica dentro do Club Homs, na Avenida Paulista, em São Paulo.",
     url: `${site.origin}/`,
     image: [site.ogImage, `${site.origin}/img/buffet-bancada.jpg`, `${site.origin}/img/esfiha-fechada-carne.jpg`],
     logo: `${site.origin}/img/logo-vermelho.png`,
@@ -206,8 +206,7 @@ function visitorsHtml(): string {
     return (
       `<li class="visitor" data-reveal>` +
       `<div class="visitor__cover">` +
-      `<x-img name="${v.cover}" class="visitor__img" sizes="(min-width: 900px) 260px, 62vw" alt="${esc(v.coverAlt)}"></x-img>` +
-      `<span class="visitor__play" aria-hidden="true"><svg><use href="#i-play"/></svg></span>` +
+      `<x-img name="${v.cover}" class="visitor__img" sizes="(min-width: 900px) 230px, 58vw" alt="${esc(v.coverAlt)}"></x-img>` +
       `</div>` +
       `<p class="visitor__who"><strong>${esc(v.creator)}</strong> <span>${esc(v.handle)}</span></p>` +
       `<h3 class="visitor__title">${esc(v.title)}</h3>` +
@@ -265,7 +264,7 @@ function llms(): string {
   const { site, address, phone, hours, links } = CONFIG;
   return `# ${site.legalName}
 
-> Restaurante árabe da família Sabbag, fundado em ${site.foundingYear}, dentro do ${address.place}, na Avenida Paulista, em São Paulo. Serve buffet árabe à vontade no almoço e no jantar, com rodízio de esfihas à noite. Para jantar, é só chegar; o Sabah pede reserva só para grupos grandes. A entrega é feita pelo iFood, as encomendas para retirada são atendidas pelo WhatsApp e há buffet a domicílio para eventos.
+> Restaurante árabe da família Sabbag, fundado em ${site.foundingYear}, dentro do ${address.place}, na Avenida Paulista, em São Paulo. Serve buffet árabe à vontade no almoço e no jantar. O jantar inclui também rodízio de esfihas à mesa e bebidas à vontade, incluindo Heineken. Para jantar, é só chegar; o Sabah pede reserva só para grupos grandes. A entrega é feita pelo iFood, as encomendas para retirada são atendidas pelo WhatsApp e há buffet a domicílio para eventos.
 
 Este arquivo resume as informações oficiais do restaurante para assistentes e mecanismos de busca com IA. Em caso de divergência, vale o que está em ${site.origin}/.
 
@@ -290,9 +289,11 @@ Este arquivo resume as informações oficiais do restaurante para assistentes e 
 
 ## O que o Sabah serve
 
-- Almoço: buffet árabe à vontade.
-- Jantar: o mesmo buffet árabe à vontade e rodízio de esfihas à mesa. Para jantar, é só chegar. Para grupos grandes, o Sabah pede reserva pelo WhatsApp.
-- Pratos do buffet: homus, coalhada seca, babaganuche, tabule, kibe cru, kafta, michui de frango, faláfel, charutinhos e m'jadara (arroz com lentilhas e cebola dourada). Os pratos da bancada podem variar conforme o dia.
+- Almoço: buffet árabe à vontade. As esfihas salgadas também ficam disponíveis na bancada do almoço.
+- Jantar: a mesma bancada de buffet árabe, com rodízio de esfihas à mesa e bebidas à vontade, incluindo Heineken. Para jantar, é só chegar. Para grupos grandes, o Sabah pede reserva pelo WhatsApp.
+- Pratos da bancada: trio de pastas (homus, coalhada seca e babaganuche), tabule, kafta, michui de frango, arroz m'jadara, arroz chairie, charutinhos de uva e de repolho, kibes cru, assado e frito, abobrinha e berinjela recheadas, faláfel e esfihas salgadas.
+- Sobremesas: doces árabes, pudim, frutas da estação e esfiha doce (inclusa no rodízio do jantar).
+- À la carte: combinado montado pela pessoa, kebabs, beirute de kafta, esfihas, kibe frito e batata frita com zátar. Os pratos da bancada podem variar conforme o dia.
 - Entrega em casa: pelo iFood.
 - Encomendas para retirada no restaurante: pelo WhatsApp geral.
 - Buffet a domicílio: buffet árabe para eventos de aproximadamente 50 a 200 convidados em São Paulo e região, com orçamento pelo WhatsApp geral.

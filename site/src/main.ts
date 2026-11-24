@@ -6,9 +6,11 @@ import { initVideo } from "./video.ts";
 import { initQuote } from "./quote.ts";
 import { initTracking } from "./tracking.ts";
 import { initWhatsapp } from "./whatsapp.ts";
+import { initTabs } from "./tabs.ts";
+import { initCarousel } from "./carousel.ts";
 
 // Cada parte inicia isolada: uma falha no menu não pode impedir as fotos de aparecer.
-for (const init of [initNav, initMotion, initOpenStatus, initVideo, initQuote, initWhatsapp, initTracking]) {
+for (const init of [initNav, initMotion, initTabs, initCarousel, initOpenStatus, initVideo, initQuote, initWhatsapp, initTracking]) {
   try {
     init();
   } catch (error) {

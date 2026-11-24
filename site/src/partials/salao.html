@@ -1,0 +1,175 @@
+      <!-- O que você encontra no salão: duas abas. A bancada abre por padrão.
+           Sem JavaScript, os dois painéis ficam visíveis um abaixo do outro. -->
+      <div class="wrap salao" id="salao">
+        <h3 class="h3 buffet__sub" data-reveal>O que você encontra no salão</h3>
+
+        <div class="tabs" data-tabs>
+          <div class="tabs__list" role="tablist" aria-label="O que você encontra no salão">
+            <button class="tabs__tab" type="button" role="tab" id="tab-bancada" aria-controls="painel-bancada" aria-selected="true">Bancada do buffet</button>
+            <button class="tabs__tab" type="button" role="tab" id="tab-alacarte" aria-controls="painel-alacarte" aria-selected="false">À la carte</button>
+          </div>
+
+          <!-- ===== Bancada do buffet ===== -->
+          <div class="tabs__panel" role="tabpanel" id="painel-bancada" aria-labelledby="tab-bancada" tabindex="0">
+            <p class="tabs__lead">A mesma bancada no almoço e no jantar.</p>
+
+            <ul class="cards cards--4" aria-label="Pratos da bancada do buffet">
+              <li class="card" data-reveal>
+                <x-img name="bancada-trio" class="card__img" sizes="(min-width: 900px) 280px, 46vw" alt="Trio de pastas árabes do Sabah: homus, coalhada seca e babaganuche"></x-img>
+                <h4 class="card__name">Trio de pastas árabes</h4>
+                <p class="card__desc">Homus, coalhada seca e babaganuche para comer com pão sírio.</p>
+              </li>
+              <li class="card" data-reveal>
+                <x-img name="bancada-tabule" class="card__img" sizes="(min-width: 900px) 280px, 46vw" alt="Tigela de tabule do Sabah"></x-img>
+                <h4 class="card__name">Tabule</h4>
+                <p class="card__desc">Salada fresca de salsinha, tomate e trigo.</p>
+              </li>
+              <li class="card" data-reveal>
+                <x-img name="bancada-kafta" class="card__img" sizes="(min-width: 900px) 280px, 46vw" alt="Espetos de kafta do Sabah com hortelã"></x-img>
+                <h4 class="card__name">Kafta</h4>
+                <p class="card__desc">Carne moída temperada, moldada no espeto e grelhada.</p>
+              </li>
+              <li class="card" data-reveal>
+                <x-img name="bancada-michui" class="card__img" sizes="(min-width: 900px) 280px, 46vw" alt="Espeto de michui de frango grelhado"></x-img>
+                <h4 class="card__name">Michui de frango</h4>
+                <p class="card__desc">Espeto de frango temperado e grelhado.</p>
+              </li>
+
+              <li class="card" data-reveal>
+                <x-img name="bancada-mjadara" class="card__img" sizes="(min-width: 900px) 280px, 46vw" alt="Arroz m'jadara na cuba do buffet, com cebola dourada por cima"></x-img>
+                <h4 class="card__name">Arroz M’jadara</h4>
+                <p class="card__desc">Arroz com lentilhas e cebola dourada.</p>
+              </li>
+              <li class="card" data-reveal>
+                <x-img name="bancada-chairie" class="card__img" sizes="(min-width: 900px) 280px, 46vw" alt="Arroz chairie servido em prato branco"></x-img>
+                <h4 class="card__name">Arroz Chairie</h4>
+                <p class="card__desc">Arroz com fios de macarrão dourados.</p>
+              </li>
+              <li class="card" data-reveal>
+                <x-img name="bancada-charuto-uva" class="card__img" sizes="(min-width: 900px) 280px, 46vw" alt="Charutinhos de folha de uva em prato branco"></x-img>
+                <h4 class="card__name">Charutinho de uva</h4>
+                <p class="card__desc">Folha de uva enrolada e recheada.</p>
+              </li>
+              <li class="card" data-reveal>
+                <x-img name="bancada-charuto-repolho" class="card__img" sizes="(min-width: 900px) 280px, 46vw" alt="Charutinhos de repolho em prato branco"></x-img>
+                <h4 class="card__name">Charutinho de repolho</h4>
+                <p class="card__desc">Folha de repolho enrolada e recheada.</p>
+              </li>
+
+              <li class="card" data-reveal>
+                <x-img name="bancada-kibes" class="card__img" sizes="(min-width: 900px) 280px, 46vw" alt="Três kibes do Sabah lado a lado: cru, assado e frito"></x-img>
+                <h4 class="card__name">Kibes <span class="card__sub">(Cru, Assado e Frito)</span></h4>
+                <p class="card__desc">Na foto, da esquerda para a direita: cru, assado e frito.</p>
+              </li>
+              <li class="card" data-reveal>
+                <x-img name="bancada-legumes" class="card__img" sizes="(min-width: 900px) 280px, 46vw" alt="Abobrinha e berinjela recheadas no mesmo prato"></x-img>
+                <h4 class="card__name">Legumes recheados <span class="card__sub">(Abobrinha e Berinjela)</span></h4>
+                <p class="card__desc">Abobrinha e berinjela recheadas, no mesmo prato.</p>
+              </li>
+              <li class="card" data-reveal>
+                <x-img name="bancada-falafel" class="card__img" sizes="(min-width: 900px) 280px, 46vw" alt="Faláfel do Sabah partido ao meio"></x-img>
+                <h4 class="card__name">Faláfel</h4>
+                <p class="card__desc">Bolinho frito de grão-de-bico, crocante por fora.</p>
+              </li>
+              <li class="card" data-reveal>
+                <x-img name="bancada-esfihas" class="card__img" sizes="(min-width: 900px) 280px, 46vw" alt="Esfihas abertas de carne na travessa do buffet"></x-img>
+                <h4 class="card__name">Esfihas salgadas</h4>
+                <p class="card__desc">Esfihas abertas de carne, direto da travessa da bancada.</p>
+              </li>
+            </ul>
+            <p class="fine salao__note">Os pratos da bancada podem variar conforme o dia.</p>
+
+            <!-- Sr. Nilton, entre os pratos e as sobremesas.
+                 ARTE PENDENTE: o personagem da campanha "Sahtein" (sorrindo, roupa branca, placa na mão)
+                 ainda não foi entregue em PNG/WebP transparente. Quando chegar, salve em media-src/,
+                 inclua no manifesto e acrescente, como primeiro filho do aside, uma figure com a classe
+                 "nilton__art" contendo a imagem: o layout já prevê a coluna da esquerda no desktop
+                 e o personagem acima do texto no celular. -->
+            <aside class="nilton" aria-labelledby="nilton-title" data-reveal>
+              <div class="nilton__body">
+                <p class="nilton__who">Sr. Nilton Sabbag, fundador do Sabah</p>
+                <h4 id="nilton-title" class="nilton__title">Sahtein! Bom apetite!</h4>
+                <p>Essa é uma forma carinhosa de desejar bom apetite à mesa. Se é sua primeira vez no Sabah, experimente o trio de pastas com pão sírio. Depois, monte o prato do seu jeito.</p>
+                <details class="tip">
+                  <summary class="btn btn--ghost tip__btn">Mais uma dica do Sr. Nilton</summary>
+                  <div class="tip__body">
+                    <p class="tip__q">O que é tahine?</p>
+                    <p>Tahine é uma pasta de gergelim. No homus, ela se mistura ao grão-de-bico e ajuda a dar a textura cremosa.</p>
+                  </div>
+                </details>
+              </div>
+            </aside>
+
+            <h4 class="salao__h" data-reveal>Sobremesas</h4>
+            <ul class="cards cards--4" aria-label="Sobremesas">
+              <li class="card" data-reveal>
+                <x-img name="sobremesa-doces" class="card__img" sizes="(min-width: 900px) 280px, 46vw" alt="Prato com doces árabes"></x-img>
+                <h5 class="card__name">Doces árabes</h5>
+              </li>
+              <li class="card" data-reveal>
+                <x-img name="sobremesa-pudim" class="card__img" sizes="(min-width: 900px) 280px, 46vw" alt="Pudim com calda de caramelo"></x-img>
+                <h5 class="card__name">Pudim</h5>
+              </li>
+              <li class="card" data-reveal>
+                <x-img name="sobremesa-frutas" class="card__img" sizes="(min-width: 900px) 280px, 46vw" alt="Travessas de frutas fatiadas, com melancia e abacaxi"></x-img>
+                <h5 class="card__name">Frutas da estação</h5>
+              </li>
+              <li class="card" data-reveal>
+                <x-img name="sobremesa-esfiha-doce" class="card__img" sizes="(min-width: 900px) 280px, 46vw" alt="Esfihas doces de chocolate em prato branco"></x-img>
+                <h5 class="card__name">Esfiha doce</h5>
+                <p class="card__tag">Inclusa no rodízio do jantar</p>
+              </li>
+            </ul>
+          </div>
+
+          <!-- ===== À la carte ===== -->
+          <div class="tabs__panel" role="tabpanel" id="painel-alacarte" aria-labelledby="tab-alacarte" tabindex="0">
+            <p class="tabs__lead">Peça à parte, direto à mesa.</p>
+
+            <ul class="cards cards--3" aria-label="Pratos à la carte">
+              <li class="card" data-reveal>
+                <x-img name="alacarte-combinado" class="card__img" sizes="(min-width: 900px) 380px, 46vw" alt="Prato montado com esfihas, kibes e pastas"></x-img>
+                <h4 class="card__name">Monte seu combinado</h4>
+                <p class="card__desc">Você escolhe um item de cada grupo e monta o prato.</p>
+                <details class="more more--card">
+                  <summary>Ver opções do combinado</summary>
+                  <dl class="groups">
+                    <div><dt>Grupo 1</dt><dd>Kafta, kibe assado, kibe cru, espeto de frango ou faláfel.</dd></div>
+                    <div><dt>Grupo 2</dt><dd>Arroz chairie, arroz m’jadara, abobrinha recheada, berinjela recheada, charuto de uva ou charuto de repolho.</dd></div>
+                    <div><dt>Grupo 3</dt><dd>Homus, coalhada, babaganuche, tabule ou salada fatuche.</dd></div>
+                  </dl>
+                </details>
+              </li>
+              <li class="card" data-reveal>
+                <x-img name="alacarte-kebab" class="card__img" sizes="(min-width: 900px) 380px, 46vw" alt="Kebab do Sabah no pão sírio"></x-img>
+                <h4 class="card__name">Kebabs</h4>
+                <p class="card__desc">Enrolados no pão sírio.</p>
+              </li>
+              <li class="card" data-reveal>
+                <x-img name="alacarte-beirute" class="card__img" sizes="(min-width: 900px) 380px, 46vw" alt="Sanduíche tostado no pão sírio, cortado em pedaços"></x-img>
+                <h4 class="card__name">Beirute de kafta</h4>
+                <p class="card__desc">Sanduíche de kafta no pão sírio.</p>
+              </li>
+              <li class="card" data-reveal>
+                <x-img name="alacarte-esfihas" class="card__img" sizes="(min-width: 900px) 380px, 46vw" alt="Esfihas salgadas abertas e fechadas do Sabah"></x-img>
+                <h4 class="card__name">Esfihas</h4>
+                <p class="card__desc">Salgadas, doces ou monte a sua. Nas doces, chocolate ou doce de leite.</p>
+              </li>
+              <li class="card" data-reveal>
+                <x-img name="alacarte-kibe-frito" class="card__img" sizes="(min-width: 900px) 380px, 46vw" alt="Kibe frito do Sabah com rodelas de limão"></x-img>
+                <h4 class="card__name">Kibe frito</h4>
+                <p class="card__desc">Crocante por fora, com limão para acompanhar.</p>
+              </li>
+              <li class="card" data-reveal>
+                <x-img name="alacarte-batata" class="card__img" sizes="(min-width: 900px) 380px, 46vw" alt="Batata frita recebendo zátar por cima"></x-img>
+                <h4 class="card__name">Batata frita com zátar</h4>
+                <p class="card__desc">Batata frita temperada com zátar.</p>
+              </li>
+            </ul>
+            <p class="salao__cta">
+              <a class="btn btn--primary" href="{{links.menuSalao}}" target="_blank" rel="noopener" data-track="menu_view" data-loc="alacarte">Ver cardápio do salão</a>
+              <span class="fine">Preços, sabores completos e condições estão no cardápio oficial.</span>
+            </p>
+          </div>
+        </div>
+      </div>

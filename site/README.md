@@ -41,14 +41,22 @@ No HTML, `<x-img name="...">` vira `<picture>` com AVIF + WebP, fallback JPEG, `
 
 ### Fotos da hero
 
-A hero usa os dois PNGs aprovados no briefing de 23/11/2026, guardados em `media-src/` com o nome original:
+A hero usa os dois recortes aprovados no briefing de 24/11/2026, guardados em `media-src/` com o nome original:
 
 | Versão | Arquivo | Dimensões |
 | --- | --- | --- |
-| Desktop | `rodizio-arabe-sabah.png` | 1672 × 941 (horizontal) |
-| Mobile | `buffet-arabe-a-vontade-sabah.png` | 1122 × 1402 (vertical) |
+| Desktop | `sabah-banner-desktop.webp` | 1037 × 799 |
+| Mobile | `sabah-banner-mobile.webp` | 1036 × 777 |
 
-No celular a foto aparece em faixa no topo. O recorte tira os 28% de cima (cadeiras e fundo) e mantém o homus, o pão e o prato principal; a altura da faixa acompanha a tela (`.hero__photo` em `main.css`). Para trocar uma foto, substitua o arquivo e rode `npm run media`.
+No celular o painel de conteúdo vem primeiro e a foto aparece inteira logo depois. No desktop o painel vinho fica à esquerda e a foto ocupa cerca de 58% da largura. Para trocar uma foto, substitua o arquivo e rode `npm run media`.
+
+### Lanternas e ornamentos
+
+São desenhos em SVG, definidos em `src/partials/icons.html` (`d-lantern`, `d-star`, `d-ornament`) e posicionados em `main.css` (`.hero__deco`, `.ornament`). Na hero: duas lanternas e três estrelas a partir de 1180 px, uma lanterna entre 900 e 1179 px e uma lanterna pequena no celular. Em Sobre o Sabah: um ornamento curto abaixo do título. A camada é decorativa, fica oculta de leitores de tela e não recebe foco nem cliques.
+
+### O que você encontra no salão
+
+O conteúdo das duas abas fica em `src/partials/salao.html`: 12 cards da bancada, o bloco do Sr. Nilton, 4 sobremesas e 6 cards à la carte. As abas são controladas por `src/tabs.ts`.
 
 ### WhatsApp por assunto
 
@@ -95,45 +103,66 @@ Apoio: `instagram_click`, `video_click`, `video_play`, `award_click`, `reviews_c
 
 | Seção | Arquivo (`media-src/`) | Origem |
 | --- | --- | --- |
-| Hero, Open Graph | `rodizio-arabe-sabah.png`, `buffet-arabe-a-vontade-sabah.png` | PNGs aprovados no briefing de 23/11/2026 |
-| Bancada | `buffet-bancada.jpg` | sessão de fotos 2026 (original 7008 px) |
-| Cartão do almoço | `buffet-almoco.jpg` | acervo 2026, DSC00050 (close da bancada) |
+| Hero, Open Graph | `sabah-banner-desktop.webp`, `sabah-banner-mobile.webp` | recortes aprovados no briefing de 24/11/2026 |
+| Bancada (foto larga) | `buffet-bancada.jpg` | acervo 2026 |
+| Cartão do almoço | `buffet-almoco.jpg` | acervo 2026, DSC00050 |
 | Cartão do jantar | `esfihas-mesa.jpg` | cardápio em PDF |
-| Pratos | `prato-*.jpg` | fotos do cardápio em PDF; faláfel do site atual |
-| Reconhecimentos (SBT) | `esfiha-fechada-carne.jpg` | acervo 2026, DSC00801 (uma inteira e outra cortada) |
-| Quem visitou | `criador-*.jpg` | área da foto dos cards "Eles Recomendam" do site anterior (260 × 366) |
-| Sobre o Sabah | `familia-sabbag.jpg` | seção Quem Somos do site atual |
-| Como chegar | `club-homs.jpg`, `public/video/como-chegar.*` | site atual (vídeo de 46 MB reduzido para 5 a 7 MB) |
-| Eventos | `evento-mesa.jpg` | site atual |
-| Sabah em casa | `kebab.jpg` | cardápio em PDF |
-| Chamada final | `salao.jpg` | sessão de fotos 2026 |
+| Trio de pastas, tabule, kafta, michui | `prato-homus.jpg`, `prato-tabule.jpg`, `prato-kafta.jpg`, `prato-michui.jpg` | cardápio em PDF |
+| Arroz M'jadara | `bancada-mjadara.jpg` | acervo 2026, DSC00014 (indicada no briefing) |
+| Arroz Chairie | `bancada-chairie.jpg` | acervo 2026, DSC00474 (indicada no briefing) |
+| Charutinho de uva | `bancada-charuto-uva.jpg` | acervo 2026, DSC00440 (escolha minha) |
+| Charutinho de repolho | `bancada-charuto-repolho.jpg` | acervo 2026, DSC00458 (escolha minha) |
+| Kibes | `bancada-kibes.jpg`, montada com `kibe-cru.jpg`, `kibe-assado.jpg`, `kibe-frito-2026.jpg` | acervo 2026, DSC00360, DSC00880 e DSC00701 (indicadas no briefing) |
+| Legumes recheados | `bancada-legumes.jpg` | acervo 2026, DSC00523 (indicada no briefing) |
+| Faláfel | `prato-falafel.jpg` | site anterior |
+| Esfihas salgadas | `bancada-esfihas.jpg` | acervo 2026, DSC00073 (indicada no briefing) |
+| Sobremesas | `sobremesa-doces.jpg`, `sobremesa-pudim.jpg`, `sobremesa-frutas.jpg`, `sobremesa-esfiha-doce.jpg` | acervo 2026, DSC01217, DSC00080, DSC00084 e DSC01361 (indicadas no briefing) |
+| Combinado | `prato-montado.jpg` | cardápio em PDF (foto da página "prato executivo / combinado") |
+| Kebabs, esfihas | `kebab.jpg`, `esfihas-salgadas.jpg` | cardápio em PDF |
+| Beirute de kafta | `alacarte-beirute.jpg` | acervo 2026, DSC01155 (escolha minha) |
+| Kibe frito | `kibe-frito-2026.jpg` | acervo 2026, DSC00701 |
+| Batata frita com zátar | `alacarte-batata.jpg` | acervo 2026, DSC00828 (indicada no briefing) |
+| Reconhecimentos (SBT) | `esfiha-fechada-carne.jpg` | acervo 2026, DSC00801 |
+| Quem visitou | `criador-*.jpg` | miniatura do próprio post no Instagram (360 × 640) |
+| Sobre o Sabah | `familia-sabbag.jpg` | seção Quem Somos do site anterior |
+| Como chegar | `club-homs.jpg`, `public/video/como-chegar.*` | site anterior |
+| Eventos, Sabah em casa | `evento-mesa.jpg`, `kebab.jpg` | site anterior e cardápio em PDF |
+| Chamada final | `salao.jpg` | acervo 2026 |
 
-O acervo 2026 fica no Drive (pasta "[2026] Fotos/vídeos Ricardo"). Geradas mas sem uso na página: `buffet-salao`, `buffet-cubas`, `prato-montado`, `prato-doces`, `esfihas-salgadas`, `kibe-frito`, `placa-sabah`, `evento-dabke`, `evento-buffet`. A foto antiga da hero (`hero-mesa.jpg`) continua em `media-src/`, fora da página.
+O acervo 2026 fica no Drive (pasta "[2026] Fotos/vídeos Ricardo"). `npm run media` apaga de `public/img` o que sair do manifesto; os originais continuam em `media-src/`.
 
-## Vídeos escolhidos para "O Sabah pelos olhos de quem visitou"
+## Vídeos de "O Sabah pelos olhos de quem visitou"
 
-Autoria e legenda conferidas em cada post em 23/11/2026.
+Nove vídeos em carrossel, na ordem definida pela P12 em 24/11/2026, sem número de seguidores. Autoria e legenda conferidas em cada post em 23/11/2026.
 
-| Card | Autor do post | Data | Link |
-| --- | --- | --- | --- |
-| Turistando (@turistandosp) | @turistandosp | 18/10/2022 | <https://www.instagram.com/p/Cj30kWiJXQM/> |
-| Sampa Dicas (@sampadicas) | @sabahcozinhaarabe, sobre a visita do Gabriel, do Sampa Dicas | 14/03/2024 | <https://www.instagram.com/p/C4gLlb7vTn-/> |
-| Mohamad Hindi (@mohindi) | @sabahcozinhaarabe, sobre a indicação de Mohamad Hindi | 24/07/2022 | <https://www.instagram.com/p/CgZb33nOp1m/> |
+| # | Card | Quem publicou | Data | Post |
+| --- | --- | --- | --- | --- |
+| 1 | Mohamad Hindi (@mohindi) | @sabahcozinhaarabe | 24/07/2022 | CgZb33nOp1m |
+| 2 | Sampa Dicas (@sampadicas) | @sabahcozinhaarabe | 14/03/2024 | C4gLlb7vTn- |
+| 3 | Desbrava São Paulo (@desbravasaopaulo) | @desbravasaopaulo | 12/12/2024 | DDf0zFAuNwk |
+| 4 | Paulistano por aí (@paulistanoporai) | @paulistanoporai | 07/08/2025 | DNEhauZuOIk |
+| 5 | Turistando SP (@turistandosp) | @turistandosp | 18/10/2022 | Cj30kWiJXQM |
+| 6 | Anna Campos e Rogerio (@dicas.em.sp) | @dicas.em.sp | 27/06/2024 | C8vHG1nxdL5 |
+| 7 | Juliana Mendes (@j.u.mendes) | @j.u.mendes | 02/09/2025 | DOHQ3RYkmkn |
+| 8 | Jornaliz (@jornaliz_) | @jornaliz_ | 03/01/2024 | C1pvUAjv44E |
+| 9 | Aline Souza (@alinesouzatb) | @alinesouzatb | 27/05/2026 | DY25eqDp9Wr |
 
-Entraram os três que têm capa aprovada (as do site anterior). Os outros links de referência do briefing têm autoria conferida, mas não têm capa aprovada: @dicas.em.sp (C8vHG1nxdL5, 27/06/2024), @jornaliz_ (C1pvUAjv44E, 03/01/2024), @paulistanoporai (DNEhauZuOIk, 07/08/2025), @desbravasaopaulo (DDf0zFAuNwk, 12/12/2024), @aceitaessadica (DHBeMsaMtPJ, 10/03/2025), @alinesouzatb (DY25eqDp9Wr, 27/05/2026), @j.u.mendes (DOHQ3RYkmkn, 02/09/2025) e @andreyakb (C-X265kOTrw, 07/08/2024).
+Cada link é `https://www.instagram.com/p/<post>/`. Os dois primeiros vídeos estão publicados no perfil do Sabah, e o card informa isso.
 
 ## Pendências que dependem do Sabah
 
-1. **Capas dos vídeos**: as três capas vêm dos cards do site anterior e têm só 260 px de largura. Enviar as capas originais, ou autorizar o uso das capas dos posts, para melhorar a nitidez e incluir criadores mais recentes.
-2. **@ dos criadores**: `@sampadicas` e `@mohindi` foram copiados dos cards do site anterior; os dois vídeos estão publicados no perfil do Sabah. Confirmar os perfis.
-3. **Esfiha campeã**: a foto usada (DSC00801) mostra uma esfiha fechada com recheio de carne. Confirmar que é a receita que venceu no SBT. O nome "Esfiha SBT" ficou fora da página até essa confirmação.
-4. **Horário do jantar**: a página usa 19h às 22h, todos os dias. O cardápio em PDF e o link-in-bio dizem 19h às 21h45. Confirmar.
-5. **Bebidas e sobremesas**: as menções a "sobremesa incluída" e "bebidas" saíram do almoço, do jantar e da FAQ até o Sabah confirmar o que está incluído em cada serviço.
-6. **Reserva para grupos**: a página não informa número mínimo de pessoas. Publicar só se o Sabah definir esse limite.
-7. **Horário da entrega pelo iFood** (11h às 21h45) e **faixa de 50 a 200 convidados** do buffet a domicílio vieram do site anterior. Confirmar.
-8. **Foto da entrega do prêmio GoWhere ou selo oficial**: não há material aprovado; o bloco ficou sem imagem.
-9. **Orçamento de eventos**: o formulário abre o WhatsApp com a mensagem pronta (não há backend). Confirmar se o Sabah também quer receber por e-mail.
-10. **FAQ**: "não precisa ser sócio do Club Homs" foi deduzido do site atual. Confirmar.
-11. **Estacionamento**: tarifas e convênio não foram detalhados.
-12. **Legenda da foto da família**: "Bruno e Nilton Sabbag". Confirmar. O acervo 2026 tem retratos novos, ainda não usados.
-13. **Michui de frango**: foto identificada pelo cardápio. Confirmar que é esse o prato.
+1. **Arte do Sr. Nilton (campanha "Sahtein")**: o recorte do personagem em PNG ou WebP transparente não foi entregue (o link do briefing exige login no ChatGPT). O bloco está no ar só com o texto e a dica expansível; o layout já prevê a coluna do personagem.
+2. **Prévia das lanternas**: a referência visual também está num link do ChatGPT. As lanternas foram desenhadas do zero, em SVG, seguindo a descrição do briefing. Validar o desenho.
+3. **Parceiros e Guias Gastronômicos**: essa seção não existe na prévia (saiu na primeira versão). Se deve voltar, enviar os logos e a lista de parceiros.
+4. **Beirute de kafta e charutinhos**: escolhi no acervo as fotos DSC01155 (sanduíche tostado no pão sírio), DSC00440 (uva) e DSC00458 (repolho). Confirmar que são esses os pratos.
+5. **Monte seu combinado**: a foto vem da página "prato executivo / combinado" do cardápio. Os três grupos foram copiados do cardápio do salão vigente. Confirmar foto e grupos.
+6. **Esfiha doce**: a foto indicada (DSC01361) foi legendada como esfiha de chocolate, conforme o briefing.
+7. **Capas dos vídeos**: são as miniaturas dos próprios posts (360 px de largura). Com os arquivos originais a nitidez melhora. Confirmar a autorização de uso com os criadores.
+8. **@ dos criadores**: `@sampadicas` e `@mohindi` vieram dos cards do site anterior; os dois vídeos estão no perfil do Sabah.
+9. **Esfiha campeã**: confirmar que a foto DSC00801 é a receita que venceu no SBT. O nome "Esfiha SBT" segue fora da página.
+10. **Horário do jantar**: a página usa 19h às 22h. O cardápio em PDF e o link-in-bio dizem 21h45.
+11. **Reserva para grupos**: sem número mínimo de pessoas publicado.
+12. **Molho de alho** não é citado no trio de pastas, por falta de confirmação de que fica na bancada.
+13. **Horário da entrega pelo iFood** (11h às 21h45) e **faixa de 50 a 200 convidados** do buffet a domicílio vieram do site anterior.
+14. **Foto da entrega do prêmio GoWhere ou selo oficial**: sem material aprovado; o bloco segue sem imagem.
+15. **FAQ**: "não precisa ser sócio do Club Homs" foi deduzido do site anterior. **Estacionamento**: tarifas e convênio não detalhados.
