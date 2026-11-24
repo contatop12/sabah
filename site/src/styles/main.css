@@ -923,22 +923,36 @@ html.js [data-reveal]:not(.is-in) .metro__here { opacity: 0; translate: -50% 8px
 /* Sr. Nilton: entre os pratos e as sobremesas */
 .nilton {
   display: grid; gap: 1.5rem; margin-block: clamp(2.5rem, 5vw, 4rem);
-  padding: clamp(1.4rem, 4vw, 2.5rem); background: var(--pao);
+  padding: clamp(1.4rem, 4vw, 2.5rem); background: #faeede;
   border-left: 5px solid var(--roma); border-radius: 4px var(--radius-lg) var(--radius-lg) 4px;
 }
-.nilton__art { justify-self: center; max-width: 240px; }
+/* a ilustração vem com o fundo creme da arte; o bloco usa a mesma cor e as bordas se desfazem */
+.nilton__art { justify-self: center; width: min(56vw, 230px); }
+.nilton__art picture { display: block; }
+.nilton__pose {
+  width: 100%; height: auto;
+  -webkit-mask-image: linear-gradient(to right, #000 86%, transparent), linear-gradient(to bottom, #000 90%, transparent);
+  -webkit-mask-composite: source-in;
+  mask-image: linear-gradient(to right, #000 86%, transparent), linear-gradient(to bottom, #000 90%, transparent);
+  mask-composite: intersect;
+}
+/* com a dica aberta entra a pose pensativa, quando ela existir */
+.nilton__pose--tip { display: none; }
+.nilton:has(.tip[open]) .nilton__art:has(.nilton__pose--tip) .nilton__pose:not(.nilton__pose--tip) { display: none; }
+.nilton:has(.tip[open]) .nilton__pose--tip { display: block; }
 .nilton__body { display: grid; gap: 0.7rem; justify-items: start; align-content: center; }
 .nilton__who { font-size: 0.95rem; font-weight: 700; color: var(--berinjela-suave); }
 .nilton__title { font-family: var(--display); font-weight: 400; font-size: clamp(1.9rem, 3.4vw, 2.7rem); line-height: 1.05; color: var(--roma); }
 .nilton__body p + p { margin-top: 0; }
 @media (min-width: 900px) {
-  .nilton:has(.nilton__art) { grid-template-columns: minmax(180px, 280px) 1fr; align-items: center; gap: clamp(2rem, 4vw, 3.5rem); }
+  .nilton { grid-template-columns: minmax(200px, 290px) 1fr; align-items: center; gap: clamp(2rem, 4vw, 3.5rem); }
+  .nilton__art { width: 100%; }
 }
 .tip { width: 100%; }
 .tip__btn { list-style: none; width: fit-content; margin-top: 0.4rem; }
 .tip__btn::-webkit-details-marker { display: none; }
 .tip[open] .tip__btn { --bg: var(--roma); --fg: var(--pao); }
-.tip__body { margin-top: 1rem; padding: 1rem 1.2rem; max-width: 60ch; background: var(--tahine); border-radius: var(--radius); }
+.tip__body { margin-top: 1rem; padding: 1rem 1.2rem; max-width: 60ch; background: var(--pao); border-radius: var(--radius); }
 .tip__q { font-weight: 800; color: var(--roma); }
 .tip__body p + p { margin-top: 0.3rem; }
 

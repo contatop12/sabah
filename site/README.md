@@ -114,13 +114,15 @@ Apoio: `instagram_click`, `video_click`, `video_play`, `award_click`, `reviews_c
 | Arroz Chairie | `bancada-chairie.jpg` | acervo 2026, DSC00474 (indicada no briefing) |
 | Charutinho de uva | `bancada-charuto-uva.jpg` | acervo 2026, DSC00440 (escolha minha) |
 | Charutinho de repolho | `bancada-charuto-repolho.jpg` | acervo 2026, DSC00458 (escolha minha) |
-| Kibes | `bancada-kibes.jpg`, montada com `kibe-cru.jpg`, `kibe-assado.jpg`, `kibe-frito-2026.jpg` | acervo 2026, DSC00360, DSC00880 e DSC00701 (indicadas no briefing) |
+| Kibes | `bancada-kibes.jpg` | montagem aprovada `kibes-cru-assado-frito.png` (cru, assado e frito), com as duas linhas divisórias removidas e as emendas igualadas, para os três pratos ficarem na mesma foto |
 | Legumes recheados | `bancada-legumes.jpg` | acervo 2026, DSC00523 (indicada no briefing) |
 | Faláfel | `prato-falafel.jpg` | site anterior |
 | Esfihas salgadas | `bancada-esfihas.jpg` | acervo 2026, DSC00073 (indicada no briefing) |
 | Sobremesas | `sobremesa-doces.jpg`, `sobremesa-pudim.jpg`, `sobremesa-frutas.jpg`, `sobremesa-esfiha-doce.jpg` | acervo 2026, DSC01217, DSC00080, DSC00084 e DSC01361 (indicadas no briefing) |
-| Combinado | `prato-montado.jpg` | cardápio em PDF (foto da página "prato executivo / combinado") |
-| Kebabs, esfihas | `kebab.jpg`, `esfihas-salgadas.jpg` | cardápio em PDF |
+| Combinado | `alacarte-combinado.jpg` | acervo 2026, DSC01096 (indicada no briefing) |
+| Kebabs | `kebab.jpg` | cardápio em PDF |
+| Esfihas (à la carte) | `alacarte-esfihas.jpg` | acervo 2026, DSC00999 (indicada no briefing) |
+| Sr. Nilton | `nilton-sahtein.png` | recorte da referência visual do bloco ("Sahtein! Dica do fundador do Sabah.png") |
 | Beirute de kafta | `alacarte-beirute.jpg` | acervo 2026, DSC01155 (escolha minha) |
 | Kibe frito | `kibe-frito-2026.jpg` | acervo 2026, DSC00701 |
 | Batata frita com zátar | `alacarte-batata.jpg` | acervo 2026, DSC00828 (indicada no briefing) |
@@ -153,11 +155,11 @@ Cada link é `https://www.instagram.com/p/<post>/`. Os dois primeiros vídeos es
 
 ## Pendências que dependem do Sabah
 
-1. **Arte do Sr. Nilton (campanha "Sahtein")**: o recorte do personagem em PNG ou WebP transparente não foi entregue (o link do briefing exige login no ChatGPT). O bloco está no ar só com o texto e a dica expansível; o layout já prevê a coluna do personagem.
+1. **Poses do Sr. Nilton**: a arte original da campanha com as duas poses não foi entregue (o link do briefing aponta para o arquivo dos kibes). A pose sorrindo com a placa foi recortada da referência visual do bloco, com fundo creme e baixa resolução (700 px). Falta a **pose pensativa**, que deve aparecer ao abrir a dica: hoje a dica abre com a mesma ilustração. Enviar as duas poses em PNG ou WebP transparente.
 2. **Lanternas e guirlanda**: foram redesenhadas em SVG a partir da imagem de referência enviada pela P12. Validar o desenho final.
 3. **Parceiros e Guias Gastronômicos**: essa seção não existe na prévia (saiu na primeira versão). Se deve voltar, enviar os logos e a lista de parceiros.
 4. **Beirute de kafta e charutinhos**: escolhi no acervo as fotos DSC01155 (sanduíche tostado no pão sírio), DSC00440 (uva) e DSC00458 (repolho). Confirmar que são esses os pratos.
-5. **Monte seu combinado**: a foto vem da página "prato executivo / combinado" do cardápio. Os três grupos foram copiados do cardápio do salão vigente. Confirmar foto e grupos.
+5. **Monte seu combinado**: os três grupos foram copiados do cardápio do salão vigente. Confirmar.
 6. **Esfiha doce**: a foto indicada (DSC01361) foi legendada como esfiha de chocolate, conforme o briefing.
 7. **Capas dos vídeos**: são as miniaturas dos próprios posts (360 px de largura). Com os arquivos originais a nitidez melhora. Confirmar a autorização de uso com os criadores.
 8. **@ dos criadores**: `@sampadicas` e `@mohindi` vieram dos cards do site anterior; os dois vídeos estão no perfil do Sabah.

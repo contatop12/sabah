@@ -133,8 +133,8 @@
     "fallbackWidth": 800
   },
   "bancada-kibes": {
-    "width": 2400,
-    "height": 1800,
+    "width": 1448,
+    "height": 1086,
     "widths": [
       400,
       800,
@@ -167,6 +167,15 @@
       800
     ],
     "fallbackWidth": 800
+  },
+  "nilton-sahtein": {
+    "width": 700,
+    "height": 810,
+    "widths": [
+      320,
+      640
+    ],
+    "fallbackWidth": 640
   },
   "sobremesa-doces": {
     "width": 2133,
@@ -205,13 +214,13 @@
     "fallbackWidth": 800
   },
   "alacarte-combinado": {
-    "width": 455,
-    "height": 341,
+    "width": 2133,
+    "height": 1600,
     "widths": [
       400,
-      455
+      800
     ],
-    "fallbackWidth": 455
+    "fallbackWidth": 800
   },
   "alacarte-kebab": {
     "width": 640,
@@ -232,13 +241,13 @@
     "fallbackWidth": 800
   },
   "alacarte-esfihas": {
-    "width": 480,
-    "height": 360,
+    "width": 2133,
+    "height": 1600,
     "widths": [
       400,
-      480
+      800
     ],
-    "fallbackWidth": 480
+    "fallbackWidth": 800
   },
   "alacarte-kibe-frito": {
     "width": 2133,
