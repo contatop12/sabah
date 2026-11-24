@@ -50,9 +50,11 @@ A hero usa os dois recortes aprovados no briefing de 24/11/2026, guardados em `m
 
 No celular o painel de conteúdo vem primeiro e a foto aparece inteira logo depois. No desktop o painel vinho fica à esquerda e a foto ocupa cerca de 58% da largura. Para trocar uma foto, substitua o arquivo e rode `npm run media`.
 
-### Lanternas e ornamentos
+### Painel da hero, lanternas e ornamentos
 
-São desenhos em SVG, definidos em `src/partials/icons.html` (`d-lantern`, `d-star`, `d-ornament`) e posicionados em `main.css` (`.hero__deco`, `.ornament`). Na hero: duas lanternas e três estrelas a partir de 1180 px, uma lanterna entre 900 e 1179 px e uma lanterna pequena no celular. Em Sobre o Sabah: um ornamento curto abaixo do título. A camada é decorativa, fica oculta de leitores de tela e não recebe foco nem cliques.
+O painel bordô segue a referência aprovada pela P12 em 24/11/2026 (imagem 1600 × 800 enviada na conversa): cor `#6e0211`, guirlanda no canto superior esquerdo com um fio de contas, duas lanternas à direita (uma pequena no alto e uma maior mais abaixo) e cinco estrelas, tudo em `#8b1c25`. O prêmio fica em uma linha a partir de 1340 px; o título ocupa três linhas no desktop.
+
+Os desenhos são SVG, definidos em `src/partials/icons.html` (`d-garland`, `d-lamp-bulb`, `d-lamp-cage`, `d-star`, `d-ornament`) e posicionados em `main.css` (`.hero__deco`, `.lamp`, `.ornament`). Entre 900 e 1179 px a lanterna grande some, para não ficar sobre o título; no celular fica só a lanterna pequena. Em Sobre o Sabah há um ornamento curto abaixo do título. A camada é decorativa, fica oculta de leitores de tela e não recebe foco nem cliques.
 
 ### O que você encontra no salão
 
@@ -152,7 +154,7 @@ Cada link é `https://www.instagram.com/p/<post>/`. Os dois primeiros vídeos es
 ## Pendências que dependem do Sabah
 
 1. **Arte do Sr. Nilton (campanha "Sahtein")**: o recorte do personagem em PNG ou WebP transparente não foi entregue (o link do briefing exige login no ChatGPT). O bloco está no ar só com o texto e a dica expansível; o layout já prevê a coluna do personagem.
-2. **Prévia das lanternas**: a referência visual também está num link do ChatGPT. As lanternas foram desenhadas do zero, em SVG, seguindo a descrição do briefing. Validar o desenho.
+2. **Lanternas e guirlanda**: foram redesenhadas em SVG a partir da imagem de referência enviada pela P12. Validar o desenho final.
 3. **Parceiros e Guias Gastronômicos**: essa seção não existe na prévia (saiu na primeira versão). Se deve voltar, enviar os logos e a lista de parceiros.
 4. **Beirute de kafta e charutinhos**: escolhi no acervo as fotos DSC01155 (sanduíche tostado no pão sírio), DSC00440 (uva) e DSC00458 (repolho). Confirmar que são esses os pratos.
 5. **Monte seu combinado**: a foto vem da página "prato executivo / combinado" do cardápio. Os três grupos foram copiados do cardápio do salão vigente. Confirmar foto e grupos.
