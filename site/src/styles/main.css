@@ -788,3 +788,159 @@ html.js [data-reveal]:not(.is-in) .metro__here { opacity: 0; translate: -50% 8px
   .top, .dock, .consent, .quote, .closing__bg { display: none !important; }
   body { background: #fff; }
 }
+
+/* ==========================================================================
+   Revisão de 24/11/2026: hero, lanternas, salão em abas, carrossel de vídeos
+   ========================================================================== */
+
+/* ---------- Hero: conteúdo primeiro, foto depois (celular); foto à direita (desktop) ---------- */
+.hero__text { order: 1; position: relative; overflow: hidden; }
+.hero__text > :not(.hero__deco) { position: relative; z-index: 1; }
+.hero__photo { order: 2; height: auto; aspect-ratio: 1036 / 777; }
+.hero__u {
+  text-decoration: underline; text-decoration-color: #f6d48c;
+  text-decoration-thickness: 2px; text-underline-offset: 0.24em;
+}
+.hero__lead { max-width: 30ch; }
+.hero__dinner { display: grid; gap: 0.15rem; }
+.hero__dinner-label { color: #f6d48c; font-weight: 800; font-size: 0.98rem; line-height: 1.3; }
+.hero__dinner-text { max-width: 34ch; color: var(--pao); font-size: 0.98rem; line-height: 1.45; }
+@media (max-width: 899px) {
+  .hero__text { padding: 1.25rem var(--gutter) 1.6rem; gap: 0.8rem; }
+  .hero__award { padding-right: 3.4rem; } /* deixa livre o canto da lanterna */
+}
+@media (min-width: 900px) {
+  .hero__photo { aspect-ratio: auto; }
+  .hero__lead { max-width: 28ch; }
+  .hero__dinner-label { font-size: 1.05rem; }
+  .hero__dinner-text { font-size: 1.08rem; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .hero__text > :nth-child(6) { animation-delay: 0.7s; }
+  .hero__text > .hero__deco { animation: hero-fade 1.6s var(--ease-out) 0.3s both; }
+}
+@keyframes hero-fade { from { opacity: 0; } }
+
+/* Lanternas: vinho sobre vinho, atrás do conteúdo, sem foco e sem cliques */
+.hero__deco { position: absolute; inset: 0; z-index: 0; pointer-events: none; color: #99252d; }
+.hero__lantern { position: absolute; top: 0; width: auto; max-width: none; }
+.hero__star { position: absolute; width: 14px; height: 14px; color: #a8343c; opacity: 0.75; }
+/* celular: uma lanterna pequena no canto superior direito */
+.hero__lantern--big, .hero__star { display: none; }
+.hero__lantern--small { right: 0.85rem; height: 104px; opacity: 0.85; }
+@media (min-width: 900px) {
+  /* recuo esquerdo proporcional: em telas muito largas o texto mantém largura para o título */
+  .hero__text { padding-left: clamp(var(--gutter), 4.5vw, 6.5rem); padding-block: 2rem; gap: 1.1rem; }
+}
+@media (min-width: 900px) and (max-width: 1179px) {
+  .hero__text { padding-right: 5.5rem; }
+  .hero__lantern--small { right: 0.9rem; height: 150px; }
+}
+/* desktop largo: duas lanternas de tamanhos diferentes e poucas estrelas perto do topo */
+@media (min-width: 1180px) {
+  /* a faixa direita do painel fica reservada às lanternas: o texto não chega até ela */
+  .hero__text { padding-right: clamp(9rem, 12.8vw, 11.5rem); }
+  .hero__lantern--big { display: block; right: 2%; height: min(44%, 300px); opacity: 0.5; }
+  .hero__lantern--small { right: 17%; height: min(25%, 170px); opacity: 0.8; }
+  .hero__star { display: block; }
+  .hero__star--a { right: 30%; top: 5%; }
+  .hero__star--b { right: 11%; top: 3.5%; width: 10px; height: 10px; }
+  .hero__star--c { right: 24%; top: 12%; width: 9px; height: 9px; opacity: 0.55; }
+}
+
+/* ---------- Almoço e jantar ---------- */
+.service__what { font-weight: 800; }
+.service__extra { color: var(--berinjela-suave); }
+
+/* ---------- O que você encontra no salão ---------- */
+.tabs__list { display: flex; gap: 0.25rem; margin: 1.25rem 0 1.5rem; border-bottom: 2px solid var(--linha); }
+.tabs__tab {
+  position: relative; margin-bottom: -2px; padding: 0.85rem 1.15rem; min-height: 48px;
+  background: none; border: 0; border-bottom: 3px solid transparent; border-radius: 10px 10px 0 0;
+  font-weight: 800; font-size: 1.02rem; color: var(--berinjela-suave); cursor: pointer;
+  transition: color 0.2s, background-color 0.2s, border-color 0.2s;
+}
+.tabs__tab:hover { color: var(--roma); }
+.tabs__tab[aria-selected="true"] { color: var(--roma); border-bottom-color: var(--roma); background: var(--pao); }
+.tabs__panel[hidden] { display: none; }
+.tabs__panel:focus-visible { outline-offset: 8px; }
+/* sem JavaScript os dois painéis aparecem: separa um do outro */
+.tabs:not(.is-ready) .tabs__panel + .tabs__panel { margin-top: 3rem; }
+.tabs__lead { margin-bottom: 1.5rem; font-size: clamp(1.1rem, 1.5vw, 1.28rem); font-weight: 700; }
+
+.cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.6rem 1rem; }
+.card { display: grid; gap: 0.3rem; align-content: start; }
+.card picture { display: block; overflow: hidden; margin-bottom: 0.5rem; border-radius: var(--radius); background: var(--homus); }
+.card__img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; transition: transform 0.9s var(--ease-out); }
+.card:hover .card__img { transform: scale(1.05); }
+.card__name { font-family: var(--display); font-weight: 400; font-size: clamp(1.2rem, 1.9vw, 1.5rem); line-height: 1.12; color: var(--roma); text-wrap: balance; }
+.card__sub { display: block; font-family: var(--text); font-weight: 700; font-size: 0.86rem; line-height: 1.35; color: var(--berinjela-suave); }
+.card__desc { font-size: 0.95rem; line-height: 1.45; color: var(--berinjela-suave); }
+.card__tag {
+  width: fit-content; margin-top: 0.15rem; padding: 0.22rem 0.65rem; border-radius: 999px;
+  background: var(--azeite); color: #fff; font-size: 0.8rem; font-weight: 800; line-height: 1.3;
+}
+@media (min-width: 900px) {
+  .cards { gap: 2.25rem 1.5rem; }
+  .cards--4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .cards--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+.salao__note { margin-top: 1.5rem; }
+.salao__h { margin: 0 0 1.25rem; font-family: var(--display); font-weight: 400; font-size: clamp(1.6rem, 2.6vw, 2.1rem); line-height: 1.1; color: var(--roma); }
+.salao__cta { display: flex; flex-wrap: wrap; gap: 0.75rem 1.25rem; align-items: center; margin-top: 2rem; max-width: none; }
+
+/* Opções do combinado (controle expansível dentro do card) */
+.more--card { margin-top: 0.35rem; }
+.more--card summary { padding: 0.7rem 0; font-size: 0.95rem; }
+.groups { display: grid; gap: 0.6rem; padding-bottom: 0.9rem; font-size: 0.93rem; line-height: 1.45; }
+.groups dt { font-weight: 800; color: var(--roma); }
+.groups dd { color: var(--berinjela-suave); }
+
+/* Sr. Nilton: entre os pratos e as sobremesas */
+.nilton {
+  display: grid; gap: 1.5rem; margin-block: clamp(2.5rem, 5vw, 4rem);
+  padding: clamp(1.4rem, 4vw, 2.5rem); background: var(--pao);
+  border-left: 5px solid var(--roma); border-radius: 4px var(--radius-lg) var(--radius-lg) 4px;
+}
+.nilton__art { justify-self: center; max-width: 240px; }
+.nilton__body { display: grid; gap: 0.7rem; justify-items: start; align-content: center; }
+.nilton__who { font-size: 0.95rem; font-weight: 700; color: var(--berinjela-suave); }
+.nilton__title { font-family: var(--display); font-weight: 400; font-size: clamp(1.9rem, 3.4vw, 2.7rem); line-height: 1.05; color: var(--roma); }
+.nilton__body p + p { margin-top: 0; }
+@media (min-width: 900px) {
+  .nilton:has(.nilton__art) { grid-template-columns: minmax(180px, 280px) 1fr; align-items: center; gap: clamp(2rem, 4vw, 3.5rem); }
+}
+.tip { width: 100%; }
+.tip__btn { list-style: none; width: fit-content; margin-top: 0.4rem; }
+.tip__btn::-webkit-details-marker { display: none; }
+.tip[open] .tip__btn { --bg: var(--roma); --fg: var(--pao); }
+.tip__body { margin-top: 1rem; padding: 1rem 1.2rem; max-width: 60ch; background: var(--tahine); border-radius: var(--radius); }
+.tip__q { font-weight: 800; color: var(--roma); }
+.tip__body p + p { margin-top: 0.3rem; }
+
+/* ---------- Sobre o Sabah: ornamento curto abaixo do título ---------- */
+.ornament { width: 132px; height: 16px; color: var(--roma); }
+
+/* ---------- Vídeos de quem visitou: carrossel ---------- */
+.visitors__head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 1rem 2rem; }
+.visitors__head > div:first-child { display: grid; gap: 1.1rem; }
+.carousel__nav { display: flex; gap: 0.5rem; }
+.carousel__nav[hidden] { display: none; }
+.carousel__btn {
+  display: grid; place-items: center; width: 48px; height: 48px; padding: 0; border-radius: 50%;
+  border: 2px solid var(--roma); background: none; color: var(--roma); cursor: pointer;
+  transition: background-color 0.2s, color 0.2s, opacity 0.2s;
+}
+.carousel__btn svg { width: 1.3rem; height: 1.3rem; }
+[data-carousel-prev] svg { rotate: 90deg; }
+[data-carousel-next] svg { rotate: -90deg; }
+.carousel__btn:hover:not(:disabled) { background: var(--roma); color: var(--pao); }
+.carousel__btn:disabled { opacity: 0.35; cursor: default; }
+.visitors__list { grid-auto-columns: min(58vw, 230px); }
+.visitor__img { aspect-ratio: 9 / 16; }
+@media (min-width: 900px) {
+  .visitors__list {
+    grid-auto-flow: column; grid-template-columns: none; grid-auto-columns: 230px; gap: 1.5rem;
+    margin-inline: 0; padding: 0.25rem 0 1rem; overflow-x: auto; scroll-padding-inline: 0;
+  }
+}

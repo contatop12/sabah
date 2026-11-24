@@ -94,7 +94,7 @@ export const CONFIG = {
     slogan: "A Legítima Cozinha Árabe",
     title: "Sabah | Buffet Árabe na Avenida Paulista, São Paulo",
     description:
-      "Buffet árabe à vontade no almoço e no jantar, na Avenida Paulista, dentro do Club Homs. À noite, tem também rodízio de esfihas. Veja o cardápio e como chegar.",
+      "Buffet árabe à vontade no almoço e no jantar na Avenida Paulista, dentro do Club Homs. No jantar, tem rodízio de esfihas e bebidas à vontade.",
     ogImage: `${ORIGIN}/img/og-sabah.jpg`,
     foundingDate: "1993-05",
     foundingYear: "1993",
@@ -188,7 +188,7 @@ export const CONFIG = {
   },
 
   /** Datas usadas no sitemap e nos dados estruturados (AAAA-MM-DD). */
-  updated: "2026-11-23",
+  updated: "2026-11-24",
 } as const;
 
 export type Config = typeof CONFIG;

@@ -9,8 +9,9 @@
  * expande para <picture> com srcset, width e height corretos.
  *
  * Trocar uma foto = substituir o arquivo em media-src/ e rodar o script.
+ * Arquivos de public/img que saíram do manifesto são apagados no fim.
  */
-import { mkdir, writeFile } from "node:fs/promises";
+import { mkdir, readdir, unlink, writeFile } from "node:fs/promises";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import sharp from "sharp";
@@ -19,59 +20,68 @@ const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const SRC = resolve(ROOT, "media-src");
 const OUT = resolve(ROOT, "public/img");
 
+/** Cards de prato: foto horizontal 4:3, recorte centrado no assunto. */
+const card = (name, src, extra = {}) => ({ name, src, widths: [400, 800], ratio: 4 / 3, ...extra });
+/** Capas dos vídeos de criadores: miniatura do próprio post (360 x 640). */
+const cover = (id) => ({ name: `criador-${id}`, src: `criador-${id}.jpg`, widths: [360] });
+
 /**
  * name: nome público | src: arquivo em media-src | widths: larguras alvo
  * crop: recorte opcional em fração da imagem {left, top, width, height} (0–1)
  * ratio: proporção final opcional (largura/altura), corte centrado em `position`
  */
 const MANIFEST = [
-  // Hero: fotos aprovadas (briefing de 23/11/2026). Mesa com homus e pão, tabule,
-  // m'jadara e o prato com kafta, charutinho, coalhada, kibe cru e espeto de frango.
-  //   desktop = rodizio-arabe-sabah.png (1672 x 941, horizontal)
-  //   mobile  = buffet-arabe-a-vontade-sabah.png (1122 x 1402, vertical)
-  // No celular a foto aparece em faixa: o recorte tira o topo (cadeiras e fundo)
-  // e mantém o homus, o pão e o prato principal.
-  { name: "hero-desktop", src: "rodizio-arabe-sabah.png", widths: [900, 1400, 1672] },
-  { name: "hero-mobile", src: "buffet-arabe-a-vontade-sabah.png", widths: [480, 750, 1122], crop: { left: 0, top: 0.28, width: 1, height: 0.72 } },
+  // Hero: recortes aprovados no briefing de 24/11/2026 (mesa com esfihas ao fundo
+  // e homus sem grãos por cima). Desktop e mobile têm arquivos próprios.
+  { name: "hero-desktop", src: "sabah-banner-desktop.webp", widths: [600, 1037] },
+  { name: "hero-mobile", src: "sabah-banner-mobile.webp", widths: [480, 750, 1036] },
 
   { name: "buffet-bancada", src: "buffet-bancada.jpg", widths: [640, 1024, 1600, 2400], ratio: 16 / 9, position: "centre" },
-  { name: "buffet-salao", src: "buffet-salao-vertical.jpg", widths: [480, 800, 1200], ratio: 4 / 5, position: "centre" },
-  // Cartão do almoço: close da bancada (kibe cru, salada e cubas). Acervo 2026, DSC00050.
+  // Cartões de almoço e jantar
   { name: "buffet-almoco", src: "buffet-almoco.jpg", widths: [480, 800, 1200, 1600] },
-  { name: "buffet-cubas", src: "buffet-cubas.jpg", widths: [453] },
-  { name: "prato-montado", src: "prato-montado.jpg", widths: [455] },
+  { name: "esfihas-mesa", src: "esfihas-mesa.jpg", widths: [480, 720] },
   { name: "salao", src: "salao.jpg", widths: [640, 1024, 1600, 2400] },
 
-  { name: "prato-homus", src: "prato-homus.jpg", widths: [320, 480], ratio: 4 / 5 },
-  { name: "prato-tabule", src: "prato-tabule.jpg", widths: [320, 600], ratio: 4 / 5 },
-  { name: "prato-mjadara", src: "prato-mjadara.jpg", widths: [320, 600], ratio: 4 / 5 },
-  { name: "prato-charutos", src: "prato-charutos.jpg", widths: [320, 600], ratio: 4 / 5 },
-  { name: "prato-kafta", src: "prato-kafta.jpg", widths: [320, 640, 960], ratio: 4 / 5 },
-  { name: "prato-michui", src: "prato-michui.jpg", widths: [320, 560], ratio: 4 / 5 },
-  { name: "prato-kibe-cru", src: "prato-kibe-cru.jpg", widths: [320, 640, 960], ratio: 4 / 5 },
-  { name: "prato-falafel", src: "prato-falafel.jpg", widths: [320, 372], ratio: 4 / 5 },
-  { name: "prato-doces", src: "prato-doces.jpg", widths: [320, 480] },
+  // Bancada do buffet: 12 cards (acervo 2026 e fotos do cardápio)
+  card("bancada-trio", "prato-homus.jpg"),
+  card("bancada-tabule", "prato-tabule.jpg"),
+  card("bancada-kafta", "prato-kafta.jpg"),
+  card("bancada-michui", "prato-michui.jpg"),
+  card("bancada-mjadara", "bancada-mjadara.jpg"), // DSC00014
+  card("bancada-chairie", "bancada-chairie.jpg"), // DSC00474
+  card("bancada-charuto-uva", "bancada-charuto-uva.jpg"), // DSC00440
+  card("bancada-charuto-repolho", "bancada-charuto-repolho.jpg"), // DSC00458
+  // Um só quadro com os três kibes: cru, assado e frito (DSC00360, DSC00880, DSC00701)
+  card("bancada-kibes", "bancada-kibes.jpg", { widths: [400, 800, 1200] }),
+  card("bancada-legumes", "bancada-legumes.jpg"), // DSC00523: abobrinha e berinjela
+  card("bancada-falafel", "prato-falafel.jpg"),
+  card("bancada-esfihas", "bancada-esfihas.jpg"), // DSC00073: esfihas abertas de carne
+
+  // Sobremesas
+  card("sobremesa-doces", "sobremesa-doces.jpg"), // DSC01217
+  card("sobremesa-pudim", "sobremesa-pudim.jpg"), // DSC00080
+  card("sobremesa-frutas", "sobremesa-frutas.jpg"), // DSC00084
+  card("sobremesa-esfiha-doce", "sobremesa-esfiha-doce.jpg"), // DSC01361
+
+  // À la carte
+  card("alacarte-combinado", "prato-montado.jpg"),
+  card("alacarte-kebab", "kebab.jpg"),
+  card("alacarte-beirute", "alacarte-beirute.jpg"), // DSC01155
+  card("alacarte-esfihas", "esfihas-salgadas.jpg"),
+  card("alacarte-kibe-frito", "kibe-frito-2026.jpg"), // DSC00701
+  card("alacarte-batata", "alacarte-batata.jpg"), // DSC00828
 
   // Esfiha fechada de carne (campeã no SBT): uma inteira e outra cortada. Acervo 2026, DSC00801.
   { name: "esfiha-fechada-carne", src: "esfiha-fechada-carne.jpg", widths: [480, 800, 1200, 1600] },
-  { name: "esfihas-mesa", src: "esfihas-mesa.jpg", widths: [480, 720] },
-  { name: "esfihas-salgadas", src: "esfihas-salgadas.jpg", widths: [320, 480] },
-  { name: "kibe-frito", src: "kibe-frito.jpg", widths: [320, 600] },
   { name: "kebab", src: "kebab.jpg", widths: [480, 720] },
 
   { name: "familia-sabbag", src: "familia-sabbag.jpg", widths: [480, 957] },
-  { name: "placa-sabah", src: "placa-sabah.jpg", widths: [480, 800, 1260] },
   { name: "club-homs", src: "club-homs.jpg", widths: [400, 616] },
   { name: "como-chegar-poster", src: "como-chegar-poster.jpg", widths: [360, 720] },
   { name: "evento-mesa", src: "evento-mesa.jpg", widths: [480, 800, 1068] },
-  { name: "evento-dabke", src: "evento-dabke.jpg", widths: [480, 800, 1068] },
-  { name: "evento-buffet", src: "evento-buffet.jpg", widths: [480, 800, 1068] },
 
-  // Capas dos vídeos de quem visitou: área da foto dos cards "Eles Recomendam"
-  // do site anterior (260 x 366). Trocar por capas em alta quando o Sabah enviar.
-  { name: "criador-turistando", src: "criador-turistando.jpg", widths: [260] },
-  { name: "criador-sampa-dicas", src: "criador-sampa-dicas.jpg", widths: [260] },
-  { name: "criador-mohamad", src: "criador-mohamad.jpg", widths: [260] },
+  // Vídeos de quem visitou, na ordem em que aparecem no carrossel
+  ...["mohamad", "sampa-dicas", "desbrava", "paulistano", "turistando", "dicas-em-sp", "juliana-mendes", "jornaliz", "aline-souza"].map(cover),
 ];
 
 const AVIF = { quality: 52, effort: 6, chromaSubsampling: "4:2:0" };
@@ -80,7 +90,7 @@ const JPEG = { quality: 78, mozjpeg: true };
 
 async function prepared(item) {
   const input = resolve(SRC, item.src);
-  let meta = await sharp(input).metadata();
+  const meta = await sharp(input).metadata();
   let img = sharp(input);
   let w = meta.width;
   let h = meta.height;
@@ -112,6 +122,7 @@ async function prepared(item) {
 async function main() {
   await mkdir(OUT, { recursive: true });
   const media = {};
+  const keep = new Set(["og-sabah.jpg"]);
   let total = 0;
   for (const item of MANIFEST) {
     const { buffer, w, h } = await prepared(item);
@@ -120,13 +131,15 @@ async function main() {
       const base = sharp(buffer).resize({ width });
       const a = await base.clone().avif(AVIF).toFile(resolve(OUT, `${item.name}-${width}.avif`));
       const p = await base.clone().webp(WEBP).toFile(resolve(OUT, `${item.name}-${width}.webp`));
+      keep.add(`${item.name}-${width}.avif`).add(`${item.name}-${width}.webp`);
       total += a.size + p.size;
     }
     const fallbackWidth = widths[Math.min(1, widths.length - 1)];
     const j = await sharp(buffer).resize({ width: fallbackWidth }).jpeg(JPEG).toFile(resolve(OUT, `${item.name}.jpg`));
+    keep.add(`${item.name}.jpg`);
     total += j.size;
     media[item.name] = { width: w, height: h, widths, fallbackWidth };
-    console.log(`${item.name.padEnd(22)} ${w}x${h}  [${widths.join(", ")}]`);
+    console.log(`${item.name.padEnd(26)} ${w}x${h}  [${widths.join(", ")}]`);
   }
 
   // Logos (PNG com transparência -> WebP sem perdas + PNG)
@@ -135,18 +148,28 @@ async function main() {
     const meta = await sharp(input).metadata();
     await sharp(input).webp({ lossless: true, effort: 6 }).toFile(resolve(OUT, `${logo}.webp`));
     await sharp(input).png({ compressionLevel: 9, palette: true }).toFile(resolve(OUT, `${logo}.png`));
+    keep.add(`${logo}.webp`).add(`${logo}.png`);
     media[logo] = { width: meta.width, height: meta.height, widths: [meta.width], fallbackWidth: meta.width };
   }
 
-  // Imagem de compartilhamento (Open Graph) 1200x630
-  const og = await sharp(resolve(SRC, "rodizio-arabe-sabah.png"))
+  // Imagem de compartilhamento (Open Graph) 1200x630, a partir do banner da hero
+  const og = await sharp(resolve(SRC, "sabah-banner-desktop.webp"))
     .resize(1200, 630, { fit: "cover", position: "centre" })
     .jpeg({ quality: 82, mozjpeg: true })
     .toFile(resolve(OUT, "og-sabah.jpg"));
   total += og.size;
 
+  // Limpeza: tira de public/img o que não está mais no manifesto
+  let removed = 0;
+  for (const file of await readdir(OUT)) {
+    if (!keep.has(file)) {
+      await unlink(resolve(OUT, file));
+      removed++;
+    }
+  }
+
   await writeFile(resolve(ROOT, "src/media.json"), JSON.stringify(media, null, 2) + "\n");
-  console.log(`\n${Object.keys(media).length} imagens, ${(total / 1024 / 1024).toFixed(2)} MB em public/img`);
+  console.log(`\n${Object.keys(media).length} imagens, ${(total / 1024 / 1024).toFixed(2)} MB em public/img (${removed} arquivos antigos removidos)`);
 }
 
 main().catch((err) => {

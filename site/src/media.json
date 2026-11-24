@@ -1,21 +1,20 @@
 {
   "hero-desktop": {
-    "width": 1672,
-    "height": 941,
+    "width": 1037,
+    "height": 799,
     "widths": [
-      900,
-      1400,
-      1672
+      600,
+      1037
     ],
-    "fallbackWidth": 1400
+    "fallbackWidth": 1037
   },
   "hero-mobile": {
-    "width": 1122,
-    "height": 1009,
+    "width": 1036,
+    "height": 777,
     "widths": [
       480,
       750,
-      1122
+      1036
     ],
     "fallbackWidth": 750
   },
@@ -30,135 +29,7 @@
     ],
     "fallbackWidth": 1024
   },
-  "buffet-salao": {
-    "width": 2000,
-    "height": 2500,
-    "widths": [
-      480,
-      800,
-      1200
-    ],
-    "fallbackWidth": 800
-  },
   "buffet-almoco": {
-    "width": 2400,
-    "height": 1600,
-    "widths": [
-      480,
-      800,
-      1200,
-      1600
-    ],
-    "fallbackWidth": 800
-  },
-  "buffet-cubas": {
-    "width": 453,
-    "height": 491,
-    "widths": [
-      453
-    ],
-    "fallbackWidth": 453
-  },
-  "prato-montado": {
-    "width": 455,
-    "height": 722,
-    "widths": [
-      455
-    ],
-    "fallbackWidth": 455
-  },
-  "salao": {
-    "width": 3200,
-    "height": 2133,
-    "widths": [
-      640,
-      1024,
-      1600,
-      2400
-    ],
-    "fallbackWidth": 1024
-  },
-  "prato-homus": {
-    "width": 480,
-    "height": 600,
-    "widths": [
-      320,
-      480
-    ],
-    "fallbackWidth": 480
-  },
-  "prato-tabule": {
-    "width": 320,
-    "height": 400,
-    "widths": [
-      320
-    ],
-    "fallbackWidth": 320
-  },
-  "prato-mjadara": {
-    "width": 320,
-    "height": 400,
-    "widths": [
-      320
-    ],
-    "fallbackWidth": 320
-  },
-  "prato-charutos": {
-    "width": 391,
-    "height": 489,
-    "widths": [
-      320,
-      391
-    ],
-    "fallbackWidth": 391
-  },
-  "prato-kafta": {
-    "width": 960,
-    "height": 1200,
-    "widths": [
-      320,
-      640,
-      960
-    ],
-    "fallbackWidth": 640
-  },
-  "prato-michui": {
-    "width": 560,
-    "height": 700,
-    "widths": [
-      320,
-      560
-    ],
-    "fallbackWidth": 560
-  },
-  "prato-kibe-cru": {
-    "width": 960,
-    "height": 1200,
-    "widths": [
-      320,
-      640,
-      960
-    ],
-    "fallbackWidth": 640
-  },
-  "prato-falafel": {
-    "width": 238,
-    "height": 298,
-    "widths": [
-      238
-    ],
-    "fallbackWidth": 238
-  },
-  "prato-doces": {
-    "width": 480,
-    "height": 720,
-    "widths": [
-      320,
-      480
-    ],
-    "fallbackWidth": 480
-  },
-  "esfiha-fechada-carne": {
     "width": 2400,
     "height": 1600,
     "widths": [
@@ -178,23 +49,225 @@
     ],
     "fallbackWidth": 720
   },
-  "esfihas-salgadas": {
-    "width": 480,
-    "height": 720,
+  "salao": {
+    "width": 3200,
+    "height": 2133,
     "widths": [
-      320,
+      640,
+      1024,
+      1600,
+      2400
+    ],
+    "fallbackWidth": 1024
+  },
+  "bancada-trio": {
+    "width": 480,
+    "height": 360,
+    "widths": [
+      400,
       480
     ],
     "fallbackWidth": 480
   },
-  "kibe-frito": {
-    "width": 600,
+  "bancada-tabule": {
+    "width": 533,
     "height": 400,
     "widths": [
-      320,
-      600
+      400,
+      533
     ],
-    "fallbackWidth": 600
+    "fallbackWidth": 533
+  },
+  "bancada-kafta": {
+    "width": 1600,
+    "height": 1200,
+    "widths": [
+      400,
+      800
+    ],
+    "fallbackWidth": 800
+  },
+  "bancada-michui": {
+    "width": 560,
+    "height": 420,
+    "widths": [
+      400,
+      560
+    ],
+    "fallbackWidth": 560
+  },
+  "bancada-mjadara": {
+    "width": 1600,
+    "height": 1200,
+    "widths": [
+      400,
+      800
+    ],
+    "fallbackWidth": 800
+  },
+  "bancada-chairie": {
+    "width": 2133,
+    "height": 1600,
+    "widths": [
+      400,
+      800
+    ],
+    "fallbackWidth": 800
+  },
+  "bancada-charuto-uva": {
+    "width": 2133,
+    "height": 1600,
+    "widths": [
+      400,
+      800
+    ],
+    "fallbackWidth": 800
+  },
+  "bancada-charuto-repolho": {
+    "width": 2133,
+    "height": 1600,
+    "widths": [
+      400,
+      800
+    ],
+    "fallbackWidth": 800
+  },
+  "bancada-kibes": {
+    "width": 2400,
+    "height": 1800,
+    "widths": [
+      400,
+      800,
+      1200
+    ],
+    "fallbackWidth": 800
+  },
+  "bancada-legumes": {
+    "width": 1600,
+    "height": 1200,
+    "widths": [
+      400,
+      800
+    ],
+    "fallbackWidth": 800
+  },
+  "bancada-falafel": {
+    "width": 397,
+    "height": 298,
+    "widths": [
+      397
+    ],
+    "fallbackWidth": 397
+  },
+  "bancada-esfihas": {
+    "width": 2133,
+    "height": 1600,
+    "widths": [
+      400,
+      800
+    ],
+    "fallbackWidth": 800
+  },
+  "sobremesa-doces": {
+    "width": 2133,
+    "height": 1600,
+    "widths": [
+      400,
+      800
+    ],
+    "fallbackWidth": 800
+  },
+  "sobremesa-pudim": {
+    "width": 2133,
+    "height": 1600,
+    "widths": [
+      400,
+      800
+    ],
+    "fallbackWidth": 800
+  },
+  "sobremesa-frutas": {
+    "width": 2133,
+    "height": 1600,
+    "widths": [
+      400,
+      800
+    ],
+    "fallbackWidth": 800
+  },
+  "sobremesa-esfiha-doce": {
+    "width": 1600,
+    "height": 1200,
+    "widths": [
+      400,
+      800
+    ],
+    "fallbackWidth": 800
+  },
+  "alacarte-combinado": {
+    "width": 455,
+    "height": 341,
+    "widths": [
+      400,
+      455
+    ],
+    "fallbackWidth": 455
+  },
+  "alacarte-kebab": {
+    "width": 640,
+    "height": 480,
+    "widths": [
+      400,
+      640
+    ],
+    "fallbackWidth": 640
+  },
+  "alacarte-beirute": {
+    "width": 2133,
+    "height": 1600,
+    "widths": [
+      400,
+      800
+    ],
+    "fallbackWidth": 800
+  },
+  "alacarte-esfihas": {
+    "width": 480,
+    "height": 360,
+    "widths": [
+      400,
+      480
+    ],
+    "fallbackWidth": 480
+  },
+  "alacarte-kibe-frito": {
+    "width": 2133,
+    "height": 1600,
+    "widths": [
+      400,
+      800
+    ],
+    "fallbackWidth": 800
+  },
+  "alacarte-batata": {
+    "width": 2133,
+    "height": 1600,
+    "widths": [
+      400,
+      800
+    ],
+    "fallbackWidth": 800
+  },
+  "esfiha-fechada-carne": {
+    "width": 2400,
+    "height": 1600,
+    "widths": [
+      480,
+      800,
+      1200,
+      1600
+    ],
+    "fallbackWidth": 800
   },
   "kebab": {
     "width": 720,
@@ -213,16 +286,6 @@
       957
     ],
     "fallbackWidth": 957
-  },
-  "placa-sabah": {
-    "width": 1260,
-    "height": 840,
-    "widths": [
-      480,
-      800,
-      1260
-    ],
-    "fallbackWidth": 800
   },
   "club-homs": {
     "width": 616,
@@ -252,49 +315,77 @@
     ],
     "fallbackWidth": 800
   },
-  "evento-dabke": {
-    "width": 1068,
-    "height": 600,
+  "criador-mohamad": {
+    "width": 360,
+    "height": 640,
     "widths": [
-      480,
-      800,
-      1068
+      360
     ],
-    "fallbackWidth": 800
-  },
-  "evento-buffet": {
-    "width": 1068,
-    "height": 600,
-    "widths": [
-      480,
-      800,
-      1068
-    ],
-    "fallbackWidth": 800
-  },
-  "criador-turistando": {
-    "width": 260,
-    "height": 366,
-    "widths": [
-      260
-    ],
-    "fallbackWidth": 260
+    "fallbackWidth": 360
   },
   "criador-sampa-dicas": {
-    "width": 260,
-    "height": 366,
+    "width": 360,
+    "height": 640,
     "widths": [
-      260
+      360
     ],
-    "fallbackWidth": 260
+    "fallbackWidth": 360
   },
-  "criador-mohamad": {
-    "width": 260,
-    "height": 366,
+  "criador-desbrava": {
+    "width": 361,
+    "height": 640,
     "widths": [
-      260
+      360
     ],
-    "fallbackWidth": 260
+    "fallbackWidth": 360
+  },
+  "criador-paulistano": {
+    "width": 361,
+    "height": 640,
+    "widths": [
+      360
+    ],
+    "fallbackWidth": 360
+  },
+  "criador-turistando": {
+    "width": 360,
+    "height": 640,
+    "widths": [
+      360
+    ],
+    "fallbackWidth": 360
+  },
+  "criador-dicas-em-sp": {
+    "width": 360,
+    "height": 640,
+    "widths": [
+      360
+    ],
+    "fallbackWidth": 360
+  },
+  "criador-juliana-mendes": {
+    "width": 361,
+    "height": 640,
+    "widths": [
+      360
+    ],
+    "fallbackWidth": 360
+  },
+  "criador-jornaliz": {
+    "width": 360,
+    "height": 640,
+    "widths": [
+      360
+    ],
+    "fallbackWidth": 360
+  },
+  "criador-aline-souza": {
+    "width": 360,
+    "height": 640,
+    "widths": [
+      360
+    ],
+    "fallbackWidth": 360
   },
   "logo-vermelho": {
     "width": 247,

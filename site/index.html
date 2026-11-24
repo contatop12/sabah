@@ -13,10 +13,10 @@
 
   <!-- Hero (LCP): pré-carrega só a variante usada na tela -->
   <link rel="preload" as="image" type="image/avif" media="(max-width: 899px)"
-    imagesrcset="/img/hero-mobile-480.avif 480w, /img/hero-mobile-750.avif 750w, /img/hero-mobile-1122.avif 1122w"
+    imagesrcset="/img/hero-mobile-480.avif 480w, /img/hero-mobile-750.avif 750w, /img/hero-mobile-1036.avif 1036w"
     imagesizes="100vw" fetchpriority="high" />
   <link rel="preload" as="image" type="image/avif" media="(min-width: 900px)"
-    imagesrcset="/img/hero-desktop-900.avif 900w, /img/hero-desktop-1400.avif 1400w, /img/hero-desktop-1672.avif 1672w"
+    imagesrcset="/img/hero-desktop-600.avif 600w, /img/hero-desktop-1037.avif 1037w"
     imagesizes="58vw" fetchpriority="high" />
 
   <!-- Navegação provável: busca as páginas internas e o cardápio com antecedência -->
@@ -36,35 +36,48 @@
 
     <!-- ================= HERO ================= -->
     <section class="hero" id="inicio" aria-labelledby="hero-title">
-      <div class="hero__photo">
-        <!-- Fotos aprovadas: vertical no celular (buffet-arabe-a-vontade-sabah.png)
-             e horizontal no desktop (rodizio-arabe-sabah.png). Sem filtro sobre a foto. -->
-        <picture>
-          <source media="(max-width: 899px)" type="image/avif" sizes="100vw"
-            srcset="/img/hero-mobile-480.avif 480w, /img/hero-mobile-750.avif 750w, /img/hero-mobile-1122.avif 1122w" />
-          <source media="(max-width: 899px)" type="image/webp" sizes="100vw"
-            srcset="/img/hero-mobile-480.webp 480w, /img/hero-mobile-750.webp 750w, /img/hero-mobile-1122.webp 1122w" />
-          <source type="image/avif" sizes="58vw"
-            srcset="/img/hero-desktop-900.avif 900w, /img/hero-desktop-1400.avif 1400w, /img/hero-desktop-1672.avif 1672w" />
-          <source type="image/webp" sizes="58vw"
-            srcset="/img/hero-desktop-900.webp 900w, /img/hero-desktop-1400.webp 1400w, /img/hero-desktop-1672.webp 1672w" />
-          <img src="/img/hero-desktop.jpg" width="1400" height="788" fetchpriority="high" decoding="async"
-            alt="Mesa do Sabah com homus e pão árabe, tabule, m'jadara e um prato com kafta, charutinho de folha de uva, coalhada seca, kibe cru e espeto de frango" />
-        </picture>
-      </div>
-
       <div class="hero__text">
         <a class="hero__award" href="#reconhecimentos">
           <svg aria-hidden="true"><use href="#i-trophy"/></svg>
-          <span>1º lugar na categoria Árabe · Campeões da Gastronomia 2026</span>
+          <span>1º lugar em Culinária Árabe · Campeões da Gastronomia 2026</span>
         </a>
         <h1 id="hero-title" class="hero__title">Buffet árabe à vontade na Paulista</h1>
-        <p class="hero__lead">Almoço e jantar dentro do Club Homs, com uma bancada farta de receitas da família Sabbag. À noite, tem também rodízio de esfihas.</p>
+        <p class="hero__lead">Receitas da família Sabbag no <span class="hero__u">almoço e no jantar</span>, dentro do Club Homs.</p>
+        <div class="hero__dinner">
+          <p class="hero__dinner-label">No jantar</p>
+          <p class="hero__dinner-text">Inclui também Rodízio de Esfihas e Bebidas à vontade, incluindo Heineken.</p>
+        </div>
         <div class="hero__ctas">
           <a class="btn btn--light" href="#buffet">Ver almoço e jantar</a>
           <a class="btn btn--outline-light" href="{{links.maps}}" target="_blank" rel="noopener" data-track="route_click" data-loc="hero">Como chegar</a>
         </div>
         <p class="hero__status" data-open-status aria-live="polite"></p>
+
+        <!-- Lanternas: camada decorativa, vinho sobre vinho. Fora da leitura, sem foco e sem cliques.
+             Desktop: duas lanternas à direita do painel e poucas estrelas. Celular: uma lanterna pequena. -->
+        <div class="hero__deco" aria-hidden="true">
+          <svg class="hero__lantern hero__lantern--big" viewBox="0 0 120 420" focusable="false"><use href="#d-lantern"/></svg>
+          <svg class="hero__lantern hero__lantern--small" viewBox="0 110 120 310" focusable="false"><use href="#d-lantern"/></svg>
+          <svg class="hero__star hero__star--a" viewBox="0 0 24 24" focusable="false"><use href="#d-star"/></svg>
+          <svg class="hero__star hero__star--b" viewBox="0 0 24 24" focusable="false"><use href="#d-star"/></svg>
+          <svg class="hero__star hero__star--c" viewBox="0 0 24 24" focusable="false"><use href="#d-star"/></svg>
+        </div>
+      </div>
+
+      <div class="hero__photo">
+        <!-- Recortes aprovados: sabah-banner-mobile.webp no celular e sabah-banner-desktop.webp no desktop -->
+        <picture>
+          <source media="(max-width: 899px)" type="image/avif" sizes="100vw"
+            srcset="/img/hero-mobile-480.avif 480w, /img/hero-mobile-750.avif 750w, /img/hero-mobile-1036.avif 1036w" />
+          <source media="(max-width: 899px)" type="image/webp" sizes="100vw"
+            srcset="/img/hero-mobile-480.webp 480w, /img/hero-mobile-750.webp 750w, /img/hero-mobile-1036.webp 1036w" />
+          <source type="image/avif" sizes="58vw"
+            srcset="/img/hero-desktop-600.avif 600w, /img/hero-desktop-1037.avif 1037w" />
+          <source type="image/webp" sizes="58vw"
+            srcset="/img/hero-desktop-600.webp 600w, /img/hero-desktop-1037.webp 1037w" />
+          <img src="/img/hero-desktop.jpg" width="1037" height="799" fetchpriority="high" decoding="async"
+            alt="Mesa com pratos da cozinha árabe, incluindo homus, tabule e esfihas fechadas" />
+        </picture>
       </div>
     </section>
 
@@ -91,7 +104,8 @@
           </figure>
           <div class="service__body">
             <h3 id="almoco-title" class="service__name">Almoço</h3>
-            <p class="service__what">Buffet árabe à vontade</p>
+            <p class="service__what">Buffet árabe à vontade com receitas da família Sabbag.</p>
+            <p class="service__extra">As esfihas salgadas também estão disponíveis na bancada do almoço.</p>
             <dl class="service__hours">
               <div><dt>Segunda a sexta</dt><dd>{{hours.lunchWeekdays}}</dd></div>
               <div><dt>Sábados, domingos e feriados</dt><dd>{{hours.lunchWeekend}}</dd></div>
@@ -108,7 +122,7 @@
           </figure>
           <div class="service__body">
             <h3 id="jantar-title" class="service__name">Jantar</h3>
-            <p class="service__what">Buffet árabe à vontade e rodízio de esfihas à mesa</p>
+            <p class="service__what">A mesma bancada de buffet árabe, com rodízio de esfihas à mesa e bebidas à vontade, incluindo Heineken.</p>
             <dl class="service__hours">
               <div><dt>Todos os dias</dt><dd>{{hours.dinner}}</dd></div>
             </dl>
@@ -121,57 +135,7 @@
         </article>
       </div>
 
-      <div class="wrap">
-        <h3 class="h3 buffet__sub" data-reveal>O que tem na bancada</h3>
-        <p class="buffet__hint" data-reveal>Se a cozinha árabe é novidade para você, comece por aqui.</p>
-      </div>
-
-      <ul class="dishes" aria-label="Pratos do buffet" data-dishes>
-        <li class="dish" data-reveal>
-          <x-img name="prato-homus" class="dish__img" sizes="(min-width: 1100px) 22vw, (min-width: 700px) 30vw, 64vw" alt="Trio de pastas árabes do Sabah: homus, coalhada seca e babaganuche"></x-img>
-          <h4 class="dish__name">Trio de pastas árabes</h4>
-          <p class="dish__desc">Homus, coalhada seca e babaganuche para comer com pão árabe.</p>
-        </li>
-        <li class="dish" data-reveal>
-          <x-img name="prato-tabule" class="dish__img" sizes="(min-width: 1100px) 22vw, (min-width: 700px) 30vw, 64vw" alt="Tigela de tabule do Sabah"></x-img>
-          <h4 class="dish__name">Tabule</h4>
-          <p class="dish__desc">Salada fresca de salsinha, tomate e trigo.</p>
-        </li>
-        <li class="dish" data-reveal>
-          <x-img name="prato-mjadara" class="dish__img" sizes="(min-width: 1100px) 22vw, (min-width: 700px) 30vw, 64vw" alt="Prato de m'jadara com cebola dourada por cima"></x-img>
-          <h4 class="dish__name">M’jadara</h4>
-          <p class="dish__desc">Arroz com lentilhas e cebola dourada.</p>
-        </li>
-        <li class="dish" data-reveal>
-          <x-img name="prato-charutos" class="dish__img" sizes="(min-width: 1100px) 22vw, (min-width: 700px) 30vw, 64vw" alt="Charutinhos de repolho recheados do Sabah"></x-img>
-          <h4 class="dish__name">Charutinhos</h4>
-          <p class="dish__desc">Folhas de uva ou de repolho enroladas e recheadas. Na foto, os de repolho.</p>
-        </li>
-        <li class="dish" data-reveal>
-          <x-img name="prato-kafta" class="dish__img" sizes="(min-width: 1100px) 22vw, (min-width: 700px) 30vw, 64vw" alt="Espetos de kafta do Sabah com hortelã"></x-img>
-          <h4 class="dish__name">Kafta</h4>
-          <p class="dish__desc">Carne moída temperada, moldada no espeto e grelhada.</p>
-        </li>
-        <li class="dish" data-reveal>
-          <x-img name="prato-michui" class="dish__img" sizes="(min-width: 1100px) 22vw, (min-width: 700px) 30vw, 64vw" alt="Espeto de michui de frango grelhado"></x-img>
-          <h4 class="dish__name">Michui de frango</h4>
-          <p class="dish__desc">Espeto de frango temperado e grelhado.</p>
-        </li>
-        <li class="dish" data-reveal>
-          <x-img name="prato-kibe-cru" class="dish__img" sizes="(min-width: 1100px) 22vw, (min-width: 700px) 30vw, 64vw" alt="Kibe cru do Sabah decorado com hortelã"></x-img>
-          <h4 class="dish__name">Kibe cru</h4>
-          <p class="dish__desc">Carne crua com trigo, servida com cebola, hortelã e azeite.</p>
-        </li>
-        <li class="dish" data-reveal>
-          <x-img name="prato-falafel" class="dish__img" sizes="(min-width: 1100px) 22vw, (min-width: 700px) 30vw, 64vw" alt="Faláfel do Sabah partido ao meio"></x-img>
-          <h4 class="dish__name">Faláfel</h4>
-          <p class="dish__desc">Bolinho frito de grão-de-bico, crocante por fora.</p>
-        </li>
-      </ul>
-
-      <div class="wrap buffet__end" data-reveal>
-        <p class="fine">Os pratos da bancada podem variar conforme o dia.</p>
-      </div>
+      <!--@include salao-->
     </section>
 
     <!-- ================= RECONHECIMENTOS ================= -->
@@ -214,11 +178,17 @@
     <!-- ================= QUEM VISITOU ================= -->
     <section class="sec visitors" id="quem-visitou" aria-labelledby="visitors-title">
       <div class="wrap">
-        <header class="sec__head" data-reveal>
-          <h2 id="visitors-title" class="h2">O Sabah pelos olhos de quem visitou</h2>
-          <p class="lead">Três vídeos de quem veio conhecer o Sabah. Cada um abre no Instagram, na publicação original.</p>
+        <header class="sec__head visitors__head" data-reveal>
+          <div>
+            <h2 id="visitors-title" class="h2">O Sabah pelos olhos de quem visitou</h2>
+            <p class="lead">Vídeos de quem veio conhecer o Sabah. Cada um abre no Instagram, na publicação original.</p>
+          </div>
+          <div class="carousel__nav" data-carousel-nav hidden>
+            <button class="carousel__btn" type="button" data-carousel-prev aria-controls="visitors-list" aria-label="Vídeos anteriores"><svg aria-hidden="true"><use href="#i-chevron"/></svg></button>
+            <button class="carousel__btn" type="button" data-carousel-next aria-controls="visitors-list" aria-label="Próximos vídeos"><svg aria-hidden="true"><use href="#i-chevron"/></svg></button>
+          </div>
         </header>
-        <ul class="visitors__list">
+        <ul class="visitors__list" id="visitors-list" data-carousel tabindex="0" aria-label="Vídeos de quem visitou o Sabah">
 <!--@visitors-->
         </ul>
       </div>
@@ -233,6 +203,7 @@
         </figure>
         <div class="story__text" data-reveal>
           <h2 id="story-title" class="h2">Sobre o Sabah</h2>
+          <svg class="ornament" viewBox="0 0 132 16" aria-hidden="true" focusable="false"><use href="#d-ornament"/></svg>
           <p class="lead">As receitas da família Sabbag estão à mesa desde 1993. O Sabah abriu as portas em maio daquele ano e ficou conhecido primeiro pelas esfihas e pelos kibes. Depois vieram os pratos e os doces tradicionais que hoje enchem a bancada.</p>
           <p>Quem cuida da casa é a família Sabbag: Nilton, o fundador, e Bruno, seu filho e sócio. As receitas e os modos de preparo vieram das matriarcas da família e continuam sendo seguidos à risca.</p>
           <p>Um exemplo é a pimenta síria caseira, que tempera a esfiha de carne e o kibe com notas de canela, cravo e limão. Até hoje, os temperos da casa são preparados pelo fundador.</p>
