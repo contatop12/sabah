@@ -57,9 +57,8 @@
               </li>
 
               <li class="card" data-reveal>
-                <x-img name="bancada-kibes" class="card__img" sizes="(min-width: 900px) 280px, 46vw" alt="Três kibes do Sabah lado a lado: cru, assado e frito"></x-img>
-                <h4 class="card__name">Kibes <span class="card__sub">(Cru, Assado e Frito)</span></h4>
-                <p class="card__desc">Na foto, da esquerda para a direita: cru, assado e frito.</p>
+                <x-img name="bancada-kibes" class="card__img" sizes="(min-width: 900px) 280px, 46vw" alt="Kibes do Sabah em três preparos: cru, assado e frito, da esquerda para a direita."></x-img>
+                <h4 class="card__name">Kibes <span class="card__sub">Cru, assado e frito</span></h4>
               </li>
               <li class="card" data-reveal>
                 <x-img name="bancada-legumes" class="card__img" sizes="(min-width: 900px) 280px, 46vw" alt="Abobrinha e berinjela recheadas no mesmo prato"></x-img>
@@ -79,17 +78,19 @@
             </ul>
             <p class="fine salao__note">Os pratos da bancada podem variar conforme o dia.</p>
 
-            <!-- Sr. Nilton, entre os pratos e as sobremesas.
-                 ARTE PENDENTE: o personagem da campanha "Sahtein" (sorrindo, roupa branca, placa na mão)
-                 ainda não foi entregue em PNG/WebP transparente. Quando chegar, salve em media-src/,
-                 inclua no manifesto e acrescente, como primeiro filho do aside, uma figure com a classe
-                 "nilton__art" contendo a imagem: o layout já prevê a coluna da esquerda no desktop
-                 e o personagem acima do texto no celular. -->
+            <!-- Sr. Nilton, entre os pratos e as sobremesas. A ilustração é o personagem da campanha
+                 "Sahtein", recortado da referência visual do bloco, sem alterar o rosto.
+                 POSE PENDENTE: a arte original com as duas poses não foi entregue. Quando a pose
+                 pensativa chegar, ela entra ao abrir a dica: acrescente a imagem à figure com a
+                 classe "nilton__pose--tip" (o CSS já alterna as duas pelo estado da dica). -->
             <aside class="nilton" aria-labelledby="nilton-title" data-reveal>
+              <figure class="nilton__art">
+                <x-img name="nilton-sahtein" class="nilton__pose" sizes="(min-width: 900px) 300px, 56vw" alt="Ilustração do Sr. Nilton sorrindo, de roupa branca, segurando uma placa com a palavra Sahtein"></x-img>
+              </figure>
               <div class="nilton__body">
                 <p class="nilton__who">Sr. Nilton Sabbag, fundador do Sabah</p>
                 <h4 id="nilton-title" class="nilton__title">Sahtein! Bom apetite!</h4>
-                <p>Essa é uma forma carinhosa de desejar bom apetite à mesa. Se é sua primeira vez no Sabah, experimente o trio de pastas com pão sírio. Depois, monte o prato do seu jeito.</p>
+                <p>Essa é uma forma carinhosa de desejar bom apetite à mesa. Para começar, rasgue um pedaço de pão sírio e use-o para pegar um pouco de cada pasta. Experimente uma por vez para sentir a diferença entre o homus, a coalhada seca e o babaganuche.</p>
                 <details class="tip">
                   <summary class="btn btn--ghost tip__btn">Mais uma dica do Sr. Nilton</summary>
                   <div class="tip__body">
@@ -128,7 +129,7 @@
 
             <ul class="cards cards--3" aria-label="Pratos à la carte">
               <li class="card" data-reveal>
-                <x-img name="alacarte-combinado" class="card__img" sizes="(min-width: 900px) 380px, 46vw" alt="Prato montado com esfihas, kibes e pastas"></x-img>
+                <x-img name="alacarte-combinado" class="card__img" sizes="(min-width: 900px) 380px, 46vw" alt="Prato de combinado do Sabah com espeto de frango, charutinhos e pasta"></x-img>
                 <h4 class="card__name">Monte seu combinado</h4>
                 <p class="card__desc">Você escolhe um item de cada grupo e monta o prato.</p>
                 <details class="more more--card">
@@ -151,9 +152,9 @@
                 <p class="card__desc">Sanduíche de kafta no pão sírio.</p>
               </li>
               <li class="card" data-reveal>
-                <x-img name="alacarte-esfihas" class="card__img" sizes="(min-width: 900px) 380px, 46vw" alt="Esfihas salgadas abertas e fechadas do Sabah"></x-img>
+                <x-img name="alacarte-esfihas" class="card__img" sizes="(min-width: 900px) 380px, 46vw" alt="Prato com esfihas fechadas e abertas do Sabah"></x-img>
                 <h4 class="card__name">Esfihas</h4>
-                <p class="card__desc">Salgadas, doces ou monte a sua. Nas doces, chocolate ou doce de leite.</p>
+                <p class="card__desc">Salgadas, doces ou monte a sua. Nas doces, escolha chocolate ou doce de leite.</p>
               </li>
               <li class="card" data-reveal>
                 <x-img name="alacarte-kibe-frito" class="card__img" sizes="(min-width: 900px) 380px, 46vw" alt="Kibe frito do Sabah com rodelas de limão"></x-img>

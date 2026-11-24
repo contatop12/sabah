@@ -51,11 +51,15 @@ const MANIFEST = [
   card("bancada-chairie", "bancada-chairie.jpg"), // DSC00474
   card("bancada-charuto-uva", "bancada-charuto-uva.jpg"), // DSC00440
   card("bancada-charuto-repolho", "bancada-charuto-repolho.jpg"), // DSC00458
-  // Um só quadro com os três kibes: cru, assado e frito (DSC00360, DSC00880, DSC00701)
+  // Os três kibes na mesma foto, sem divisões: cru, assado e frito. Feita a partir da montagem
+  // aprovada (kibes-cru-assado-frito.png), com as linhas removidas e as emendas igualadas.
   card("bancada-kibes", "bancada-kibes.jpg", { widths: [400, 800, 1200] }),
   card("bancada-legumes", "bancada-legumes.jpg"), // DSC00523: abobrinha e berinjela
   card("bancada-falafel", "prato-falafel.jpg"),
   card("bancada-esfihas", "bancada-esfihas.jpg"), // DSC00073: esfihas abertas de carne
+
+  // Sr. Nilton com a placa "Sahtein": recorte da referência visual do bloco (fundo creme).
+  { name: "nilton-sahtein", src: "nilton-sahtein.png", widths: [320, 640] },
 
   // Sobremesas
   card("sobremesa-doces", "sobremesa-doces.jpg"), // DSC01217
@@ -64,10 +68,10 @@ const MANIFEST = [
   card("sobremesa-esfiha-doce", "sobremesa-esfiha-doce.jpg"), // DSC01361
 
   // À la carte
-  card("alacarte-combinado", "prato-montado.jpg"),
+  card("alacarte-combinado", "alacarte-combinado.jpg"), // DSC01096 (indicada no briefing)
   card("alacarte-kebab", "kebab.jpg"),
   card("alacarte-beirute", "alacarte-beirute.jpg"), // DSC01155
-  card("alacarte-esfihas", "esfihas-salgadas.jpg"),
+  card("alacarte-esfihas", "alacarte-esfihas.jpg"), // DSC00999 (indicada no briefing)
   card("alacarte-kibe-frito", "kibe-frito-2026.jpg"), // DSC00701
   card("alacarte-batata", "alacarte-batata.jpg"), // DSC00828
 
