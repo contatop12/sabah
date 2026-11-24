@@ -108,13 +108,17 @@ export function initNav(): void {
   const links = new Map<string, HTMLAnchorElement>();
   document.querySelectorAll<HTMLAnchorElement>("[data-spy]").forEach((a) => links.set(a.dataset.spy!, a));
   const sections = [...links.keys()].map((id) => document.getElementById(id)).filter((s): s is HTMLElement => !!s);
+  // A primeira dobra apresenta o almoço e o jantar: enquanto ela está na tela, esse item fica ativo.
+  const hero = document.getElementById("inicio");
+  const sectionId = (el: Element): string => (el === hero ? "buffet" : el.id);
+  if (hero && links.has("buffet")) sections.unshift(hero);
   if (sections.length && "IntersectionObserver" in window) {
     const spy = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {
           if (!entry.isIntersecting) continue;
           links.forEach((a, id) => {
-            const on = id === entry.target.id;
+            const on = id === sectionId(entry.target);
             a.classList.toggle("is-current", on);
             if (on) a.setAttribute("aria-current", "true");
             else a.removeAttribute("aria-current");
