@@ -913,12 +913,25 @@ html.js [data-reveal]:not(.is-in) .metro__here { opacity: 0; translate: -50% 8px
 .salao__h { margin: 0 0 1.25rem; font-family: var(--display); font-weight: 400; font-size: clamp(1.6rem, 2.6vw, 2.1rem); line-height: 1.1; color: var(--roma); }
 .salao__cta { display: flex; flex-wrap: wrap; gap: 0.75rem 1.25rem; align-items: center; margin-top: 2rem; max-width: none; }
 
-/* Opções do combinado (controle expansível dentro do card) */
-.more--card { margin-top: 0.35rem; }
+/* Opções do combinado, do kebab, do beirute e das esfihas (controle expansível dentro do card).
+   No à la carte os cartões dividem as mesmas linhas: foto, nome, texto e opções ficam
+   alinhados lado a lado, e abrir um não desloca o vizinho. */
+.more--card { margin-top: 0.35rem; align-self: start; }
+@supports (grid-template-rows: subgrid) {
+  .cards--3 > .card { grid-row: span 4; grid-template-rows: subgrid; }
+}
 .more--card summary { padding: 0.7rem 0; font-size: 0.95rem; }
 .groups { display: grid; gap: 0.6rem; padding-bottom: 0.9rem; font-size: 0.93rem; line-height: 1.45; }
 .groups dt { font-weight: 800; color: var(--roma); }
 .groups dd { color: var(--berinjela-suave); }
+/* opções em lista (esfihas): um item por linha; a lista longa abre em duas colunas quando o cartão é largo */
+.groups ul { margin-top: 0.2rem; padding-left: 1.35em; list-style: disc; }
+.groups li::marker { color: var(--roma); }
+.groups__hint { font-weight: 600; color: var(--berinjela-suave); }
+@media (min-width: 900px) {
+  .groups__cols { columns: 2; column-gap: 1.5rem; }
+  .groups__cols li { break-inside: avoid; }
+}
 
 /* Sr. Nilton: entre os pratos e as sobremesas */
 .nilton {
