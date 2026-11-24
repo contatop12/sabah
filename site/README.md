@@ -159,7 +159,7 @@ Cada link é `https://www.instagram.com/p/<post>/`. Os dois primeiros vídeos es
 2. **Lanternas e guirlanda**: foram redesenhadas em SVG a partir da imagem de referência enviada pela P12. Validar o desenho final.
 3. **Parceiros e Guias Gastronômicos**: essa seção não existe na prévia (saiu na primeira versão). Se deve voltar, enviar os logos e a lista de parceiros.
 4. **Beirute de kafta e charutinhos**: escolhi no acervo as fotos DSC01155 (sanduíche tostado no pão sírio), DSC00440 (uva) e DSC00458 (repolho). Confirmar que são esses os pratos.
-5. **Monte seu combinado**: os três grupos foram copiados do cardápio do salão vigente. Confirmar.
+5. **Opções do à la carte**: os grupos do combinado e as opções de kebabs, beirute e esfihas (controles "Ver opções…" dos cartões) foram copiados do cardápio do salão vigente, páginas 3, 6 e 7, sem os preços. Confirmar, e avisar quando o cardápio mudar.
 6. **Esfiha doce**: a foto indicada (DSC01361) foi legendada como esfiha de chocolate, conforme o briefing.
 7. **Capas dos vídeos**: são as miniaturas dos próprios posts (360 px de largura). Com os arquivos originais a nitidez melhora. Confirmar a autorização de uso com os criadores.
 8. **@ dos criadores**: `@sampadicas` e `@mohindi` vieram dos cards do site anterior; os dois vídeos estão no perfil do Sabah.
