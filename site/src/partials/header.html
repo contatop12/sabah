@@ -1,6 +1,19 @@
   <a class="skip" href="#conteudo">Ir para o conteúdo</a>
 
   <header class="top" data-header>
+    <div class="top__bar">
+      <div class="top__bar-in">
+        <a class="top__address" href="{{links.maps}}" target="_blank" rel="noopener" data-track="route_click" data-loc="cabecalho">
+          <svg aria-hidden="true"><use href="#i-pin"/></svg>
+          <span class="top__address-text">{{address.street}} - <span>{{address.neighborhood}}, {{address.city}} - {{address.state}}</span></span>
+        </a>
+        <ul class="top__social" aria-label="Redes sociais">
+          <li><a href="{{links.instagram}}" target="_blank" rel="me noopener" aria-label="Instagram do Sabah" data-track="instagram_click" data-loc="cabecalho"><svg aria-hidden="true"><use href="#i-instagram"/></svg></a></li>
+          <li><a href="{{links.facebook}}" target="_blank" rel="me noopener" aria-label="Facebook do Sabah"><svg aria-hidden="true"><use href="#i-facebook"/></svg></a></li>
+          <li><a href="{{links.tiktok}}" target="_blank" rel="me noopener" aria-label="TikTok do Sabah"><svg aria-hidden="true"><use href="#i-tiktok"/></svg></a></li>
+        </ul>
+      </div>
+    </div>
     <div class="top__in">
       <a class="top__logo" href="/" aria-label="Sabah, A Legítima Cozinha Árabe: página inicial">
         <picture>

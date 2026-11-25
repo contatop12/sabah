@@ -61,29 +61,4 @@ export function initWhatsapp(): void {
     const target = e.target as HTMLElement;
     if (isOpen() && !root.contains(target) && !target.closest("[data-wa-open]")) close(false);
   });
-
-  // O botão não pode cobrir os botões da primeira dobra: enquanto estiver sobre eles
-  // (telas baixas), ele se recolhe e volta assim que a pessoa rola a página.
-  const heroButtons = [...document.querySelectorAll<HTMLElement>(".hero__ctas .btn")];
-  if (heroButtons.length) {
-    let ticking = false;
-    const check = (): void => {
-      ticking = false;
-      const box = root.getBoundingClientRect();
-      const covers = heroButtons.some((b) => {
-        const r = b.getBoundingClientRect();
-        return r.bottom > box.top - 8 && r.top < box.bottom && r.right > box.left - 8 && r.left < box.right;
-      });
-      root.classList.toggle("is-tucked", covers && !isOpen());
-    };
-    const request = (): void => {
-      if (ticking) return;
-      ticking = true;
-      requestAnimationFrame(check);
-    };
-    window.addEventListener("scroll", request, { passive: true });
-    window.addEventListener("resize", request, { passive: true });
-    window.addEventListener("load", request, { once: true });
-    request();
-  }
 }

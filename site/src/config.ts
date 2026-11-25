@@ -170,7 +170,7 @@ export const CONFIG = {
     maps: "https://maps.app.goo.gl/NYnaeeeBb6ij7XVF6",
     googleReviews: "https://maps.app.goo.gl/NYnaeeeBb6ij7XVF6",
     instagram: "https://www.instagram.com/sabahcozinhaarabe/",
-    facebook: "https://www.facebook.com/sabahcozinhaarabe",
+    facebook: "https://www.facebook.com/sabahcozinhaarabe/",
     tiktok: "https://www.tiktok.com/@sabahcozinhaarabe",
     bio: "https://links.sabah.com.br/",
 
