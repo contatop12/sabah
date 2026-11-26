@@ -24,7 +24,34 @@ npm run video      # prepara os vídeos de quem visitou a partir de media-src/vi
 2. Nome do Worker: `sabah-site`. **Root directory: `site`**. Build command: vazio (o `wrangler.jsonc` já roda `npm run build`). Deploy command: `npx wrangler deploy`.
 3. Em Build watch paths, use `site/*` para este Worker (e exclua `site/*` no `sabah-bio`), assim cada push só publica o projeto que mudou.
 4. A prévia sai em `sabah-site.<conta>.workers.dev`, com `X-Robots-Tag: noindex`.
-5. Depois da aprovação: Settings → Domains & Routes → Custom domain → `sabah.com.br` e `www.sabah.com.br`.
+5. O domínio oficial já está ligado por rota: ver "Domínio oficial e e-mail" abaixo. Não usar "Custom domain" em `sabah.com.br`: derruba o e-mail.
+
+## Domínio oficial e e-mail
+
+O site está em `https://sabah.com.br` desde 26/11/2026, por uma **rota** do Worker (`routes` em `wrangler.jsonc`), não por "Custom domain".
+
+**Por quê.** O e-mail do Sabah fica no servidor antigo (VPS da Hostinger com cPanel, `2.24.68.90`), e o MX depende do registro DNS do próprio domínio. Um "Custom domain" em `sabah.com.br` substitui esse registro e a entrada de e-mails para. A rota não toca no DNS: o registro continua apontando para o servidor antigo e o Cloudflare só entrega este site no lugar do WordPress.
+
+**O que passa pelo site novo.** Só `https://sabah.com.br/*`.
+
+**O que continua no servidor antigo.**
+
+| Endereço | O que faz |
+| --- | --- |
+| `http://sabah.com.br` | redireciona para `https` e responde a validação do certificado Let's Encrypt (`/.well-known/acme-challenge/`), usado pelo e-mail e pelo webmail |
+| `www.sabah.com.br` | o WordPress redireciona para `https://sabah.com.br`, mantendo o caminho |
+| `webmail.sabah.com.br` | webmail |
+| `cpanel.sabah.com.br` | painel da hospedagem |
+| `mail.sabah.com.br`, MX, SPF, DKIM, DMARC | e-mail; nada foi alterado |
+
+`/webmail` e `/cpanel` em `sabah.com.br` redirecionam para esses endereços (`cf/_redirects`), como o cPanel fazia.
+
+**Cuidados.**
+
+- Não apagar a conta nem o WordPress no servidor antigo: o e-mail, o webmail e os redirecionamentos de `www` e de `http` dependem dele.
+- Não ligar `sabah.com.br` como "Custom domain" e não trocar o registro DNS do domínio antes de apontar o MX para um nome fora do proxy (por exemplo `mail.sabah.com.br`, só DNS, para `2.24.68.90`).
+- O cabeçalho HSTS não usa `includeSubDomains`, porque os subdomínios do cPanel são servidos pelo servidor antigo.
+- Para voltar ao site antigo: painel Cloudflare → Workers & Pages → sabah-site → Settings → Domains & Routes → remover a rota. O WordPress volta a responder na hora.
 
 ## Onde alterar cada coisa
 
