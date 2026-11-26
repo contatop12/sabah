@@ -100,6 +100,8 @@ A lista fica em `VISITOR_VIDEOS` (`src/content.ts`). Só entra vídeo com autori
 
 Os vídeos tocam dentro da página, numa janela sobre o conteúdo (`src/player.ts`), com o crédito do criador e o link da publicação original. Nenhum vídeo é baixado antes do clique: o card é só a capa, e ao fechar a janela o download para.
 
+O carrossel gira sozinho: passa um card a cada 4,5 s e volta ao começo no fim (`src/carousel.ts`). A rotação para com o mouse em cima, com foco de teclado, com um vídeo aberto e por 8 s depois de um toque ou clique; o botão de pausa ao lado das setas desliga até ser tocado de novo. A lista não mostra barra de rolagem, mas continua rolando por toque, trackpad e teclado. Com "reduzir movimento" ligado no sistema, a troca de card é seca, sem deslizar.
+
 Para um vídeo tocar na página, ele precisa de arquivo próprio:
 
 1. Salve o original em `media-src/video/<id>.mp4`, com o mesmo `id` do item em `VISITOR_VIDEOS`. Essa pasta não vai para o git.

@@ -490,8 +490,11 @@ p + p { margin-top: 0.9em; }
   display: grid; grid-auto-flow: column; grid-auto-columns: min(62vw, 240px); gap: 1.25rem;
   margin-inline: calc(-1 * var(--gutter)); padding: 0.25rem var(--gutter) 1rem;
   overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-inline: var(--gutter);
-  scrollbar-width: thin; scrollbar-color: var(--linha) transparent; overscroll-behavior-x: contain;
+  scrollbar-width: none; overscroll-behavior-x: contain;
 }
+/* Sem barra de rolagem à vista: a lista continua rolando por toque, trackpad, teclado,
+   pelas setas e pela rotação automática (src/carousel.ts). */
+.visitors__list::-webkit-scrollbar { display: none; }
 .visitor { position: relative; display: grid; gap: 0.3rem; align-content: start; scroll-snap-align: start; }
 .visitor__cover { position: relative; margin-bottom: 0.6rem; overflow: hidden; border-radius: var(--radius); background: var(--homus); }
 .visitor__cover picture { display: block; }
@@ -1039,7 +1042,7 @@ html.js [data-reveal]:not(.is-in) .metro__here { opacity: 0; translate: -50% 8px
 .visitors__head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 1rem 2rem; }
 .visitors__head > div:first-child { display: grid; gap: 1.1rem; }
 .carousel__nav { display: flex; gap: 0.5rem; }
-.carousel__nav[hidden] { display: none; }
+.carousel__nav[hidden], .carousel__btn[hidden] { display: none; }
 .carousel__btn {
   display: grid; place-items: center; width: 48px; height: 48px; padding: 0; border-radius: 50%;
   border: 2px solid var(--roma); background: none; color: var(--roma); cursor: pointer;
