@@ -4,3 +4,8 @@ dist/
 .dev.vars
 *.log
 .DS_Store
+
+# Credenciais locais: nunca vão para o repositório
+.env
+.env.*
+!.env.example

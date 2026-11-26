@@ -1,0 +1,58 @@
+{
+  "aline-souza": {
+    "src": "/video/visitou-aline-souza.mp4",
+    "width": 720,
+    "height": 1280,
+    "duration": 71,
+    "bytes": 9024704
+  },
+  "dicas-em-sp": {
+    "src": "/video/visitou-dicas-em-sp.mp4",
+    "width": 720,
+    "height": 1280,
+    "duration": 74,
+    "bytes": 10519031
+  },
+  "jornaliz": {
+    "src": "/video/visitou-jornaliz.mp4",
+    "width": 720,
+    "height": 1280,
+    "duration": 68,
+    "bytes": 10612892
+  },
+  "juliana-mendes": {
+    "src": "/video/visitou-juliana-mendes.mp4",
+    "width": 720,
+    "height": 1280,
+    "duration": 80,
+    "bytes": 10337736
+  },
+  "mohamad": {
+    "src": "/video/visitou-mohamad.mp4",
+    "width": 720,
+    "height": 1280,
+    "duration": 87,
+    "bytes": 6197542
+  },
+  "paulistano": {
+    "src": "/video/visitou-paulistano.mp4",
+    "width": 720,
+    "height": 1280,
+    "duration": 45,
+    "bytes": 6362585
+  },
+  "sampa-dicas": {
+    "src": "/video/visitou-sampa-dicas.mp4",
+    "width": 718,
+    "height": 1280,
+    "duration": 43,
+    "bytes": 6779460
+  },
+  "turistando": {
+    "src": "/video/visitou-turistando.mp4",
+    "width": 720,
+    "height": 1280,
+    "duration": 55,
+    "bytes": 7989912
+  }
+}

@@ -16,6 +16,16 @@ interface MediaEntry {
 }
 const MEDIA = JSON.parse(readFileSync(resolve(ROOT, "src/media.json"), "utf8")) as Record<string, MediaEntry>;
 
+/** Vídeos de quem visitou com arquivo próprio em public/video (gerado por `npm run video`). */
+interface VideoEntry {
+  src: string;
+  width: number;
+  height: number;
+  duration: number;
+  bytes: number;
+}
+const VIDEOS = JSON.parse(readFileSync(resolve(ROOT, "src/videos.json"), "utf8")) as Record<string, VideoEntry>;
+
 /** Páginas indexáveis (entram no sitemap e no llms.txt). */
 const PAGES = [
   { path: "/", title: "Sabah: buffet árabe na Avenida Paulista", priority: "1.0", changefreq: "weekly" },
@@ -199,21 +209,37 @@ function reviewsHtml(): string {
   ).join("\n");
 }
 
-/** Cards de "O Sabah pelos olhos de quem visitou" (lista em src/content.ts). */
+/**
+ * Cards de "O Sabah pelos olhos de quem visitou" (lista em src/content.ts).
+ * Com arquivo em src/videos.json, o card toca o vídeo na própria página (src/player.ts);
+ * sem arquivo, continua abrindo a publicação no Instagram.
+ */
 function visitorsHtml(): string {
+  for (const id of Object.keys(VIDEOS)) {
+    if (!VISITOR_VIDEOS.some((v) => v.id === id)) throw new Error(`[sabah] vídeo sem card em VISITOR_VIDEOS: ${id}`);
+  }
+  const clock = (s: number): string => `${Math.floor(s / 60)}:${String(s % 60).padStart(2, "0")}`;
   return VISITOR_VIDEOS.map((v) => {
     const house = v.postedBy !== v.handle;
+    const file = VIDEOS[v.id];
+    const about = `<span class="sr">: ${esc(v.title)}, de ${esc(v.creator)}</span>`;
+    const cta = file
+      ? `<a class="link visitor__cta" href="${file.src}" aria-haspopup="dialog" data-player data-id="${v.id}" ` +
+        `data-w="${file.width}" data-h="${file.height}" data-poster="/img/${v.cover}.jpg" data-creator="${esc(v.creator)}" ` +
+        `data-handle="${esc(v.handle)}" data-title="${esc(v.title)}" data-post="${v.url}">` +
+        `Assistir ao vídeo${about}</a>`
+      : `<a class="link visitor__cta" href="${v.url}" target="_blank" rel="noopener" data-track="video_click" data-loc="visitou-${v.id}">` +
+        `Assistir no Instagram${about}<svg aria-hidden="true"><use href="#i-out"/></svg></a>`;
     return (
       `<li class="visitor" data-reveal>` +
       `<div class="visitor__cover">` +
       `<x-img name="${v.cover}" class="visitor__img" sizes="(min-width: 900px) 230px, 58vw" alt="${esc(v.coverAlt)}"></x-img>` +
+      (file ? `<span class="visitor__time"><span class="sr">Duração: </span>${clock(file.duration)}</span>` : "") +
       `</div>` +
       `<p class="visitor__who"><strong>${esc(v.creator)}</strong> <span>${esc(v.handle)}</span></p>` +
       `<h3 class="visitor__title">${esc(v.title)}</h3>` +
       (house ? `<p class="visitor__note">Publicado no perfil ${esc(v.postedBy)}.</p>` : "") +
-      `<a class="link visitor__cta" href="${v.url}" target="_blank" rel="noopener" data-track="video_click" data-loc="visitou-${v.id}">` +
-      `Assistir no Instagram<span class="sr">: ${esc(v.title)}, de ${esc(v.creator)}</span>` +
-      `<svg aria-hidden="true"><use href="#i-out"/></svg></a>` +
+      cta +
       `</li>`
     );
   }).join("\n");
