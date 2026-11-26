@@ -19,20 +19,29 @@
     "run_worker_first": ["/video/*"],
     "html_handling": "auto-trailing-slash",
     "not_found_handling": "404-page"
-  }
+  },
 
   // ---------------------------------------------------------------------------
-  // DOMÍNIO FINAL: sabah.com.br  (só depois da aprovação da prévia)
+  // DOMÍNIO OFICIAL: https://sabah.com.br (no ar desde 26/11/2026)
   //
-  // Opção A (recomendada): painel Cloudflare → Workers & Pages → sabah-site →
-  // Settings → Domains & Routes → Add → Custom domain → sabah.com.br e www.
+  // É uma ROTA, não um "custom domain", de propósito. O e-mail do Sabah fica no
+  // servidor antigo (VPS com cPanel) e o MX depende do registro DNS do domínio.
+  // Um custom domain trocaria esse registro e a entrada de e-mails pararia. A rota
+  // não toca no DNS: o registro continua apontando para o servidor antigo e o
+  // Cloudflare só entrega este site no lugar do WordPress.
   //
-  // Opção B: descomentar abaixo e fazer push. Só funciona se a zona
-  // sabah.com.br estiver NESTA conta Cloudflare.
+  // Só HTTPS e só o domínio sem www, também de propósito:
+  //  - http://sabah.com.br continua no servidor antigo, que redireciona para https e
+  //    responde a validação do certificado usado pelo e-mail e pelo webmail
+  //    (Let's Encrypt, /.well-known/acme-challenge/ na porta 80);
+  //  - www.sabah.com.br continua no servidor antigo, que redireciona para sabah.com.br;
+  //  - webmail.sabah.com.br, cpanel.sabah.com.br e mail.sabah.com.br não passam por aqui.
   //
-  // "routes": [
-  //   { "pattern": "sabah.com.br", "custom_domain": true },
-  //   { "pattern": "www.sabah.com.br", "custom_domain": true }
-  // ]
+  // Para voltar ao site antigo: painel Cloudflare → Workers & Pages → sabah-site →
+  // Settings → Domains & Routes → remover a rota. O WordPress volta a responder na hora.
+  // Detalhes no README, em "Domínio oficial e e-mail".
   // ---------------------------------------------------------------------------
+  "routes": [
+    { "pattern": "https://sabah.com.br/*", "zone_name": "sabah.com.br" }
+  ]
 }

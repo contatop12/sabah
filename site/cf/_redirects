@@ -17,3 +17,10 @@
 /links               https://links.sabah.com.br/           302
 /privacidade         /politicasdeprivacidade/              301
 /termos              /termosdeuso/                         301
+
+# Atalhos da hospedagem de e-mail (servidor antigo, cPanel). Existiam em sabah.com.br
+# antes do site novo; quem usa /webmail para ler o e-mail continua chegando lá.
+/webmail             https://webmail.sabah.com.br/         302
+/webmail/            https://webmail.sabah.com.br/         302
+/cpanel              https://cpanel.sabah.com.br/          302
+/cpanel/             https://cpanel.sabah.com.br/          302
