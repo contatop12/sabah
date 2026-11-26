@@ -62,7 +62,7 @@ const MANIFEST = [
   { name: "nilton-sahtein", src: "nilton-sahtein.png", widths: [320, 640] },
 
   // Sobremesas
-  card("sobremesa-doces", "sobremesa-doces.jpg"), // DSC01217
+  card("sobremesa-doces", "sobremesa-doces.jpg"), // foto enviada pela P12 em 26/11/2026
   card("sobremesa-pudim", "sobremesa-pudim.jpg"), // DSC00080
   card("sobremesa-frutas", "sobremesa-frutas.jpg"), // DSC00084
   card("sobremesa-esfiha-doce", "sobremesa-esfiha-doce.jpg"), // DSC01361
