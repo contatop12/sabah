@@ -34,6 +34,13 @@
     "duration": 87,
     "bytes": 6197542
   },
+  "mustache": {
+    "src": "/video/visitou-mustache.mp4",
+    "width": 720,
+    "height": 1280,
+    "duration": 58,
+    "bytes": 10618558
+  },
   "paulistano": {
     "src": "/video/visitou-paulistano.mp4",
     "width": 720,

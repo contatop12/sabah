@@ -234,6 +234,10 @@ function visitorsHtml(): string {
       `<li class="visitor" data-reveal>` +
       `<div class="visitor__cover">` +
       `<x-img name="${v.cover}" class="visitor__img" sizes="(min-width: 900px) 230px, 58vw" alt="${esc(v.coverAlt)}"></x-img>` +
+      (v.play !== undefined
+        ? `<span class="visitor__play" style="--play-y: ${v.play}%" aria-hidden="true"><svg viewBox="0 0 24 24">` +
+          `<path fill="currentColor" stroke="currentColor" stroke-width="3" stroke-linejoin="round" d="M8 5.5v13l10.5-6.5z"/></svg></span>`
+        : "") +
       (file ? `<span class="visitor__time"><span class="sr">Duração: </span>${clock(file.duration)}</span>` : "") +
       `</div>` +
       `<p class="visitor__who"><strong>${esc(v.creator)}</strong> <span>${esc(v.handle)}</span></p>` +

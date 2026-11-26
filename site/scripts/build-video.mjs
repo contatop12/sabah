@@ -1,7 +1,8 @@
 /**
  * VÍDEOS DE QUEM VISITOU: prepara os arquivos que tocam dentro da página.
  *
- *   npm run video
+ *   npm run video              todos os originais
+ *   npm run video -- <id> …    só os indicados (os outros arquivos ficam como estão)
  *
  * Lê os originais em media-src/video/<id>.mp4 (o <id> é o mesmo de VISITOR_VIDEOS,
  * em src/content.ts) e grava a versão para a web em public/video/visitou-<id>.mp4:
@@ -49,7 +50,14 @@ try {
 
 mkdirSync(OUT, { recursive: true });
 const index = existsSync(INDEX) ? JSON.parse(readFileSync(INDEX, "utf8")) : {};
-const masters = existsSync(SRC) ? readdirSync(SRC).filter((f) => f.endsWith(".mp4")).sort() : [];
+const all = existsSync(SRC) ? readdirSync(SRC).filter((f) => f.endsWith(".mp4")).sort() : [];
+const only = process.argv.slice(2);
+const missing = only.filter((id) => !all.includes(`${id}.mp4`));
+if (missing.length > 0) {
+  console.error(`Sem original em media-src/video para: ${missing.join(", ")}`);
+  process.exit(1);
+}
+const masters = only.length > 0 ? all.filter((f) => only.includes(basename(f, ".mp4"))) : all;
 
 for (const file of masters) {
   const id = basename(file, ".mp4");

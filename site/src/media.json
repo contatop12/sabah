@@ -325,8 +325,8 @@
     "fallbackWidth": 800
   },
   "criador-mohamad": {
-    "width": 360,
-    "height": 640,
+    "width": 720,
+    "height": 1280,
     "widths": [
       360
     ],
@@ -359,6 +359,14 @@
   "criador-turistando": {
     "width": 360,
     "height": 640,
+    "widths": [
+      360
+    ],
+    "fallbackWidth": 360
+  },
+  "criador-mustache": {
+    "width": 720,
+    "height": 1280,
     "widths": [
       360
     ],
