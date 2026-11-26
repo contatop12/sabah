@@ -44,6 +44,13 @@ function readChoice(): Choice | null {
   }
 }
 
+/** Recusa feita nesta visita: vale mesmo que o navegador não deixe gravar no localStorage. */
+let refusedNow = false;
+
+function isRefused(): boolean {
+  return refusedNow || readChoice() === "denied";
+}
+
 function applyChoice(choice: Choice): void {
   gtag("consent", "update", {
     ad_storage: choice,
@@ -53,9 +60,28 @@ function applyChoice(choice: Choice): void {
   });
 }
 
+/** Apaga os cookies próprios de medição (host e domínios pais), pois só o navegador os limpa. */
+const TRACKING_COOKIE = /^(_ga|_gid|_gat|_gcl|_gac|_fbp|_fbc)/;
+function clearTrackingCookies(): void {
+  const parts = location.hostname.split(".");
+  const domains: (string | null)[] = [null];
+  for (let i = 0; i <= parts.length - 2; i++) {
+    const d = parts.slice(i).join(".");
+    domains.push(d, `.${d}`);
+  }
+  for (const pair of document.cookie.split(";")) {
+    const name = pair.split("=")[0]?.trim();
+    if (!name || !TRACKING_COOKIE.test(name)) continue;
+    for (const d of domains) {
+      document.cookie = `${name}=; Max-Age=0; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/${d ? `; domain=${d}` : ""}`;
+    }
+  }
+}
+
 let gtmLoaded = false;
 function loadGtm(): void {
-  if (gtmLoaded || !CONFIG.gtmId) return;
+  // Com recusa guardada nada é carregado, em nenhuma página.
+  if (gtmLoaded || !CONFIG.gtmId || isRefused()) return;
   gtmLoaded = true;
   window.dataLayer.push({ "gtm.start": Date.now(), event: "gtm.js" });
   const s = document.createElement("script");
@@ -67,16 +93,16 @@ function loadGtm(): void {
 export function initTracking(): void {
   window.dataLayer = window.dataLayer || [];
 
-  // 1) Consentimento: tudo negado até a pessoa escolher.
-  gtag("consent", "default", {
-    ad_storage: "denied",
-    ad_user_data: "denied",
-    ad_personalization: "denied",
-    analytics_storage: "denied",
-    wait_for_update: 500,
-  });
+  // 1) Consentimento: medição ligada desde a primeira visita (padrão da agência);
+  //    só fica negada se a pessoa já recusou.
   const saved = readChoice();
-  if (saved) applyChoice(saved);
+  const initial: Choice = saved === "denied" ? "denied" : "granted";
+  gtag("consent", "default", {
+    ad_storage: initial,
+    ad_user_data: initial,
+    ad_personalization: initial,
+    analytics_storage: initial,
+  });
 
   const banner = document.querySelector<HTMLElement>("[data-consent]");
   // Enquanto o aviso está na tela, o botão flutuante de WhatsApp sobe para não
@@ -90,17 +116,32 @@ export function initTracking(): void {
     else root.style.removeProperty("--consent-h");
   };
   const choose = (choice: Choice): void => {
+    let persisted = false;
     try {
       localStorage.setItem(STORAGE_KEY, choice);
+      persisted = localStorage.getItem(STORAGE_KEY) === choice;
     } catch {
       /* navegação privada: vale só para esta visita */
     }
-    applyChoice(choice);
+    if (choice === "denied") {
+      refusedNow = true;
+      applyChoice("denied");
+      clearTrackingCookies();
+      setBanner(false);
+      // Um contêiner já carregado só sai da página recarregando. Sem armazenamento,
+      // recarregar traria a tag de volta, então não recarrega.
+      if (gtmLoaded && persisted) location.reload();
+      return;
+    }
+    refusedNow = false;
+    applyChoice("granted");
     setBanner(false);
+    // Depois de uma recusa, aceitar liga a medição na hora, sem recarregar.
+    loadGtm();
   };
   if (banner) {
     // Sem escolha salva: o aviso aparece na primeira rolagem (ou após 6 s), para não
-    // cobrir a primeira dobra. Até lá, medição e anúncios continuam negados.
+    // cobrir a primeira dobra. A medição não espera a escolha.
     if (!saved) {
       let shown = false;
       const show = (): void => {

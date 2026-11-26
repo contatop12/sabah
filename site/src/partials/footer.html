@@ -74,12 +74,12 @@
     </button>
   </div>
 
-  <!-- Consentimento de cookies (LGPD). Sem escolha, medição e anúncios ficam negados. -->
+  <!-- Aviso de cookies. A medição vale desde a primeira visita; "Recusar" a desliga (src/tracking.ts). -->
   <section class="consent" data-consent hidden aria-labelledby="consent-title">
     <h2 id="consent-title" class="consent__title">Cookies no site do Sabah</h2>
-    <p>Usamos cookies para medir visitas e melhorar o site. Você pode aceitar ou recusar. Saiba mais na <a href="/politicasdeprivacidade/">política de privacidade</a>.</p>
+    <p>Usamos cookies para medir a audiência do site e melhorar sua experiência. <a href="/politicasdeprivacidade/">Política de Privacidade</a></p>
     <div class="consent__actions">
-      <button type="button" class="btn btn--ghost" data-consent-deny>Recusar</button>
-      <button type="button" class="btn btn--primary" data-consent-accept>Aceitar cookies</button>
+      <button type="button" class="btn btn--primary" data-consent-accept>Aceitar</button>
+      <button type="button" class="consent__deny" data-consent-deny>Recusar</button>
     </div>
   </section>
