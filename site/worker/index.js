@@ -1,8 +1,9 @@
 /**
- * Worker do sabah-site. Só entra em /video/* (ver "run_worker_first" no wrangler.jsonc);
- * o resto do site continua saindo direto dos arquivos estáticos, sem passar por aqui.
+ * Worker do sabah-site. Entra em /video/* e em poucos caminhos por onde alguém chegaria ao
+ * cPanel (ver "run_worker_first" no wrangler.jsonc); o resto do site continua saindo direto
+ * dos arquivos estáticos, sem passar por aqui.
  *
- * Por que existe: os arquivos estáticos do Workers ignoram o cabeçalho Range e devolvem
+ * Vídeos: os arquivos estáticos do Workers ignoram o cabeçalho Range e devolvem
  * sempre o arquivo inteiro (200). O Safari, no iPhone e no Mac, só toca vídeo se o servidor
  * atender pedidos de trecho (206 Partial Content), e os outros navegadores dependem disso
  * para avançar o vídeo sem baixar tudo. Este Worker busca o arquivo no próprio site e
@@ -13,6 +14,15 @@
  * a resposta em trechos precisa informar o total, e o arquivo chega aqui sem essa medida.
  */
 import SIZES from "./sizes.json";
+
+/**
+ * Portas do cPanel no servidor antigo, onde fica o e-mail. A rota do domínio vale para
+ * qualquer porta HTTPS que o Cloudflare aceita, então sabah.com.br:2096 (webmail), :2083
+ * (cPanel) e :2087 (WHM) cairiam neste site. Quem tem um desses endereços salvo é levado
+ * ao subdomínio do serviço, que continua no servidor antigo.
+ * @type {Record<string, string>}
+ */
+const CPANEL_PORTS = { 2096: "webmail", 2095: "webmail", 2083: "cpanel", 2082: "cpanel", 2087: "whm", 2086: "whm" };
 
 /**
  * Lê "bytes=início-fim" (um único intervalo) e devolve [início, fim] dentro do arquivo.
@@ -87,8 +97,16 @@ export default {
    * @param {{ waitUntil(promise: Promise<unknown>): void }} ctx
    */
   async fetch(request, env, ctx) {
+    const url = new URL(request.url);
+
+    const service = CPANEL_PORTS[url.port];
+    if (service) return Response.redirect(`https://${service}.sabah.com.br/`, 302);
+
+    // Fora de /video/* o Worker só entrou para conferir a porta: o arquivo estático segue como está.
+    if (!url.pathname.startsWith("/video/")) return env.ASSETS.fetch(request);
+
     const range = request.headers.get("Range");
-    const size = /** @type {Record<string, number>} */ (SIZES)[new URL(request.url).pathname] ?? 0;
+    const size = /** @type {Record<string, number>} */ (SIZES)[url.pathname] ?? 0;
     const ranged = range !== null && size > 0 && (request.method === "GET" || request.method === "HEAD");
 
     // Sem Range (ou arquivo fora da lista): o arquivo estático segue como está.
