@@ -86,7 +86,7 @@ function jsonLd(kind: string, pagePath: string, pageTitle: string): string {
     url: `${site.origin}/`,
     image: [site.ogImage, `${site.origin}/img/buffet-bancada.jpg`, `${site.origin}/img/esfiha-fechada-carne.jpg`],
     logo: `${site.origin}/img/logo-vermelho.png`,
-    telephone: phone.tel,
+    telephone: phone.whatsappE164,
     email: CONFIG.email,
     servesCuisine: ["Árabe", "Libanesa", "Sírio-libanesa", "Esfihas"],
     foundingDate: site.foundingDate,
@@ -116,7 +116,7 @@ function jsonLd(kind: string, pagePath: string, pageTitle: string): string {
         "@type": "ContactPoint",
         contactType: "reservations",
         description: "Reservas para grupos grandes",
-        telephone: phone.gruposE164,
+        telephone: phone.whatsappE164,
         availableLanguage: "pt-BR",
         url: links.waGrupo,
       },
@@ -274,9 +274,7 @@ Este arquivo resume as informações oficiais do restaurante para assistentes e 
 - Endereço: ${address.full}, CEP ${address.postalCode}, dentro do ${address.place}
 - Como entrar: entre no ${address.place}, avise na portaria que vai ao Sabah; o restaurante fica no fim do corredor, à esquerda. Não é preciso ser sócio do clube.
 - Metrô: ${address.metro}
-- Telefone: ${phone.display}
-- WhatsApp geral (dúvidas, encomendas para retirada, buffet a domicílio e fornecedores): ${phone.whatsappDisplay}
-- WhatsApp de reservas para grupos grandes: ${phone.gruposDisplay}
+- WhatsApp do Sabah (dúvidas, reservas para grupos grandes, encomendas para retirada, buffet a domicílio e fornecedores): ${phone.whatsappDisplay}. O atendimento é feito pelo WhatsApp; o Sabah não divulga telefone fixo.
 - WhatsApp exclusivo para influenciadores, imprensa e parcerias: ${phone.midiaDisplay}
 - E-mail: ${CONFIG.email}
 
@@ -295,8 +293,8 @@ Este arquivo resume as informações oficiais do restaurante para assistentes e 
 - Sobremesas: doces árabes, pudim, frutas da estação e esfiha doce (inclusa no rodízio do jantar).
 - À la carte: combinado montado pela pessoa, kebabs, beirute de kafta, esfihas, kibe frito e batata frita com zátar. Os pratos da bancada podem variar conforme o dia.
 - Entrega em casa: pelo iFood.
-- Encomendas para retirada no restaurante: pelo WhatsApp geral.
-- Buffet a domicílio: buffet árabe para eventos de aproximadamente 50 a 200 convidados em São Paulo e região, com orçamento pelo WhatsApp geral.
+- Encomendas para retirada no restaurante: pelo WhatsApp do Sabah.
+- Buffet a domicílio: buffet árabe para eventos de aproximadamente 50 a 200 convidados em São Paulo e região, com orçamento pelo WhatsApp do Sabah.
 
 ## Reconhecimentos
 
