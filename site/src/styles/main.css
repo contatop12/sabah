@@ -497,11 +497,14 @@ p + p { margin-top: 0.9em; }
 .visitor__cover picture { display: block; }
 .visitor__img { width: 100%; aspect-ratio: 260 / 366; object-fit: cover; transition: transform 0.9s var(--ease-out); }
 .visitor:hover .visitor__img { transform: scale(1.05); }
+/* Capas feitas de um quadro do vídeo: o site desenha o ícone de play que as miniaturas do
+   Instagram já trazem, no mesmo tamanho. --play-y vem do card (src/content.ts). */
 .visitor__play {
-  position: absolute; left: 0.75rem; bottom: 0.75rem; display: grid; place-items: center;
-  width: 2.6rem; height: 2.6rem; border-radius: 50%; background: var(--pao); color: var(--roma);
+  position: absolute; left: 50%; top: var(--play-y, 50%); transform: translate(-50%, -50%);
+  display: grid; place-items: center; width: 27%; aspect-ratio: 1; border-radius: 50%;
+  background: rgb(0 0 0 / 0.24); color: #fff; pointer-events: none;
 }
-.visitor__play svg { width: 1.1rem; height: 1.1rem; }
+.visitor__play svg { width: 72%; height: auto; margin-left: 2%; }
 .visitor__who { font-size: 0.95rem; }
 .visitor__who strong { font-weight: 800; }
 .visitor__who span { color: var(--berinjela-suave); }

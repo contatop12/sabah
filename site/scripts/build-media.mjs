@@ -22,7 +22,7 @@ const OUT = resolve(ROOT, "public/img");
 
 /** Cards de prato: foto horizontal 4:3, recorte centrado no assunto. */
 const card = (name, src, extra = {}) => ({ name, src, widths: [400, 800], ratio: 4 / 3, ...extra });
-/** Capas dos vídeos de criadores: miniatura do próprio post (360 x 640). */
+/** Capas dos vídeos de criadores, em 9:16: miniatura do post ou quadro do vídeo com o criador. */
 const cover = (id) => ({ name: `criador-${id}`, src: `criador-${id}.jpg`, widths: [360] });
 
 /**
@@ -85,7 +85,7 @@ const MANIFEST = [
   { name: "evento-mesa", src: "evento-mesa.jpg", widths: [480, 800, 1068] },
 
   // Vídeos de quem visitou, na ordem em que aparecem no carrossel
-  ...["mohamad", "sampa-dicas", "desbrava", "paulistano", "turistando", "dicas-em-sp", "juliana-mendes", "jornaliz", "aline-souza"].map(cover),
+  ...["mohamad", "sampa-dicas", "desbrava", "paulistano", "turistando", "mustache", "dicas-em-sp", "juliana-mendes", "jornaliz", "aline-souza"].map(cover),
 ];
 
 const AVIF = { quality: 52, effort: 6, chromaSubsampling: "4:2:0" };

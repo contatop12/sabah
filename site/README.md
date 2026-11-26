@@ -103,7 +103,7 @@ Os vídeos tocam dentro da página, numa janela sobre o conteúdo (`src/player.t
 Para um vídeo tocar na página, ele precisa de arquivo próprio:
 
 1. Salve o original em `media-src/video/<id>.mp4`, com o mesmo `id` do item em `VISITOR_VIDEOS`. Essa pasta não vai para o git.
-2. Rode `npm run video`. O script grava a versão para a web em `public/video/visitou-<id>.mp4` (H.264 em até 720 x 1280, áudio preservado, índice no começo do arquivo) e atualiza `src/videos.json`.
+2. Rode `npm run video` (ou `npm run video -- <id>` para preparar só um). O script grava a versão para a web em `public/video/visitou-<id>.mp4` (H.264 em até 720 x 1280, áudio preservado, índice no começo do arquivo) e atualiza `src/videos.json`.
 3. Rode o build. O card com arquivo ganha a duração na capa e o texto "Assistir ao vídeo"; o card sem arquivo continua abrindo o Instagram.
 
 Para tirar um vídeo da página, apague o arquivo em `public/video` e rode `npm run video`: o card volta a abrir o Instagram.
@@ -180,7 +180,7 @@ O acervo 2026 fica no Drive (pasta "[2026] Fotos/vídeos Ricardo"). `npm run med
 
 ## Vídeos de "O Sabah pelos olhos de quem visitou"
 
-Nove vídeos em carrossel, na ordem definida pela P12 em 24/11/2026, sem número de seguidores. Autoria e legenda conferidas em cada post em 23/11/2026.
+Dez vídeos em carrossel, na ordem definida pela P12 em 24/11/2026, sem número de seguidores. Autoria e legenda conferidas em cada post em 23/11/2026. O vídeo do Reviews do Mustache entrou em 26/11/2026, a pedido da P12, entre o Turistando SP e o Dicas em SP.
 
 | # | Card | Quem publicou | Data | Post |
 | --- | --- | --- | --- | --- |
@@ -189,12 +189,15 @@ Nove vídeos em carrossel, na ordem definida pela P12 em 24/11/2026, sem número
 | 3 | Desbrava São Paulo (@desbravasaopaulo) | @desbravasaopaulo | 12/12/2024 | DDf0zFAuNwk |
 | 4 | Paulistano por aí (@paulistanoporai) | @paulistanoporai | 07/08/2025 | DNEhauZuOIk |
 | 5 | Turistando SP (@turistandosp) | @turistandosp | 18/10/2022 | Cj30kWiJXQM |
-| 6 | Anna Campos e Rogerio (@dicas.em.sp) | @dicas.em.sp | 27/06/2024 | C8vHG1nxdL5 |
-| 7 | Juliana Mendes (@j.u.mendes) | @j.u.mendes | 02/09/2025 | DOHQ3RYkmkn |
-| 8 | Jornaliz (@jornaliz_) | @jornaliz_ | 03/01/2024 | C1pvUAjv44E |
-| 9 | Aline Souza (@alinesouzatb) | @alinesouzatb | 27/05/2026 | DY25eqDp9Wr |
+| 6 | Reviews do Mustache (@reviewsdomustache) | @reviewsdomustache | 03/03/2023 | CpV2TkVDMSm |
+| 7 | Anna Campos e Rogerio (@dicas.em.sp) | @dicas.em.sp | 27/06/2024 | C8vHG1nxdL5 |
+| 8 | Juliana Mendes (@j.u.mendes) | @j.u.mendes | 02/09/2025 | DOHQ3RYkmkn |
+| 9 | Jornaliz (@jornaliz_) | @jornaliz_ | 03/01/2024 | C1pvUAjv44E |
+| 10 | Aline Souza (@alinesouzatb) | @alinesouzatb | 27/05/2026 | DY25eqDp9Wr |
 
 Cada link é `https://www.instagram.com/p/<post>/`. Os dois primeiros vídeos estão publicados no perfil do Sabah, e o card informa isso.
+
+A capa de cada card é a miniatura do post. Em dois cards a P12 pediu, em 26/11/2026, um quadro do vídeo em que o criador aparece, para a capa mostrar a pessoa e não a arte do título: Mohamad Hindi (à mesa do Sabah, aos 60 s do vídeo) e Reviews do Mustache (mordendo o enrolado, aos 46 s). Os arquivos ficam em `media-src/criador-<id>.jpg`.
 
 ## Pendências que dependem do Sabah
 
@@ -213,5 +216,5 @@ Cada link é `https://www.instagram.com/p/<post>/`. Os dois primeiros vídeos es
 13. **Horário da entrega pelo iFood** (11h às 21h45) e **faixa de 50 a 200 convidados** do buffet a domicílio vieram do site anterior.
 14. **Foto da entrega do prêmio GoWhere ou selo oficial**: sem material aprovado; o bloco segue sem imagem.
 15. **FAQ**: "não precisa ser sócio do Club Homs" foi deduzido do site anterior. **Estacionamento**: tarifas e convênio não detalhados.
-16. **Autorização dos criadores**: oito vídeos estão hospedados no próprio site (arquivos em `public/video`), copiados das publicações do Instagram em 26/11/2026. O vídeo é de quem o gravou: confirmar com cada criador a autorização de uso antes de publicar no domínio oficial. Sem autorização, basta apagar o arquivo e o card volta a abrir o Instagram.
+16. **Autorização dos criadores**: nove vídeos estão hospedados no próprio site (arquivos em `public/video`), copiados das publicações do Instagram em 26/11/2026. O vídeo é de quem o gravou: confirmar com cada criador a autorização de uso antes de publicar no domínio oficial. Sem autorização, basta apagar o arquivo e o card volta a abrir o Instagram.
 17. **Vídeo do Desbrava São Paulo**: o perfil não permite incorporar a publicação em outros sites, então o arquivo não foi copiado e o card continua abrindo o Instagram. Para tocar na página, pedir o arquivo ao criador e seguir os passos de "Vídeos de quem visitou".

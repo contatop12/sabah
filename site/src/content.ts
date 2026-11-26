@@ -105,11 +105,20 @@ export interface VisitorVideo {
   postedBy: string;
   cover: string;
   coverAlt: string;
+  /**
+   * Só nas capas feitas de um quadro do vídeo: altura do ícone de play, em % da capa.
+   * As miniaturas dos posts já trazem o ícone do Instagram; nessas, deixar sem.
+   * A altura muda de capa para capa para o ícone não cobrir o rosto.
+   */
+  play?: number;
   /** Identificador curto para a mensuração. */
   id: string;
 }
 
-/** Monta um item da lista; a capa é a miniatura do próprio post (media-src/criador-<id>.jpg). */
+/**
+ * Monta um item da lista. A capa fica em media-src/criador-<id>.jpg: a miniatura do post ou,
+ * onde a P12 pediu, um quadro do vídeo em que o criador aparece.
+ */
 function video(id: string, creator: string, handle: string, post: string, title: string, postedBy = handle): VisitorVideo {
   return {
     id,
@@ -126,14 +135,16 @@ function video(id: string, creator: string, handle: string, post: string, title:
 /**
  * VÍDEOS DE QUEM VISITOU, na ordem definida pela P12 em 24/11/2026.
  * Autoria e legenda de cada post foram conferidas no Instagram em 23/11/2026.
+ * O Reviews do Mustache entrou em 26/11/2026, na posição pedida pela P12.
  * Não exibir número de seguidores.
  */
 export const VISITOR_VIDEOS: VisitorVideo[] = [
-  video("mohamad", "Mohamad Hindi", "@mohindi", "CgZb33nOp1m", "Mohamad Hindi indica o Sabah entre os melhores da Paulista", "@sabahcozinhaarabe"),
+  { ...video("mohamad", "Mohamad Hindi", "@mohindi", "CgZb33nOp1m", "Mohamad Hindi indica o Sabah entre os melhores da Paulista", "@sabahcozinhaarabe"), play: 58 },
   video("sampa-dicas", "Sampa Dicas", "@sampadicas", "C4gLlb7vTn-", "O Gabriel, do Sampa Dicas, deu seu aval ao Sabah", "@sabahcozinhaarabe"),
   video("desbrava", "Desbrava São Paulo", "@desbravasaopaulo", "DDf0zFAuNwk", "Experiência árabe à vontade, com bebidas e sobremesa"),
   video("paulistano", "Paulistano por aí", "@paulistanoporai", "DNEhauZuOIk", "Restaurante árabe escondido na Avenida Paulista"),
   video("turistando", "Turistando SP", "@turistandosp", "Cj30kWiJXQM", "Buffet árabe à vontade na Paulista"),
+  { ...video("mustache", "Reviews do Mustache", "@reviewsdomustache", "CpV2TkVDMSm", "De tudo um pouco no buffet do Sabah, na Avenida Paulista"), play: 74 },
   video("dicas-em-sp", "Anna Campos e Rogerio", "@dicas.em.sp", "C8vHG1nxdL5", "Restaurante escondidinho na Paulista, com mais de 30 anos de tradição"),
   video("juliana-mendes", "Juliana Mendes", "@j.u.mendes", "DOHQ3RYkmkn", "Restaurante escondido dentro do Club Homs"),
   video("jornaliz", "Jornaliz", "@jornaliz_", "C1pvUAjv44E", "Sabah, comida árabe com receitas de família"),
