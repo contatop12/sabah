@@ -79,6 +79,8 @@ Para um vídeo tocar na página, ele precisa de arquivo próprio:
 
 Para tirar um vídeo da página, apague o arquivo em `public/video` e rode `npm run video`: o card volta a abrir o Instagram.
 
+Os vídeos são entregues em trechos: um Worker pequeno (`worker/index.js`) atende só `/video/*` e devolve os bytes que o navegador pede (resposta 206). Sem isso o Safari, no iPhone e no Mac, não toca vídeo, porque os arquivos estáticos do Workers sempre devolvem o arquivo inteiro. O resto do site continua estático, sem passar pelo Worker. O build grava o tamanho de cada vídeo em `worker/sizes.json`. No plano gratuito do Cloudflare, cada pedido de vídeo conta no limite diário de 100 mil requisições de Worker.
+
 ## SEO, GEO e AEO
 
 - Title e meta description do briefing, um único H1, canonical, Open Graph e Twitter Card.
