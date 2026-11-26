@@ -1,6 +1,6 @@
 import { defineConfig, type Plugin } from "vite";
 import { fileURLToPath } from "node:url";
-import { existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, readFileSync, readdirSync, statSync, writeFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { CONFIG, WHATSAPP_TOPICS } from "./src/config.ts";
 import { FAQS, REVIEWS, VISITOR_VIDEOS } from "./src/content.ts";
@@ -381,6 +381,14 @@ function sabahSite(): Plugin {
       for (const file of readdirSync(resolve(ROOT, "cf"))) {
         writeFileSync(resolve(OUT, file), readFileSync(resolve(ROOT, "cf", file)));
       }
+      // Tamanho de cada vídeo publicado: o Worker (worker/index.js) usa para responder
+      // pedidos de trecho (206), que o Safari exige para tocar vídeo.
+      const videoDir = resolve(ROOT, "public/video");
+      const sizes: Record<string, number> = {};
+      for (const file of existsSync(videoDir) ? readdirSync(videoDir).sort() : []) {
+        sizes[`/video/${file}`] = statSync(resolve(videoDir, file)).size;
+      }
+      writeFileSync(resolve(ROOT, "worker/sizes.json"), JSON.stringify(sizes, null, 2) + "\n");
     },
   };
 }

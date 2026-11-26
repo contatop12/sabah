@@ -8,9 +8,15 @@
     "command": "npm run build"
   },
 
-  // Site estático (assets-only): não há código de Worker, só os arquivos de dist/.
+  // Worker mínimo: só atende /video/*, para entregar os vídeos em trechos (206), que o
+  // Safari exige e os arquivos estáticos do Workers não fazem. Ver worker/index.js.
+  "main": "worker/index.js",
+
+  // O resto do site é estático: sai direto de dist/, sem passar pelo Worker.
   "assets": {
     "directory": "./dist",
+    "binding": "ASSETS",
+    "run_worker_first": ["/video/*"],
     "html_handling": "auto-trailing-slash",
     "not_found_handling": "404-page"
   }
