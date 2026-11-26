@@ -46,7 +46,7 @@ O site está em `https://sabah.com.br` desde 26/11/2026, por uma **rota** do Wor
 
 `/webmail` e `/cpanel` em `sabah.com.br` redirecionam para esses endereços (`cf/_redirects`), como o cPanel fazia.
 
-A rota vale para qualquer porta HTTPS, então os atalhos do cPanel pela porta também chegam ao site novo. O Worker (`worker/index.js`) redireciona `sabah.com.br:2096` para `webmail.sabah.com.br`, `:2083` para `cpanel.sabah.com.br` e `:2087` para `whm.sabah.com.br`. Para isso ele roda antes dos arquivos estáticos na página inicial e nos caminhos de login do cPanel (`run_worker_first` em `wrangler.jsonc`).
+A rota vale para qualquer porta HTTPS, então os atalhos do cPanel pela porta também chegam ao site novo. O Worker (`worker/video.ts` e `worker/index.ts`) redireciona `sabah.com.br:2096` para `webmail.sabah.com.br`, `:2083` para `cpanel.sabah.com.br` e `:2087` para `whm.sabah.com.br`. Para isso ele roda antes dos arquivos estáticos na página inicial e nos caminhos de login do cPanel (`run_worker_first` em `wrangler.jsonc`).
 
 **Cuidados.**
 
@@ -110,7 +110,53 @@ Para um vídeo tocar na página, ele precisa de arquivo próprio:
 
 Para tirar um vídeo da página, apague o arquivo em `public/video` e rode `npm run video`: o card volta a abrir o Instagram.
 
-Os vídeos são entregues em trechos: um Worker pequeno (`worker/index.js`) atende só `/video/*` e devolve os bytes que o navegador pede (resposta 206). Sem isso o Safari, no iPhone e no Mac, não toca vídeo, porque os arquivos estáticos do Workers sempre devolvem o arquivo inteiro. O resto do site continua estático, sem passar pelo Worker. O build grava o tamanho de cada vídeo em `worker/sizes.json`. No plano gratuito do Cloudflare, cada pedido de vídeo conta no limite diário de 100 mil requisições de Worker.
+Os vídeos são entregues em trechos: um Worker pequeno (`worker/video.ts` e `worker/index.ts`) atende só `/video/*` e devolve os bytes que o navegador pede (resposta 206). Sem isso o Safari, no iPhone e no Mac, não toca vídeo, porque os arquivos estáticos do Workers sempre devolvem o arquivo inteiro. O resto do site continua estático, sem passar pelo Worker. O build grava o tamanho de cada vídeo em `worker/sizes.json`. No plano gratuito do Cloudflare, cada pedido de vídeo conta no limite diário de 100 mil requisições de Worker.
+
+## Blog do Rankeando
+
+O Rankeando publica os textos do blog por um recebimento assinado (contrato versão 3, pacote em `blog-power/execution/src/conectores/pacote/modelos/`). O site não tinha blog: tudo o que aparece em `/blog/` vem do banco D1 `sabah-blog`.
+
+| Endereço | O que é |
+| --- | --- |
+| `POST /api/p12/webhook` | recebimento do Rankeando (ping, post.publicar, post.remover, categorias, categorias.listar, categorias.remover, posts.listar, post.ler, post.substituir, post.restaurar). A assinatura é conferida antes de qualquer coisa, inclusive do ping |
+| `/blog/` | lista paginada (12 por página, `?page=N`). Sem nenhum post: página amigável com `noindex` |
+| `/blog/<slug>/` | o post (`BlogPosting` + `BreadcrumbList` Blog › Categoria › Post, FAQ do post quando vier). Slug antigo responde 301 |
+| `/blog/categoria/<slug>/` | categoria; 404 enquanto não tiver post |
+| `/sitemap.xml` | o do build mais `/blog/`, os posts e as categorias com post. Sem posts, igual ao do build |
+| `/feed.xml` | RSS dos 30 mais novos; 404 enquanto não há posts |
+| `/` | a home estática; com ao menos um post ganha o link "Blog" no menu e no rodapé e a seção "Do blog" com os 3 mais novos |
+| `/p12-kit/*` | modelo de página do build para o Worker; visitantes recebem 404 |
+
+**Como as páginas são montadas.** O build gera `dist/p12-kit/modelo/index.html` (`p12-kit/modelo/index.html`), com os mesmos parciais (`<head>`, cabeçalho, rodapé) e o mesmo CSS do site, e `dist/p12-kit/config.json` (nós comuns do JSON-LD). O Worker (`worker/p12/`) troca título, descrição, canonical, Open Graph, JSON-LD e o miolo do `<main>` com HTMLRewriter. O estilo do blog está no fim de `src/styles/main.css`. Imagens dos posts ficam no endereço do Rankeando (`/blog-img/…`); o site não tem CSP, então nada foi liberado.
+
+**Home e cache.** A lista dos 3 mais recentes e as trocas de conteúdo ficam em cache (memória do isolate 60 s + Cache API 60 s) e são limpas a cada escrita do Rankeando. Sem posts, ou com o D1 fora, a home sai exatamente como o build fez.
+
+**Posts do próprio site.** Não há: `posts.listar` só enxerga os do D1, `post.ler`/`post.substituir`/`post.restaurar` de um `id_no_site` que não existe respondem 404 `nao_encontrado`. Posts do Rankeando têm id `rk:<id>` e podem ser trocados normalmente.
+
+**Banco.** `sabah-blog` (id em `wrangler.jsonc`), migrações em `migrations/` (as mesmas do Ventura Vet).
+
+**Primeira publicação (comandos).**
+
+```bash
+cd site
+npx wrangler d1 migrations apply sabah-blog --remote   # já aplicadas em 26/11/2026; repetir é seguro
+npx wrangler secret put RANKEANDO_WEBHOOK_SECRET        # a chave que o Rankeando mostra ao ligar o site
+npx wrangler deploy
+```
+
+Endereço de recebimento para colar no Rankeando: `https://sabah.com.br/api/p12/webhook`, depois "Verificar agora". Também vale `P12_WEBHOOK_SECRET` (nome antigo), lido só se a nova não existir.
+
+**Testar.**
+
+```bash
+npm test                       # vitest: assinatura, eventos, exemplos do pacote, páginas puras, vídeo, portas do cPanel, cache
+npm run typecheck
+cp .dev.vars.example .dev.vars # chave de teste local (ignorado pelo git)
+npx wrangler d1 migrations apply sabah-blog --local
+npm run cf:dev                 # http://127.0.0.1:8787; reassine os exemplos de tests/exemplos/ com a chave de teste e o horário atual
+```
+
+**Desfazer.** Tire `/api/*`, `/blog`, `/blog/*`, `/feed.xml` e `/p12-kit/*` de `run_worker_first` e volte `main` para um Worker sem o blog; o D1 pode ficar.
 
 ## SEO, GEO e AEO
 
