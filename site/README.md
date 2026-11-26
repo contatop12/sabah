@@ -41,10 +41,12 @@ O site está em `https://sabah.com.br` desde 26/11/2026, por uma **rota** do Wor
 | `http://sabah.com.br` | redireciona para `https` e responde a validação do certificado Let's Encrypt (`/.well-known/acme-challenge/`), usado pelo e-mail e pelo webmail |
 | `www.sabah.com.br` | o WordPress redireciona para `https://sabah.com.br`, mantendo o caminho |
 | `webmail.sabah.com.br` | webmail |
-| `cpanel.sabah.com.br` | painel da hospedagem |
+| `cpanel.sabah.com.br`, `whm.sabah.com.br` | painel da hospedagem |
 | `mail.sabah.com.br`, MX, SPF, DKIM, DMARC | e-mail; nada foi alterado |
 
 `/webmail` e `/cpanel` em `sabah.com.br` redirecionam para esses endereços (`cf/_redirects`), como o cPanel fazia.
+
+A rota vale para qualquer porta HTTPS, então os atalhos do cPanel pela porta também chegam ao site novo. O Worker (`worker/index.js`) redireciona `sabah.com.br:2096` para `webmail.sabah.com.br`, `:2083` para `cpanel.sabah.com.br` e `:2087` para `whm.sabah.com.br`. Para isso ele roda antes dos arquivos estáticos na página inicial e nos caminhos de login do cPanel (`run_worker_first` em `wrangler.jsonc`).
 
 **Cuidados.**
 

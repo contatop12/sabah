@@ -3,20 +3,26 @@
   "name": "sabah-site",
   "compatibility_date": "2026-11-01",
 
+  // Mantém a prévia em sabah-site.<conta>.workers.dev (com noindex, ver cf/_headers).
+  // Sem isto, o wrangler desliga esse endereço quando existe "routes".
+  "workers_dev": true,
+
   // Roda antes de `wrangler deploy` / `wrangler dev`, inclusive no Workers Builds.
   "build": {
     "command": "npm run build"
   },
 
-  // Worker mínimo: só atende /video/*, para entregar os vídeos em trechos (206), que o
-  // Safari exige e os arquivos estáticos do Workers não fazem. Ver worker/index.js.
+  // Worker mínimo: entrega os vídeos em trechos (206), que o Safari exige e os arquivos
+  // estáticos do Workers não fazem, e redireciona as portas do cPanel. Ver worker/index.js.
   "main": "worker/index.js",
 
   // O resto do site é estático: sai direto de dist/, sem passar pelo Worker.
   "assets": {
     "directory": "./dist",
     "binding": "ASSETS",
-    "run_worker_first": ["/video/*"],
+    // /video/*: vídeos em trechos. Os outros são os caminhos por onde alguém chega ao webmail
+    // ou ao cPanel pela porta (sabah.com.br:2096 etc.): o Worker confere a porta e redireciona.
+    "run_worker_first": ["/video/*", "/", "/login*", "/logout*", "/cpsess*", "/unprotected/*", "/3rdparty/*"],
     "html_handling": "auto-trailing-slash",
     "not_found_handling": "404-page"
   },
@@ -36,6 +42,8 @@
   //    (Let's Encrypt, /.well-known/acme-challenge/ na porta 80);
   //  - www.sabah.com.br continua no servidor antigo, que redireciona para sabah.com.br;
   //  - webmail.sabah.com.br, cpanel.sabah.com.br e mail.sabah.com.br não passam por aqui.
+  // A rota vale para qualquer porta: sabah.com.br:2096, :2083 e :2087 (atalhos do cPanel)
+  // chegam ao Worker, que redireciona para webmail., cpanel. e whm. (worker/index.js).
   //
   // Para voltar ao site antigo: painel Cloudflare → Workers & Pages → sabah-site →
   // Settings → Domains & Routes → remover a rota. O WordPress volta a responder na hora.
