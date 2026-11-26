@@ -1,0 +1,17 @@
+{
+  "descricao": "Post removido (post.remover). Envie o corpo sem mudar nenhum caractere: o site apaga ou esconde o post desse id.",
+  "chave_de_teste": "p12-vetor-de-teste-1",
+  "cabecalhos": {
+    "Content-Type": "application/json",
+    "X-Rankeando-Evento": "post.remover",
+    "X-Rankeando-Entrega": "art_exemplo_1:remover",
+    "X-Rankeando-Assinatura": "t=1760000300,v1=70a4f79474f23dea1a469ca4ebfd8ebd351bec90d447f4af4ecc54a3d706bdd6",
+    "X-P12-Evento": "post.remover",
+    "X-P12-Entrega": "art_exemplo_1:remover",
+    "X-P12-Assinatura": "t=1760000300,v1=70a4f79474f23dea1a469ca4ebfd8ebd351bec90d447f4af4ecc54a3d706bdd6"
+  },
+  "corpo": "{\"evento\":\"post.remover\",\"contrato\":2,\"post\":{\"id\":\"art_exemplo_1\"}}",
+  "resposta_esperada": {
+    "ok": true
+  }
+}

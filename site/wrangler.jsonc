@@ -12,20 +12,32 @@
     "command": "npm run build"
   },
 
-  // Worker mínimo: entrega os vídeos em trechos (206), que o Safari exige e os arquivos
-  // estáticos do Workers não fazem, e redireciona as portas do cPanel. Ver worker/index.js.
-  "main": "worker/index.js",
+  // Worker: entrega os vídeos em trechos (206), que o Safari exige e os arquivos estáticos do Workers não fazem,
+  // redireciona as portas do cPanel e recebe os posts do Rankeando (blog, D1). Ver worker/index.ts e a seção "Blog do Rankeando" do README.
+  "main": "worker/index.ts",
 
   // O resto do site é estático: sai direto de dist/, sem passar pelo Worker.
   "assets": {
     "directory": "./dist",
     "binding": "ASSETS",
-    // /video/*: vídeos em trechos. Os outros são os caminhos por onde alguém chega ao webmail
-    // ou ao cPanel pela porta (sabah.com.br:2096 etc.): o Worker confere a porta e redireciona.
-    "run_worker_first": ["/video/*", "/", "/login*", "/logout*", "/cpsess*", "/unprotected/*", "/3rdparty/*"],
+    // /video/*: vídeos em trechos. /login*, /cpsess*...: caminhos por onde alguém chega ao webmail ou ao cPanel pela porta
+    // (sabah.com.br:2096 etc.): o Worker confere a porta e redireciona.
+    // /api/*: recebimento dos posts do Rankeando. /blog, /blog/*, /sitemap.xml, /feed.xml: blog (posts no D1).
+    // /p12-kit/*: modelo de página do build para o Worker (o Worker responde 404 a visitantes).
+    // "/": a home também confere a porta e, quando há posts, ganha o link e a seção do blog.
+    "run_worker_first": ["/video/*", "/", "/login*", "/logout*", "/cpsess*", "/unprotected/*", "/3rdparty/*", "/api/*", "/blog", "/blog/*", "/sitemap.xml", "/feed.xml", "/p12-kit/*"],
     "html_handling": "auto-trailing-slash",
     "not_found_handling": "404-page"
   },
+
+  // Posts do Rankeando (migrations/: npx wrangler d1 migrations apply sabah-blog --remote).
+  // Segredo (NÃO vai para o git): npx wrangler secret put RANKEANDO_WEBHOOK_SECRET
+  "d1_databases": [
+    { "binding": "DB", "database_name": "sabah-blog", "database_id": "4896b5a8-df88-4e36-a299-be3aadd1bebd", "migrations_dir": "migrations" }
+  ],
+
+  // Logs do Worker no painel (nenhum dado pessoal é registrado)
+  "observability": { "enabled": true },
 
   // ---------------------------------------------------------------------------
   // DOMÍNIO OFICIAL: https://sabah.com.br (no ar desde 26/11/2026)

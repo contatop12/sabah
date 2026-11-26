@@ -1,0 +1,40 @@
+{
+  "descricao": "Pedido das categorias que o site já tem (categorias.listar). Só vem se o ping do site declarou \"categorias.listar\" em recursos. Envie o corpo sem mudar nenhum caractere. O site responde 200 com todas as categorias dele (inclusive as criadas no próprio site e as subcategorias, com pai = slug da mãe ou null); a resposta de baixo é um exemplo. Não é uma entrega com efeito: cada pedido tem uma X-Rankeando-Entrega nova e a resposta não precisa ser guardada.",
+  "chave_de_teste": "p12-vetor-de-teste-1",
+  "cabecalhos": {
+    "Content-Type": "application/json",
+    "X-Rankeando-Evento": "categorias.listar",
+    "X-Rankeando-Entrega": "categorias.listar:2026-10-19T12:00:00.000Z:exemplo-0001",
+    "X-Rankeando-Assinatura": "t=1760000060,v1=2910dc7b4117be9e5073354dc106e59db34f6d9df15653eefbca4e05660c614a",
+    "X-P12-Evento": "categorias.listar",
+    "X-P12-Entrega": "categorias.listar:2026-10-19T12:00:00.000Z:exemplo-0001",
+    "X-P12-Assinatura": "t=1760000060,v1=2910dc7b4117be9e5073354dc106e59db34f6d9df15653eefbca4e05660c614a"
+  },
+  "corpo": "{\"evento\":\"categorias.listar\",\"contrato\":2}",
+  "resposta_esperada": {
+    "categorias": [
+      {
+        "slug": "internet-e-wi-fi",
+        "nome": "Internet e Wi-Fi",
+        "descricao": "Como escolher, instalar e melhorar a sua conexão.",
+        "pai": null,
+        "ordem": 0,
+        "total_posts": 12
+      },
+      {
+        "slug": "wi-fi-em-casa",
+        "nome": "Wi-Fi em casa",
+        "pai": "internet-e-wi-fi",
+        "ordem": 1,
+        "total_posts": 4
+      },
+      {
+        "slug": "bastidores",
+        "nome": "Bastidores",
+        "pai": null,
+        "ordem": 2,
+        "total_posts": 0
+      }
+    ]
+  }
+}

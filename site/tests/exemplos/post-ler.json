@@ -1,0 +1,35 @@
+{
+  "descricao": "Pedido de um post completo (post.ler, contrato 3). Envie o corpo sem mudar nenhum caractere. O site responde 200 com os campos do post na raiz, ao lado do ok. Obrigatórios: id_no_site (o mesmo do pedido), slug, url, titulo, conteudo_html e publicado_em. Opcionais (podem faltar num post antigo): atualizado_em, conteudo_markdown, seo, faq_jsonld e capa. A resposta pode ter até 1 MB (os outros eventos, 64 KB) e leva no máximo 20 segundos. Se o post foi trocado por post.substituir, devolva o conteúdo NOVO (titulo, conteudo_html, conteudo_markdown, seo, faq_jsonld) e atualizado_em igual ao do corpo da troca, nunca o original. Leitura: não grave nada.",
+  "chave_de_teste": "p12-vetor-de-teste-1",
+  "cabecalhos": {
+    "Content-Type": "application/json",
+    "X-Rankeando-Evento": "post.ler",
+    "X-Rankeando-Entrega": "post.ler:post-42:2026-11-01T12:00:00.000Z:exemplo-0003",
+    "X-Rankeando-Assinatura": "t=1760000460,v1=6d96cac9e915488628a278083d98901777d71266528ea7a4da258896c6838e0e",
+    "X-P12-Evento": "post.ler",
+    "X-P12-Entrega": "post.ler:post-42:2026-11-01T12:00:00.000Z:exemplo-0003",
+    "X-P12-Assinatura": "t=1760000460,v1=6d96cac9e915488628a278083d98901777d71266528ea7a4da258896c6838e0e"
+  },
+  "corpo": "{\"evento\":\"post.ler\",\"contrato\":3,\"id_no_site\":\"post-42\"}",
+  "resposta_esperada": {
+    "ok": true,
+    "id_no_site": "post-42",
+    "slug": "como-escolher-racao-para-caes",
+    "url": "https://empresaexemplo.com.br/blog/como-escolher-racao-para-caes/",
+    "titulo": "Como escolher a ração ideal para o seu cão",
+    "publicado_em": "2026-09-12T13:00:00.000Z",
+    "atualizado_em": "2026-09-20T09:30:00.000Z",
+    "conteudo_html": "<p>Escolher a ração certa depende da idade, do porte e da saúde do seu cão.</p><h2>Idade e porte</h2><p>Filhotes precisam de mais proteína.</p>",
+    "conteudo_markdown": "Escolher a ração certa depende da idade, do porte e da saúde do seu cão.\n\n## Idade e porte\n\nFilhotes precisam de mais proteína.",
+    "seo": {
+      "titulo": "Como escolher a ração ideal para o seu cão | Empresa Exemplo",
+      "descricao": "Veja como escolher a ração certa para o seu cão pela idade, pelo porte e pela saúde.",
+      "palavra_chave": "ração para cães"
+    },
+    "faq_jsonld": null,
+    "capa": {
+      "url": "https://empresaexemplo.com.br/img/racao.jpg",
+      "alt": "Cão comendo ração"
+    }
+  }
+}

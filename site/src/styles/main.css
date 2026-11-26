@@ -1148,3 +1148,102 @@ html.js [data-reveal]:not(.is-in) .metro__here { opacity: 0; translate: -50% 8px
 .player__btn:disabled { opacity: 0.3; cursor: default; }
 .player :focus-visible { outline: 3px solid var(--ouro, #f5c85a); outline-offset: 2px; }
 @media (prefers-reduced-motion: reduce) { .player[open] { animation: none; } }
+
+/* ==========================================================================
+   Blog do Rankeando: /blog/, categorias, posts e a seção "Do blog" da home.
+   As páginas são montadas pelo Worker (worker/p12/) sobre a página-modelo do build.
+   ========================================================================== */
+.blog { padding-block: clamp(2.5rem, 6vw, 5rem) var(--sec); }
+.blog__in { width: min(100% - 2 * var(--gutter), var(--wrap)); margin-inline: auto; }
+.blog__h1 { font: 400 clamp(2.2rem, 5vw, 3.6rem)/1.05 var(--display); color: var(--roma); margin-bottom: 1rem; text-wrap: balance; }
+.blog__lede { font-size: clamp(1.05rem, 1.4vw, 1.2rem); max-width: 56ch; margin-bottom: 1.75rem; }
+.blog__vazio { min-height: 45svh; }
+.blog__vazio .row { margin-top: 1.5rem; }
+
+/* filtros e paginação */
+.chips { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 2rem; }
+.chips--paginas { margin: 2.5rem 0 0; justify-content: center; }
+.chip {
+  display: inline-flex; align-items: center; gap: 0.4rem; min-height: 40px; padding: 0.35rem 1rem;
+  border: 1.5px solid var(--linha); border-radius: 999px; background: var(--pao); color: var(--berinjela);
+  font-weight: 700; font-size: 0.9rem; text-decoration: none; transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+}
+.chip span { color: var(--berinjela-suave); font-weight: 600; }
+.chip:hover { border-color: var(--roma); color: var(--roma); }
+.chip[aria-current="page"] { background: var(--roma); border-color: var(--roma); color: var(--pao); }
+.chip[aria-current="page"] span { color: var(--pao); opacity: 0.8; }
+
+/* cartões */
+.post-grid { display: grid; gap: clamp(1.25rem, 2.5vw, 2rem); grid-template-columns: repeat(auto-fill, minmax(min(100%, 19rem), 1fr)); }
+.post-card { background: var(--pao); border: 1px solid var(--linha); border-radius: var(--radius-lg); overflow: hidden; transition: transform 0.25s var(--ease-out), box-shadow 0.25s; }
+.post-card:hover { transform: translateY(-3px); box-shadow: 0 16px 30px -22px rgb(42 19 21 / 0.6); }
+.post-card__link { display: grid; height: 100%; grid-template-rows: auto 1fr; color: inherit; text-decoration: none; }
+.post-card__media { display: block; aspect-ratio: 16 / 10; background: var(--homus); overflow: hidden; }
+.post-card__media img { width: 100%; height: 100%; object-fit: cover; }
+.post-card__body { display: grid; align-content: start; gap: 0.55rem; padding: 1.15rem 1.3rem 1.4rem; }
+.post-card__cat { color: var(--roma); font-weight: 800; font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; }
+.post-card__title { font: 400 1.4rem/1.15 var(--display); color: var(--berinjela); text-wrap: balance; }
+.post-card:hover .post-card__title { color: var(--roma); }
+.post-card__meta { display: flex; flex-wrap: wrap; gap: 0.2rem 0.9rem; color: var(--berinjela-suave); font-size: 0.88rem; }
+
+/* post */
+.article__head { width: min(100% - 2 * var(--gutter), 46rem); margin-inline: auto; }
+.article__head h1 { font: 400 clamp(2.2rem, 5vw, 3.5rem)/1.06 var(--display); color: var(--roma); margin-bottom: 1rem; text-wrap: balance; }
+.article__cats { margin-bottom: 0.75rem; font-weight: 800; font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase; }
+.article__cat { color: var(--roma); text-decoration: none; }
+.article__cat:hover { text-decoration: underline; }
+.article__lede { font-size: clamp(1.1rem, 1.5vw, 1.28rem); line-height: 1.55; margin-bottom: 1.1rem; }
+.article__meta { display: flex; flex-wrap: wrap; gap: 0.2rem 1rem; color: var(--berinjela-suave); font-size: 0.92rem; max-width: none; }
+.article__cover { width: min(100% - 2 * var(--gutter), 60rem); margin: 2rem auto 0; }
+.article__cover img { width: 100%; border-radius: var(--radius-lg); aspect-ratio: 16 / 9; object-fit: cover; background: var(--homus); }
+.toc { width: min(100% - 2 * var(--gutter), 46rem); margin: 2rem auto 0; padding: 1.1rem 1.4rem; border: 1px solid var(--linha); border-radius: var(--radius); background: var(--pao); }
+.toc__title { font-weight: 800; margin-bottom: 0.5rem; }
+.toc ol { list-style: decimal; padding-left: 1.25rem; display: grid; gap: 0.3rem; }
+.toc a { color: var(--roma); font-weight: 600; }
+
+/* texto do post (conteudo_html do Rankeando) */
+.prose { width: min(100% - 2 * var(--gutter), 46rem); margin: 2rem auto 0; font-size: 1.0625rem; line-height: 1.75; overflow-wrap: anywhere; }
+.prose > * + * { margin-top: 1.1em; }
+.prose p { max-width: none; }
+.prose p + p { margin-top: 1.1em; }
+.prose h2 { font: 400 clamp(1.7rem, 3vw, 2.15rem)/1.12 var(--display); color: var(--roma); margin-top: 2.2em; scroll-margin-top: calc(var(--header-h) + 16px); }
+.prose h3 { font: 400 1.45rem/1.15 var(--display); margin-top: 1.8em; scroll-margin-top: calc(var(--header-h) + 16px); }
+.prose h4 { font-weight: 800; margin-top: 1.5em; }
+.prose a { color: var(--roma); font-weight: 600; text-underline-offset: 0.18em; }
+.prose ul, .prose ol { padding-left: 1.4rem; display: grid; gap: 0.4rem; }
+.prose ul { list-style: disc; }
+.prose ol { list-style: decimal; }
+.prose blockquote { border-left: 4px solid var(--cebola); padding: 0.2rem 0 0.2rem 1.1rem; color: var(--berinjela-suave); font-style: italic; }
+.prose img { border-radius: var(--radius); }
+.prose figure { margin-block: 1.6em; }
+.prose figcaption { margin-top: 0.5rem; font-size: 0.88rem; color: var(--berinjela-suave); }
+.prose table { width: 100%; border-collapse: collapse; font-size: 0.95rem; display: block; overflow-x: auto; }
+.prose th, .prose td { padding: 0.55rem 0.7rem; border: 1px solid var(--linha); text-align: left; }
+.prose th { background: var(--homus); }
+.prose iframe { width: 100%; aspect-ratio: 16 / 9; border: 0; border-radius: var(--radius); }
+.prose hr { border: 0; border-top: 1px solid var(--linha); margin-block: 2em; }
+/* blocos que o Rankeando põe no texto (as classes ficam; o estilo é leve) */
+.p12-linha-fina { font-size: 1.15rem; font-weight: 600; color: var(--berinjela-suave); }
+.p12-resumo, .p12-leia-tambem, .p12-fontes { padding: 1rem 1.25rem; border: 1px solid var(--linha); border-radius: var(--radius); background: var(--pao); }
+.p12-resumo { border-left: 4px solid var(--roma); }
+.p12-fontes { font-size: 0.92rem; color: var(--berinjela-suave); }
+.p12-caixa-titulo { font-weight: 800; color: var(--roma); margin-bottom: 0.4rem; }
+.rankeando-sumario { padding: 1rem 1.25rem; border: 1px solid var(--linha); border-radius: var(--radius); background: var(--pao); }
+
+/* assinatura do autor */
+.rankeando-assinatura { display: flex; gap: 1.1rem; align-items: flex-start; margin-top: 2.5rem; padding: 1.25rem 1.4rem; border: 1px solid var(--linha); border-radius: var(--radius-lg); background: var(--pao); font-size: 0.95rem; line-height: 1.55; }
+.rankeando-assinatura__foto { width: 88px; height: 88px; flex: none; border-radius: 50%; object-fit: cover; }
+.rankeando-assinatura__rotulo { font-size: 0.78rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--roma); }
+.rankeando-assinatura__nome { font: 400 1.35rem/1.2 var(--display); }
+.rankeando-assinatura__cargo { color: var(--berinjela-suave); font-weight: 600; }
+.rankeando-assinatura__bio, .rankeando-assinatura p + p { margin-top: 0.4rem; }
+.rankeando-assinatura a { color: var(--roma); font-weight: 700; }
+
+/* continue lendo e seção da home */
+.related { margin-top: clamp(3rem, 7vw, 5rem); padding-block: clamp(2.5rem, 5vw, 4rem); background: var(--homus); }
+.related__title { font: 400 clamp(1.8rem, 3.4vw, 2.4rem)/1.1 var(--display); color: var(--roma); margin-bottom: 1.5rem; }
+.home-blog { background: var(--tahine); }
+.home-blog__mais { margin-top: clamp(1.5rem, 3vw, 2.25rem); }
+@media (max-width: 599px) {
+  .rankeando-assinatura { flex-direction: column; }
+}

@@ -1,0 +1,27 @@
+{
+  "descricao": "Teste de conexão (ping). O corpo é o mesmo em todas as versões; envie sem mudar nenhum caractere: o site devolve o mesmo desafio, a versão do contrato que implementa (3) e, no site novo, os recursos que ele sabe fazer (recursos). Sem a chave recursos, o Rankeando trata o site como o de antes.",
+  "chave_de_teste": "p12-vetor-de-teste-1",
+  "cabecalhos": {
+    "Content-Type": "application/json",
+    "X-Rankeando-Evento": "ping",
+    "X-Rankeando-Entrega": "ping-exemplo-0001",
+    "X-Rankeando-Assinatura": "t=1760000000,v1=3c6ae81ec5c58d28eed93666b429c54e68d54741a5fdc2d986ffb6729be3966c",
+    "X-P12-Evento": "ping",
+    "X-P12-Entrega": "ping-exemplo-0001",
+    "X-P12-Assinatura": "t=1760000000,v1=3c6ae81ec5c58d28eed93666b429c54e68d54741a5fdc2d986ffb6729be3966c"
+  },
+  "corpo": "{\"evento\":\"ping\",\"contrato\":1,\"desafio\":\"desafio-fixo-0001\"}",
+  "resposta_esperada": {
+    "ok": true,
+    "desafio": "desafio-fixo-0001",
+    "contrato": 3,
+    "recursos": [
+      "categorias.listar",
+      "categorias.mesclar",
+      "posts.listar",
+      "post.ler",
+      "post.substituir",
+      "post.restaurar"
+    ]
+  }
+}

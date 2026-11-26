@@ -1,0 +1,18 @@
+{
+  "descricao": "Post enviado para publicar (post.publicar), com a categoria. Envie o corpo sem mudar nenhum caractere: o site grava o post pelo id, liga a categoria e devolve o endereço dele.",
+  "chave_de_teste": "p12-vetor-de-teste-1",
+  "cabecalhos": {
+    "Content-Type": "application/json",
+    "X-Rankeando-Evento": "post.publicar",
+    "X-Rankeando-Entrega": "art_exemplo_1:2026-10-19T12:00:00.000Z",
+    "X-Rankeando-Assinatura": "t=1760000100,v1=49f0f06f058ee0cef3164b2b7c44472d6cdacb5379b3b899102c781ba2898cdc",
+    "X-P12-Evento": "post.publicar",
+    "X-P12-Entrega": "art_exemplo_1:2026-10-19T12:00:00.000Z",
+    "X-P12-Assinatura": "t=1760000100,v1=49f0f06f058ee0cef3164b2b7c44472d6cdacb5379b3b899102c781ba2898cdc"
+  },
+  "corpo": "{\"evento\":\"post.publicar\",\"contrato\":2,\"post\":{\"id\":\"art_exemplo_1\",\"slug\":\"como-escolher-um-plano-de-internet\",\"titulo\":\"Como escolher um plano de internet\",\"resumo\":\"Veja o que comparar antes de contratar: velocidade, fidelidade e suporte.\",\"conteudo_html\":\"<h2>O que comparar</h2>\\n<p>Velocidade, fidelidade e suporte.</p>\\n<figure class=\\\"wp-block-image size-large\\\"><img src=\\\"https://publisher.contato-097.workers.dev/blog-img/AAAAAAAAAAAAAAAAAAAAAA\\\" alt=\\\"Roteador\\\"/></figure>\",\"conteudo_markdown\":\"## O que comparar\\n\\nVelocidade, fidelidade e suporte.\\n\\n![Roteador](https://publisher.contato-097.workers.dev/blog-img/AAAAAAAAAAAAAAAAAAAAAA)\",\"capa\":{\"url\":\"https://publisher.contato-097.workers.dev/blog-img/BBBBBBBBBBBBBBBBBBBBBB\",\"alt\":\"Pessoa usando notebook\"},\"seo\":{\"titulo\":\"Como escolher um plano de internet\",\"descricao\":\"Veja o que comparar antes de contratar: velocidade, fidelidade e suporte.\",\"palavra_chave\":\"plano de internet\",\"canonical\":null},\"faq_jsonld\":{\"@context\":\"https://schema.org\",\"@type\":\"FAQPage\",\"mainEntity\":[{\"@type\":\"Question\",\"name\":\"Fidelidade vale a pena?\",\"acceptedAnswer\":{\"@type\":\"Answer\",\"text\":\"Só com desconto real na mensalidade.\"}}]},\"autor\":\"Projeto de exemplo\",\"publicado_em\":\"2026-10-19T12:00:00.000Z\",\"atualizado_em\":\"2026-10-19T12:00:00.000Z\",\"categoria\":{\"slug\":\"internet-e-wi-fi\",\"nome\":\"Internet e Wi-Fi\",\"descricao\":\"Como escolher, instalar e melhorar a sua conexão.\"}}}",
+  "resposta_esperada": {
+    "ok": true,
+    "url": "https://exemplo.com.br/blog/como-escolher-um-plano-de-internet"
+  }
+}

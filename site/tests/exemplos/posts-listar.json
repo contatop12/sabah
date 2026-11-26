@@ -1,0 +1,41 @@
+{
+  "descricao": "Pedido de uma página dos posts que o site já tem (posts.listar, contrato 3). Só vale se o ping respondeu \"contrato\":3. Envie o corpo sem mudar nenhum caractere. O site responde 200 com no máximo `limite` posts (nunca mais de 50), os mais recentes primeiro (por publicado_em), só os dessa janela quando vierem `desde`/`ate`, e `proximo_cursor` (texto) para pedir a página seguinte, ou null na última. Leitura: não grave nada; cada pedido tem uma X-Rankeando-Entrega nova. `total` (opcional, inteiro) é quantos posts existem nessa janela. `proximo_cursor` é um texto de 1 a 512 caracteres, ou null/ausente na última página (outro tipo de valor é erro do site). Se um post tiver sido trocado por post.substituir, a lista traz o titulo e o atualizado_em NOVOS. A resposta de baixo é um exemplo da Empresa Exemplo (pet shop): `origem` é o id do artigo quando foi o Rankeando que publicou o post, senão null.",
+  "chave_de_teste": "p12-vetor-de-teste-1",
+  "cabecalhos": {
+    "Content-Type": "application/json",
+    "X-Rankeando-Evento": "posts.listar",
+    "X-Rankeando-Entrega": "posts.listar:2026-11-01T12:00:00.000Z:exemplo-0002",
+    "X-Rankeando-Assinatura": "t=1760000400,v1=2b57aa0de445861724f6eaff32019101de230ae08e5c7d8f5137769574388e02",
+    "X-P12-Evento": "posts.listar",
+    "X-P12-Entrega": "posts.listar:2026-11-01T12:00:00.000Z:exemplo-0002",
+    "X-P12-Assinatura": "t=1760000400,v1=2b57aa0de445861724f6eaff32019101de230ae08e5c7d8f5137769574388e02"
+  },
+  "corpo": "{\"evento\":\"posts.listar\",\"contrato\":3,\"limite\":2,\"desde\":\"2026-01-01T00:00:00.000Z\",\"ate\":\"2026-10-31T23:59:59.000Z\"}",
+  "resposta_esperada": {
+    "ok": true,
+    "posts": [
+      {
+        "id_no_site": "post-42",
+        "slug": "como-escolher-racao-para-caes",
+        "url": "https://empresaexemplo.com.br/blog/como-escolher-racao-para-caes/",
+        "titulo": "Como escolher a ração ideal para o seu cão",
+        "publicado_em": "2026-09-12T13:00:00.000Z",
+        "atualizado_em": "2026-09-20T09:30:00.000Z",
+        "categoria_slug": "caes",
+        "origem": null
+      },
+      {
+        "id_no_site": "post-37",
+        "slug": "banho-e-tosa-em-casa",
+        "url": "https://empresaexemplo.com.br/blog/banho-e-tosa-em-casa/",
+        "titulo": "Banho e tosa em casa: o que você precisa saber",
+        "publicado_em": "2026-07-03T13:00:00.000Z",
+        "atualizado_em": "2026-07-03T13:00:00.000Z",
+        "categoria_slug": null,
+        "origem": "art_exemplo_1"
+      }
+    ],
+    "total": 37,
+    "proximo_cursor": "pagina-2-opaco"
+  }
+}

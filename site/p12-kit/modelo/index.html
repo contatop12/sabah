@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!--
+    Página-modelo do blog do Rankeando. O build a gera com os mesmos parciais (<head>, cabeçalho, rodapé) e o mesmo CSS do site;
+    o Worker (worker/p12/pagina.ts) troca o título, a descrição, o endereço, a imagem social, o JSON-LD e o miolo do <main>.
+    Nunca é servida a visitantes: /p12-kit/* responde 404 (worker/p12/site.ts).
+  -->
+  <title>Blog | Sabah Cozinha Árabe</title>
+  <meta name="description" content="Blog do Sabah Cozinha Árabe." />
+  <link rel="canonical" href="{{site.origin}}/blog/" />
+  <meta property="og:title" content="Blog | Sabah Cozinha Árabe" />
+  <meta property="og:description" content="Blog do Sabah Cozinha Árabe." />
+  <meta property="og:url" content="{{site.origin}}/blog/" />
+  <meta name="twitter:title" content="Blog | Sabah Cozinha Árabe" />
+  <meta name="twitter:description" content="Blog do Sabah Cozinha Árabe." />
+<!--@include head-->
+  <link rel="stylesheet" href="/src/styles/main.css" />
+  <script type="module" src="/src/main.ts"></script>
+</head>
+<body>
+<!--@include icons-->
+<!--@include header-->
+
+  <main id="conteudo" class="blog" data-p12-main></main>
+
+<!--@include footer-->
+</body>
+</html>

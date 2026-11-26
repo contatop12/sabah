@@ -1,0 +1,18 @@
+{
+  "descricao": "Desfaz a troca de um post (post.restaurar, contrato 3). Só vale se o ping declarou \"post.restaurar\" em recursos (e quem declara post.substituir declara este também). Envie o corpo sem mudar nenhum caractere. O site APAGA a linha da troca (a tabela à parte) e o post ORIGINAL volta inteiro, com o titulo, o conteudo, o SEO e o FAQ que tinha, inclusive os que post.ler omitia; grave o atualizado_em do corpo como a data de atualização do post. Post sem troca: responda 200 sem mudar nada. Id que o site não tem: 404 nao_encontrado. Responda 200 {\"ok\":true,\"url\":\"<endereço do post>\"}. A entrega repetida devolve a mesma resposta. Só chega depois de a pessoa confirmar no Rankeando.",
+  "chave_de_teste": "p12-vetor-de-teste-1",
+  "cabecalhos": {
+    "Content-Type": "application/json",
+    "X-Rankeando-Evento": "post.restaurar",
+    "X-Rankeando-Entrega": "restaurar:post-42:da35d10d031bf1067aa6da5cd16e4180246633cf19270bcbdc5ac52cefcf73b5",
+    "X-Rankeando-Assinatura": "t=1760000580,v1=49aac4cd63d49856243e8027cac0e13e3ab4738eeb7eec5e1ee9cc94046c7880",
+    "X-P12-Evento": "post.restaurar",
+    "X-P12-Entrega": "restaurar:post-42:da35d10d031bf1067aa6da5cd16e4180246633cf19270bcbdc5ac52cefcf73b5",
+    "X-P12-Assinatura": "t=1760000580,v1=49aac4cd63d49856243e8027cac0e13e3ab4738eeb7eec5e1ee9cc94046c7880"
+  },
+  "corpo": "{\"evento\":\"post.restaurar\",\"contrato\":3,\"id_no_site\":\"post-42\",\"atualizado_em\":\"2026-11-02T12:00:00.000Z\"}",
+  "resposta_esperada": {
+    "ok": true,
+    "url": "https://empresaexemplo.com.br/blog/como-escolher-racao-para-caes/"
+  }
+}

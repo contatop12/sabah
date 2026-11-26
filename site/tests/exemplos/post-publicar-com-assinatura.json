@@ -1,0 +1,18 @@
+{
+  "descricao": "Post enviado para publicar (post.publicar) com a assinatura do autor (campo opcional `assinatura`, só quando o cliente a liga). Envie o corpo sem mudar nenhum caractere; o site grava o post e a assinatura e mostra a caixa no fim do post.",
+  "chave_de_teste": "p12-vetor-de-teste-1",
+  "cabecalhos": {
+    "Content-Type": "application/json",
+    "X-Rankeando-Evento": "post.publicar",
+    "X-Rankeando-Entrega": "art_exemplo_2:2026-10-19T12:00:00.000Z",
+    "X-Rankeando-Assinatura": "t=1760000100,v1=a77c129fd2e26a0ac5ceac5897220ec53494b14a7381d409166e35362c2ea465",
+    "X-P12-Evento": "post.publicar",
+    "X-P12-Entrega": "art_exemplo_2:2026-10-19T12:00:00.000Z",
+    "X-P12-Assinatura": "t=1760000100,v1=a77c129fd2e26a0ac5ceac5897220ec53494b14a7381d409166e35362c2ea465"
+  },
+  "corpo": "{\"evento\":\"post.publicar\",\"contrato\":2,\"post\":{\"id\":\"art_exemplo_2\",\"slug\":\"como-cuidar-do-pelo-do-seu-cao\",\"titulo\":\"Como cuidar do pelo do seu cão\",\"resumo\":\"Escovação, banho e tosa: o que fazer em cada fase para manter o pelo saudável.\",\"conteudo_html\":\"<h2>Escovação</h2>\\n<p>Escove o pelo com frequência.</p>\",\"conteudo_markdown\":\"## Escovação\\n\\nEscove o pelo com frequência.\",\"capa\":null,\"seo\":{\"titulo\":\"Como cuidar do pelo do seu cão\",\"descricao\":\"Escovação, banho e tosa: o que fazer em cada fase para manter o pelo saudável.\",\"palavra_chave\":\"cuidar do pelo do cão\",\"canonical\":null},\"faq_jsonld\":null,\"autor\":\"Empresa Exemplo\",\"publicado_em\":\"2026-10-19T12:00:00.000Z\",\"atualizado_em\":\"2026-10-19T12:00:00.000Z\",\"categoria\":null,\"assinatura\":{\"tipo\":\"pessoa\",\"nome\":\"Dra. Ana Exemplo\",\"funcao\":\"Médica veterinária\",\"registro\":\"CRMV-SP 00000\",\"curriculo\":\"Atende cães e gatos na Empresa Exemplo.\\nFormação e anos de experiência em poucas linhas.\",\"foto_url\":\"https://publisher.contato-097.workers.dev/blog-img/CCCCCCCCCCCCCCCCCCCCCC?v=abcdef12\",\"link_url\":\"https://empresaexemplo.com.br/equipe\"}}}",
+  "resposta_esperada": {
+    "ok": true,
+    "url": "https://exemplo.com.br/blog/como-cuidar-do-pelo-do-seu-cao"
+  }
+}

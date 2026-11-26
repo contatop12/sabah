@@ -6,20 +6,23 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc --noEmit && vite build",
+    "build": "tsc --noEmit && tsc --noEmit -p worker && tsc --noEmit -p tests && vite build",
     "preview": "vite preview",
-    "typecheck": "tsc --noEmit",
+    "typecheck": "tsc --noEmit && tsc --noEmit -p worker && tsc --noEmit -p tests",
     "cf:dev": "wrangler dev",
     "deploy": "wrangler deploy",
     "deploy:dry": "wrangler deploy --dry-run",
     "media": "node scripts/build-media.mjs",
-    "video": "node scripts/build-video.mjs"
+    "video": "node scripts/build-video.mjs",
+    "test": "vitest run",
+    "cf:types": "wrangler types worker/worker-configuration.d.ts"
   },
   "devDependencies": {
     "@types/node": "^26.6.2",
     "sharp": "^0.35.4",
     "typescript": "^7.0.2",
     "vite": "^8.3.0",
+    "vitest": "^5.1.2",
     "wrangler": "^4.136.3"
   }
 }

@@ -1,0 +1,18 @@
+{
+  "descricao": "Troca do conteúdo de um post que o site já tinha (post.substituir, contrato 3). Só vale se o ping declarou \"post.substituir\" e \"post.restaurar\" em recursos. Envie o corpo sem mudar nenhum caractere. O site troca titulo, conteudo_html, conteudo_markdown, seo e faq_jsonld (faq_jsonld null = sem FAQ) e MANTÉM o slug, a data de publicação (publicado_em), a categoria e a capa do post. Grave o atualizado_em do corpo como a data de atualização. Responda 200 {\"ok\":true,\"url\":\"<endereço do post>\"}. A entrega repetida (X-Rankeando-Entrega igual) devolve a mesma resposta e não grava de novo. Id que o site não tem: 404. A troca vale em TODO lugar onde o site mostra o post: post.ler e posts.listar (titulo e atualizado_em novos), a página, os cartões de lista, title/meta/Open Graph, JSON-LD Article e FAQ, lastmod do sitemap, RSS, páginas pré-renderizadas e cache. Só chega depois de a pessoa confirmar no Rankeando.",
+  "chave_de_teste": "p12-vetor-de-teste-1",
+  "cabecalhos": {
+    "Content-Type": "application/json",
+    "X-Rankeando-Evento": "post.substituir",
+    "X-Rankeando-Entrega": "substituir:post-42:1cbf2276409ed5e61e4f8919f22f6aa87574c926dda924abeb559b69f98fa821",
+    "X-Rankeando-Assinatura": "t=1760000520,v1=5ce1c59a1413519dc643e7054065133bb1879d0432f10da37d6a7df219a3258a",
+    "X-P12-Evento": "post.substituir",
+    "X-P12-Entrega": "substituir:post-42:1cbf2276409ed5e61e4f8919f22f6aa87574c926dda924abeb559b69f98fa821",
+    "X-P12-Assinatura": "t=1760000520,v1=5ce1c59a1413519dc643e7054065133bb1879d0432f10da37d6a7df219a3258a"
+  },
+  "corpo": "{\"evento\":\"post.substituir\",\"contrato\":3,\"id_no_site\":\"post-42\",\"post\":{\"titulo\":\"Como escolher a ração ideal para o seu cão: guia completo\",\"conteudo_html\":\"<p>Escolher a ração certa depende da idade, do porte e da saúde do seu cão. Veja o guia.</p><h2>Idade e porte</h2><p>Filhotes precisam de mais proteína.</p>\",\"conteudo_markdown\":\"Escolher a ração certa depende da idade, do porte e da saúde do seu cão. Veja o guia.\\n\\n## Idade e porte\\n\\nFilhotes precisam de mais proteína.\",\"seo\":{\"titulo\":\"Como escolher a ração ideal para o seu cão | Empresa Exemplo\",\"descricao\":\"Guia completo para escolher a ração do seu cão pela idade, pelo porte e pela saúde.\",\"palavra_chave\":\"ração para cães\"},\"faq_jsonld\":null},\"atualizado_em\":\"2026-11-01T12:00:00.000Z\"}",
+  "resposta_esperada": {
+    "ok": true,
+    "url": "https://empresaexemplo.com.br/blog/como-escolher-racao-para-caes/"
+  }
+}

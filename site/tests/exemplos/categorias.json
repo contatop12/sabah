@@ -1,0 +1,17 @@
+{
+  "descricao": "Categorias do blog (categorias), no modo \"mesclar\". Envie o corpo sem mudar nenhum caractere: o site cria ou atualiza cada categoria pelo slug, ignorando só o item cujo atualizado_em seja mais velho que o que ele guardou (a última é uma subcategoria: o campo pai traz o slug da mãe) e NUNCA apaga as que não vieram, nem as que foram criadas no próprio site (com ou sem modo). Responde ok. Um site que não declarou categorias.mesclar no ping não recebe este evento sozinho.",
+  "chave_de_teste": "p12-vetor-de-teste-1",
+  "cabecalhos": {
+    "Content-Type": "application/json",
+    "X-Rankeando-Evento": "categorias",
+    "X-Rankeando-Entrega": "categorias:2026-10-19T11:59:00.000Z",
+    "X-Rankeando-Assinatura": "t=1760000050,v1=311796642ddddc8b2fd6300f563a9698877b9aae93a1b2c683e993d9c9ba5a7c",
+    "X-P12-Evento": "categorias",
+    "X-P12-Entrega": "categorias:2026-10-19T11:59:00.000Z",
+    "X-P12-Assinatura": "t=1760000050,v1=311796642ddddc8b2fd6300f563a9698877b9aae93a1b2c683e993d9c9ba5a7c"
+  },
+  "corpo": "{\"evento\":\"categorias\",\"contrato\":2,\"modo\":\"mesclar\",\"atualizado_em\":\"2026-10-19T11:59:00.000Z\",\"categorias\":[{\"slug\":\"internet-e-wi-fi\",\"nome\":\"Internet e Wi-Fi\",\"descricao\":\"Como escolher, instalar e melhorar a sua conexão.\",\"ordem\":0,\"pai\":null,\"atualizado_em\":\"2026-10-19T10:00:00.000Z\"},{\"slug\":\"seguranca-digital\",\"nome\":\"Segurança digital\",\"descricao\":null,\"ordem\":1,\"pai\":null,\"atualizado_em\":\"2026-10-19T10:00:00.000Z\"},{\"slug\":\"wi-fi-em-casa\",\"nome\":\"Wi-Fi em casa\",\"descricao\":null,\"ordem\":2,\"pai\":\"internet-e-wi-fi\",\"atualizado_em\":\"2026-10-19T11:30:00.000Z\"}]}",
+  "resposta_esperada": {
+    "ok": true
+  }
+}

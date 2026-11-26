@@ -1,0 +1,17 @@
+{
+  "descricao": "Categorias removidas (categorias.remover). Só vem se o ping do site declarou \"categorias.mesclar\" e só quando a pessoa exclui a categoria no Rankeando. Envie o corpo sem mudar nenhum caractere: o site apaga SÓ os slugs da lista (os posts dessas categorias ficam sem categoria; as subcategorias de uma mãe removida viram categorias de cima; slug que o site não tem é ignorado) e responde ok.",
+  "chave_de_teste": "p12-vetor-de-teste-1",
+  "cabecalhos": {
+    "Content-Type": "application/json",
+    "X-Rankeando-Evento": "categorias.remover",
+    "X-Rankeando-Entrega": "categorias.remover:2026-10-19T12:01:00.000Z:wi-fi-em-casa",
+    "X-Rankeando-Assinatura": "t=1760000070,v1=afd105abaed0065628b82924673cc7d851019b7390b3acfdd20a3426351c4ae5",
+    "X-P12-Evento": "categorias.remover",
+    "X-P12-Entrega": "categorias.remover:2026-10-19T12:01:00.000Z:wi-fi-em-casa",
+    "X-P12-Assinatura": "t=1760000070,v1=afd105abaed0065628b82924673cc7d851019b7390b3acfdd20a3426351c4ae5"
+  },
+  "corpo": "{\"evento\":\"categorias.remover\",\"contrato\":2,\"slugs\":[\"wi-fi-em-casa\"]}",
+  "resposta_esperada": {
+    "ok": true
+  }
+}

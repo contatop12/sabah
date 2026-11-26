@@ -1,0 +1,4 @@
+# Copie para .dev.vars (ignorado pelo git) para testar o recebimento do Rankeando com `npm run cf:dev`.
+# Em produção, cadastre o segredo com: npx wrangler secret put RANKEANDO_WEBHOOK_SECRET
+# (o valor é o que o Rankeando mostra ao criar a conexão do site; nunca o ponha no repositório).
+RANKEANDO_WEBHOOK_SECRET=troque-por-uma-chave-de-teste-longa

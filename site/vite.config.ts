@@ -190,6 +190,15 @@ function jsonLd(kind: string, pagePath: string, pageTitle: string): string {
   return `<script type="application/ld+json">${json}</script>`;
 }
 
+/** Nós do JSON-LD comuns a todas as páginas internas (WebSite e Restaurant), para o Worker juntar ao grafo das páginas do blog. */
+function p12GraphBase(): unknown[] {
+  const { site } = CONFIG;
+  return [
+    { "@type": "WebSite", "@id": `${site.origin}/#website`, url: `${site.origin}/`, name: site.legalName, inLanguage: "pt-BR", publisher: { "@id": `${site.origin}/#restaurant` } },
+    { "@type": "Restaurant", "@id": `${site.origin}/#restaurant`, name: site.legalName, url: `${site.origin}/` },
+  ];
+}
+
 function faqHtml(): string {
   return FAQS.map(
     (f, i) =>
@@ -385,13 +394,17 @@ function sabahSite(): Plugin {
       for (const file of readdirSync(resolve(ROOT, "cf"))) {
         writeFileSync(resolve(OUT, file), readFileSync(resolve(ROOT, "cf", file)));
       }
-      // Tamanho de cada vídeo publicado: o Worker (worker/index.js) usa para responder
+      // Tamanho de cada vídeo publicado: o Worker (worker/video.ts) usa para responder
       // pedidos de trecho (206), que o Safari exige para tocar vídeo.
       const videoDir = resolve(ROOT, "public/video");
       const sizes: Record<string, number> = {};
       for (const file of existsSync(videoDir) ? readdirSync(videoDir).sort() : []) {
         sizes[`/video/${file}`] = statSync(resolve(videoDir, file)).size;
       }
+      // Kit do Rankeando: o que o Worker precisa do build para montar as páginas do blog (nós comuns do JSON-LD, iguais aos das outras páginas internas).
+      // A página-modelo (p12-kit/modelo/index.html) sai do próprio Vite; o Worker responde 404 a visitantes em /p12-kit/*.
+      mkdirSync(resolve(OUT, "p12-kit"), { recursive: true });
+      writeFileSync(resolve(OUT, "p12-kit/config.json"), JSON.stringify({ graphBase: p12GraphBase() }));
       writeFileSync(resolve(ROOT, "worker/sizes.json"), JSON.stringify(sizes, null, 2) + "\n");
     },
   };
@@ -410,6 +423,8 @@ export default defineConfig({
         privacidade: resolve(ROOT, "politicasdeprivacidade/index.html"),
         termos: resolve(ROOT, "termosdeuso/index.html"),
         notFound: resolve(ROOT, "404.html"),
+        // Modelo das páginas do blog do Rankeando (ver worker/p12/pagina.ts); sai em dist/p12-kit/modelo/.
+        p12Modelo: resolve(ROOT, "p12-kit/modelo/index.html"),
       },
     },
   },
