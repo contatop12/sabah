@@ -15,6 +15,7 @@ npm run preview    # serve o dist/
 npm run cf:dev     # roda o dist/ no runtime do Cloudflare (testa redirects, 404 e headers)
 npm run deploy     # build + deploy manual
 npm run media      # regenera as imagens otimizadas a partir de media-src/
+npm run video      # prepara os vídeos de quem visitou a partir de media-src/video/ (precisa de ffmpeg)
 ```
 
 ## Deploy pelo GitHub (Cloudflare Workers Builds)
@@ -68,6 +69,16 @@ Os sete assuntos, com número e mensagem, ficam em `WHATSAPP_TOPICS` (`src/confi
 
 A lista fica em `VISITOR_VIDEOS` (`src/content.ts`). Só entra vídeo com autoria conferida no post e capa aprovada.
 
+Os vídeos tocam dentro da página, numa janela sobre o conteúdo (`src/player.ts`), com o crédito do criador e o link da publicação original. Nenhum vídeo é baixado antes do clique: o card é só a capa, e ao fechar a janela o download para.
+
+Para um vídeo tocar na página, ele precisa de arquivo próprio:
+
+1. Salve o original em `media-src/video/<id>.mp4`, com o mesmo `id` do item em `VISITOR_VIDEOS`. Essa pasta não vai para o git.
+2. Rode `npm run video`. O script grava a versão para a web em `public/video/visitou-<id>.mp4` (H.264 em até 720 x 1280, áudio preservado, índice no começo do arquivo) e atualiza `src/videos.json`.
+3. Rode o build. O card com arquivo ganha a duração na capa e o texto "Assistir ao vídeo"; o card sem arquivo continua abrindo o Instagram.
+
+Para tirar um vídeo da página, apague o arquivo em `public/video` e rode `npm run video`: o card volta a abrir o Instagram.
+
 ## SEO, GEO e AEO
 
 - Title e meta description do briefing, um único H1, canonical, Open Graph e Twitter Card.
@@ -99,7 +110,7 @@ GTM `GTM-TFZ56NX3` (o mesmo do site atual), com Consent Mode v2: medição e an�
 
 O `whatsapp_click` leva o parâmetro `topic` só com o identificador do assunto (`almoco`, `jantar`, `domicilio`, `grupo`, `retirada`, `midia`, `fornecedores`, ou `geral` no número escrito no contato e no rodapé), sem número nem mensagem. Ele conta como abertura de conversa, porque o envio acontece no aplicativo. O antigo `reservation_click` saiu: reserva de grupo agora é `whatsapp_click` com `topic = grupo`.
 
-Apoio: `instagram_click`, `video_click`, `video_play`, `award_click`, `reviews_click`, `quote_open`. No GTM, crie um gatilho de evento personalizado para cada um.
+Apoio: `instagram_click`, `video_click`, `video_play`, `award_click`, `reviews_click`, `quote_open`. No GTM, crie um gatilho de evento personalizado para cada um. O `video_click` dos vídeos de quem visitou sai a cada vídeo aberto na janela, com `location = visitou-<id>`; no link "Ver publicação no Instagram" da janela sai `instagram_click` com `location = player`.
 
 ## Mídias usadas
 
@@ -171,3 +182,5 @@ Cada link é `https://www.instagram.com/p/<post>/`. Os dois primeiros vídeos es
 13. **Horário da entrega pelo iFood** (11h às 21h45) e **faixa de 50 a 200 convidados** do buffet a domicílio vieram do site anterior.
 14. **Foto da entrega do prêmio GoWhere ou selo oficial**: sem material aprovado; o bloco segue sem imagem.
 15. **FAQ**: "não precisa ser sócio do Club Homs" foi deduzido do site anterior. **Estacionamento**: tarifas e convênio não detalhados.
+16. **Autorização dos criadores**: oito vídeos estão hospedados no próprio site (arquivos em `public/video`), copiados das publicações do Instagram em 26/11/2026. O vídeo é de quem o gravou: confirmar com cada criador a autorização de uso antes de publicar no domínio oficial. Sem autorização, basta apagar o arquivo e o card volta a abrir o Instagram.
+17. **Vídeo do Desbrava São Paulo**: o perfil não permite incorporar a publicação em outros sites, então o arquivo não foi copiado e o card continua abrindo o Instagram. Para tocar na página, pedir o arquivo ao criador e seguir os passos de "Vídeos de quem visitou".

@@ -184,7 +184,7 @@
         <header class="sec__head visitors__head" data-reveal>
           <div>
             <h2 id="visitors-title" class="h2">O Sabah pelos olhos de quem visitou</h2>
-            <p class="lead">Vídeos de quem veio conhecer o Sabah. Cada um abre no Instagram, na publicação original.</p>
+            <p class="lead">Vídeos de quem veio conhecer o Sabah. Toque em um vídeo para assistir aqui mesmo, sem sair da página.</p>
           </div>
           <div class="carousel__nav" data-carousel-nav hidden>
             <button class="carousel__btn" type="button" data-carousel-prev aria-controls="visitors-list" aria-label="Vídeos anteriores"><svg aria-hidden="true"><use href="#i-chevron"/></svg></button>
@@ -380,6 +380,27 @@
   </main>
 
   <!-- Orçamento de eventos: monta a mensagem e abre o WhatsApp do Sabah -->
+  <!-- Janela dos vídeos de quem visitou. O <video> fica sem fonte até o clique num card
+       (src/player.ts); ao fechar, a fonte sai e o download para. -->
+  <dialog class="player" data-player-dialog aria-labelledby="player-title">
+    <div class="player__frame">
+      <video class="player__video" data-player-video controls playsinline preload="none" tabindex="0"></video>
+      <button class="player__close" type="button" data-player-close aria-label="Fechar vídeo"><svg aria-hidden="true"><use href="#i-close"/></svg></button>
+    </div>
+    <div class="player__bar">
+      <div class="player__meta">
+        <p class="player__who"><strong data-player-creator></strong> <span data-player-handle></span></p>
+        <h2 id="player-title" class="player__title" data-player-title></h2>
+        <a class="player__post" href="#" target="_blank" rel="noopener" data-player-post data-track="instagram_click" data-loc="player">Ver publicação no Instagram<svg aria-hidden="true"><use href="#i-out"/></svg></a>
+      </div>
+      <div class="player__nav">
+        <button class="player__btn" type="button" data-player-prev aria-label="Vídeo anterior"><svg aria-hidden="true"><use href="#i-chevron"/></svg></button>
+        <button class="player__btn" type="button" data-player-next aria-label="Próximo vídeo"><svg aria-hidden="true"><use href="#i-chevron"/></svg></button>
+        <p class="sr" data-player-count aria-live="polite"></p>
+      </div>
+    </div>
+  </dialog>
+
   <dialog class="quote" data-quote aria-labelledby="quote-title">
     <form class="quote__form" method="dialog" data-quote-form novalidate>
       <header class="quote__head">

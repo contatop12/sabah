@@ -96,7 +96,7 @@ body {
 img, video, svg { display: block; max-width: 100%; }
 img, video { height: auto; }
 picture { display: contents; }
-h1, h2, h3, h4, p, ul, ol, dl, dd, figure, blockquote { margin: 0; }
+h1, h2, h3, h4, h5, h6, p, ul, ol, dl, dd, figure, blockquote { margin: 0; }
 ul, ol { padding: 0; list-style: none; }
 a { color: inherit; }
 button, input, select, textarea { font: inherit; color: inherit; }
@@ -837,7 +837,7 @@ html.js [data-reveal]:not(.is-in) .metro__here { opacity: 0; translate: -50% 8px
 .doc--center .row { justify-content: center; margin-top: 1.75rem; }
 
 @media print {
-  .top, .dock, .consent, .quote, .closing__bg { display: none !important; }
+  .top, .dock, .consent, .quote, .player, .closing__bg { display: none !important; }
   body { background: #fff; }
 }
 
@@ -1082,3 +1082,54 @@ html.js [data-reveal]:not(.is-in) .metro__here { opacity: 0; translate: -50% 8px
     padding: clamp(2rem, 4vw, 3.5rem) clamp(1.5rem, 4vw, 3.5rem) clamp(2rem, 4vw, 3.5rem) clamp(1rem, 2vw, 2rem);
   }
 }
+
+/* ---------- Vídeos de quem visitou: duração na capa e janela do player ----------
+   O vídeo toca na própria página. A janela tem a proporção do arquivo (--ar vem do
+   card), ocupa a altura que sobra na tela e deixa crédito e navegação abaixo. */
+.visitor__time {
+  position: absolute; right: 0.6rem; bottom: 0.6rem; padding: 0.12rem 0.5rem; border-radius: 999px;
+  background: rgb(24 10 12 / 0.72); color: #fff; font-size: 0.8rem; font-weight: 700; line-height: 1.5; font-variant-numeric: tabular-nums;
+}
+.player {
+  --ar: 9 / 16;
+  width: fit-content; max-width: 100vw; max-height: 100dvh; padding: 0; border: 0; overflow: visible;
+  background: none; color: var(--pao);
+}
+.player[open] { display: grid; gap: 0.9rem; animation: hero-rise 0.35s var(--ease-out) both; }
+.player::backdrop { background: rgb(24 10 12 / 0.94); backdrop-filter: blur(4px); }
+.player__frame {
+  position: relative; height: min(100dvh - 11.5rem, 780px); aspect-ratio: var(--ar); max-width: calc(100vw - 1.5rem);
+  overflow: hidden; border-radius: var(--radius-lg); background: #000;
+}
+.player__video { width: 100%; height: 100%; object-fit: contain; background: #000; }
+.player__close {
+  position: absolute; top: 0.6rem; right: 0.6rem; display: grid; place-items: center; width: 44px; height: 44px; padding: 0;
+  border: 0; border-radius: 50%; background: rgb(24 10 12 / 0.62); color: #fff; cursor: pointer; transition: background-color 0.2s;
+}
+.player__close:hover { background: var(--roma); }
+.player__close svg { width: 1.15rem; height: 1.15rem; }
+/* a barra nunca alarga a janela além do vídeo */
+.player__bar { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 0.2rem 0.75rem; width: 0; min-width: 100%; }
+/* nome e título ocupam a largura toda; o link do post e as setas dividem a última linha */
+.player__meta { display: contents; }
+.player__who, .player__title { grid-column: 1 / -1; }
+.player__who { font-size: 0.9rem; color: rgb(255 255 255 / 0.78); }
+.player__who strong { font-weight: 800; color: #fff; }
+.player__title { font: 800 1.02rem/1.3 var(--text); color: #fff; text-wrap: balance; }
+.player__post {
+  display: inline-flex; align-items: center; gap: 0.35rem; width: fit-content; padding-block: 0.3rem;
+  font-size: 0.9rem; font-weight: 700; color: var(--ouro, #f5c85a); text-decoration: underline; text-underline-offset: 0.2em;
+}
+.player__post svg { width: 0.9em; height: 0.9em; }
+.player__nav { display: flex; flex: none; gap: 0.4rem; }
+.player__btn {
+  display: grid; place-items: center; width: 44px; height: 44px; padding: 0; border-radius: 50%;
+  border: 2px solid rgb(255 255 255 / 0.7); background: none; color: #fff; cursor: pointer; transition: background-color 0.2s, color 0.2s, opacity 0.2s;
+}
+.player__btn svg { width: 1.2rem; height: 1.2rem; }
+[data-player-prev] svg { rotate: 90deg; }
+[data-player-next] svg { rotate: -90deg; }
+.player__btn:hover:not(:disabled) { background: #fff; color: var(--berinjela); }
+.player__btn:disabled { opacity: 0.3; cursor: default; }
+.player :focus-visible { outline: 3px solid var(--ouro, #f5c85a); outline-offset: 2px; }
+@media (prefers-reduced-motion: reduce) { .player[open] { animation: none; } }

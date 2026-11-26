@@ -3,3 +3,6 @@ dist/
 .wrangler/
 .dev.vars
 *.log
+
+# Originais dos vídeos de quem visitou (pesados): a versão para a web fica em public/video
+media-src/video/
