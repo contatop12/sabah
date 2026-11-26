@@ -41,7 +41,7 @@ export const FAQS: Faq[] = [
   },
   {
     q: "Como reservo para um grupo grande?",
-    a: `As reservas para grupos grandes são feitas pelo WhatsApp ${phone.gruposDisplay}. Informe a data, o horário e o número de pessoas.`,
+    a: `As reservas para grupos grandes são feitas pelo WhatsApp ${phone.whatsappDisplay}. Informe a data, o horário e o número de pessoas.`,
   },
   {
     q: "Preciso ser sócio do Club Homs para ir ao restaurante?",

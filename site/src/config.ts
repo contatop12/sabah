@@ -7,10 +7,11 @@
  * Alterou aqui, mudou em tudo.
  */
 
-/** WhatsApp geral: dúvidas, buffet a domicílio, encomendas e fornecedores. */
+/**
+ * WhatsApp do Sabah: único contato do site. Atende todos os assuntos, inclusive as
+ * reservas para grupos grandes. O site não mostra telefone fixo.
+ */
 const WHATSAPP_GERAL = "5511918730446";
-/** WhatsApp de reservas: só para grupos grandes. */
-const WHATSAPP_GRUPOS = "5511975114014";
 /** WhatsApp de mídia: EXCLUSIVO para influenciadores, imprensa e parcerias. */
 const WHATSAPP_MIDIA = "5511976635211";
 
@@ -47,7 +48,7 @@ export const WHATSAPP_TOPICS = [
   {
     id: "grupo",
     label: "Reservar para um grupo grande",
-    number: WHATSAPP_GRUPOS,
+    number: WHATSAPP_GERAL,
     message:
       "Olá! Gostaria de reservar uma mesa para um grupo grande. Data: ___ / Horário: ___ / Número de pessoas: ___.",
   },
@@ -117,13 +118,10 @@ export const CONFIG = {
     metro: "Entre as estações Brigadeiro e Trianon-Masp (Linha 2-Verde)",
   },
 
+  /** Contato só por WhatsApp: o número do Sabah e o de mídia (influenciadores, imprensa e parcerias). */
   phone: {
-    display: "(11) 3284-8899",
-    tel: "+551132848899",
     whatsappDisplay: "(11) 91873-0446",
     whatsappE164: "+5511918730446",
-    gruposDisplay: "(11) 97511-4014",
-    gruposE164: "+5511975114014",
     midiaDisplay: "(11) 97663-5211",
   },
 
@@ -147,6 +145,8 @@ export const CONFIG = {
   },
 
   links: {
+    /** Conversa direta com o número do Sabah, onde o número aparece escrito (contato, rodapé, páginas legais). */
+    whatsapp: wa(WHATSAPP_GERAL, "Olá! Vim pelo site do Sabah."),
     // WhatsApp por assunto (mesma lista do painel flutuante)
     waAlmoco: topicLink("almoco"),
     waJantar: topicLink("jantar"),
@@ -188,7 +188,7 @@ export const CONFIG = {
   },
 
   /** Datas usadas no sitemap e nos dados estruturados (AAAA-MM-DD). */
-  updated: "2026-11-24",
+  updated: "2026-11-26",
 } as const;
 
 export type Config = typeof CONFIG;

@@ -62,7 +62,7 @@ O conteúdo das duas abas fica em `src/partials/salao.html`: 12 cards da bancada
 
 ### WhatsApp por assunto
 
-Os sete assuntos, com número e mensagem, ficam em `WHATSAPP_TOPICS` (`src/config.ts`). O painel flutuante e os botões das seções saem dessa lista. São três números: geral (11) 91873-0446, grupos (11) 97511-4014 e mídia (11) 97663-5211, este último só para influenciadores, imprensa e parcerias.
+Os sete assuntos, com número e mensagem, ficam em `WHATSAPP_TOPICS` (`src/config.ts`). O painel flutuante e os botões das seções saem dessa lista. São dois números: o do Sabah, (11) 91873-0446, que atende todos os assuntos, inclusive reservas para grupos grandes, e o de mídia, (11) 97663-5211, só para influenciadores, imprensa e parcerias. O site não mostra telefone fixo: onde o número aparece escrito (contato, rodapé e páginas legais), ele abre a conversa com o número do Sabah (`links.whatsapp`).
 
 ### Vídeos de quem visitou
 
@@ -97,7 +97,7 @@ GTM `GTM-TFZ56NX3` (o mesmo do site atual), com Consent Mode v2: medição e an�
 | `whatsapp_selector_open` | abertura do painel de WhatsApp |
 | `whatsapp_click` | clique num assunto de WhatsApp, no painel ou nas seções |
 
-O `whatsapp_click` leva o parâmetro `topic` só com o identificador do assunto (`almoco`, `jantar`, `domicilio`, `grupo`, `retirada`, `midia`, `fornecedores`), sem número nem mensagem. Ele conta como abertura de conversa, porque o envio acontece no aplicativo. O antigo `reservation_click` saiu: reserva de grupo agora é `whatsapp_click` com `topic = grupo`.
+O `whatsapp_click` leva o parâmetro `topic` só com o identificador do assunto (`almoco`, `jantar`, `domicilio`, `grupo`, `retirada`, `midia`, `fornecedores`, ou `geral` no número escrito no contato e no rodapé), sem número nem mensagem. Ele conta como abertura de conversa, porque o envio acontece no aplicativo. O antigo `reservation_click` saiu: reserva de grupo agora é `whatsapp_click` com `topic = grupo`.
 
 Apoio: `instagram_click`, `video_click`, `video_play`, `award_click`, `reviews_click`, `quote_open`. No GTM, crie um gatilho de evento personalizado para cada um.
 
@@ -118,7 +118,8 @@ Apoio: `instagram_click`, `video_click`, `video_play`, `award_click`, `reviews_c
 | Legumes recheados | `bancada-legumes.jpg` | acervo 2026, DSC00523 (indicada no briefing) |
 | Faláfel | `prato-falafel.jpg` | site anterior |
 | Esfihas salgadas | `bancada-esfihas.jpg` | acervo 2026, DSC00073 (indicada no briefing) |
-| Sobremesas | `sobremesa-doces.jpg`, `sobremesa-pudim.jpg`, `sobremesa-frutas.jpg`, `sobremesa-esfiha-doce.jpg` | acervo 2026, DSC01217, DSC00080, DSC00084 e DSC01361 (indicadas no briefing) |
+| Doces árabes | `sobremesa-doces.jpg` | foto enviada pela P12 em 26/11/2026 (1448 px de largura) |
+| Outras sobremesas | `sobremesa-pudim.jpg`, `sobremesa-frutas.jpg`, `sobremesa-esfiha-doce.jpg` | acervo 2026, DSC00080, DSC00084 e DSC01361 (indicadas no briefing) |
 | Combinado | `alacarte-combinado.jpg` | acervo 2026, DSC01096 (indicada no briefing) |
 | Kebabs | `kebab.jpg` | cardápio em PDF |
 | Esfihas (à la carte) | `alacarte-esfihas.jpg` | acervo 2026, DSC00999 (indicada no briefing) |
